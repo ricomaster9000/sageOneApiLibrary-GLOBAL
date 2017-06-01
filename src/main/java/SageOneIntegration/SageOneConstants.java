@@ -4,7 +4,7 @@ package SageOneIntegration;
 import java.util.HashMap;
 import java.util.Map;
 
-final class SageOneConstants {
+public final class SageOneConstants {
 
 	/* Request Limits,
 
