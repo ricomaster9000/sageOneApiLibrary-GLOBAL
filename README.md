@@ -3,6 +3,8 @@ A library that contains pre-written code to connect and access the SageOne SA Ap
 
 ### HOW TO USE
 
+add as dependency by using jitpack.io , go to this link https://jitpack.io/
+
 Please run the method SageOneApiConnector.setupSageOneApiConnector(Properties properties) to initialize this library's code with your App's Properties class object (usually System.getProperties()) and make sure these below fields/properties appear in your properties file and have the required (also correct) assigned values.
 
 ```
