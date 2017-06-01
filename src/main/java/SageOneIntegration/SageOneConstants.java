@@ -12,14 +12,14 @@ final class SageOneConstants {
        returned for list methods, regardless of the parameter sent through. THIS IS PER COMPANY/USER,
        CAN HAVE MORE THAN ONE, LIMIT IS NOT ENFORCED BUT REALLY RECOMMENDED.
     */
-	static final String CLIENT_USERNAME = "ricorpwd@yahoo.co.za"; // TODO testing account, change to actual
-	static final String CLIENT_PASSWORD = "StartingSmall500*";  // TODO testing password, change to actual
-	static final String API_URL = "https://accounting.sageone.co.za/";
-	static final String API_VERSION = "1.1.2";
-	static final String API_KEY = "{71A42541-A543-4164-8CBA-5E0F0602B141}";
+	static String CLIENT_USERNAME = "ricorpwd@yahoo.co.za"; // TODO testing account, change to actual
+	static String CLIENT_PASSWORD = "StartingSmall500*";  // TODO testing password, change to actual
+	static String API_URL = "https://accounting.sageone.co.za/";
+	static String API_VERSION = "1.1.2";
+	static String API_KEY = "{71A42541-A543-4164-8CBA-5E0F0602B141}";
 	static final Map<String, Integer> COMPANY_LIST = new HashMap<String, Integer>();
-	static final int SageOneRequestLimit = 100;
-	static final int requestTimeout = 30 * 1000; // Seconds multiplied with milliseconds
+	static int SageOneRequestLimit = 100;
+	static int requestTimeout = 30 * 1000; // Seconds multiplied with milliseconds
 
 	public static Map<String, Integer> getSageOneApiCompanyList() {
 		return COMPANY_LIST;

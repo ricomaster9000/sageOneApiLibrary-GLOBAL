@@ -34,9 +34,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static SageOneIntegration.SageOneConstants.*;
 import static SageOneIntegration.SageOneCoreHelperMethods.encodeCurlyBrackets;
@@ -54,7 +52,15 @@ final class SageOneApiConnector {
 	private static boolean runningInner = false;
 	private static boolean globalResponse = true;
 
-	SageOneApiConnector() {
+	public SageOneApiConnector(final Properties properties) {
+		CLIENT_USERNAME = properties.getProperty("sageOneApi.SA.clientUsername");
+		CLIENT_PASSWORD = properties.getProperty("sageOneApi.SA.clientPassword");
+		API_URL = properties.getProperty("sageOneApi.SA.apiUrl");
+		API_VERSION = properties.getProperty("sageOneApi.SA.apiVersion");
+		API_KEY = "{" + properties.getProperty("sageOneApi.SA.apiKey") + "}";
+		SageOneRequestLimit = Integer.valueOf(properties.getProperty("sageOneApi.SA.requestLimit"));
+		requestTimeout = Integer.valueOf(properties.getProperty("sageOneApi.SA.requestTimeout"));
+
 		objectMapper.configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES, true);
 		RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(requestTimeout).build();
 		client = HttpClientBuilder.create().setDefaultRequestConfig(requestConfig).build();
@@ -68,7 +74,7 @@ final class SageOneApiConnector {
 		if(globalResponse) {
 			try {
 				String endpointToGetCompanies = endpointPrefix + "Company/Get?" + endpointSuffix +
-				encodeCurlyBrackets(API_KEY);
+						encodeCurlyBrackets(API_KEY);
 
 				if (!runningInner) {
 					globalSkipIterator = 0;
@@ -77,13 +83,13 @@ final class SageOneApiConnector {
 				}
 
 				ResponseJsonObject responseJsonObject = ConnectionCoreCodeReturnResponseJson(
-				endpointToGetCompanies + "&$skip=" + globalSkipIterator,
-				"GET");
+						endpointToGetCompanies + "&$skip=" + globalSkipIterator,
+						"GET");
 
 				if (responseJsonObject.getSuccess()) {
 
 					SageOneGrabbedResultsClass resultObject = objectMapper.readValue(responseJsonObject.getResponseJson(),
-					SageOneGrabbedResultsClass.class);
+							SageOneGrabbedResultsClass.class);
 
 					objectsBeforeConversion.addAll(Arrays.asList(resultObject.getResults()));
 
@@ -173,8 +179,8 @@ final class SageOneApiConnector {
 		ResponseJsonObject.initializeClass();
 
 		ResponseJsonObject jsonObjectToReturn = (response)
-		? new ResponseJsonObject(true, null, resultToReturn) :
-		new ResponseJsonObject(false, "ERROR", resultToReturn);
+				? new ResponseJsonObject(true, null, resultToReturn) :
+				new ResponseJsonObject(false, "ERROR", resultToReturn);
 
 		ResponseJsonObject.deInitializeClass();
 
@@ -182,7 +188,7 @@ final class SageOneApiConnector {
 	}
 
 	static ResponseObject sageOneGrabData(final String endpointPlusQuery, final Class<?> ObjectClassToMapTo,
-												 final boolean mustReturnResultObject, final int companyId) {
+										  final boolean mustReturnResultObject, final int companyId) {
 		ResponseObject.initializeClass();
 		ResponseObject responseObject = null;
 		String endpoint = "";
@@ -193,16 +199,16 @@ final class SageOneApiConnector {
 				objectsBeforeConversion = new ArrayList<Object>();
 				endpoint = endpointPrefix + encodeCurlyBrackets(endpointPlusQuery) +
 						((endpointPlusQuery.contains("?") && endpointPlusQuery.contains("="))
-						? "&" + endpointSuffix : "?" + endpointSuffix) + encodeCurlyBrackets(API_KEY) +
+								? "&" + endpointSuffix : "?" + endpointSuffix) + encodeCurlyBrackets(API_KEY) +
 						"&companyid=" + companyId;
 			}
 			ResponseJsonObject jsonResponse = ConnectionCoreCodeReturnResponseJson((runningInner) ?
-			endpoint + "&$skip=" + globalSkipIterator : endpoint, "GET");
+					endpoint + "&$skip=" + globalSkipIterator : endpoint, "GET");
 
 			if(mustReturnResultObject && jsonResponse.getSuccess()) {
 
 				SageOneGrabbedResultsClass responseResultObject =
-				objectMapper.readValue(jsonResponse.getResponseJson(), SageOneGrabbedResultsClass.class);
+						objectMapper.readValue(jsonResponse.getResponseJson(), SageOneGrabbedResultsClass.class);
 
 				for(Object object : responseResultObject.getResults()) {
 					objectsBeforeConversion.add(objectMapper.convertValue(object, ObjectClassToMapTo));
@@ -216,10 +222,10 @@ final class SageOneApiConnector {
 				} else {
 					runningInner = false;
 				}
-					responseObject = (jsonResponse.getSuccess()) ? new ResponseObject(true,
-							objectsBeforeConversion, objectsBeforeConversion.size()) :
-							new ResponseObject(false,
-							"Failed to grab data from SageOne account, the request failed");
+				responseObject = (jsonResponse.getSuccess()) ? new ResponseObject(true,
+						objectsBeforeConversion, objectsBeforeConversion.size()) :
+						new ResponseObject(false,
+								"Failed to grab data from SageOne account, the request failed");
 			} else {
 				responseObject = (jsonResponse.getSuccess())
 						? new ResponseObject(true, objectMapper.readValue(jsonResponse.getResponseJson(),
@@ -229,7 +235,7 @@ final class SageOneApiConnector {
 		} catch (Exception e) {
 			e.printStackTrace();
 			responseObject = new ResponseObject(false, "An error occurred while " +
-			"trying to grab data from the SageOne account, look on terminal or log files for details");
+					"trying to grab data from the SageOne account, look on terminal or log files for details");
 		}
 
 		ResponseObject.deInitializeClass();
@@ -243,21 +249,21 @@ final class SageOneApiConnector {
 
 		try {
 			endpoint = endpointPrefix + encodeCurlyBrackets(endpointPlusQuery) +
-				((endpointPlusQuery.contains("?") && endpointPlusQuery.contains("="))
-				? "&" + endpointSuffix : "?" + endpointSuffix) + encodeCurlyBrackets(API_KEY) +
-				"&companyid=" + companyId;
+					((endpointPlusQuery.contains("?") && endpointPlusQuery.contains("="))
+							? "&" + endpointSuffix : "?" + endpointSuffix) + encodeCurlyBrackets(API_KEY) +
+					"&companyid=" + companyId;
 
 			ResponseJsonObject jsonResponse = ConnectionCoreCodeReturnResponseJson(endpoint, "POST");
 
 			responseObject = (jsonResponse.getSuccess())
-				? new ResponseObject(true, jsonResponse.getResponseMessage()) :
-				new ResponseObject(false,
-				"Failed to save data on SageOne account, the request failed");
+					? new ResponseObject(true, jsonResponse.getResponseMessage()) :
+					new ResponseObject(false,
+							"Failed to save data on SageOne account, the request failed");
 
 		} catch (Exception e) {
 			e.printStackTrace();
 			responseObject = new ResponseObject(false, "An error occurred while " +
-				"trying to save data on the SageOne account, look on terminal or log files for details");
+					"trying to save data on the SageOne account, look on terminal or log files for details");
 		}
 
 		ResponseObject.deInitializeClass();
