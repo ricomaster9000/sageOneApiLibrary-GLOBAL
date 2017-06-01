@@ -6,7 +6,7 @@
 
     <groupId>org.ricardo.sageOne</groupId>
     <artifactId>api-SA</artifactId>
-    <version>1.0</version>
+    <version>0.8</version>
     <packaging>jar</packaging>
 
     <name>SageOne Api South Africa Library</name>
