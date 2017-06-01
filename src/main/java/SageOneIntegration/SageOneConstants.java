@@ -21,7 +21,7 @@ public final class SageOneConstants {
 	static int SageOneRequestLimit = 100;
 	static int requestTimeout = 30 * 1000; // Seconds multiplied with milliseconds
 
-	public static Map<String, Integer> getSageOneApiCompanyList() {
+	public final static Map<String, Integer> getSageOneApiCompanyList() {
 		return COMPANY_LIST;
 	}
 }
