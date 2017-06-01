@@ -16,5 +16,25 @@ sageOneApi.SA.apiKey = 'sd24d-....'; (don't include the brackets, it gets added 
 sageOneApi.SA.requestLimit = 100; (default is 100)
 sageOneApi.SA.requestTimeout = 30000; (default is 30 seconds)
 ```
+### important classes/methods you should use
+
+```
+SageOneEntityType enum class -> use this primarly as a parameter for template methods, currently only 4 enums is supported, will add more through time
+
+getSageOneApiCompanyList() Map variable -> 
+Gets the company list which was initialized with all the companies related to the user in the SageOneApiConnector.setupSageOneApiConnector(Properties properties) method, from here you can grab company id's by passing in the name of the company in the .get() method of getSageOneApiCompanyList()
+
+SageOne Entities, all of them lies in the SageOneIntegration.SageOneApiEntities package, include them from here, these entity classes will especially be used to save/persist SageOne entities to the SageOne account
+
+```
+
+### Template Methods
+```
+getCustomersByNameAndSurnameOrName(String companyName, String... customerNames) -> the second parameter can be one value or multiple values seperated by a comma
+                                                                                   
+getSageOneEntity(String companyName, SageOneEntityType entityName, int entityId) -> grabs one sageOne entity by its id for a certain company
+
+saveSageOneEntity(String companyName, Object entityToSave) -> saves one SageOne entity by passing the company name and the SageOne entity object (look above to know where they can be found)
+```
 
 https://github.com/ricomaster9000/sageOneApiLibrary-SA/
