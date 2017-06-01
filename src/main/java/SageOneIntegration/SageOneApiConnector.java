@@ -52,7 +52,10 @@ public final class SageOneApiConnector {
 	private static boolean runningInner = false;
 	private static boolean globalResponse = true;
 
-	public SageOneApiConnector(final Properties properties) {
+	SageOneApiConnector() {
+	}
+
+	public static final void setupSageOneApiConnector(final Properties properties) {
 		CLIENT_USERNAME = properties.getProperty("sageOneApi.SA.clientUsername");
 		CLIENT_PASSWORD = properties.getProperty("sageOneApi.SA.clientPassword");
 		API_URL = properties.getProperty("sageOneApi.SA.apiUrl");
