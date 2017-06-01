@@ -40,7 +40,7 @@ import static SageOneIntegration.SageOneConstants.*;
 import static SageOneIntegration.SageOneCoreHelperMethods.encodeCurlyBrackets;
 
 
-final class SageOneApiConnector {
+public final class SageOneApiConnector {
 	private static final long serialVersionUID = 1L;
 	static final ObjectMapper objectMapper = new ObjectMapper();
 	private static final String endpointPrefix = API_URL + "/api/" + API_VERSION + "/";
