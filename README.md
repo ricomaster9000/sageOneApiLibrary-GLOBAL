@@ -34,7 +34,7 @@ getCustomersByNameAndSurnameOrName(String companyName, String... customerNames) 
                                                                                    
 getSageOneEntity(String companyName, SageOneEntityType entityName, int entityId) -> grabs one sageOne entity by its id for a certain company
 
-saveSageOneEntity(String companyName, Object entityToSave) -> saves one SageOne entity by passing the company name and the SageOne entity object (look above to know where they can be found)
+saveSageOneEntity(String companyName, Object entityToSave) -> saves one SageOne entity by passing the company name and the SageOne entity object (look above to know where the SageOne entity classes/objects can be found)
 ```
 
 https://github.com/ricomaster9000/sageOneApiLibrary-SA/
