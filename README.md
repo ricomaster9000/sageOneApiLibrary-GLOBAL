@@ -6,13 +6,13 @@ A library that contains pre-written code to connect and access the SageOne SA Ap
 Please run the method SageOneApiConnector.setupSageOneApiConnector(Properties properties) to initialize this library's code with your App's Properties class object (usually System.getProperties()) and make sure these below fields/properties appear in your properties file and have the required (also correct) assigned values.
 
 ```
-sageOneApi.SA.clientUsername
-sageOneApi.SA.clientPassword
-sageOneApi.SA.apiUrl (this isn't required as the default should work)
-sageOneApi.SA.apiVersion (default is 1.1.2)
-sageOneApi.SA.apiKey (don't include the brackets, it gets added automatically)
-sageOneApi.SA.requestLimit (default is 100)
-sageOneApi.SA.requestTimeout (default is 30 seconds)
+sageOneApi.SA.clientUsername = 'your Sage One username';
+sageOneApi.SA.clientPassword = 'your Sage One Password';
+sageOneApi.SA.apiUrl = 'base url for api call'; (this isn't required as the default should work)
+sageOneApi.SA.apiVersion = '1.1.2'; (default is 1.1.2)
+sageOneApi.SA.apiKey = 'sd24d-....'; (don't include the brackets, it gets added automatically)
+sageOneApi.SA.requestLimit = 100; (default is 100)
+sageOneApi.SA.requestTimeout = 30000; (default is 30 seconds)
 ```
 
 https://github.com/ricomaster9000/sageOneApiLibrary-SA/
