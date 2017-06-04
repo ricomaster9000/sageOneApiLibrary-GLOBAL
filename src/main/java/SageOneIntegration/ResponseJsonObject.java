@@ -18,7 +18,7 @@
  **/
 package SageOneIntegration;
 
-final class ResponseJsonObject {
+public final class ResponseJsonObject {
     private boolean success = false;
     private String responseMessage = "";
     private String responseJson;
