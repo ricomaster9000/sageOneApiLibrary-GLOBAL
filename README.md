@@ -8,10 +8,10 @@ add as dependency by using jitpack.io, go to this link to see how https://jitpac
 ``
 USER = ricomaster9000
 REPO/REPOSITORY = sageOneApiLibrary-SA
-TAG/VERSION = v0.82b
+TAG/VERSION = v0.85a
 ``
 
-Please run the method SageOneApiConnector.setupSageOneApiConnector(Properties properties) to initialize this library's code with your App's Properties class object (usually System.getProperties()) and make sure these below fields/properties appear in your properties file and have the required (also correct) assigned values.
+Please run the method SageOneApiConnector.setupSageOneApiSA(Properties properties) to initialize this library's code with your App's Properties class object (usually System.getProperties()) and make sure these below fields/properties appear in your properties file and have the required (also correct) assigned values.
 
 ```
 sageOneApi.SA.clientUsername = 'your Sage One username';
@@ -19,7 +19,8 @@ sageOneApi.SA.clientPassword = 'your Sage One Password';
 sageOneApi.SA.apiUrl = 'base url for api call'; (this isn't required as the default should work)
 sageOneApi.SA.apiVersion = '1.1.2'; (default is 1.1.2)
 sageOneApi.SA.apiKey = 'sd24d-....'; (don't include the brackets, it gets added automatically)
-sageOneApi.SA.requestLimit = 100; (default is 100)
+sageOneApi.SA.requestLimit = 5000; (default is 5000)
+sageOneApi.SA.requestResultLimit = 100; (default is 100)
 sageOneApi.SA.requestTimeout = 30000; (default is 30 seconds)
 ```
 ### important classes/methods you should use
@@ -28,7 +29,7 @@ sageOneApi.SA.requestTimeout = 30000; (default is 30 seconds)
 SageOneEntityType enum class -> use this primarly as a parameter for template methods, currently only 4 enums is supported, will add more through time
 
 SageOneConstants.getSageOneApiCompanyList() Map variable -> 
-Gets the company list which was initialized with all the companies related to the user in the SageOneApiConnector.setupSageOneApiConnector(Properties properties) method, from here you can grab company id's by passing in the name of the company in the .get() method of getSageOneApiCompanyList()
+Gets the company list which was initialized with all the companies related to the user in the SageOneApiConnector.setupSageOneApiSA(Properties properties) method, from here you can grab company id's by passing in the name of the company in the .get() method of getSageOneApiCompanyList()
 
 SageOne Entities, all of them lies in the SageOneIntegration.SageOneApiEntities package, include them from here, these entity classes will especially be used to save/persist SageOne entities to the SageOne account
 
