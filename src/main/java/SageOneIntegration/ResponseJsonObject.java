@@ -25,10 +25,10 @@ public final class ResponseJsonObject {
     private static boolean classInitialized = false;
     private boolean initialized = false;
 
-    public static void initializeClass() {
+    static void initializeClass() {
         ResponseJsonObject.classInitialized = true;
     }
-    public static void deInitializeClass() { ResponseJsonObject.classInitialized = false; }
+    static void deInitializeClass() { ResponseJsonObject.classInitialized = false; }
 
     ResponseJsonObject() {
         try {

@@ -26,9 +26,6 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by ricomaster9000 on 2017/05/31.
- */
 public final class SageOneApiTemplate {
 
     SageOneApiTemplate() {

@@ -18,7 +18,7 @@
  **/
 package SageOneIntegration;
 
-final class ResponseObject {
+public final class ResponseObject {
     private boolean success = false;
     private String responseMessage = "";
     private Object responseObject;
@@ -26,10 +26,10 @@ final class ResponseObject {
     private static boolean classInitialized = false;
     private boolean initialized = false;
 
-    public static void initializeClass() {
+    static void initializeClass() {
         ResponseObject.classInitialized = true;
     }
-    public static void deInitializeClass() { ResponseObject.classInitialized = false; }
+    static void deInitializeClass() { ResponseObject.classInitialized = false; }
 
     ResponseObject() {
         try {
