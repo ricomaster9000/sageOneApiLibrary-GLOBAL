@@ -19,7 +19,7 @@
 package SageOneIntegration;
 
 
-import SageOneIntegration.SageOneApiEntities.Company;
+import SageOneIntegration.SageOneApiEntities.SageOneCompany;
 import SageOneIntegration.SageOneApiEntities.SageOneGrabbedResultsClass;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -43,9 +43,9 @@ import static SageOneIntegration.SageOneCoreHelperMethods.encodeCurlyBrackets;
 public final class SageOneApiConnector {
 	private static final long serialVersionUID = 1L;
 	static final ObjectMapper objectMapper = new ObjectMapper();
-	private static final String endpointPrefix = API_URL + "/api/" + API_VERSION + "/";
-	private static final String endpointSuffix = "$top=" + SageOneRequestLimit + "&apikey=";
-	private static final String notEncodedCredentials = CLIENT_USERNAME + ":" + CLIENT_PASSWORD;
+	private static String endpointPrefix = API_URL + "/api/" + API_VERSION + "/";
+	private static String endpointSuffix = "$top=" + SAGE_ONE_REQUEST_LIMIT + "&apikey=";
+	private static String notEncodedCredentials = CLIENT_USERNAME + ":" + CLIENT_PASSWORD;
 	private static HttpClient client = HttpClientBuilder.create().build();
 	private static List<Object> objectsBeforeConversion;
 	private static int globalSkipIterator = 0;
@@ -61,14 +61,72 @@ public final class SageOneApiConnector {
 		API_URL = properties.getProperty("sageOneApi.SA.apiUrl");
 		API_VERSION = properties.getProperty("sageOneApi.SA.apiVersion");
 		API_KEY = "{" + properties.getProperty("sageOneApi.SA.apiKey") + "}";
-		SageOneRequestLimit = Integer.valueOf(properties.getProperty("sageOneApi.SA.requestLimit"));
-		requestTimeout = Integer.valueOf(properties.getProperty("sageOneApi.SA.requestTimeout"));
+		SAGE_ONE_REQUEST_RESULT_LIMIT = Integer.valueOf(properties.getProperty("sageOneApi.SA.requestResultLimit"));
+		REQUEST_TIMEOUT = Integer.valueOf(properties.getProperty("sageOneApi.SA.requestTimeout"));
+		SAGE_ONE_REQUEST_LIMIT = Integer.valueOf(properties.getProperty("sageOneApi.SA.requestLimit"));
+
+
+		SageOneApiConnector.endpointPrefix = API_URL + "/api/" + API_VERSION + "/";
+		SageOneApiConnector.endpointSuffix = "$top=" + SAGE_ONE_REQUEST_RESULT_LIMIT + "&apikey=";
+		SageOneApiConnector.notEncodedCredentials = CLIENT_USERNAME + ":" + CLIENT_PASSWORD;
+
 
 		objectMapper.configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES, true);
-		RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(requestTimeout).build();
+		RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(REQUEST_TIMEOUT).build();
 		client = HttpClientBuilder.create().setDefaultRequestConfig(requestConfig).build();
 
 		setupCompanyList();
+	}
+
+	public static final void setupSageOneApiSA(final Map<String, String> properties) {
+		SageOneConstants.CLIENT_USERNAME = properties.get("sageOneApi.SA.clientUsername");
+		SageOneConstants.CLIENT_PASSWORD = properties.get("sageOneApi.SA.clientPassword");
+		SageOneConstants.API_URL = properties.get("sageOneApi.SA.apiUrl");
+		SageOneConstants.API_VERSION = properties.get("sageOneApi.SA.apiVersion");
+		SageOneConstants.API_KEY = "{" + properties.get("sageOneApi.SA.apiKey") + "}";
+		SageOneConstants.SAGE_ONE_REQUEST_RESULT_LIMIT = Integer.valueOf(properties.get("sageOneApi.SA.requestResultLimit"));
+		SageOneConstants.REQUEST_TIMEOUT = Integer.valueOf(properties.get("sageOneApi.SA.requestTimeout"));
+		SageOneConstants.SAGE_ONE_REQUEST_LIMIT = Integer.valueOf(properties.get("sageOneApi.SA.requestLimit"));
+
+		SageOneApiConnector.endpointPrefix = API_URL + "/api/" + API_VERSION + "/";
+		SageOneApiConnector.endpointSuffix = "$top=" + SAGE_ONE_REQUEST_RESULT_LIMIT + "&apikey=";
+		SageOneApiConnector.notEncodedCredentials = CLIENT_USERNAME + ":" + CLIENT_PASSWORD;
+
+		SageOneApiConnector.objectMapper.configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES, true);
+		RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(REQUEST_TIMEOUT).build();
+		SageOneApiConnector.client = HttpClientBuilder.create().setDefaultRequestConfig(requestConfig).build();
+
+		try {
+			if (!setupCompanyList()) {
+				throw new Exception("Could net setup SageOne Integration Library, check console for details");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static boolean incrementSageOneRequestCounter() {
+		boolean response = true;
+		SageOneConstants.SAGE_ONE_REQUEST_COUNTER_DAY++;
+		SageOneConstants.SAGE_ONE_REQUEST_COUNTER_HOUR++;
+
+		if((SageOneConstants.SAGE_ONE_REQUEST_COUNTER_DAY >= SageOneConstants.SAGE_ONE_REQUEST_LIMIT &&
+		   SageOneConstants.CURRENT_DAY == SageOneConstants.CALENDAR.get(Calendar.DAY_OF_WEEK))
+		   || (SageOneConstants.SAGE_ONE_REQUEST_COUNTER_HOUR >= SageOneConstants.SAGE_ONE_REQUEST_RESULT_LIMIT &&
+		   SageOneConstants.CURRENT_HOUR == SageOneConstants.CALENDAR.get(Calendar.HOUR_OF_DAY))) {
+			response = false;
+		}
+
+		if(SageOneConstants.CURRENT_DAY != SageOneConstants.CALENDAR.get(Calendar.DAY_OF_WEEK)) {
+		    SageOneConstants.CURRENT_DAY = SageOneConstants.CALENDAR.get(Calendar.DAY_OF_WEEK);
+			SageOneConstants.SAGE_ONE_REQUEST_COUNTER_DAY = 0;
+		}
+
+		if(SageOneConstants.CURRENT_HOUR != SageOneConstants.CALENDAR.get(Calendar.HOUR_OF_DAY)) {
+			SageOneConstants.CURRENT_HOUR = CALENDAR.get(Calendar.HOUR_OF_DAY);
+			SageOneConstants.SAGE_ONE_REQUEST_COUNTER_HOUR = 0;
+		}
+		return response;
 	}
 
 	private static boolean setupCompanyList() {
@@ -76,7 +134,7 @@ public final class SageOneApiConnector {
 
 		if(globalResponse) {
 			try {
-				String endpointToGetCompanies = endpointPrefix + "Company/Get?" + endpointSuffix +
+				String endpointToGetCompanies = endpointPrefix + "SageOneCompany/Get?" + endpointSuffix +
 				encodeCurlyBrackets(API_KEY);
 
 				if (!runningInner) {
@@ -85,25 +143,24 @@ public final class SageOneApiConnector {
 					globalResponse = true;
 				}
 
-				ResponseJsonObject responseJsonObject = ConnectionCoreCodeReturnResponseJson(
-						endpointToGetCompanies + "&$skip=" + globalSkipIterator,
-						"GET");
+				SageOneResponseJsonObject sageOneResponseJsonObject = ConnectionCoreCodeReturnResponseJson(
+				endpointToGetCompanies + "&$skip=" + globalSkipIterator, "GET");
 
-				if (responseJsonObject.getSuccess()) {
+				if (sageOneResponseJsonObject.getSuccess()) {
 
-					SageOneGrabbedResultsClass resultObject = objectMapper.readValue(responseJsonObject.getResponseJson(),
+					SageOneGrabbedResultsClass resultObject = objectMapper.readValue(sageOneResponseJsonObject.getResponseJson(),
 					SageOneGrabbedResultsClass.class);
 
 					objectsBeforeConversion.addAll(Arrays.asList(resultObject.getResults()));
 
-					if (resultObject.getResults().length >= SageOneRequestLimit) {
+					if (resultObject.getResults().length >= SAGE_ONE_REQUEST_RESULT_LIMIT) {
 						runningInner = true;
-						globalSkipIterator += SageOneRequestLimit;
+						globalSkipIterator += SAGE_ONE_REQUEST_RESULT_LIMIT;
 						globalResponse = setupCompanyList();
 					} else {
 						for (Object object : objectsBeforeConversion) {
-							Company companyToGetIdFrom = objectMapper.convertValue(object, Company.class);
-							COMPANY_LIST.put(companyToGetIdFrom.getName(), companyToGetIdFrom.getId());
+							SageOneCompany sageOneCompanyToGetIdFrom = objectMapper.convertValue(object, SageOneCompany.class);
+							COMPANY_LIST.put(sageOneCompanyToGetIdFrom.getName(), sageOneCompanyToGetIdFrom.getId());
 						}
 						runningInner = false;
 					}
@@ -136,7 +193,7 @@ public final class SageOneApiConnector {
 		return response;
 	}
 
-	private static ResponseJsonObject ConnectionCoreCodeReturnResponseJson(String endpoint, final String requestMethod) {
+	private static SageOneResponseJsonObject ConnectionCoreCodeReturnResponseJson(String endpoint, final String requestMethod) {
 		boolean response = true;
 		String resultToReturn = "";
 		HttpRequestBase request = null;
@@ -157,48 +214,59 @@ public final class SageOneApiConnector {
 			}
 
 			if(response) {
-				String authStringEnc = new BASE64Encoder().encode(notEncodedCredentials.getBytes());
-				String encodedCredidentials = "Basic " + authStringEnc;
+				response = incrementSageOneRequestCounter();
 
-				request.addHeader("Accept", "*/*");
-				request.addHeader("Content-Type", "application/json");
-				request.addHeader("Authorization", encodedCredidentials);
-				HttpResponse responseFromRquest = client.execute(request);
+				if(response) {
+					String authStringEnc = new BASE64Encoder().encode(notEncodedCredentials.getBytes());
+					String encodedCredidentials = "Basic " + authStringEnc;
 
-				BufferedReader rd = new BufferedReader(new InputStreamReader(responseFromRquest.getEntity().getContent()));
+					request.addHeader("Accept", "*/*");
+					request.addHeader("Content-Type", "application/json");
+					request.addHeader("Authorization", encodedCredidentials);
+					HttpResponse responseFromRquest = client.execute(request);
 
-				StringBuilder constructedResultString = new StringBuilder();
-				String line = "";
+					BufferedReader rd = new BufferedReader(new InputStreamReader(responseFromRquest.getEntity().getContent()));
 
-				while ((line = rd.readLine()) != null) {
-					constructedResultString.append(line);
+					StringBuilder constructedResultString = new StringBuilder();
+					String line = "";
+
+					while ((line = rd.readLine()) != null) {
+						constructedResultString.append(line);
+					}
+
+					resultToReturn = constructedResultString.toString();
+				} else {
+					String string = "MAX REQUEST LIMIT REACHED FOR HOUR/DAY, REQUEST COUNTERS:\n" +
+							"DAY -> " + SageOneConstants.SAGE_ONE_REQUEST_COUNTER_DAY + "\n" +
+							"HOUR -> " + SageOneConstants.SAGE_ONE_REQUEST_COUNTER_HOUR;
+
+					System.out.println(string);
+					resultToReturn = string;
 				}
-				
-				resultToReturn = constructedResultString.toString();
 			}
 		} catch(IOException e) {
 			resultToReturn = "A Java Exception Occurred in the Sage One Integration SageOneApiConnector.class " +
-					"ConnectionCoreCode method code, please check to see what may have caused it, not that it gets" +
+					"ConnectionCoreCode method code, please check to see what may have caused it, note that it gets" +
 					"used in all the other component methods, so you need to pinpoint which one it is";
 			
 			e.printStackTrace();
 		}
 
-		ResponseJsonObject.initializeClass();
+		SageOneResponseJsonObject.initializeClass();
 
-		ResponseJsonObject jsonObjectToReturn = (response)
-				? new ResponseJsonObject(true, null, resultToReturn) :
-				new ResponseJsonObject(false, "ERROR", resultToReturn);
+		SageOneResponseJsonObject jsonObjectToReturn = (response)
+				? new SageOneResponseJsonObject(true, null, resultToReturn) :
+				new SageOneResponseJsonObject(false, "ERROR", resultToReturn);
 
-		ResponseJsonObject.deInitializeClass();
+		SageOneResponseJsonObject.deInitializeClass();
 
 		return jsonObjectToReturn;
 	}
 
-	public final static ResponseObject sageOneGrabData(final String endpointPlusQuery, final Class<?> ObjectClassToMapTo,
-										  final boolean mustReturnResultObject, final int companyId) {
-		ResponseObject.initializeClass();
-		ResponseObject responseObject = null;
+	public final static SageOneResponseObject sageOneGrabData(final String endpointPlusQuery, final Class<?> ObjectClassToMapTo,
+															  final boolean mustReturnResultObject, final int companyId) {
+		SageOneResponseObject.initializeClass();
+		SageOneResponseObject sageOneResponseObject = null;
 		String endpoint = "";
 
 		try {
@@ -211,7 +279,7 @@ public final class SageOneApiConnector {
 					"&" + endpointSuffix : "?" + endpointSuffix) + encodeCurlyBrackets(API_KEY) +
 					"&companyid=" + companyId;
 			}
-			ResponseJsonObject jsonResponse = ConnectionCoreCodeReturnResponseJson((runningInner) ?
+			SageOneResponseJsonObject jsonResponse = ConnectionCoreCodeReturnResponseJson((runningInner) ?
 			endpoint + "&$skip=" + globalSkipIterator : endpoint, "GET");
 
 			if(mustReturnResultObject && jsonResponse.getSuccess()) {
@@ -223,59 +291,59 @@ public final class SageOneApiConnector {
 					objectsBeforeConversion.add(objectMapper.convertValue(object, ObjectClassToMapTo));
 				}
 
-				if(responseResultObject.getResults().length >= SageOneRequestLimit) {
+				if(responseResultObject.getResults().length >= SAGE_ONE_REQUEST_RESULT_LIMIT) {
 					runningInner = true;
-					globalSkipIterator += SageOneRequestLimit;
+					globalSkipIterator += SAGE_ONE_REQUEST_RESULT_LIMIT;
 
 					sageOneGrabData(endpoint, ObjectClassToMapTo, mustReturnResultObject, companyId);
 				} else {
 					runningInner = false;
 				}
-				responseObject = (jsonResponse.getSuccess()) ? new ResponseObject(true,
+				sageOneResponseObject = (jsonResponse.getSuccess()) ? new SageOneResponseObject(true,
 						objectsBeforeConversion, objectsBeforeConversion.size()) :
-						new ResponseObject(false, "Failed to grab data from SageOne account, the request failed");
+						new SageOneResponseObject(false, "Failed to grab data from SageOne account, the request failed");
 			} else {
-				responseObject = (jsonResponse.getSuccess())
-						? new ResponseObject(true, objectMapper.readValue(jsonResponse.getResponseJson(),
-						ObjectClassToMapTo)) : new ResponseObject(false,
+				sageOneResponseObject = (jsonResponse.getSuccess())
+						? new SageOneResponseObject(true, objectMapper.readValue(jsonResponse.getResponseJson(),
+						ObjectClassToMapTo)) : new SageOneResponseObject(false,
 						"Failed to grab data from SageOne account, the request failed");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			
-			responseObject = new ResponseObject(false, "An error occurred while " +
+			sageOneResponseObject = new SageOneResponseObject(false, "An error occurred while " +
 			"trying to grab data from the SageOne account, look on terminal or log files for details");
 		}
 
-		ResponseObject.deInitializeClass();
-		return responseObject;
+		SageOneResponseObject.deInitializeClass();
+		return sageOneResponseObject;
 	}
 
-	public final static ResponseObject sageOneSaveData(final String endpointPlusQuery, final int companyId) {
-		ResponseObject.initializeClass();
-		ResponseObject responseObject = null;
+	public final static SageOneResponseObject sageOneSaveData(final String endpointPlusQuery, final int companyId) {
+		SageOneResponseObject.initializeClass();
+		SageOneResponseObject sageOneResponseObject = null;
 		String endpoint = "";
 
 		try {
 			endpoint = endpointPrefix + encodeCurlyBrackets(endpointPlusQuery) +
-					((endpointPlusQuery.contains("?") && endpointPlusQuery.contains("=")) ? 
-					"&" + endpointSuffix : "?" + endpointSuffix) + encodeCurlyBrackets(API_KEY) + 
-					"&companyid=" + companyId;
+					((endpointPlusQuery.contains("?") && endpointPlusQuery.contains("=")) ?
+					"&" + endpointSuffix : "?" + endpointSuffix) + encodeCurlyBrackets(API_KEY) + "&companyid=" +
+					companyId;
 
-			ResponseJsonObject jsonResponse = ConnectionCoreCodeReturnResponseJson(endpoint, "POST");
+			SageOneResponseJsonObject jsonResponse = ConnectionCoreCodeReturnResponseJson(endpoint, "POST");
 
-			responseObject = (jsonResponse.getSuccess())
-					? new ResponseObject(true, jsonResponse.getResponseMessage()) :
-					new ResponseObject(false, "Failed to save data on SageOne account, the request failed");
+			sageOneResponseObject = (jsonResponse.getSuccess())
+					? new SageOneResponseObject(true, jsonResponse.getResponseMessage()) :
+					new SageOneResponseObject(false, "Failed to save data on SageOne account, the request failed");
 
 		} catch (Exception e) {
 			e.printStackTrace();
 			
-			responseObject = new ResponseObject(false, "An error occurred while " +
+			sageOneResponseObject = new SageOneResponseObject(false, "An error occurred while " +
 			"trying to save data on the SageOne account, look on terminal or log files for details");
 		}
 
-		ResponseObject.deInitializeClass();
-		return responseObject;
+		SageOneResponseObject.deInitializeClass();
+		return sageOneResponseObject;
 	}
 }

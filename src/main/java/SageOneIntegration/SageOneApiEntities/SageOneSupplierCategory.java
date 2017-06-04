@@ -4,13 +4,13 @@ package SageOneIntegration.SageOneApiEntities;
 import java.util.Date;
 
 
-public final class SupplierCategory extends MainEntity {
+public final class SageOneSupplierCategory extends SageOneMainEntity {
     //String length: inclusive between 0 and 100
     private String Description;
     private Date Modified;
     private Date Created;
 
-    public SupplierCategory(){
+    public SageOneSupplierCategory(){
         this.setInitialized(true);
     }
 
@@ -40,7 +40,7 @@ public final class SupplierCategory extends MainEntity {
 
     @Override
     public String toString() {
-        return "SupplierCategory{" +
+        return "SageOneSupplierCategory{" +
                 "Description='" + Description + '\'' +
                 ", Modified=" + Modified +
                 ", Created=" + Created +

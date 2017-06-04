@@ -23,15 +23,15 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 /**
  * Created by brent on 2017/05/31.
  */
-@JsonDeserialize(builder = CommercialDocumentLine.Builder.class)
-public final class CommercialDocumentLine {
+@JsonDeserialize(builder = SageOneCommercialDocumentLine.Builder.class)
+public final class SageOneCommercialDocumentLine {
     //Gets or sets the selection identifier. This is the selected Item Id or Account Id.
     private final int id;
     private final int SelectionId;
     private final int TaxTypeId;
     //String length: inclusive between 0 and 100
     private final String Description;
-    private final CommercialDocumentLine LineType;
+    private final SageOneCommercialDocumentLine LineType;
     private final double Quantity;
     private final double UnitPriceExclusive;
     private final double Unit;
@@ -53,7 +53,7 @@ public final class CommercialDocumentLine {
     //Gets the UnitCost identifier. This is the Unit Cost of the Item at Time of Sale (only available on TaxInvoices for Item Lines).
     private final double UnitCost;
 
-    public CommercialDocumentLine(Builder builder) {
+    public SageOneCommercialDocumentLine(Builder builder) {
         this.id = builder.getId();
         SelectionId = builder.SelectionId;
         TaxTypeId = builder.TaxTypeId;
@@ -78,11 +78,11 @@ public final class CommercialDocumentLine {
         UnitCost = builder.UnitCost;
     }
 
-    public static class Builder extends MainEntity{
+    public static class Builder extends SageOneMainEntity {
         private int SelectionId;
         private int TaxTypeId;
         private String Description;
-        private CommercialDocumentLine LineType;
+        private SageOneCommercialDocumentLine LineType;
         private double Quantity;
         private double UnitPriceExclusive;
         private double Unit;
@@ -121,7 +121,7 @@ public final class CommercialDocumentLine {
             return this;
         }
 
-        public Builder withLineType(final CommercialDocumentLine val){
+        public Builder withLineType(final SageOneCommercialDocumentLine val){
             LineType = (this.isInitialized()) ? val:LineType;
             return this;
         }
@@ -210,8 +210,8 @@ public final class CommercialDocumentLine {
             return this;
         }
 
-        public CommercialDocumentLine build(){
-            return new CommercialDocumentLine(this);
+        public SageOneCommercialDocumentLine build(){
+            return new SageOneCommercialDocumentLine(this);
         }
     }
 
@@ -231,7 +231,7 @@ public final class CommercialDocumentLine {
         return Description;
     }
 
-    public CommercialDocumentLine getLineType() {
+    public SageOneCommercialDocumentLine getLineType() {
         return LineType;
     }
 
@@ -305,7 +305,7 @@ public final class CommercialDocumentLine {
 
     @Override
     public String toString() {
-        return "CommercialDocumentLine{" +
+        return "SageOneCommercialDocumentLine{" +
                 "id=" + id +
                 ", SelectionId=" + SelectionId +
                 ", TaxTypeId=" + TaxTypeId +

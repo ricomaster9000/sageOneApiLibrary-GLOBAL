@@ -75,7 +75,7 @@ public final class SageOneSupplierReturn {
     private final Date AnticipatedDate;
     //String length: inclusive between 0 and 100
     private final String ExternalReference;
-    private final CommercialDocumentLine Lines;
+    private final SageOneCommercialDocumentLine Lines;
 
     public SageOneSupplierReturn(Builder builder) {
         id = builder.getId();
@@ -122,7 +122,7 @@ public final class SageOneSupplierReturn {
         Lines = builder.Lines;
     }
 
-    public static class Builder extends MainEntity{
+    public static class Builder extends SageOneMainEntity {
         private String FromDocument;
         private boolean Locked;
         private int SupplierId;
@@ -163,7 +163,7 @@ public final class SageOneSupplierReturn {
         private boolean HasAnticipatedDate;
         private Date AnticipatedDate;
         private String ExternalReference;
-        private CommercialDocumentLine Lines;
+        private SageOneCommercialDocumentLine Lines;
 
         public Builder withId(final int val){
             setId(val);
@@ -371,7 +371,7 @@ public final class SageOneSupplierReturn {
             return this;
         }
 
-        public Builder withLines(final CommercialDocumentLine val){
+        public Builder withLines(final SageOneCommercialDocumentLine val){
             Lines = (this.isInitialized()) ? val: Lines;
             return this;
         }
@@ -545,7 +545,7 @@ public final class SageOneSupplierReturn {
         return ExternalReference;
     }
 
-    public CommercialDocumentLine getLines() {
+    public SageOneCommercialDocumentLine getLines() {
         return Lines;
     }
 

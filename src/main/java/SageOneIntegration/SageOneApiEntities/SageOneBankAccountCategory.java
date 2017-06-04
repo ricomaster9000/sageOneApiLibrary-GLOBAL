@@ -23,7 +23,7 @@ import java.util.Date;
 /**
  * Created by brent on 2017/05/31.
  */
-public final class SageOneBankAccountCategory extends MainEntity {
+public final class SageOneBankAccountCategory extends SageOneMainEntity {
     //String length: inclusive between 0 and 100
     private String Description;
     private Date Modified;

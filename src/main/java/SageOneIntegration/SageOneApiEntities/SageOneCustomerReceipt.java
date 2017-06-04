@@ -18,12 +18,12 @@
  **/
 package SageOneIntegration.SageOneApiEntities;
 
-import SageOneIntegration.SageOneApiEntities.SageEnum.PaymentMethod;
+import SageOneIntegration.SageOneApiEntities.SageEnum.SageOnePaymentMethod;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 
-@JsonDeserialize(builder = CustomerReceipt.Builder.class)
-public final class CustomerReceipt {
+@JsonDeserialize(builder = SageOneCustomerReceipt.Builder.class)
+public final class SageOneCustomerReceipt {
     private final int id;
    private final int CustomerId;
    private final java.util.Date Date;
@@ -41,7 +41,7 @@ public final class CustomerReceipt {
    private final double TotalUnallocated;
    private final boolean Reconciled;
    private final int BankAccountId;
-   private final PaymentMethod PaymentMethod;
+   private final SageOnePaymentMethod SageOnePaymentMethod;
    private final int TaxPeriodId;
    private final boolean Editable;
    private final boolean Accepted;
@@ -63,10 +63,10 @@ public final class CustomerReceipt {
    private final java.util.Date Modified;
    private final java.util.Date Created;
    private final SageOneCustomer SageOneCustomer;
-   private final SalesRepresentative SalesRepresentative;
+   private final SageOneSalesRepresentative SageOneSalesRepresentative;
    private final SageOneBankAccount SageOneBankAccount;
 
-    public CustomerReceipt(Builder builder) {
+    public SageOneCustomerReceipt(Builder builder) {
         this.id                 = builder.getId();
         CustomerId              = builder.CustomerId;
         Date                    = builder.Date;
@@ -80,7 +80,7 @@ public final class CustomerReceipt {
         TotalUnallocated        = builder.TotalUnallocated;
         Reconciled              = builder.Reconciled;
         BankAccountId           = builder.BankAccountId;
-        PaymentMethod           = builder.PaymentMethod;
+        SageOnePaymentMethod = builder.SageOnePaymentMethod;
         TaxPeriodId             = builder.TaxPeriodId;
         Editable                = builder.Editable;
         Accepted                = builder.Accepted;
@@ -99,12 +99,12 @@ public final class CustomerReceipt {
         Modified                = builder.Modified;
         Created                 = builder.Created;
         SageOneCustomer = builder.SageOneCustomer;
-        SalesRepresentative     = builder.SalesRepresentative;
+        SageOneSalesRepresentative = builder.SageOneSalesRepresentative;
         SageOneBankAccount = builder.SageOneBankAccount;
 
     }
 
-    public static class Builder extends MainEntity{
+    public static class Builder extends SageOneMainEntity {
        private int CustomerId;
        private java.util.Date Date;
         private String Payee;
@@ -117,7 +117,7 @@ public final class CustomerReceipt {
         private double TotalUnallocated;
         private boolean Reconciled;
         private int BankAccountId;
-        private PaymentMethod PaymentMethod;
+        private SageOnePaymentMethod SageOnePaymentMethod;
         private int TaxPeriodId;
         private boolean Editable;
         private boolean Accepted;
@@ -136,7 +136,7 @@ public final class CustomerReceipt {
         private java.util.Date Modified;
         private java.util.Date Created;
         private SageOneCustomer SageOneCustomer;
-        private SalesRepresentative SalesRepresentative;
+        private SageOneSalesRepresentative SageOneSalesRepresentative;
         private SageOneBankAccount SageOneBankAccount;
 
        public Builder withId(final int val){
@@ -204,8 +204,8 @@ public final class CustomerReceipt {
             return this;
         }
 
-        public Builder withPaymentMethod(final PaymentMethod val){
-            PaymentMethod = (this.isInitialized()) ? val:PaymentMethod;
+        public Builder withPaymentMethod(final SageOnePaymentMethod val){
+            SageOnePaymentMethod = (this.isInitialized()) ? val: SageOnePaymentMethod;
             return this;
         }
 
@@ -299,8 +299,8 @@ public final class CustomerReceipt {
             return this;
         }
 
-        public Builder withSalesRepresentative(final SalesRepresentative val){
-            SalesRepresentative = (this.isInitialized()) ? val:SalesRepresentative;
+        public Builder withSalesRepresentative(final SageOneSalesRepresentative val){
+            SageOneSalesRepresentative = (this.isInitialized()) ? val: SageOneSalesRepresentative;
             return this;
         }
 
@@ -309,8 +309,8 @@ public final class CustomerReceipt {
             return this;
         }
 
-        public CustomerReceipt build(){
-            return new CustomerReceipt(this);
+        public SageOneCustomerReceipt build(){
+            return new SageOneCustomerReceipt(this);
         }
    }
 
@@ -366,8 +366,8 @@ public final class CustomerReceipt {
         return BankAccountId;
     }
 
-    public PaymentMethod getPaymentMethod() {
-        return PaymentMethod;
+    public SageOnePaymentMethod getSageOnePaymentMethod() {
+        return SageOnePaymentMethod;
     }
 
     public int getTaxPeriodId() {
@@ -440,7 +440,7 @@ public final class CustomerReceipt {
 
     @Override
     public String toString() {
-        return "CustomerReceipt{" +
+        return "SageOneCustomerReceipt{" +
                 "id=" + id +
                 ", CustomerId=" + CustomerId +
                 ", Date=" + Date +
@@ -454,7 +454,7 @@ public final class CustomerReceipt {
                 ", TotalUnallocated=" + TotalUnallocated +
                 ", Reconciled=" + Reconciled +
                 ", BankAccountId=" + BankAccountId +
-                ", PaymentMethod=" + PaymentMethod +
+                ", SageOnePaymentMethod=" + SageOnePaymentMethod +
                 ", TaxPeriodId=" + TaxPeriodId +
                 ", Editable=" + Editable +
                 ", Accepted=" + Accepted +

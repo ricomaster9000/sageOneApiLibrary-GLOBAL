@@ -23,9 +23,9 @@ import java.util.Date;
 /**
  * Created by brent on 2017/05/31.
  */
-public final class SageOneBankFeedAccount extends MainEntity {
+public final class SageOneBankFeedAccount extends SageOneMainEntity {
     private int BankFeedAccountGroupId;
-    private BankFeedAccountGroup BankFeedAccountGroup;
+    private SageOneBankFeedAccountGroup SageOneBankFeedAccountGroup;
     private String Description;
     private String Identifier;
     private Date LastRefreshDate;
@@ -47,12 +47,12 @@ public final class SageOneBankFeedAccount extends MainEntity {
         BankFeedAccountGroupId = bankFeedAccountGroupId;
     }
 
-    public BankFeedAccountGroup getBankFeedAccountGroup() {
-        return BankFeedAccountGroup;
+    public SageOneBankFeedAccountGroup getSageOneBankFeedAccountGroup() {
+        return SageOneBankFeedAccountGroup;
     }
 
-    public void setBankFeedAccountGroup(BankFeedAccountGroup bankFeedAccountGroup) {
-        BankFeedAccountGroup = bankFeedAccountGroup;
+    public void setSageOneBankFeedAccountGroup(SageOneBankFeedAccountGroup sageOneBankFeedAccountGroup) {
+        SageOneBankFeedAccountGroup = sageOneBankFeedAccountGroup;
     }
 
     public String getDescription() {
@@ -123,7 +123,7 @@ public final class SageOneBankFeedAccount extends MainEntity {
     public String toString() {
         return "SageOneBankFeedAccount{" +
                 "BankFeedAccountGroupId=" + BankFeedAccountGroupId +
-                ", BankFeedAccountGroup=" + BankFeedAccountGroup +
+                ", SageOneBankFeedAccountGroup=" + SageOneBankFeedAccountGroup +
                 ", Description='" + Description + '\'' +
                 ", Identifier='" + Identifier + '\'' +
                 ", LastRefreshDate=" + LastRefreshDate +

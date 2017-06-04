@@ -2,10 +2,10 @@
 
 package SageOneIntegration.SageOneApiEntities.SageEnum;
 
-public enum PaymentMethod {
+public enum SageOnePaymentMethod {
     Cash(1), Cheque(2), CreditCard(3), EFT(4);
 
     private final int id;
-    PaymentMethod(int id) { this.id = id; }
+    SageOnePaymentMethod(int id) { this.id = id; }
     public int getValue() { return id; }
 }

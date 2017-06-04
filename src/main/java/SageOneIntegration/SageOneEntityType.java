@@ -7,17 +7,14 @@ import SageOneIntegration.SageOneApiEntities.SageOneCustomerReturn;
 import SageOneIntegration.SageOneApiEntities.SageOneSupplier;
 import SageOneIntegration.SageOneApiEntities.SageOneSupplierReturn;
 
-/**
- * Created by ricardo on 2017/06/01.
- */
 public enum SageOneEntityType {
     CUSTOMER_RETURN("CustomerReturn/Get", SageOneCustomerReturn.class),
     SUPPLIER_RETURN("SupplierReturn/Get", SageOneSupplierReturn.class),
     CUSTOMER("Customer/Get", SageOneCustomer.class),
     SUPPLIER("Supplier/Get", SageOneSupplier.class);
 
-    public StringAndClassObject GetObject;
+    public SageOneStringAndClassObject GetObject;
     SageOneEntityType(final String entityGetReqParamName, final Class<?> entityGetReqParamClass)  {
-        this.GetObject = new StringAndClassObject(entityGetReqParamName, entityGetReqParamClass);
+        this.GetObject = new SageOneStringAndClassObject(entityGetReqParamName, entityGetReqParamClass);
     }
 }

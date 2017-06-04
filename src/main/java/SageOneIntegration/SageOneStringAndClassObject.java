@@ -4,12 +4,12 @@ package SageOneIntegration;
 /**
  * Created by ricardo on 2017/06/01.
  */
-final class StringAndClassObject {
+final class SageOneStringAndClassObject {
     private String stringProperty = "";
     private Class<?> classProperty;
     private boolean initialized = false;
 
-    StringAndClassObject(final String stringProperty, final Class<?> classProperty) {
+    SageOneStringAndClassObject(final String stringProperty, final Class<?> classProperty) {
         this.stringProperty = stringProperty;
         this.classProperty = classProperty;
         this.initialized = true;

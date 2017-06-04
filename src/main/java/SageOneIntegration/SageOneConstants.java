@@ -1,6 +1,8 @@
 /** "Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0. "*/
 package SageOneIntegration;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,10 +20,17 @@ public final class SageOneConstants {
 	static String API_VERSION = "1.1.2";
 	static String API_KEY = "";
 	static final Map<String, Integer> COMPANY_LIST = new HashMap<String, Integer>();
-	static int SageOneRequestLimit = 100;
-	static int requestTimeout = 30 * 1000; // Seconds multiplied with milliseconds
+	static int SAGE_ONE_REQUEST_RESULT_LIMIT = 100;
+	static int SAGE_ONE_REQUEST_LIMIT = 5000;
+	static int REQUEST_TIMEOUT = 30 * 1000; // Seconds multiplied with milliseconds
+	static int SAGE_ONE_REQUEST_COUNTER_DAY = 0;
+	static int SAGE_ONE_REQUEST_COUNTER_HOUR = 0;
+	static final Calendar CALENDAR = Calendar.getInstance();
+	static int CURRENT_DAY = CALENDAR.get(Calendar.DAY_OF_WEEK);
+	static int CURRENT_HOUR = CALENDAR.get(Calendar.HOUR_OF_DAY);
+
 
 	public final static Map<String, Integer> getSageOneApiCompanyList() {
-		return COMPANY_LIST;
+		return SageOneConstants.COMPANY_LIST;
 	}
 }

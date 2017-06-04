@@ -35,7 +35,7 @@ public final class SageOneApiTemplate {
     public static List<SageOneCustomer> getCustomersByNameAndSurnameOrName(final String companyName,
                                                                            String... customerNames) {
         boolean response = true;
-        ResponseObject responseObject;
+        SageOneResponseObject sageOneResponseObject;
         List<SageOneCustomer> sageOneCustomersGrabbed = new ArrayList<SageOneCustomer>();
         String endpointQuery = "Customer/Get?$filter=";
 
@@ -48,29 +48,29 @@ public final class SageOneApiTemplate {
             
             if(response) {
                 for (String customerName : customerNames) {
-                    responseObject = SageOneApiConnector.sageOneGrabData(endpointQuery +
+                    sageOneResponseObject = SageOneApiConnector.sageOneGrabData(endpointQuery +
                     URLEncoder.encode("Name eq " + "'" + customerName + "'", "UTF-8"), SageOneCustomer.class,
                     true, companyId);
 
-                    if (responseObject.getSuccess()) {
-                        if (responseObject.getTotalResponseObjects() <= 0) {
+                    if (sageOneResponseObject.getSuccess()) {
+                        if (sageOneResponseObject.getTotalResponseObjects() <= 0) {
 
-                            responseObject = SageOneApiConnector.sageOneGrabData(endpointQuery +
+                            sageOneResponseObject = SageOneApiConnector.sageOneGrabData(endpointQuery +
                             "startswith(Name,'" + customerName + "')", SageOneCustomer.class, true,
                             companyId);
                         }
 
-                        sageOneCustomersGrabbed.addAll((responseObject.getResponseObject() != null) ?
-                            (List<SageOneCustomer>) responseObject.getResponseObject() : sageOneCustomersGrabbed);
+                        sageOneCustomersGrabbed.addAll((sageOneResponseObject.getResponseObject() != null) ?
+                            (List<SageOneCustomer>) sageOneResponseObject.getResponseObject() : sageOneCustomersGrabbed);
                     } else {
-                        System.out.println(responseObject.getResponseMessage());
+                        System.out.println(sageOneResponseObject.getResponseMessage());
                         break;
                     }
                 }
             } else {
                 sageOneCustomersGrabbed = null;
                 
-                System.out.println("Company does not exist for the specified Sage One User -> " +
+                System.out.println("SageOneCompany does not exist for the specified Sage One User -> " +
                 "SageOneApiTemplate.class");
             }    
         } catch (UnsupportedEncodingException e) {
@@ -83,26 +83,26 @@ public final class SageOneApiTemplate {
 
     public static <T> T getSageOneEntity(final String companyName, final SageOneEntityType entityName, final int entityId) {
         String endpointQuery = entityName.GetObject.getStringProperty() + "/" + entityId;
-        ResponseObject responseObject = null;
+        SageOneResponseObject sageOneResponseObject = null;
 
         final Integer companyId = SageOneConstants.COMPANY_LIST.get(companyName);
 
         if(companyId == null) {
-            responseObject = null;
+            sageOneResponseObject = null;
             
-            System.out.println("Company does not exist for the specified Sage One User -> " +
+            System.out.println("SageOneCompany does not exist for the specified Sage One User -> " +
             "SageOneApiTemplate.class");
         } else {
-            responseObject = SageOneApiConnector.sageOneGrabData(endpointQuery, entityName.GetObject.getClassProperty(),
+            sageOneResponseObject = SageOneApiConnector.sageOneGrabData(endpointQuery, entityName.GetObject.getClassProperty(),
                     false, companyId);
         }
 
-        return (responseObject != null && responseObject.getSuccess() ) ? (T) responseObject.getResponseObject() : null;
+        return (sageOneResponseObject != null && sageOneResponseObject.getSuccess() ) ? (T) sageOneResponseObject.getResponseObject() : null;
     }
 
     public static boolean saveSageOneEntity(final String companyName, final Object entityToSave) {
         boolean response = false;
-        ResponseObject responseObject = null;
+        SageOneResponseObject sageOneResponseObject = null;
         Class classToUse;
 
         for(SageOneEntityType sageOneEntityType : SageOneEntityType.values()) {
@@ -116,15 +116,15 @@ public final class SageOneApiTemplate {
 
             final Integer companyId = SageOneConstants.COMPANY_LIST.get(companyName);
             if (companyId == null) {
-                responseObject = null;
-                System.out.println("Company does not exist for the specified Sage One User -> " +
+                sageOneResponseObject = null;
+                System.out.println("SageOneCompany does not exist for the specified Sage One User -> " +
                         "SageOneApiTemplate.class");
             } else {
-                responseObject = SageOneApiConnector.sageOneSaveData(
+                sageOneResponseObject = SageOneApiConnector.sageOneSaveData(
                 SageOneCoreHelperMethods.convertObjectToJsonString(entityToSave), companyId);
             }
         }
 
-        return (response && responseObject != null && responseObject.getSuccess());
+        return (response && sageOneResponseObject != null && sageOneResponseObject.getSuccess());
     }
 }

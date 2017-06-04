@@ -21,7 +21,7 @@ package SageOneIntegration.SageOneApiEntities;
 /**
  * Created by brent on 2017/05/31.
  */
-public final class BankFeedAccountGroup extends MainEntity {
+public final class SageOneBankFeedAccountGroup extends SageOneMainEntity {
     private int BankFeedProviderId;
     private int BankFeedProviderTypeId;
     private String Description;
@@ -29,7 +29,7 @@ public final class BankFeedAccountGroup extends MainEntity {
     private boolean RequiresAdditionalAuthentication;
     private int LastRefreshStatusId;
 
-    public BankFeedAccountGroup(){
+    public SageOneBankFeedAccountGroup(){
         this.setInitialized(true);
     }
 
@@ -83,7 +83,7 @@ public final class BankFeedAccountGroup extends MainEntity {
 
     @Override
     public String toString() {
-        return "BankFeedAccountGroup{" +
+        return "SageOneBankFeedAccountGroup{" +
                 "BankFeedProviderId=" + BankFeedProviderId +
                 ", BankFeedProviderTypeId=" + BankFeedProviderTypeId +
                 ", Description='" + Description + '\'' +

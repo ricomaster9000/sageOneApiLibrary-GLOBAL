@@ -24,7 +24,7 @@ import java.sql.Date;
 /**
  * Created by ricardo on 2017/05/30.
  */
-public final class Company extends MainEntity {
+public final class SageOneCompany extends SageOneMainEntity {
     private String Name = "";
     private String CurrencySymbol = "";
     private int CurrencyDecimalDigits = 0;
@@ -40,8 +40,8 @@ public final class Company extends MainEntity {
     private String PostalAddress5 = "";
     private String GroupSeparator = "";
     private int RoundingValue = 0;
-    private TaxSystemClass TaxSystem;
-    private RoundingTypeClass RoundingType;
+    private SageOneTaxSystemClass TaxSystem;
+    private SageOneRoundingTypeClass RoundingType;
     private boolean AgeMonthly;
     private boolean DisplayInactiveItems;
     private boolean WarnWhenItemCostIsZero;
@@ -104,7 +104,7 @@ public final class Company extends MainEntity {
     private String RegistrationNumber;
     private boolean IsPracticeAccount;
     private int LogoPositionID;
-    private CompanyLogoClass Attachment;
+    private SageOneCompanyLogoClass Attachment;
     private String CompanyTaxNumber;
     private String TaxOffice;
     private String CustomerZoneGuid;
@@ -112,7 +112,7 @@ public final class Company extends MainEntity {
     private int DisplayTotalTypeId;
     private boolean DisplayInCompanyConsole;
     private Date LastLoginDate;
-    private CompanyStatus Status;
+    private SageOneCompanyStatus Status;
 
     public final String getName() {
         return this.Name;
@@ -234,19 +234,19 @@ public final class Company extends MainEntity {
         this.RoundingValue = RoundingValue;
     }
 
-    public final TaxSystemClass getTaxSystem() {
+    public final SageOneTaxSystemClass getTaxSystem() {
         return this.TaxSystem;
     }
 
-    public final void setTaxSystem(final TaxSystemClass TaxSystem) {
+    public final void setTaxSystem(final SageOneTaxSystemClass TaxSystem) {
         this.TaxSystem = TaxSystem;
     }
 
-    public final RoundingTypeClass getRoundingType() {
+    public final SageOneRoundingTypeClass getRoundingType() {
         return this.RoundingType;
     }
 
-    public final void setRoundingType(final RoundingTypeClass RoundingType) {
+    public final void setRoundingType(final SageOneRoundingTypeClass RoundingType) {
         this.RoundingType = RoundingType;
     }
 
@@ -746,11 +746,11 @@ public final class Company extends MainEntity {
         this.LogoPositionID = LogoPositionID;
     }
 
-    public final CompanyLogoClass getAttachment() {
+    public final SageOneCompanyLogoClass getAttachment() {
         return this.Attachment;
     }
 
-    public final void setAttachment(final CompanyLogoClass Attachment) {
+    public final void setAttachment(final SageOneCompanyLogoClass Attachment) {
         this.Attachment = Attachment;
     }
 
@@ -810,11 +810,11 @@ public final class Company extends MainEntity {
         this.LastLoginDate = LastLoginDate;
     }
 
-    public final CompanyStatus getStatus() {
+    public final SageOneCompanyStatus getStatus() {
         return this.Status;
     }
 
-    public final void setStatus(final CompanyStatus Status) {
+    public final void setStatus(final SageOneCompanyStatus Status) {
         this.Status = Status;
     }
 }

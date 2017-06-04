@@ -18,7 +18,7 @@
  **/
 package SageOneIntegration;
 
-public final class ResponseObject {
+public final class SageOneResponseObject {
     private boolean success = false;
     private String responseMessage = "";
     private Object responseObject;
@@ -27,13 +27,13 @@ public final class ResponseObject {
     private boolean initialized = false;
 
     static void initializeClass() {
-        ResponseObject.classInitialized = true;
+        SageOneResponseObject.classInitialized = true;
     }
-    static void deInitializeClass() { ResponseObject.classInitialized = false; }
+    static void deInitializeClass() { SageOneResponseObject.classInitialized = false; }
 
-    ResponseObject() {
+    SageOneResponseObject() {
         try {
-            if (ResponseObject.classInitialized) {
+            if (SageOneResponseObject.classInitialized) {
                 this.initialized = true;
             } else {
                 throw new Exception("Cannot access class");
@@ -43,9 +43,9 @@ public final class ResponseObject {
         }
     }
 
-    ResponseObject(final boolean success, final Object responseObject) {
+    SageOneResponseObject(final boolean success, final Object responseObject) {
         try {
-            if(ResponseObject.classInitialized) {
+            if(SageOneResponseObject.classInitialized) {
                 this.initialized = true;
                 this.success = success;
                 this.responseObject = responseObject;
@@ -57,10 +57,10 @@ public final class ResponseObject {
         }
     }
 
-    ResponseObject(final boolean success, final Object responseObject,
+    SageOneResponseObject(final boolean success, final Object responseObject,
                           final int totalResponseObjects) {
         try {
-            if(ResponseObject.classInitialized) {
+            if(SageOneResponseObject.classInitialized) {
                 this.initialized = true;
                 this.success = success;
                 this.responseObject = responseObject;
@@ -73,9 +73,9 @@ public final class ResponseObject {
         }
     }
 
-    ResponseObject(final boolean success, final String responseMessage) {
+    SageOneResponseObject(final boolean success, final String responseMessage) {
         try {
-            if(ResponseObject.classInitialized) {
+            if(SageOneResponseObject.classInitialized) {
                 this.initialized = true;
                 this.success = success;
                 this.responseMessage = responseMessage;
@@ -87,9 +87,9 @@ public final class ResponseObject {
         }
     }
 
-    ResponseObject(final boolean success, final String responseMessage, final Object responseObject) {
+    SageOneResponseObject(final boolean success, final String responseMessage, final Object responseObject) {
         try {
-            if(ResponseObject.classInitialized) {
+            if(SageOneResponseObject.classInitialized) {
                 this.initialized = true;
                 this.success = success;
                 this.responseMessage = responseMessage;
@@ -102,10 +102,10 @@ public final class ResponseObject {
         }
     }
 
-    ResponseObject(final boolean success, final String responseMessage, final Object responseObject,
+    SageOneResponseObject(final boolean success, final String responseMessage, final Object responseObject,
                           final int totalResponseObjects) {
         try {
-            if(ResponseObject.classInitialized) {
+            if(SageOneResponseObject.classInitialized) {
                 this.initialized = true;
                 this.success = success;
                 this.responseMessage = responseMessage;

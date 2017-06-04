@@ -20,7 +20,7 @@ package SageOneIntegration.SageOneApiEntities;
 /**
  * Created by brent on 2017/05/31.
  */
-public final class SageOneAdditionalPriceList extends MainEntity {
+public final class SageOneAdditionalPriceList extends SageOneMainEntity {
     //String length: inclusive between 0 and 100
     private String Description;
     private boolean IsDefault;

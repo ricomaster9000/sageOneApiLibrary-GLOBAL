@@ -2,10 +2,10 @@
 package SageOneIntegration.SageOneApiEntities;
 
 
-final class SageOneDatabaseEntityRelationship extends MainEntity {
+final class SageOneDatabaseEntityRelationshipSageOne extends SageOneMainEntity {
         private int $key;
 
-        SageOneDatabaseEntityRelationship() {
+        SageOneDatabaseEntityRelationshipSageOne() {
                 this.setInitialized(true);
         }
 

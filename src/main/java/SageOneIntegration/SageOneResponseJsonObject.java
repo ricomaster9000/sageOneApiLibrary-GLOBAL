@@ -18,7 +18,7 @@
  **/
 package SageOneIntegration;
 
-public final class ResponseJsonObject {
+public final class SageOneResponseJsonObject {
     private boolean success = false;
     private String responseMessage = "";
     private String responseJson;
@@ -26,13 +26,13 @@ public final class ResponseJsonObject {
     private boolean initialized = false;
 
     static void initializeClass() {
-        ResponseJsonObject.classInitialized = true;
+        SageOneResponseJsonObject.classInitialized = true;
     }
-    static void deInitializeClass() { ResponseJsonObject.classInitialized = false; }
+    static void deInitializeClass() { SageOneResponseJsonObject.classInitialized = false; }
 
-    ResponseJsonObject() {
+    SageOneResponseJsonObject() {
         try {
-            if (ResponseJsonObject.classInitialized) {
+            if (SageOneResponseJsonObject.classInitialized) {
                 this.initialized = true;
             } else {
                 throw new Exception("Cannot access class");
@@ -42,9 +42,9 @@ public final class ResponseJsonObject {
         }
     }
 
-    ResponseJsonObject(final boolean success, final String responseMessage) {
+    SageOneResponseJsonObject(final boolean success, final String responseMessage) {
         try {
-            if(ResponseJsonObject.classInitialized) {
+            if(SageOneResponseJsonObject.classInitialized) {
                 this.initialized = true;
                 this.success = success;
                 this.responseMessage = responseMessage;
@@ -56,9 +56,9 @@ public final class ResponseJsonObject {
         }
     }
 
-    ResponseJsonObject(final boolean success, final String responseMessage, final String responseJson) {
+    SageOneResponseJsonObject(final boolean success, final String responseMessage, final String responseJson) {
         try {
-            if(ResponseJsonObject.classInitialized) {
+            if(SageOneResponseJsonObject.classInitialized) {
                 this.initialized = true;
                 this.success = success;
                 this.responseMessage = responseMessage;

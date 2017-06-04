@@ -18,7 +18,7 @@
  **/
 package SageOneIntegration.SageOneApiEntities;
 
-import SageOneIntegration.SageOneApiEntities.SageEnum.PaymentMethod;
+import SageOneIntegration.SageOneApiEntities.SageEnum.SageOnePaymentMethod;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import java.util.Date;
@@ -47,7 +47,7 @@ public final class SageOneBankAccount {
     private final Date LastImportDate;
     private final boolean HasTransactionsWaitingForReview;
     private final int DefaultPaymentMethodId;
-    private final PaymentMethod PaymentMethod;
+    private final SageOnePaymentMethod SageOnePaymentMethod;
     private final Date Modified;
     private final Date Created;
     private final int CurrencyId;
@@ -69,13 +69,13 @@ public final class SageOneBankAccount {
         LastImportDate = builder.LastImportDate;
         HasTransactionsWaitingForReview = builder.HasTransactionsWaitingForReview;
         DefaultPaymentMethodId = builder.DefaultPaymentMethodId;
-        PaymentMethod = builder.PaymentMethod;
+        SageOnePaymentMethod = builder.SageOnePaymentMethod;
         Modified = builder.Modified;
         Created = builder.Created;
         CurrencyId = builder.CurrencyId;
     }
 
-    public static class Builder extends MainEntity{
+    public static class Builder extends SageOneMainEntity {
         private String Name;
         private String BankName;
         private String AccountNumber;
@@ -91,7 +91,7 @@ public final class SageOneBankAccount {
         private Date         LastImportDate;
         private boolean         HasTransactionsWaitingForReview;
         private int DefaultPaymentMethodId;
-        private PaymentMethod PaymentMethod;
+        private SageOnePaymentMethod SageOnePaymentMethod;
         private Date Modified;
         private Date Created;
         private int CurrencyId;
@@ -180,8 +180,8 @@ public final class SageOneBankAccount {
         }
 
 
-        public Builder withPaymentMethod(final PaymentMethod val){
-            PaymentMethod = (this.isInitialized()) ? val:PaymentMethod;
+        public Builder withPaymentMethod(final SageOnePaymentMethod val){
+            SageOnePaymentMethod = (this.isInitialized()) ? val: SageOnePaymentMethod;
             return this;
         }
 
@@ -270,8 +270,8 @@ public final class SageOneBankAccount {
         return DefaultPaymentMethodId;
     }
 
-    public PaymentMethod getPaymentMethod() {
-        return PaymentMethod;
+    public SageOnePaymentMethod getSageOnePaymentMethod() {
+        return SageOnePaymentMethod;
     }
 
     public Date getModified() {
@@ -305,7 +305,7 @@ public final class SageOneBankAccount {
                 ", LastImportDate=" + LastImportDate +
                 ", HasTransactionsWaitingForReview=" + HasTransactionsWaitingForReview +
                 ", DefaultPaymentMethodId=" + DefaultPaymentMethodId +
-                ", PaymentMethod=" + PaymentMethod +
+                ", SageOnePaymentMethod=" + SageOnePaymentMethod +
                 ", Modified=" + Modified +
                 ", Created=" + Created +
                 ", CurrencyId=" + CurrencyId +

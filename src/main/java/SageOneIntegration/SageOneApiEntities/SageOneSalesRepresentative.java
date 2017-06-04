@@ -23,7 +23,7 @@ import java.util.Date;
 /**
  * Created by brent on 2017/05/31.
  */
-public final class SalesRepresentative extends MainEntity {
+public final class SageOneSalesRepresentative extends SageOneMainEntity {
     //String length: inclusive between 0 and 50
     private String FirstName;
     //String length: inclusive between 0 and 50
@@ -38,7 +38,7 @@ public final class SalesRepresentative extends MainEntity {
     private Date Created;
     private Date Modified;
 
-    public SalesRepresentative() {
+    public SageOneSalesRepresentative() {
         this.setInitialized(true);
     }
 
@@ -116,7 +116,7 @@ public final class SalesRepresentative extends MainEntity {
 
     @Override
     public String toString() {
-        return "SalesRepresentative{" +
+        return "SageOneSalesRepresentative{" +
                 "FirstName='" + FirstName + '\'' +
                 ", LastName='" + LastName + '\'' +
                 ", Name='" + Name + '\'' +

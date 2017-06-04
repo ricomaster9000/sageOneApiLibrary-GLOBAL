@@ -21,19 +21,19 @@ package SageOneIntegration.SageOneApiEntities;
 /**
  * Created by ricomaster9000 on 2017/05/24.
  */
-public final class SageOneContact extends MainEntity {
+public final class SageOneContact extends SageOneMainEntity {
     private String description;
     private double quantity;
     private double unit_price;
     private double net_amount;
     private double tax_amount;
-    private SageOneDatabaseEntityRelationship[] tax_code;
+    private SageOneDatabaseEntityRelationshipSageOne[] tax_code;
     private double tax_rate_percentage;
     private boolean unit_price_includes_tax;
-    private SageOneDatabaseEntityRelationship[] ledger_account;
+    private SageOneDatabaseEntityRelationshipSageOne[] ledger_account;
     private String product_code;
-    private SageOneDatabaseEntityRelationship[] product;
-    private SageOneDatabaseEntityRelationship[] service;
+    private SageOneDatabaseEntityRelationshipSageOne[] product;
+    private SageOneDatabaseEntityRelationshipSageOne[] service;
 
     public final String getDescription() { return (this.isInitialized()) ? this.description : ""; }
 
@@ -65,11 +65,11 @@ public final class SageOneContact extends MainEntity {
         this.tax_amount = (this.isInitialized()) ? tax_amount : this.tax_amount;
     }
 
-    public final SageOneDatabaseEntityRelationship[] getTax_code() {
-        return (this.isInitialized()) ? this.tax_code : new SageOneDatabaseEntityRelationship[0];
+    public final SageOneDatabaseEntityRelationshipSageOne[] getTax_code() {
+        return (this.isInitialized()) ? this.tax_code : new SageOneDatabaseEntityRelationshipSageOne[0];
     }
 
-    public final void setQuantity(final SageOneDatabaseEntityRelationship[] tax_code) {
+    public final void setQuantity(final SageOneDatabaseEntityRelationshipSageOne[] tax_code) {
         this.tax_code = (this.isInitialized()) ? tax_code : this.tax_code;
     }
 
@@ -85,11 +85,11 @@ public final class SageOneContact extends MainEntity {
         this.unit_price_includes_tax = (this.isInitialized()) ? unit_price_includes_tax : this.unit_price_includes_tax;
     }
 
-    public final SageOneDatabaseEntityRelationship[] getLedger_account() {
-        return (this.isInitialized()) ? this.ledger_account : new SageOneDatabaseEntityRelationship[0];
+    public final SageOneDatabaseEntityRelationshipSageOne[] getLedger_account() {
+        return (this.isInitialized()) ? this.ledger_account : new SageOneDatabaseEntityRelationshipSageOne[0];
     }
 
-    public final void setLedger_account(final SageOneDatabaseEntityRelationship[] ledger_account) {
+    public final void setLedger_account(final SageOneDatabaseEntityRelationshipSageOne[] ledger_account) {
         this.ledger_account = (this.isInitialized()) ? ledger_account : this.ledger_account;
     }
 
@@ -99,19 +99,19 @@ public final class SageOneContact extends MainEntity {
         this.product_code = (this.isInitialized()) ? product_code : this.product_code;
     }
 
-    public final SageOneDatabaseEntityRelationship[] getProduct() {
-        return (this.isInitialized()) ? this.product : new SageOneDatabaseEntityRelationship[0];
+    public final SageOneDatabaseEntityRelationshipSageOne[] getProduct() {
+        return (this.isInitialized()) ? this.product : new SageOneDatabaseEntityRelationshipSageOne[0];
     }
 
-    public final void setProduct(final SageOneDatabaseEntityRelationship[] product) {
+    public final void setProduct(final SageOneDatabaseEntityRelationshipSageOne[] product) {
         this.product = (this.isInitialized()) ? product : this.product;
     }
 
-    public final SageOneDatabaseEntityRelationship[] getService() {
-        return (this.isInitialized()) ? this.service : new SageOneDatabaseEntityRelationship[0];
+    public final SageOneDatabaseEntityRelationshipSageOne[] getService() {
+        return (this.isInitialized()) ? this.service : new SageOneDatabaseEntityRelationshipSageOne[0];
     }
 
-    public final void setService(final SageOneDatabaseEntityRelationship[] service) {
+    public final void setService(final SageOneDatabaseEntityRelationshipSageOne[] service) {
         this.service = (this.isInitialized()) ? service : this.service;
     }
 }

@@ -21,7 +21,7 @@ package SageOneIntegration.SageOneApiEntities;
 /**
  * Created by ricardo on 2017/05/30.
  */
-public final class CompanyLogoClass extends MainEntity {
+public final class SageOneCompanyLogoClass extends SageOneMainEntity {
     private byte[] Image;
     private byte[] Timestamp;
 

@@ -1,11 +1,11 @@
 /** "Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0. "*/
 package SageOneIntegration.SageOneApiEntities;
 
-public enum RoundingTypeClass {
-    Up(0), Down(1), Normal(2), None(3);
+public enum SageOneCompanyStatus {
+    None(0), RegistrationExpired(1), UserAccessDenied(2);
 
-    private int valueOfEnum = 0;
-    RoundingTypeClass(final int valueOfEnum) {
+    private int valueOfEnum;
+    SageOneCompanyStatus(final int valueOfEnum) {
         this.valueOfEnum = valueOfEnum;
     }
 

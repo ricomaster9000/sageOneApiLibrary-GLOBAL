@@ -23,7 +23,7 @@ import java.util.Date;
 /**
  * Created by brent on 2017/05/31.
  */
-public final class TaxType extends MainEntity {
+public final class SageOneTaxType extends SageOneMainEntity {
     private String Name;
     private double Percentage;
     private boolean IsDefault;
@@ -32,7 +32,7 @@ public final class TaxType extends MainEntity {
     private Date Created;
     private Date Modified;
 
-    public TaxType() {
+    public SageOneTaxType() {
         this.setInitialized(true);
     }
 
@@ -94,7 +94,7 @@ public final class TaxType extends MainEntity {
 
     @Override
     public String toString() {
-        return "TaxType{" +
+        return "SageOneTaxType{" +
                 "Name='" + Name + '\'' +
                 ", Percentage=" + Percentage +
                 ", IsDefault=" + IsDefault +

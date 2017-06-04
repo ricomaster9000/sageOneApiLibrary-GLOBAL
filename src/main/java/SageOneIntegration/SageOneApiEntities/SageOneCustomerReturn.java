@@ -30,7 +30,7 @@ public final class SageOneCustomerReturn {
     private final String CustomerName;
     private final SageOneCustomer SageOneCustomer;
     private final int SalesRepresentativeId;
-    private final SalesRepresentative SalesRepresentative;
+    private final SageOneSalesRepresentative SageOneSalesRepresentative;
     private final int StatusId;
     private final Date Modified;
     private final Date Created;
@@ -74,7 +74,7 @@ public final class SageOneCustomerReturn {
     private final Date AnticipatedDate;
     //String length: inclusive between 0 and 100
     private final String ExternalReference;
-    private final CommercialDocumentLine Lines;
+    private final SageOneCommercialDocumentLine Lines;
 
     public SageOneCustomerReturn(Builder builder) {
         this.id = builder.getId();
@@ -84,7 +84,7 @@ public final class SageOneCustomerReturn {
         CustomerName = builder.CustomerName;
         SageOneCustomer = builder.SageOneCustomer;
         SalesRepresentativeId = builder.SalesRepresentativeId;
-        SalesRepresentative = builder.SalesRepresentative;
+        SageOneSalesRepresentative = builder.SageOneSalesRepresentative;
         StatusId = builder.StatusId;
         Modified = builder.Modified;
         Created = builder.Created;
@@ -123,14 +123,14 @@ public final class SageOneCustomerReturn {
         Lines = builder.Lines;
     }
 
-    public static class Builder extends MainEntity{
+    public static class Builder extends SageOneMainEntity {
         private String FromDocument;
         private boolean Locked;
         private int CustomerId;
         private String CustomerName;
         private SageOneCustomer SageOneCustomer;
         private int SalesRepresentativeId;
-        private SalesRepresentative SalesRepresentative;
+        private SageOneSalesRepresentative SageOneSalesRepresentative;
         private int StatusId;
         private Date Modified;
         private Date Created;
@@ -166,7 +166,7 @@ public final class SageOneCustomerReturn {
         private boolean HasAnticipatedDate;
         private Date AnticipatedDate;
         private String ExternalReference;
-        private CommercialDocumentLine Lines;
+        private SageOneCommercialDocumentLine Lines;
 
         public Builder withId(final int val){
             setId(val);
@@ -203,8 +203,8 @@ public final class SageOneCustomerReturn {
             return this;
         }
 
-        public Builder withSalesRepresentative(final SalesRepresentative val){
-            SalesRepresentative = (this.isInitialized()) ? val:SalesRepresentative;
+        public Builder withSalesRepresentative(final SageOneSalesRepresentative val){
+            SageOneSalesRepresentative = (this.isInitialized()) ? val: SageOneSalesRepresentative;
             return this;
         }
 
@@ -384,7 +384,7 @@ public final class SageOneCustomerReturn {
             return this;
         }
 
-        public Builder withLines(final CommercialDocumentLine val){
+        public Builder withLines(final SageOneCommercialDocumentLine val){
             Lines = (this.isInitialized()) ? val:Lines;
             return this;
         }
@@ -422,8 +422,8 @@ public final class SageOneCustomerReturn {
         return SalesRepresentativeId;
     }
 
-    public SalesRepresentative getSalesRepresentative() {
-        return SalesRepresentative;
+    public SageOneSalesRepresentative getSageOneSalesRepresentative() {
+        return SageOneSalesRepresentative;
     }
 
     public int getStatusId() {
@@ -566,7 +566,7 @@ public final class SageOneCustomerReturn {
         return ExternalReference;
     }
 
-    public CommercialDocumentLine getLines() {
+    public SageOneCommercialDocumentLine getLines() {
         return Lines;
     }
 
@@ -580,7 +580,7 @@ public final class SageOneCustomerReturn {
                 ", CustomerName='" + CustomerName + '\'' +
                 ", SageOneCustomer=" + SageOneCustomer +
                 ", SalesRepresentativeId=" + SalesRepresentativeId +
-                ", SalesRepresentative=" + SalesRepresentative +
+                ", SageOneSalesRepresentative=" + SageOneSalesRepresentative +
                 ", StatusId=" + StatusId +
                 ", Modified=" + Modified +
                 ", Created=" + Created +

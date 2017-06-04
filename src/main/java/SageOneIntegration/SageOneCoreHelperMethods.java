@@ -28,9 +28,7 @@ import java.lang.reflect.Array;
 import java.net.URLEncoder;
 import java.util.List;
 
-/**
- * Created by ricardo on 2017/05/31.
- */
+
 public final class SageOneCoreHelperMethods {
 
     SageOneCoreHelperMethods() {
@@ -64,26 +62,27 @@ public final class SageOneCoreHelperMethods {
         return stringToReturn;
     }
 
-    public static Object alterResponseJsonObjectAfterSageOneApiCall(final ResponseObject responseObjectFromApi,
-                                                                                final String forSpecificField) {
-        ResponseJsonObject.initializeClass();
-        ResponseJsonObject responseJsonObject = new ResponseJsonObject(false,
+    public static SageOneResponseJsonObject alterResponseJsonObjectAfterSageOneApiCall(final SageOneResponseObject
+                                                                                               sageOneResponseObjectFromApi,
+                                                                                       final String forSpecificField) {
+        SageOneResponseJsonObject.initializeClass();
+        SageOneResponseJsonObject sageOneResponseJsonObject = new SageOneResponseJsonObject(false,
                 "Failed to grab data from Sage One Api", "");
 
-        if(responseObjectFromApi.getSuccess()) {
-            Object responseObjectToWorkWith = responseObjectFromApi.getResponseObject();
+        if(sageOneResponseObjectFromApi.getSuccess()) {
+            Object responseObjectToWorkWith = sageOneResponseObjectFromApi.getResponseObject();
             if(responseObjectToWorkWith instanceof SageOneCustomerReturn) {
 
                 if(forSpecificField.equals("invoiceNumber")) {
                     SageOneCustomerReturn purchaseInvoice = (SageOneCustomerReturn) responseObjectToWorkWith;
 
-                    responseJsonObject = new ResponseJsonObject(responseObjectFromApi.getSuccess(),
+                    sageOneResponseJsonObject = new SageOneResponseJsonObject(sageOneResponseObjectFromApi.getSuccess(),
                             "Successfully grabbed invoiceNumber", purchaseInvoice.getDocumentNumber());
                 } else {
                     Gson g = new Gson();
-                    String jsonString = g.toJson(responseObjectFromApi);
+                    String jsonString = g.toJson(sageOneResponseObjectFromApi);
 
-                    responseJsonObject = new ResponseJsonObject(responseObjectFromApi.getSuccess(),
+                    sageOneResponseJsonObject = new SageOneResponseJsonObject(sageOneResponseObjectFromApi.getSuccess(),
                     "Successfully grabbed invoiceNumber", jsonString);
                 }
 
@@ -93,7 +92,7 @@ public final class SageOneCoreHelperMethods {
                 if(forSpecificField.equals("invoiceNumber")) {
                     SageOneSupplierReturn saleInvoice = (SageOneSupplierReturn) responseObjectToWorkWith;
 
-                    responseJsonObject = new ResponseJsonObject(responseObjectFromApi.getSuccess(),
+                    sageOneResponseJsonObject = new SageOneResponseJsonObject(sageOneResponseObjectFromApi.getSuccess(),
                             "Successfully grabbed invoiceNumber", saleInvoice.getDocumentNumber());
                 } else {
                         boolean responseFromTry = false;
@@ -101,29 +100,26 @@ public final class SageOneCoreHelperMethods {
 
                         try {
                             Gson g = new Gson();
-                            jsonString = g.toJson(responseObjectFromApi);
+                            jsonString = g.toJson(sageOneResponseObjectFromApi);
                             responseFromTry = true;
                         } catch(Exception e) {
                             e.printStackTrace();
                             responseFromTry = false;
                         }
-
-                        responseJsonObject = new ResponseJsonObject((responseObjectFromApi.getSuccess() && responseFromTry),
+                        sageOneResponseJsonObject = new SageOneResponseJsonObject((sageOneResponseObjectFromApi.getSuccess() && responseFromTry),
                                 (responseFromTry) ? "Successfully grabbed data from SageOne Api" : "Failed to grab " +
-                                        "data from SageOne Api, Api call was successful but the data returned caused " +
-                                        "an error", jsonString);
+                                "data from SageOne Api, Api call was successful but the data returned caused " +
+                                "an error", jsonString);
                 }
-
             }
-
-            ResponseJsonObject.deInitializeClass();
+            SageOneResponseJsonObject.deInitializeClass();
         } else {
-            responseJsonObject.setResponseMessage(responseObjectFromApi.getResponseMessage());
+            sageOneResponseJsonObject.setResponseMessage(sageOneResponseObjectFromApi.getResponseMessage());
         }
-        return responseJsonObject;
+        return sageOneResponseJsonObject;
     }
 
-    static String convertObjectToJsonString(final Object object) {
+    public static String convertObjectToJsonString(final Object object) {
 
         String stringToReturn = "";
         try {

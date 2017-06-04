@@ -29,7 +29,7 @@ public final class SageOneSupplier {
     private final int id;
     //String length: inclusive between 0 and 100
     private final String Name;
-    private final SupplierCategory Category;
+    private final SageOneSupplierCategory Category;
     //String length: inclusive between 0 and 30
     private final String TaxReference;
     //String length: inclusive between 0 and 100
@@ -81,7 +81,7 @@ public final class SageOneSupplier {
     private final boolean HasActivity;
     private final double DefaultDiscountPercentage;
     private final int DefaultTaxTypeId;
-    private final TaxType DefaultTaxType;
+    private final SageOneTaxType defaultSageOneTaxType;
     private final int DueDateMethodId;
     private final int DueDateMethodValue;
     private final String CurrencySymbol;
@@ -132,16 +132,16 @@ public final class SageOneSupplier {
         HasActivity = builder.HasActivity;
         DefaultDiscountPercentage = builder.DefaultDiscountPercentage;
         DefaultTaxTypeId = builder.DefaultTaxTypeId;
-        DefaultTaxType = builder.DefaultTaxType;
+        defaultSageOneTaxType = builder.defaultSageOneTaxType;
         DueDateMethodId = builder.DueDateMethodId;
         DueDateMethodValue = builder.DueDateMethodValue;
         CurrencySymbol = builder.CurrencySymbol;
     }
 
-    public static class Builder extends MainEntity{
+    public static class Builder extends SageOneMainEntity {
 
         private String Name;
-        private SupplierCategory Category;
+        private SageOneSupplierCategory Category;
         private String TaxReference;
         private String ContactName;
         private String Telephone;
@@ -184,7 +184,7 @@ public final class SageOneSupplier {
         private boolean HasActivity;
         private double DefaultDiscountPercentage;
         private int DefaultTaxTypeId;
-        private TaxType DefaultTaxType;
+        private SageOneTaxType defaultSageOneTaxType;
         private int DueDateMethodId;
         private int DueDateMethodValue;
         private String CurrencySymbol;
@@ -199,7 +199,7 @@ public final class SageOneSupplier {
             return this;
         }
 
-        public Builder withCategory(final SupplierCategory val){
+        public Builder withCategory(final SageOneSupplierCategory val){
             Category = (this.isInitialized()) ? val: Category;
             return this;
         }
@@ -424,8 +424,8 @@ public final class SageOneSupplier {
             return this;
         }
 
-        public Builder withDefaultTaxType(final TaxType val){
-            DefaultTaxType = (this.isInitialized()) ? val: DefaultTaxType;
+        public Builder withDefaultTaxType(final SageOneTaxType val){
+            defaultSageOneTaxType = (this.isInitialized()) ? val: defaultSageOneTaxType;
             return this;
         }
 
@@ -447,7 +447,7 @@ public final class SageOneSupplier {
         return Name;
     }
 
-    public SupplierCategory getCategory() {
+    public SageOneSupplierCategory getCategory() {
         return Category;
     }
 
@@ -619,8 +619,8 @@ public final class SageOneSupplier {
         return DefaultTaxTypeId;
     }
 
-    public TaxType getDefaultTaxType() {
-        return DefaultTaxType;
+    public SageOneTaxType getDefaultSageOneTaxType() {
+        return defaultSageOneTaxType;
     }
 
     public int getDueDateMethodId() {
@@ -683,7 +683,7 @@ public final class SageOneSupplier {
                 ", HasActivity=" + HasActivity +
                 ", DefaultDiscountPercentage=" + DefaultDiscountPercentage +
                 ", DefaultTaxTypeId=" + DefaultTaxTypeId +
-                ", DefaultTaxType=" + DefaultTaxType +
+                ", defaultSageOneTaxType=" + defaultSageOneTaxType +
                 ", DueDateMethodId=" + DueDateMethodId +
                 ", DueDateMethodValue=" + DueDateMethodValue +
                 ", CurrencySymbol='" + CurrencySymbol + '\'' +
