@@ -83,7 +83,7 @@ public final class SageOneCustomer {
    private final Date DateField2;
    private final Date DateField3;
    private final int DefaultPriceListId;
-   private final AdditionalPriceList DefaultPriceList;
+   private final SageOneAdditionalPriceList DefaultPriceList;
    private final String DefaultPriceListName;
    private final boolean AcceptsElectronicInvoices;
    private final Date Modified;
@@ -203,7 +203,7 @@ public final class SageOneCustomer {
       private Date DateField2;
       private Date DateField3;
       private int DefaultPriceListId;
-      private AdditionalPriceList DefaultPriceList;
+      private SageOneAdditionalPriceList DefaultPriceList;
       private String DefaultPriceListName;
       private boolean AcceptsElectronicInvoices;
       private Date Modified;
@@ -435,7 +435,7 @@ public final class SageOneCustomer {
          return this;
       }
 
-      public Builder withDefaultPriceList(final AdditionalPriceList val){
+      public Builder withDefaultPriceList(final SageOneAdditionalPriceList val){
          DefaultPriceList = (this.isInitialized()) ? val:DefaultPriceList;
          return this;
       }
@@ -692,7 +692,7 @@ public final class SageOneCustomer {
       return DefaultPriceListId;
    }
 
-   public AdditionalPriceList getDefaultPriceList() {
+   public SageOneAdditionalPriceList getDefaultPriceList() {
       return DefaultPriceList;
    }
 

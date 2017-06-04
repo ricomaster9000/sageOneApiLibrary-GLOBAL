@@ -26,8 +26,8 @@ import java.util.Date;
 /**
  * Created by brent on 2017/05/31.
  */
-@JsonDeserialize(builder = BankAccount.Builder.class)
-public final class BankAccount {
+@JsonDeserialize(builder = SageOneBankAccount.Builder.class)
+public final class SageOneBankAccount {
     //String length: inclusive between 0 and 100
     private final int id;
     private final String Name;
@@ -36,13 +36,13 @@ public final class BankAccount {
     private final String BranchName;
     private final String BranchNumber;
     //-------------------------------------
-    private final BankAccountCategory Category;
+    private final SageOneBankAccountCategory Category;
     private final boolean Active;
     private final boolean Default;
     private final double Balance;
     //String length: inclusive between 0 and 4000
     private final String Description;
-    private final BankFeedAccount BankFeedAccount;
+    private final SageOneBankFeedAccount SageOneBankFeedAccount;
     private final Date LastTransactionDate;
     private final Date LastImportDate;
     private final boolean HasTransactionsWaitingForReview;
@@ -52,7 +52,7 @@ public final class BankAccount {
     private final Date Created;
     private final int CurrencyId;
 
-    public BankAccount(Builder builder) {
+    public SageOneBankAccount(Builder builder) {
         this.id = builder.getId();
         Name = builder.Name;
         BankName = builder.BankName;
@@ -64,7 +64,7 @@ public final class BankAccount {
         Default = builder.Default;
         Balance = builder.Balance;
         Description = builder.Description;
-        BankFeedAccount = builder.BankFeedAccount;
+        SageOneBankFeedAccount = builder.SageOneBankFeedAccount;
         LastTransactionDate = builder.LastTransactionDate;
         LastImportDate = builder.LastImportDate;
         HasTransactionsWaitingForReview = builder.HasTransactionsWaitingForReview;
@@ -81,12 +81,12 @@ public final class BankAccount {
         private String AccountNumber;
         private String BranchName;
         private String BranchNumber;
-        private BankAccountCategory Category;
+        private SageOneBankAccountCategory Category;
         private boolean         Active;
         private boolean         Default;
         private double Balance;
         private String Description;
-        private BankFeedAccount BankFeedAccount;
+        private SageOneBankFeedAccount SageOneBankFeedAccount;
         private Date         LastTransactionDate;
         private Date         LastImportDate;
         private boolean         HasTransactionsWaitingForReview;
@@ -126,7 +126,7 @@ public final class BankAccount {
             return this;
         }
 
-        public Builder withCategory(final BankAccountCategory val){
+        public Builder withCategory(final SageOneBankAccountCategory val){
             Category = (this.isInitialized()) ? val:Category;
             return this;
         }
@@ -151,8 +151,8 @@ public final class BankAccount {
             return this;
         }
 
-        public Builder withBankFeedAccount(final BankFeedAccount val){
-            BankFeedAccount = (this.isInitialized()) ? val:BankFeedAccount;
+        public Builder withBankFeedAccount(final SageOneBankFeedAccount val){
+            SageOneBankFeedAccount = (this.isInitialized()) ? val: SageOneBankFeedAccount;
             return this;
         }
 
@@ -200,8 +200,8 @@ public final class BankAccount {
             return this;
         }
 
-       public BankAccount build(){
-            return new BankAccount(this);
+       public SageOneBankAccount build(){
+            return new SageOneBankAccount(this);
        }
 
     }
@@ -230,7 +230,7 @@ public final class BankAccount {
         return BranchNumber;
     }
 
-    public BankAccountCategory getCategory() {
+    public SageOneBankAccountCategory getCategory() {
         return Category;
     }
 
@@ -250,8 +250,8 @@ public final class BankAccount {
         return Description;
     }
 
-    public BankFeedAccount getBankFeedAccount() {
-        return BankFeedAccount;
+    public SageOneBankFeedAccount getSageOneBankFeedAccount() {
+        return SageOneBankFeedAccount;
     }
 
     public Date getLastTransactionDate() {
@@ -288,7 +288,7 @@ public final class BankAccount {
 
     @Override
     public String toString() {
-        return "BankAccount{" +
+        return "SageOneBankAccount{" +
                 "id=" + id +
                 ", Name='" + Name + '\'' +
                 ", BankName='" + BankName + '\'' +
@@ -300,7 +300,7 @@ public final class BankAccount {
                 ", Default=" + Default +
                 ", Balance=" + Balance +
                 ", Description='" + Description + '\'' +
-                ", BankFeedAccount=" + BankFeedAccount +
+                ", SageOneBankFeedAccount=" + SageOneBankFeedAccount +
                 ", LastTransactionDate=" + LastTransactionDate +
                 ", LastImportDate=" + LastImportDate +
                 ", HasTransactionsWaitingForReview=" + HasTransactionsWaitingForReview +

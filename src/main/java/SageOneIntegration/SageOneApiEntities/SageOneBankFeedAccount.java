@@ -23,7 +23,7 @@ import java.util.Date;
 /**
  * Created by brent on 2017/05/31.
  */
-public final class BankFeedAccount extends MainEntity {
+public final class SageOneBankFeedAccount extends MainEntity {
     private int BankFeedAccountGroupId;
     private BankFeedAccountGroup BankFeedAccountGroup;
     private String Description;
@@ -35,7 +35,7 @@ public final class BankFeedAccount extends MainEntity {
     private String BankAccountName;
     private int LastRefreshStatusId;
 
-    public BankFeedAccount(){
+    public SageOneBankFeedAccount(){
         this.setInitialized(true);
     }
 
@@ -121,7 +121,7 @@ public final class BankFeedAccount extends MainEntity {
 
     @Override
     public String toString() {
-        return "BankFeedAccount{" +
+        return "SageOneBankFeedAccount{" +
                 "BankFeedAccountGroupId=" + BankFeedAccountGroupId +
                 ", BankFeedAccountGroup=" + BankFeedAccountGroup +
                 ", Description='" + Description + '\'' +

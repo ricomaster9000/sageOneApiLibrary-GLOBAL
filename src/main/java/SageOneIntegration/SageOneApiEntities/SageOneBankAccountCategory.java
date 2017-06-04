@@ -23,13 +23,13 @@ import java.util.Date;
 /**
  * Created by brent on 2017/05/31.
  */
-public final class BankAccountCategory extends MainEntity {
+public final class SageOneBankAccountCategory extends MainEntity {
     //String length: inclusive between 0 and 100
     private String Description;
     private Date Modified;
     private Date Created;
 
-    public BankAccountCategory(){
+    public SageOneBankAccountCategory(){
         this.setInitialized(true);
     }
 
@@ -59,7 +59,7 @@ public final class BankAccountCategory extends MainEntity {
 
     @Override
     public String toString() {
-        return "BankAccountCategory{" +
+        return "SageOneBankAccountCategory{" +
                 "Description='" + Description + '\'' +
                 ", Modified=" + Modified +
                 ", Created=" + Created +

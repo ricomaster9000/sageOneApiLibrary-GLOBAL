@@ -64,7 +64,7 @@ public final class CustomerReceipt {
    private final java.util.Date Created;
    private final SageOneCustomer SageOneCustomer;
    private final SalesRepresentative SalesRepresentative;
-   private final BankAccount BankAccount;
+   private final SageOneBankAccount SageOneBankAccount;
 
     public CustomerReceipt(Builder builder) {
         this.id                 = builder.getId();
@@ -100,7 +100,7 @@ public final class CustomerReceipt {
         Created                 = builder.Created;
         SageOneCustomer = builder.SageOneCustomer;
         SalesRepresentative     = builder.SalesRepresentative;
-        BankAccount             = builder.BankAccount;
+        SageOneBankAccount = builder.SageOneBankAccount;
 
     }
 
@@ -137,7 +137,7 @@ public final class CustomerReceipt {
         private java.util.Date Created;
         private SageOneCustomer SageOneCustomer;
         private SalesRepresentative SalesRepresentative;
-        private BankAccount BankAccount;
+        private SageOneBankAccount SageOneBankAccount;
 
        public Builder withId(final int val){
            setId(val);
@@ -304,8 +304,8 @@ public final class CustomerReceipt {
             return this;
         }
 
-        public Builder withBankAccount(final BankAccount val){
-            BankAccount = (this.isInitialized()) ? val:BankAccount;
+        public Builder withBankAccount(final SageOneBankAccount val){
+            SageOneBankAccount = (this.isInitialized()) ? val: SageOneBankAccount;
             return this;
         }
 

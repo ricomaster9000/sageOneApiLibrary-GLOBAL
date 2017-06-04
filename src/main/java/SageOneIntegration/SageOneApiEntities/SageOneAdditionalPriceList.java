@@ -20,12 +20,12 @@ package SageOneIntegration.SageOneApiEntities;
 /**
  * Created by brent on 2017/05/31.
  */
-public final class AdditionalPriceList extends MainEntity {
+public final class SageOneAdditionalPriceList extends MainEntity {
     //String length: inclusive between 0 and 100
     private String Description;
     private boolean IsDefault;
 
-    public AdditionalPriceList() {
+    public SageOneAdditionalPriceList() {
         this.setInitialized(true);
 
 
@@ -50,7 +50,7 @@ public final class AdditionalPriceList extends MainEntity {
 
     @Override
     public String toString() {
-        return "AdditionalPriceList{" +
+        return "SageOneAdditionalPriceList{" +
                 "Description='" + Description + '\'' +
                 ", IsDefault=" + IsDefault +
                 '}';
