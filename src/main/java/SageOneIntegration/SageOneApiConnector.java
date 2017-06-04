@@ -44,7 +44,7 @@ public final class SageOneApiConnector {
 	private static final long serialVersionUID = 1L;
 	static final ObjectMapper objectMapper = new ObjectMapper();
 	private static String endpointPrefix = API_URL + "/api/" + API_VERSION + "/";
-	private static String endpointSuffix = "$top=" + SAGE_ONE_REQUEST_LIMIT + "&apikey=";
+	private static String endpointSuffix = "$top=" + SAGE_ONE_REQUEST_RESULT_LIMIT + "&apikey=";
 	private static String notEncodedCredentials = CLIENT_USERNAME + ":" + CLIENT_PASSWORD;
 	private static HttpClient client = HttpClientBuilder.create().build();
 	private static List<Object> objectsBeforeConversion;
@@ -56,14 +56,15 @@ public final class SageOneApiConnector {
 	}
 
 	public static final void setupSageOneApiConnector(final Properties properties) {
-		CLIENT_USERNAME = properties.getProperty("sageOneApi.SA.clientUsername");
-		CLIENT_PASSWORD = properties.getProperty("sageOneApi.SA.clientPassword");
-		API_URL = properties.getProperty("sageOneApi.SA.apiUrl");
-		API_VERSION = properties.getProperty("sageOneApi.SA.apiVersion");
-		API_KEY = "{" + properties.getProperty("sageOneApi.SA.apiKey") + "}";
-		SAGE_ONE_REQUEST_RESULT_LIMIT = Integer.valueOf(properties.getProperty("sageOneApi.SA.requestResultLimit"));
-		REQUEST_TIMEOUT = Integer.valueOf(properties.getProperty("sageOneApi.SA.requestTimeout"));
-		SAGE_ONE_REQUEST_LIMIT = Integer.valueOf(properties.getProperty("sageOneApi.SA.requestLimit"));
+		SageOneConstants.CLIENT_USERNAME = properties.getProperty("sageOneApi.SA.clientUsername");
+		SageOneConstants.CLIENT_PASSWORD = properties.getProperty("sageOneApi.SA.clientPassword");
+		SageOneConstants.API_URL = properties.getProperty("sageOneApi.SA.apiUrl");
+		SageOneConstants.API_VERSION = properties.getProperty("sageOneApi.SA.apiVersion");
+		SageOneConstants.API_KEY = "{" + properties.get("sageOneApi.SA.apiKey") + "}";
+		SageOneConstants.SAGE_ONE_REQUEST_RESULT_LIMIT = Integer.valueOf(properties.getProperty("sageOneApi.SA.requestResultLimit"));
+		SageOneConstants.REQUEST_TIMEOUT = Integer.valueOf(properties.getProperty("sageOneApi.SA.requestTimeout"));
+		SageOneConstants.SAGE_ONE_REQUEST_LIMIT_DAY = Integer.valueOf(properties.getProperty("sageOneApi.SA.requestLimitDay"));
+		SageOneConstants.SAGE_ONE_REQUEST_LIMIT_HOUR = Integer.valueOf(properties.getProperty("sageOneApi.SA.requestLimitHour"));
 
 
 		SageOneApiConnector.endpointPrefix = API_URL + "/api/" + API_VERSION + "/";
@@ -71,9 +72,9 @@ public final class SageOneApiConnector {
 		SageOneApiConnector.notEncodedCredentials = CLIENT_USERNAME + ":" + CLIENT_PASSWORD;
 
 
-		objectMapper.configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES, true);
+		SageOneApiConnector.objectMapper.configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES, true);
 		RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(REQUEST_TIMEOUT).build();
-		client = HttpClientBuilder.create().setDefaultRequestConfig(requestConfig).build();
+		SageOneApiConnector.client = HttpClientBuilder.create().setDefaultRequestConfig(requestConfig).build();
 
 		setupCompanyList();
 	}
@@ -86,7 +87,8 @@ public final class SageOneApiConnector {
 		SageOneConstants.API_KEY = "{" + properties.get("sageOneApi.SA.apiKey") + "}";
 		SageOneConstants.SAGE_ONE_REQUEST_RESULT_LIMIT = Integer.valueOf(properties.get("sageOneApi.SA.requestResultLimit"));
 		SageOneConstants.REQUEST_TIMEOUT = Integer.valueOf(properties.get("sageOneApi.SA.requestTimeout"));
-		SageOneConstants.SAGE_ONE_REQUEST_LIMIT = Integer.valueOf(properties.get("sageOneApi.SA.requestLimit"));
+		SageOneConstants.SAGE_ONE_REQUEST_LIMIT_DAY = Integer.valueOf(properties.get("sageOneApi.SA.requestLimitDay"));
+		SageOneConstants.SAGE_ONE_REQUEST_LIMIT_HOUR = Integer.valueOf(properties.get("sageOneApi.SA.requestLimitHour"));
 
 		SageOneApiConnector.endpointPrefix = API_URL + "/api/" + API_VERSION + "/";
 		SageOneApiConnector.endpointSuffix = "$top=" + SAGE_ONE_REQUEST_RESULT_LIMIT + "&apikey=";
@@ -110,9 +112,9 @@ public final class SageOneApiConnector {
 		SageOneConstants.SAGE_ONE_REQUEST_COUNTER_DAY++;
 		SageOneConstants.SAGE_ONE_REQUEST_COUNTER_HOUR++;
 
-		if((SageOneConstants.SAGE_ONE_REQUEST_COUNTER_DAY >= SageOneConstants.SAGE_ONE_REQUEST_LIMIT &&
+		if((SageOneConstants.SAGE_ONE_REQUEST_COUNTER_DAY >= SageOneConstants.SAGE_ONE_REQUEST_LIMIT_DAY &&
 		   SageOneConstants.CURRENT_DAY == SageOneConstants.CALENDAR.get(Calendar.DAY_OF_WEEK))
-		   || (SageOneConstants.SAGE_ONE_REQUEST_COUNTER_HOUR >= SageOneConstants.SAGE_ONE_REQUEST_RESULT_LIMIT &&
+		   || (SageOneConstants.SAGE_ONE_REQUEST_COUNTER_HOUR >= SageOneConstants.SAGE_ONE_REQUEST_LIMIT_HOUR &&
 		   SageOneConstants.CURRENT_HOUR == SageOneConstants.CALENDAR.get(Calendar.HOUR_OF_DAY))) {
 			response = false;
 		}

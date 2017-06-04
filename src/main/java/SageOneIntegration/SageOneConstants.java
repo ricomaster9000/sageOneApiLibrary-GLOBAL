@@ -21,7 +21,8 @@ public final class SageOneConstants {
 	static String API_KEY = "";
 	static final Map<String, Integer> COMPANY_LIST = new HashMap<String, Integer>();
 	static int SAGE_ONE_REQUEST_RESULT_LIMIT = 100;
-	static int SAGE_ONE_REQUEST_LIMIT = 5000;
+	static int SAGE_ONE_REQUEST_LIMIT_HOUR = 100;
+	static int SAGE_ONE_REQUEST_LIMIT_DAY = 5000;
 	static int REQUEST_TIMEOUT = 30 * 1000; // Seconds multiplied with milliseconds
 	static int SAGE_ONE_REQUEST_COUNTER_DAY = 0;
 	static int SAGE_ONE_REQUEST_COUNTER_HOUR = 0;
