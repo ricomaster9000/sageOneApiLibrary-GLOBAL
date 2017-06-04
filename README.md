@@ -8,7 +8,7 @@ add as dependency by using jitpack.io, go to this link to see how https://jitpac
 ``
 USER = ricomaster9000
 REPO/REPOSITORY = sageOneApiLibrary-SA
-TAG/VERSION = v0.81b
+TAG/VERSION = v0.81c3
 ``
 
 Please run the method SageOneApiConnector.setupSageOneApiConnector(Properties properties) to initialize this library's code with your App's Properties class object (usually System.getProperties()) and make sure these below fields/properties appear in your properties file and have the required (also correct) assigned values.
