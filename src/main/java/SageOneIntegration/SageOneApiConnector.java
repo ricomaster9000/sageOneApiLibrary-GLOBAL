@@ -195,7 +195,7 @@ public final class SageOneApiConnector {
 		return jsonObjectToReturn;
 	}
 
-	static ResponseObject sageOneGrabData(final String endpointPlusQuery, final Class<?> ObjectClassToMapTo,
+	public final static ResponseObject sageOneGrabData(final String endpointPlusQuery, final Class<?> ObjectClassToMapTo,
 										  final boolean mustReturnResultObject, final int companyId) {
 		ResponseObject.initializeClass();
 		ResponseObject responseObject = null;
@@ -251,7 +251,7 @@ public final class SageOneApiConnector {
 		return responseObject;
 	}
 
-	static ResponseObject sageOneSaveData(final String endpointPlusQuery, final int companyId) {
+	public final static ResponseObject sageOneSaveData(final String endpointPlusQuery, final int companyId) {
 		ResponseObject.initializeClass();
 		ResponseObject responseObject = null;
 		String endpoint = "";

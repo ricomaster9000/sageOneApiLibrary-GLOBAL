@@ -19,6 +19,8 @@
 package SageOneIntegration;
 
 import SageOneIntegration.SageOneApiEntities.PurchaseInvoice;
+import SageOneIntegration.SageOneApiEntities.SageOneCustomerReturn;
+import SageOneIntegration.SageOneApiEntities.SageOneSupplierReturn;
 import SageOneIntegration.SageOneApiEntities.SaleInvoice;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.gson.Gson;
@@ -64,7 +66,7 @@ public final class SageOneCoreHelperMethods {
         return stringToReturn;
     }
 
-    public static ResponseJsonObject alterResponseJsonObjectAfterSageOneApiCall(final ResponseObject responseObjectFromApi,
+    public static Object alterResponseJsonObjectAfterSageOneApiCall(final ResponseObject responseObjectFromApi,
                                                                                 final String forSpecificField) {
         ResponseJsonObject.initializeClass();
         ResponseJsonObject responseJsonObject = new ResponseJsonObject(false,
@@ -72,13 +74,13 @@ public final class SageOneCoreHelperMethods {
 
         if(responseObjectFromApi.getSuccess()) {
             Object responseObjectToWorkWith = responseObjectFromApi.getResponseObject();
-            if(responseObjectToWorkWith instanceof PurchaseInvoice) {
+            if(responseObjectToWorkWith instanceof SageOneCustomerReturn) {
 
                 if(forSpecificField.equals("invoiceNumber")) {
-                    PurchaseInvoice purchaseInvoice = (PurchaseInvoice) responseObjectToWorkWith;
+                    SageOneCustomerReturn purchaseInvoice = (SageOneCustomerReturn) responseObjectToWorkWith;
 
                     responseJsonObject = new ResponseJsonObject(responseObjectFromApi.getSuccess(),
-                            "Successfully grabbed invoiceNumber", purchaseInvoice.getReference());
+                            "Successfully grabbed invoiceNumber", purchaseInvoice.getDocumentNumber());
                 } else {
                     Gson g = new Gson();
                     String jsonString = g.toJson(responseObjectFromApi);
@@ -87,14 +89,14 @@ public final class SageOneCoreHelperMethods {
                     "Successfully grabbed invoiceNumber", jsonString);
                 }
 
-            } else if(responseObjectToWorkWith instanceof SaleInvoice) {
+            } else if(responseObjectToWorkWith instanceof SageOneSupplierReturn) {
 
 
                 if(forSpecificField.equals("invoiceNumber")) {
-                    SaleInvoice saleInvoice = (SaleInvoice) responseObjectToWorkWith;
+                    SageOneSupplierReturn saleInvoice = (SageOneSupplierReturn) responseObjectToWorkWith;
 
                     responseJsonObject = new ResponseJsonObject(responseObjectFromApi.getSuccess(),
-                            "Successfully grabbed invoiceNumber", saleInvoice.getInvoice_number());
+                            "Successfully grabbed invoiceNumber", saleInvoice.getDocumentNumber());
                 } else {
                         boolean responseFromTry = false;
                         String jsonString = "";

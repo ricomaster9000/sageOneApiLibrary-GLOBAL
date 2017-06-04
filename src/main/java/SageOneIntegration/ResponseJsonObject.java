@@ -75,7 +75,7 @@ public final class ResponseJsonObject {
         this.success = (this.initialized) ? success : this.success;
     }
 
-    final boolean getSuccess() {
+    public final boolean getSuccess() {
         try {
             if (!this.initialized) {
                 throw new Exception("Cannot access class");
@@ -91,7 +91,7 @@ public final class ResponseJsonObject {
         this.responseMessage = (this.initialized) ? responseMessage : this.responseMessage;
     }
 
-    final String getResponseMessage() {
+    public final String getResponseMessage() {
         try {
             if (!this.initialized) {
                 throw new Exception("Cannot access class");
@@ -107,7 +107,7 @@ public final class ResponseJsonObject {
         this.responseJson = (this.initialized) ? responseJson : this.responseJson;
     }
 
-    final String getResponseJson() {
+    public final String getResponseJson() {
         try {
             if (!this.initialized) {
                 throw new Exception("Cannot access class");
