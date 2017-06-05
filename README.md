@@ -1,4 +1,4 @@
-# sageOneApiLibrary-SA V0.90a
+# sageOneApiLibrary-SA V0.90a (Final Alpha)
 A library that contains pre-written code to connect and access the SageOne South Africa Api (v.1.1.2), it also comes with a template that makes use of these pre-written component code to access the SageOne SA api, the template contains methods (mostly dynamic or generic) that a developer can use to build this library into his/her app. Compatible with java 1.6 and upwards.
 
 ### HOW TO USE
