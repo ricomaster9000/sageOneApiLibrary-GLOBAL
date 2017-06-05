@@ -23,15 +23,15 @@ import java.util.Date;
 
 @JsonDeserialize(builder = SageOneCustomerReturn.Builder.class)
 public final class SageOneCustomerReturn {
-    private final int id;
+    private final Integer ID;
     private final String FromDocument;
     private final boolean Locked;
-    private final int CustomerId;
+    private final Integer CustomerId;
     private final String CustomerName;
     private final SageOneCustomer SageOneCustomer;
-    private final int SalesRepresentativeId;
+    private final Integer SalesRepresentativeId;
     private final SageOneSalesRepresentative SageOneSalesRepresentative;
-    private final int StatusId;
+    private final Integer StatusId;
     private final Date Modified;
     private final Date Created;
     private final Date Date;
@@ -64,9 +64,9 @@ public final class SageOneCustomerReturn {
     private final String DeliveryAddress04;
     private final String DeliveryAddress05;
     //--------------------------------------
-    private final int CurrencyId;
+    private final Integer CurrencyId;
     private final double ExchangeRate;
-    private final int TaxPeriodId;
+    private final Integer TaxPeriodId;
     private final boolean Editable;
     private final boolean HasAttachments;
     private final boolean HasNotes;
@@ -77,7 +77,7 @@ public final class SageOneCustomerReturn {
     private final SageOneCommercialDocumentLine Lines;
 
     public SageOneCustomerReturn(Builder builder) {
-        this.id = builder.getId();
+        this.ID = builder.getId();
         FromDocument = builder.FromDocument;
         Locked = builder.Locked;
         CustomerId = builder.CustomerId;
@@ -126,12 +126,12 @@ public final class SageOneCustomerReturn {
     public static class Builder extends SageOneMainEntity {
         private String FromDocument;
         private boolean Locked;
-        private int CustomerId;
+        private Integer CustomerId;
         private String CustomerName;
         private SageOneCustomer SageOneCustomer;
-        private int SalesRepresentativeId;
+        private Integer SalesRepresentativeId;
         private SageOneSalesRepresentative SageOneSalesRepresentative;
-        private int StatusId;
+        private Integer StatusId;
         private Date Modified;
         private Date Created;
         private Date Date;
@@ -157,9 +157,9 @@ public final class SageOneCustomerReturn {
         private String DeliveryAddress03 = "";
         private String DeliveryAddress04 = "";
         private String DeliveryAddress05 = "";
-        private int CurrencyId;
+        private Integer CurrencyId;
         private double ExchangeRate;
-        private int TaxPeriodId;
+        private Integer TaxPeriodId;
         private boolean Editable;
         private boolean HasAttachments;
         private boolean HasNotes;
@@ -168,7 +168,7 @@ public final class SageOneCustomerReturn {
         private String ExternalReference;
         private SageOneCommercialDocumentLine Lines;
 
-        public Builder withId(final int val){
+        public Builder withId(final Integer val){
             setId(val);
             return this;
         }
@@ -183,7 +183,7 @@ public final class SageOneCustomerReturn {
             return this;
         }
 
-        public Builder withCustomerId(final int val){
+        public Builder withCustomerId(final Integer val){
             CustomerId = (this.isInitialized()) ? val:CustomerId;
             return this;
         }
@@ -198,7 +198,7 @@ public final class SageOneCustomerReturn {
             return this;
         }
 
-        public Builder withSalesRepresentativeId(final int val){
+        public Builder withSalesRepresentativeId(final Integer val){
             SalesRepresentativeId = (this.isInitialized()) ? val:SalesRepresentativeId;
             return this;
         }
@@ -208,7 +208,7 @@ public final class SageOneCustomerReturn {
             return this;
         }
 
-        public Builder withStatusId(final int val){
+        public Builder withStatusId(final Integer val){
             StatusId = (this.isInitialized()) ? val:StatusId;
             return this;
         }
@@ -339,7 +339,7 @@ public final class SageOneCustomerReturn {
             return this;
         }
 
-        public Builder withCurrencyId(final int val){
+        public Builder withCurrencyId(final Integer val){
             CurrencyId = (this.isInitialized()) ? val:CurrencyId;
             return this;
         }
@@ -349,7 +349,7 @@ public final class SageOneCustomerReturn {
             return this;
         }
 
-        public Builder withTaxPeriodId(final int val){
+        public Builder withTaxPeriodId(final Integer val){
             TaxPeriodId = (this.isInitialized()) ? val:TaxPeriodId;
             return this;
         }
@@ -394,8 +394,8 @@ public final class SageOneCustomerReturn {
         }
     }
 
-    public int getId() {
-        return id;
+    public Integer getId() {
+        return ID;
     }
 
     public String getFromDocument() {
@@ -406,7 +406,7 @@ public final class SageOneCustomerReturn {
         return Locked;
     }
 
-    public int getCustomerId() {
+    public Integer getCustomerId() {
         return CustomerId;
     }
 
@@ -418,7 +418,7 @@ public final class SageOneCustomerReturn {
         return SageOneCustomer;
     }
 
-    public int getSalesRepresentativeId() {
+    public Integer getSalesRepresentativeId() {
         return SalesRepresentativeId;
     }
 
@@ -426,7 +426,7 @@ public final class SageOneCustomerReturn {
         return SageOneSalesRepresentative;
     }
 
-    public int getStatusId() {
+    public Integer getStatusId() {
         return StatusId;
     }
 
@@ -530,7 +530,7 @@ public final class SageOneCustomerReturn {
         return DeliveryAddress05;
     }
 
-    public int getCurrencyId() {
+    public Integer getCurrencyId() {
         return CurrencyId;
     }
 
@@ -538,7 +538,7 @@ public final class SageOneCustomerReturn {
         return ExchangeRate;
     }
 
-    public int getTaxPeriodId() {
+    public Integer getTaxPeriodId() {
         return TaxPeriodId;
     }
 
@@ -573,7 +573,7 @@ public final class SageOneCustomerReturn {
     @Override
     public String toString() {
         return "CustomerReturn{" +
-                "id=" + id +
+                "id=" + ID +
                 ", FromDocument='" + FromDocument + '\'' +
                 ", Locked=" + Locked +
                 ", CustomerId=" + CustomerId +

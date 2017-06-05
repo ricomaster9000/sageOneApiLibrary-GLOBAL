@@ -2,7 +2,6 @@
 package SageOneIntegration;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,7 +15,7 @@ public final class SageOneConstants {
     */
 	static String CLIENT_USERNAME = ""; // TODO testing account, change to actual
 	static String CLIENT_PASSWORD = "";  // TODO testing password, change to actual
-	static String API_URL = "https://accounting.sageone.co.za/";
+	static String API_URL = "https://accounting.sageone.co.za";
 	static String API_VERSION = "1.1.2";
 	static String API_KEY = "";
 	static final Map<String, Integer> COMPANY_LIST = new HashMap<String, Integer>();
@@ -24,14 +23,11 @@ public final class SageOneConstants {
 	static int SAGE_ONE_REQUEST_LIMIT_HOUR = 100;
 	static int SAGE_ONE_REQUEST_LIMIT_DAY = 5000;
 	static int REQUEST_TIMEOUT = 30 * 1000; // Seconds multiplied with milliseconds
-	static Map<Integer, Integer> SAGE_ONE_REQUEST_COUNTER_DAY;
-	static Map<Integer, Integer> SAGE_ONE_REQUEST_COUNTER_HOUR;
+	static Map<Integer, Integer> SAGE_ONE_REQUEST_COUNTER_DAY = new HashMap<Integer, Integer>();
+	static Map<Integer, Integer> SAGE_ONE_REQUEST_COUNTER_HOUR = new HashMap<Integer, Integer>();
 	static final Calendar CALENDAR = Calendar.getInstance();
 	static int CURRENT_DAY = CALENDAR.get(Calendar.DAY_OF_WEEK);
 	static int CURRENT_HOUR = CALENDAR.get(Calendar.HOUR_OF_DAY);
-
-	static Map<Integer, Map<String, Integer>> SAGE_ONE_ID_HOLDER = new HashMap<Integer, Map<String, Integer>>();
-
 
 	public final static Map<String, Integer> getSageOneApiCompanyList() {
 		return SageOneConstants.COMPANY_LIST;

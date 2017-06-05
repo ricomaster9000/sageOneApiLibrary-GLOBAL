@@ -24,7 +24,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 @JsonDeserialize(builder = SageOneCustomerReceipt.Builder.class)
 public final class SageOneCustomerReceipt {
-    private final int id;
+   private final int ID;
    private final int CustomerId;
    private final java.util.Date Date;
    private final String Payee;
@@ -67,7 +67,7 @@ public final class SageOneCustomerReceipt {
    private final SageOneBankAccount SageOneBankAccount;
 
     public SageOneCustomerReceipt(Builder builder) {
-        this.id                 = builder.getId();
+        this.ID                 = builder.getId();
         CustomerId              = builder.CustomerId;
         Date                    = builder.Date;
         Payee                   = builder.Payee;
@@ -105,8 +105,8 @@ public final class SageOneCustomerReceipt {
     }
 
     public static class Builder extends SageOneMainEntity {
-       private int CustomerId;
-       private java.util.Date Date;
+        private int CustomerId;
+        private java.util.Date Date;
         private String Payee;
         private String DocumentNumber;
         private String Reference;
@@ -315,7 +315,7 @@ public final class SageOneCustomerReceipt {
    }
 
     public int getId() {
-        return id;
+        return ID;
     }
 
     public int getCustomerId() {
@@ -441,7 +441,7 @@ public final class SageOneCustomerReceipt {
     @Override
     public String toString() {
         return "SageOneCustomerReceipt{" +
-                "id=" + id +
+                "id=" + ID +
                 ", CustomerId=" + CustomerId +
                 ", Date=" + Date +
                 ", Payee='" + Payee + '\'' +

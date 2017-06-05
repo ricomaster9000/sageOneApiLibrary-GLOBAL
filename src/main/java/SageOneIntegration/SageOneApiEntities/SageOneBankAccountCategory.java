@@ -56,13 +56,4 @@ public final class SageOneBankAccountCategory extends SageOneMainEntity {
     public void setCreated(Date created) {
         Created = created;
     }
-
-    @Override
-    public String toString() {
-        return "SageOneBankAccountCategory{" +
-                "Description='" + Description + '\'' +
-                ", Modified=" + Modified +
-                ", Created=" + Created +
-                '}';
-    }
 }

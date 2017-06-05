@@ -22,5 +22,11 @@ public final class SageOneSaveEntityResponse {
         this.success = (this.initialized) ? success : this.success;
     }
 
-    public final int getSavedEntityId = 0;
+    public final int getSavedEntityId() {
+        return (this.initialized) ? this.savedEntityId : -1;
+    }
+
+    public final void setSavedEntityId(final int savedEntityId) {
+        this.savedEntityId = (this.initialized) ? savedEntityId : this.savedEntityId;
+    }
 }

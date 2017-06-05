@@ -26,7 +26,7 @@ import java.util.Date;
  */
 @JsonDeserialize(builder = SageOneSupplier.Builder.class)
 public final class SageOneSupplier {
-    private final int id;
+    private final Integer ID;
     //String length: inclusive between 0 and 100
     private final String Name;
     private final SageOneSupplierCategory Category;
@@ -77,17 +77,17 @@ public final class SageOneSupplier {
     private final String BusinessRegistrationNumber;
     private final String RMCDApprovalNumber;
     private final Date TaxStatusVerified;
-    private final int CurrencyId;
+    private final Integer CurrencyId;
     private final boolean HasActivity;
     private final double DefaultDiscountPercentage;
-    private final int DefaultTaxTypeId;
+    private final Integer DefaultTaxTypeId;
     private final SageOneTaxType defaultSageOneTaxType;
-    private final int DueDateMethodId;
-    private final int DueDateMethodValue;
+    private final Integer DueDateMethodId;
+    private final Integer DueDateMethodValue;
     private final String CurrencySymbol;
 
     public SageOneSupplier(Builder builder) {
-        this.id = builder.getId();
+        this.ID = builder.getId();
         Name = builder.Name;
         Category = builder.Category;
         TaxReference = builder.TaxReference;
@@ -180,16 +180,16 @@ public final class SageOneSupplier {
         private String BusinessRegistrationNumber;
         private String RMCDApprovalNumber;
         private Date TaxStatusVerified;
-        private int CurrencyId;
+        private Integer CurrencyId;
         private boolean HasActivity;
         private double DefaultDiscountPercentage;
-        private int DefaultTaxTypeId;
+        private Integer DefaultTaxTypeId;
         private SageOneTaxType defaultSageOneTaxType;
-        private int DueDateMethodId;
-        private int DueDateMethodValue;
+        private Integer DueDateMethodId;
+        private Integer DueDateMethodValue;
         private String CurrencySymbol;
 
-        public Builder withId(final int val){
+        public Builder withId(final Integer val){
            setId(val);
             return this;
         }
@@ -394,22 +394,22 @@ public final class SageOneSupplier {
             return this;
         }
 
-        public Builder withCurrencyId(final int val){
+        public Builder withCurrencyId(final Integer val){
             CurrencyId = (this.isInitialized()) ? val: CurrencyId;
             return this;
         }
 
-        public Builder withDefaultTaxTypeId(final int val){
+        public Builder withDefaultTaxTypeId(final Integer val){
             DefaultTaxTypeId = (this.isInitialized()) ? val: DefaultTaxTypeId;
             return this;
         }
 
-        public Builder withDueDateMethodId(final int val){
+        public Builder withDueDateMethodId(final Integer val){
             DueDateMethodId = (this.isInitialized()) ? val: DueDateMethodId;
             return this;
         }
 
-        public Builder withDueDateMethodValue(final int val){
+        public Builder withDueDateMethodValue(final Integer val){
             DueDateMethodValue = (this.isInitialized()) ? val: DueDateMethodValue;
             return this;
         }
@@ -439,8 +439,8 @@ public final class SageOneSupplier {
         }
     }
 
-    public int getId() {
-        return id;
+    public Integer getId() {
+        return ID;
     }
 
     public String getName() {
@@ -603,7 +603,7 @@ public final class SageOneSupplier {
         return TaxStatusVerified;
     }
 
-    public int getCurrencyId() {
+    public Integer getCurrencyId() {
         return CurrencyId;
     }
 
@@ -615,7 +615,7 @@ public final class SageOneSupplier {
         return DefaultDiscountPercentage;
     }
 
-    public int getDefaultTaxTypeId() {
+    public Integer getDefaultTaxTypeId() {
         return DefaultTaxTypeId;
     }
 
@@ -623,11 +623,11 @@ public final class SageOneSupplier {
         return defaultSageOneTaxType;
     }
 
-    public int getDueDateMethodId() {
+    public Integer getDueDateMethodId() {
         return DueDateMethodId;
     }
 
-    public int getDueDateMethodValue() {
+    public Integer getDueDateMethodValue() {
         return DueDateMethodValue;
     }
 
@@ -638,7 +638,7 @@ public final class SageOneSupplier {
     @Override
     public String toString() {
         return "Supplier{" +
-                "id=" + id +
+                "id=" + ID +
                 ", Name='" + Name + '\'' +
                 ", Category=" + Category +
                 ", TaxReference='" + TaxReference + '\'' +

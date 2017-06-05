@@ -37,13 +37,4 @@ public final class SageOneSupplierCategory extends SageOneMainEntity {
     public void setCreated(Date created) {
         Created = created;
     }
-
-    @Override
-    public String toString() {
-        return "SageOneSupplierCategory{" +
-                "Description='" + Description + '\'' +
-                ", Modified=" + Modified +
-                ", Created=" + Created +
-                '}';
-    }
 }

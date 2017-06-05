@@ -28,11 +28,11 @@ import java.util.UUID;
  */
 @JsonDeserialize(builder = SageOneCustomer.Builder.class)
 public final class SageOneCustomer {
-   private final int id;
+   private final Integer ID;
    //RequiredString length: inclusive between 0 and 100
    private final String Name;
    private final SageOneCustomerCategory Category;
-   private final int SalesRepresentativeId;
+   private final Integer SalesRepresentativeId;
    private final SageOneSalesRepresentative SageOneSalesRepresentative;
     //String length: inclusive between 0 and 30
    private final String TaxReference;
@@ -51,7 +51,7 @@ public final class SageOneCustomer {
    private final double Balance;
    private final double CreditLimit;
    //Gets or sets the communication method. Optional. None = 0, Print = 1, Email = 2, Print and Email = 3
-   private final int CommunicationMethod;
+   private final Integer CommunicationMethod;
    //String length: inclusive between 0 and 100
    private final String PostalAddress01;
    private final String PostalAddress02;
@@ -82,7 +82,7 @@ public final class SageOneCustomer {
    private final Date DateField1;
    private final Date DateField2;
    private final Date DateField3;
-   private final int DefaultPriceListId;
+   private final Integer DefaultPriceListId;
    private final SageOneAdditionalPriceList DefaultPriceList;
    private final String DefaultPriceListName;
    private final boolean AcceptsElectronicInvoices;
@@ -90,17 +90,17 @@ public final class SageOneCustomer {
    private final Date Created;
    private final String BusinessRegistrationNumber;
    private final Date TaxStatusVerified;
-   private final int CurrencyId;
+   private final Integer CurrencyId;
    private final boolean HasActivity;
    private final double DefaultDiscountPercentage;
-   private final int DefaultTaxTypeId;
+   private final Integer DefaultTaxTypeId;
    private final SageOneTaxType defaultSageOneTaxType;
-   private final int DueDateMethodId;
-   private final int DueDateMethodValue;
+   private final Integer DueDateMethodId;
+   private final Integer DueDateMethodValue;
    private final String CurrencySymbol;
 
    public SageOneCustomer(Builder builder) {
-      this.id                     = builder.getId();
+      ID                          = builder.ID;
       Name                        = builder.Name;
       Category                    = builder.Category;
       SalesRepresentativeId       = builder.SalesRepresentativeId;
@@ -160,10 +160,11 @@ public final class SageOneCustomer {
       CurrencySymbol              = builder.CurrencySymbol;
    }
 
-   public static class Builder extends SageOneMainEntity {
+   public static class Builder {
+      private Integer ID;
       private String Name;
       private SageOneCustomerCategory Category;
-      private int SalesRepresentativeId;
+      private Integer SalesRepresentativeId;
       private SageOneSalesRepresentative SageOneSalesRepresentative;
       private String TaxReference;
       private String ContactName;
@@ -175,7 +176,7 @@ public final class SageOneCustomer {
       private boolean Active;
       private double Balance;
       private double CreditLimit;
-      private int CommunicationMethod;
+      private Integer CommunicationMethod;
       private String PostalAddress01 = "";
       private String PostalAddress02 = "";
       private String PostalAddress03 = "";
@@ -202,7 +203,7 @@ public final class SageOneCustomer {
       private Date DateField1;
       private Date DateField2;
       private Date DateField3;
-      private int DefaultPriceListId;
+      private Integer DefaultPriceListId;
       private SageOneAdditionalPriceList DefaultPriceList;
       private String DefaultPriceListName;
       private boolean AcceptsElectronicInvoices;
@@ -210,308 +211,308 @@ public final class SageOneCustomer {
       private Date Created;
       private String BusinessRegistrationNumber;
       private Date TaxStatusVerified;
-      private int CurrencyId;
+      private Integer CurrencyId;
       private boolean HasActivity;
       private double DefaultDiscountPercentage;
-      private int DefaultTaxTypeId;
+      private Integer DefaultTaxTypeId;
       private SageOneTaxType defaultSageOneTaxType;
-      private int DueDateMethodId;
-      private int DueDateMethodValue;
+      private Integer DueDateMethodId;
+      private Integer DueDateMethodValue;
       private String CurrencySymbol;
 
 
-      public Builder withId(final int val){
-         setId(val);
+      public Builder withID(final Integer val){
+         ID = val;
          return this;
       }
 
       public Builder withName(final String val){
-         Name = (this.isInitialized()) ? val:Name;
+         Name = val;
          return this;
       }
 
       public Builder withCategory(final SageOneCustomerCategory val){
-         Category = (this.isInitialized()) ? val:Category;
+         Category = val;
          return this;
       }
 
-      public Builder withSalesRepresentativeId(final int val){
-         SalesRepresentativeId = (this.isInitialized()) ? val:SalesRepresentativeId;
+      public Builder withSalesRepresentativeId(final Integer val){
+         SalesRepresentativeId = val;
          return this;
       }
 
       public Builder withSalesRepresentative(final SageOneSalesRepresentative val){
-         SageOneSalesRepresentative = (this.isInitialized()) ? val: SageOneSalesRepresentative;
+         SageOneSalesRepresentative = val;
          return this;
       }
 
       public Builder withTaxReference(final String val){
-         TaxReference = (this.isInitialized()) ? val:TaxReference;
+         TaxReference = val;
          return this;
       }
 
       public Builder withContactName(final String val){
-         ContactName = (this.isInitialized()) ? val:ContactName;
+         ContactName = val;
          return this;
       }
 
       public Builder withTelephone(final String val){
-         Telephone = (this.isInitialized()) ? val:Telephone;
+         Telephone = val;
          return this;
       }
 
       public Builder withFax(final String val){
-         Fax = (this.isInitialized()) ? val:Fax;
+         Fax = val;
          return this;
       }
 
       public Builder withMobile(final String val){
-         Mobile = (this.isInitialized()) ? val:Mobile;
+         Mobile = val;
          return this;
       }
 
       public Builder withEmail(final String val){
-         Email = (this.isInitialized()) ? val:Email;
+         Email = val;
          return this;
       }
 
       public Builder withWebAddress(final String val){
-         WebAddress = (this.isInitialized()) ? val:WebAddress;
+         WebAddress = val;
          return this;
       }
 
       public Builder withActive(final boolean val){
-         Active = (this.isInitialized()) ? val:Active;
+         Active = val;
          return this;
       }
 
       public Builder withBalance(final double val){
-         Balance = (this.isInitialized()) ? val:Balance;
+         Balance = val;
          return this;
       }
 
       public Builder withCreditLimit(final double val){
-         CreditLimit = (this.isInitialized()) ? val:CreditLimit;
+         CreditLimit = val;
          return this;
       }
 
-      public Builder withCommunicationMethod(final int val){
-         CommunicationMethod = (this.isInitialized()) ? val:CommunicationMethod;
+      public Builder withCommunicationMethod(final Integer val){
+         CommunicationMethod = val;
          return this;
       }
 
       public Builder withPostalAddress01(final String val){
-         PostalAddress01 = (this.isInitialized()) ? val:PostalAddress01;
+         PostalAddress01 = val;
          return this;
       }
 
       public Builder withPostalAddress02(final String val){
-         PostalAddress02 = (this.isInitialized()) ? val:PostalAddress02;
+         PostalAddress02 = val;
          return this;
       }
 
       public Builder withPostalAddress03(final String val){
-         PostalAddress03 = (this.isInitialized()) ? val:PostalAddress03;
+         PostalAddress03 = val;
          return this;
       }
 
       public Builder withPostalAddress04(final String val){
-         PostalAddress04 = (this.isInitialized()) ? val:PostalAddress04;
+         PostalAddress04 = val;
          return this;
       }
 
       public Builder withPostalAddress05(final String val){
-         PostalAddress05 = (this.isInitialized()) ? val:PostalAddress05;
+         PostalAddress05 = val;
          return this;
       }
 
       public Builder withDeliveryAddress01(final String val){
-         DeliveryAddress01 = (this.isInitialized()) ? val:DeliveryAddress01;
+         DeliveryAddress01 = val;
          return this;
       }
 
       public Builder withDeliveryAddress02(final String val){
-         DeliveryAddress02 = (this.isInitialized()) ? val:DeliveryAddress02;
+         DeliveryAddress02 = val;
          return this;
       }
 
       public Builder withDeliveryAddress03(final String val){
-         DeliveryAddress03 = (this.isInitialized()) ? val:DeliveryAddress03;
+         DeliveryAddress03 = val;
          return this;
       }
 
       public Builder withDeliveryAddress04(final String val){
-         DeliveryAddress04 = (this.isInitialized()) ? val:DeliveryAddress04;
+         DeliveryAddress04 = val;
          return this;
       }
 
       public Builder withDeliveryAddress05(final String val){
-         DeliveryAddress05 = (this.isInitialized()) ? val:DeliveryAddress05;
+         DeliveryAddress05 = val;
          return this;
       }
 
       public Builder withAutoAllocateToOldestInvoice(final boolean val){
-         AutoAllocateToOldestInvoice = (this.isInitialized()) ? val:AutoAllocateToOldestInvoice;
+         AutoAllocateToOldestInvoice = val;
          return this;
       }
 
       public Builder withEnableCustomerZone(final boolean val){
-         EnableCustomerZone = (this.isInitialized()) ? val:EnableCustomerZone;
+         EnableCustomerZone = val;
          return this;
       }
 
       public Builder withCustomerZoneGuid(final UUID val){
-         CustomerZoneGuid = (this.isInitialized()) ? val:CustomerZoneGuid;
+         CustomerZoneGuid = val;
          return this;
       }
 
       public Builder withCashSale(final boolean val){
-         CashSale = (this.isInitialized()) ? val:CashSale;
+         CashSale = val;
          return this;
       }
 
       public Builder withTextField1(final String val){
-         TextField1 = (this.isInitialized()) ? val:TextField1;
+         TextField1 = val;
          return this;
       }
 
       public Builder withTextField2(final String val){
-         TextField2 = (this.isInitialized()) ? val:TextField2;
+         TextField2 = val;
          return this;
       }
 
       public Builder withTextField3(final String val){
-         TextField3 = (this.isInitialized()) ? val:TextField3;
+         TextField3 = val;
          return this;
       }
 
       public Builder withNumericField1(final double val){
-         NumericField1 = (this.isInitialized()) ? val:NumericField1;
+         NumericField1 = val;
          return this;
       }
 
       public Builder withNumericField2(final double val){
-         NumericField2 = (this.isInitialized()) ? val:NumericField2;
+         NumericField2 = val;
          return this;
       }
 
       public Builder withNumericField3(final double val){
-         NumericField3 = (this.isInitialized()) ? val:NumericField3;
+         NumericField3 = val;
          return this;
       }
 
       public Builder withYesNoField1(final boolean val){
-         YesNoField1 = (this.isInitialized()) ? val:YesNoField1;
+         YesNoField1 = val;
          return this;
       }
 
       public Builder withYesNoField2(final boolean val){
-         YesNoField2 = (this.isInitialized()) ? val:YesNoField2;
+         YesNoField2 = val;
          return this;
       }
 
       public Builder withYesNoField3(final boolean val){
-         YesNoField3 = (this.isInitialized()) ? val:YesNoField3;
+         YesNoField3 = val;
          return this;
       }
 
       public Builder withDateField1(final Date val){
-         DateField1 = (this.isInitialized()) ? val:DateField1;
+         DateField1 = val;
          return this;
       }
 
       public Builder withDateField2(final Date val){
-         DateField2 = (this.isInitialized()) ? val:DateField2;
+         DateField2 = val;
          return this;
       }
 
       public Builder withDateField3(final Date val){
-         DateField3 = (this.isInitialized()) ? val:DateField3;
+         DateField3 = val;
          return this;
       }
 
-      public Builder withDefaultPriceListId(final int val){
-         DefaultPriceListId = (this.isInitialized()) ? val:DefaultPriceListId;
+      public Builder withDefaultPriceListId(final Integer val){
+         DefaultPriceListId = val;
          return this;
       }
 
       public Builder withDefaultPriceList(final SageOneAdditionalPriceList val){
-         DefaultPriceList = (this.isInitialized()) ? val:DefaultPriceList;
+         DefaultPriceList = val;
          return this;
       }
 
       public Builder withDefaultPriceListName(final String val){
-         DefaultPriceListName = (this.isInitialized()) ? val:DefaultPriceListName;
+         DefaultPriceListName = val;
          return this;
       }
 
       public Builder withAcceptsElectronicInvoices(final boolean val){
-         AcceptsElectronicInvoices = (this.isInitialized()) ? val:AcceptsElectronicInvoices;
+         AcceptsElectronicInvoices = val;
          return this;
       }
 
       public Builder withModified(final Date val){
-         Modified = (this.isInitialized()) ? val:Modified;
+         Modified = val;
          return this;
       }
 
       public Builder withCreated(final Date val){
-         Created = (this.isInitialized()) ? val:Created;
+         Created = val;
          return this;
       }
 
       public Builder withBusinessRegistrationNumber(final String val){
-         BusinessRegistrationNumber = (this.isInitialized()) ? val:BusinessRegistrationNumber;
+         BusinessRegistrationNumber = val;
          return this;
       }
 
       public Builder withTaxStatusVerified(final Date val){
-         TaxStatusVerified = (this.isInitialized()) ? val:TaxStatusVerified;
+         TaxStatusVerified = val;
          return this;
       }
 
-      public Builder withCurrencyId(final int val){
-         CurrencyId = (this.isInitialized()) ? val:CurrencyId;
+      public Builder withCurrencyId(final Integer val){
+         CurrencyId = val;
          return this;
       }
 
 
       public Builder withHasActivity(final boolean val){
-         HasActivity = (this.isInitialized()) ? val:HasActivity;
+         HasActivity = val;
          return this;
       }
 
 
       public Builder withDefaultDiscountPercentage(final double val){
-         DefaultDiscountPercentage = (this.isInitialized()) ? val:DefaultDiscountPercentage;
+         DefaultDiscountPercentage = val;
          return this;
       }
 
 
-      public Builder withDefaultTaxTypeId(final int val){
-         DefaultTaxTypeId = (this.isInitialized()) ? val:DefaultTaxTypeId;
+      public Builder withDefaultTaxTypeId(final Integer val){
+         DefaultTaxTypeId = val;
          return this;
       }
 
       public Builder withDefaultTaxType(final SageOneTaxType val){
-         defaultSageOneTaxType = (this.isInitialized()) ? val: defaultSageOneTaxType;
+         defaultSageOneTaxType = val;
          return this;
       }
 
 
-      public Builder withDueDateMethodId(final int val){
-         DueDateMethodId = (this.isInitialized()) ? val:DueDateMethodId;
+      public Builder withDueDateMethodId(final Integer val){
+         DueDateMethodId = val;
          return this;
       }
 
 
-      public Builder withDueDateMethodValue(final int val){
-         DueDateMethodValue = (this.isInitialized()) ? val:DueDateMethodValue;
+      public Builder withDueDateMethodValue(final Integer val){
+         DueDateMethodValue = val;
          return this;
       }
 
       public Builder withCurrencySymbol(final String val){
-         CurrencySymbol = (this.isInitialized()) ? val:CurrencySymbol;
+         CurrencySymbol = val;
          return this;
       }
 
@@ -520,8 +521,8 @@ public final class SageOneCustomer {
       }
    }
 
-   public int getId() {
-      return id;
+   public Integer getId() {
+      return ID;
    }
 
    public String getName() {
@@ -532,7 +533,7 @@ public final class SageOneCustomer {
       return Category;
    }
 
-   public int getSalesRepresentativeId() {
+   public Integer getSalesRepresentativeId() {
       return SalesRepresentativeId;
    }
 
@@ -580,7 +581,7 @@ public final class SageOneCustomer {
       return CreditLimit;
    }
 
-   public int getCommunicationMethod() {
+   public Integer getCommunicationMethod() {
       return CommunicationMethod;
    }
 
@@ -688,7 +689,7 @@ public final class SageOneCustomer {
       return DateField3;
    }
 
-   public int getDefaultPriceListId() {
+   public Integer getDefaultPriceListId() {
       return DefaultPriceListId;
    }
 
@@ -720,7 +721,7 @@ public final class SageOneCustomer {
       return TaxStatusVerified;
    }
 
-   public int getCurrencyId() {
+   public Integer getCurrencyId() {
       return CurrencyId;
    }
 
@@ -732,7 +733,7 @@ public final class SageOneCustomer {
       return DefaultDiscountPercentage;
    }
 
-   public int getDefaultTaxTypeId() {
+   public Integer getDefaultTaxTypeId() {
       return DefaultTaxTypeId;
    }
 
@@ -740,11 +741,11 @@ public final class SageOneCustomer {
       return defaultSageOneTaxType;
    }
 
-   public int getDueDateMethodId() {
+   public Integer getDueDateMethodId() {
       return DueDateMethodId;
    }
 
-   public int getDueDateMethodValue() {
+   public Integer getDueDateMethodValue() {
       return DueDateMethodValue;
    }
 
@@ -755,7 +756,7 @@ public final class SageOneCustomer {
    @Override
    public String toString() {
       return "SageOneCustomer{" +
-              "id=" + id +
+              "ID=" + ID +
               ", Name='" + Name + '\'' +
               ", Category=" + Category +
               ", SalesRepresentativeId=" + SalesRepresentativeId +

@@ -113,19 +113,4 @@ public final class SageOneSalesRepresentative extends SageOneMainEntity {
     public void setModified(Date modified) {
         Modified = (this.isInitialized()) ? modified:this.Modified;
     }
-
-    @Override
-    public String toString() {
-        return "SageOneSalesRepresentative{" +
-                "FirstName='" + FirstName + '\'' +
-                ", LastName='" + LastName + '\'' +
-                ", Name='" + Name + '\'' +
-                ", Active=" + Active +
-                ", Email='" + Email + '\'' +
-                ", Mobile='" + Mobile + '\'' +
-                ", Telephone='" + Telephone + '\'' +
-                ", Created=" + Created +
-                ", Modified=" + Modified +
-                '}';
-    }
 }

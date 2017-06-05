@@ -91,17 +91,4 @@ public final class SageOneTaxType extends SageOneMainEntity {
     public void setModified(Date modified) {
         Modified = modified;
     }
-
-    @Override
-    public String toString() {
-        return "SageOneTaxType{" +
-                "Name='" + Name + '\'' +
-                ", Percentage=" + Percentage +
-                ", IsDefault=" + IsDefault +
-                ", HasActivity=" + HasActivity +
-                ", IsManualTax=" + IsManualTax +
-                ", Created=" + Created +
-                ", Modified=" + Modified +
-                '}';
-    }
 }

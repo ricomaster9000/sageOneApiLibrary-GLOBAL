@@ -27,15 +27,15 @@ import java.util.Date;
  */
 @JsonDeserialize(builder = SageOneSupplierReturn.Builder.class)
 public final class SageOneSupplierReturn {
-    private final int id;
+    private final Integer ID;
     private final String FromDocument;
     private final boolean Locked;
-    private final int SupplierId;
+    private final Integer SupplierId;
     private final String SupplierName;
     private final SageOneSupplier SageOneSupplier;
     private final java.util.Date Modified;
     private final Date Created;
-    private final int StatusId;
+    private final Integer StatusId;
     private final Date Date;
     private final boolean Inclusive;
     private final double DiscountPercentage;
@@ -65,9 +65,9 @@ public final class SageOneSupplierReturn {
     private final String DeliveryAddress04;
     private final String DeliveryAddress05;
     //----------------------------------------
-    private final int CurrencyId;
+    private final Integer CurrencyId;
     private final double ExchangeRate;
-    private final int TaxPeriodId;
+    private final Integer TaxPeriodId;
     private final boolean Editable;
     private final boolean HasAttachments;
     private final boolean HasNotes;
@@ -78,7 +78,7 @@ public final class SageOneSupplierReturn {
     private final SageOneCommercialDocumentLine Lines;
 
     public SageOneSupplierReturn(Builder builder) {
-        id = builder.getId();
+        ID = builder.getId();
         FromDocument = builder.FromDocument;
         Locked = builder.Locked;
         SupplierId = builder.SupplierId;
@@ -125,12 +125,12 @@ public final class SageOneSupplierReturn {
     public static class Builder extends SageOneMainEntity {
         private String FromDocument;
         private boolean Locked;
-        private int SupplierId;
+        private Integer SupplierId;
         private String SupplierName;
         private SageOneSupplier SageOneSupplier;
         private java.util.Date Modified;
         private Date Created;
-        private int StatusId;
+        private Integer StatusId;
         private Date Date;
         private boolean Inclusive;
         private double DiscountPercentage;
@@ -154,9 +154,9 @@ public final class SageOneSupplierReturn {
         private String DeliveryAddress03;
         private String DeliveryAddress04;
         private String DeliveryAddress05;
-        private int CurrencyId;
+        private Integer CurrencyId;
         private double ExchangeRate;
-        private int TaxPeriodId;
+        private Integer TaxPeriodId;
         private boolean Editable;
         private boolean HasAttachments;
         private boolean HasNotes;
@@ -165,7 +165,7 @@ public final class SageOneSupplierReturn {
         private String ExternalReference;
         private SageOneCommercialDocumentLine Lines;
 
-        public Builder withId(final int val){
+        public Builder withId(final Integer val){
             setId(val);
             return this;
         }
@@ -180,7 +180,7 @@ public final class SageOneSupplierReturn {
             return this;
         }
 
-        public Builder withSupplierId(final int val){
+        public Builder withSupplierId(final Integer val){
             SupplierId = (this.isInitialized()) ? val: SupplierId;
             return this;
         }
@@ -206,7 +206,7 @@ public final class SageOneSupplierReturn {
             return this;
         }
 
-        public Builder withStatusId(final int val){
+        public Builder withStatusId(final Integer val){
             StatusId = (this.isInitialized()) ? val: StatusId;
             return this;
         }
@@ -326,7 +326,7 @@ public final class SageOneSupplierReturn {
             return this;
         }
 
-        public Builder withCurrencyId(final int val){
+        public Builder withCurrencyId(final Integer val){
             CurrencyId = (this.isInitialized()) ? val: CurrencyId;
             return this;
         }
@@ -336,7 +336,7 @@ public final class SageOneSupplierReturn {
             return this;
         }
 
-        public Builder withTaxPeriodId(final int val){
+        public Builder withTaxPeriodId(final Integer val){
             TaxPeriodId = (this.isInitialized()) ? val: TaxPeriodId;
             return this;
         }
@@ -381,8 +381,8 @@ public final class SageOneSupplierReturn {
         }
     }
 
-    public int getId() {
-        return id;
+    public Integer getId() {
+        return ID;
     }
 
     public String getFromDocument() {
@@ -393,7 +393,7 @@ public final class SageOneSupplierReturn {
         return Locked;
     }
 
-    public int getSupplierId() {
+    public Integer getSupplierId() {
         return SupplierId;
     }
 
@@ -413,7 +413,7 @@ public final class SageOneSupplierReturn {
         return Created;
     }
 
-    public int getStatusId() {
+    public Integer getStatusId() {
         return StatusId;
     }
 
@@ -509,7 +509,7 @@ public final class SageOneSupplierReturn {
         return DeliveryAddress05;
     }
 
-    public int getCurrencyId() {
+    public Integer getCurrencyId() {
         return CurrencyId;
     }
 
@@ -517,7 +517,7 @@ public final class SageOneSupplierReturn {
         return ExchangeRate;
     }
 
-    public int getTaxPeriodId() {
+    public Integer getTaxPeriodId() {
         return TaxPeriodId;
     }
 
@@ -552,7 +552,7 @@ public final class SageOneSupplierReturn {
     @Override
     public String toString() {
         return "SupplierReturn{" +
-                "id=" + id +
+                "id=" + ID +
                 ", FromDocument='" + FromDocument + '\'' +
                 ", Locked=" + Locked +
                 ", SupplierId=" + SupplierId +

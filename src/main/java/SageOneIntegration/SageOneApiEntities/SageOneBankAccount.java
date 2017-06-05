@@ -29,7 +29,7 @@ import java.util.Date;
 @JsonDeserialize(builder = SageOneBankAccount.Builder.class)
 public final class SageOneBankAccount {
     //String length: inclusive between 0 and 100
-    private final int id;
+    private final int ID;
     private final String Name;
     private final String BankName;
     private final String AccountNumber;
@@ -53,7 +53,7 @@ public final class SageOneBankAccount {
     private final int CurrencyId;
 
     public SageOneBankAccount(Builder builder) {
-        this.id = builder.getId();
+        this.ID = builder.getId();
         Name = builder.Name;
         BankName = builder.BankName;
         AccountNumber = builder.AccountNumber;
@@ -207,7 +207,7 @@ public final class SageOneBankAccount {
     }
 
     public int getId() {
-        return id;
+        return ID;
     }
 
     public String getName() {
@@ -284,31 +284,5 @@ public final class SageOneBankAccount {
 
     public int getCurrencyId() {
         return CurrencyId;
-    }
-
-    @Override
-    public String toString() {
-        return "SageOneBankAccount{" +
-                "id=" + id +
-                ", Name='" + Name + '\'' +
-                ", BankName='" + BankName + '\'' +
-                ", AccountNumber='" + AccountNumber + '\'' +
-                ", BranchName='" + BranchName + '\'' +
-                ", BranchNumber='" + BranchNumber + '\'' +
-                ", Category=" + Category +
-                ", Active=" + Active +
-                ", Default=" + Default +
-                ", Balance=" + Balance +
-                ", Description='" + Description + '\'' +
-                ", SageOneBankFeedAccount=" + SageOneBankFeedAccount +
-                ", LastTransactionDate=" + LastTransactionDate +
-                ", LastImportDate=" + LastImportDate +
-                ", HasTransactionsWaitingForReview=" + HasTransactionsWaitingForReview +
-                ", DefaultPaymentMethodId=" + DefaultPaymentMethodId +
-                ", SageOnePaymentMethod=" + SageOnePaymentMethod +
-                ", Modified=" + Modified +
-                ", Created=" + Created +
-                ", CurrencyId=" + CurrencyId +
-                '}';
     }
 }

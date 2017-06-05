@@ -17,9 +17,7 @@
  under the License.
  **/
 package SageOneIntegration.SageOneApiEntities;
-/**
- * Created by brent on 2017/05/31.
- */
+
 public final class SageOneAdditionalPriceList extends SageOneMainEntity {
     //String length: inclusive between 0 and 100
     private String Description;
@@ -45,14 +43,5 @@ public final class SageOneAdditionalPriceList extends SageOneMainEntity {
 
     public void setDefault(boolean aDefault) {
         IsDefault = aDefault;
-    }
-
-
-    @Override
-    public String toString() {
-        return "SageOneAdditionalPriceList{" +
-                "Description='" + Description + '\'' +
-                ", IsDefault=" + IsDefault +
-                '}';
     }
 }

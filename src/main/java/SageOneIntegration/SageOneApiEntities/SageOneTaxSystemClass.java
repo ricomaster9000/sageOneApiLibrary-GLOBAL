@@ -5,9 +5,9 @@ package SageOneIntegration.SageOneApiEntities;
 enum SageOneTaxSystemClass {
     InvoiceBased(0), PaymentsBased(1), NoTax(2);
 
-    private final int id;
-    SageOneTaxSystemClass(int id) { this.id = id; }
-    public int getValue() { return id; }
+    private final int ID;
+    SageOneTaxSystemClass(int ID) { this.ID = ID; }
+    public int getValue() { return ID; }
 
 
 }

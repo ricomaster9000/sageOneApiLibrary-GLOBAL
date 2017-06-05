@@ -26,7 +26,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 @JsonDeserialize(builder = SageOneCommercialDocumentLine.Builder.class)
 public final class SageOneCommercialDocumentLine {
     //Gets or sets the selection identifier. This is the selected Item Id or Account Id.
-    private final int id;
+    private final int ID;
     private final int SelectionId;
     private final int TaxTypeId;
     //String length: inclusive between 0 and 100
@@ -54,7 +54,7 @@ public final class SageOneCommercialDocumentLine {
     private final double UnitCost;
 
     public SageOneCommercialDocumentLine(Builder builder) {
-        this.id = builder.getId();
+        this.ID = builder.getId();
         SelectionId = builder.SelectionId;
         TaxTypeId = builder.TaxTypeId;
         Description = builder.Description;
@@ -216,7 +216,7 @@ public final class SageOneCommercialDocumentLine {
     }
 
     public int getId() {
-        return id;
+        return ID;
     }
 
     public int getSelectionId() {
@@ -306,7 +306,7 @@ public final class SageOneCommercialDocumentLine {
     @Override
     public String toString() {
         return "SageOneCommercialDocumentLine{" +
-                "id=" + id +
+                "id=" + ID +
                 ", SelectionId=" + SelectionId +
                 ", TaxTypeId=" + TaxTypeId +
                 ", Description='" + Description + '\'' +

@@ -2,16 +2,16 @@
 package SageOneIntegration.SageOneApiEntities;
 
 class SageOneMainEntity {
-    private int id;
+    private Integer ID;
     private boolean initialized = false;
 
     public SageOneMainEntity() {
         this.initialized = true;
     }
 
-    public int getId() { return (this.initialized) ? this.id : -1; }
+    public Integer getId() { return (this.initialized) ? this.ID : -1; }
 
-    public void setId(final int id) { this.id = (this.initialized) ? id : this.id; }
+    public void setId(final Integer ID) { this.ID = (this.initialized) ? ID : this.ID; }
 
     public boolean isInitialized() { return this.initialized; }
 

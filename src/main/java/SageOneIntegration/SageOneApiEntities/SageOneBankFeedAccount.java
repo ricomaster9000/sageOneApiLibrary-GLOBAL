@@ -118,20 +118,4 @@ public final class SageOneBankFeedAccount extends SageOneMainEntity {
     public void setLastRefreshStatusId(int lastRefreshStatusId) {
         LastRefreshStatusId = lastRefreshStatusId;
     }
-
-    @Override
-    public String toString() {
-        return "SageOneBankFeedAccount{" +
-                "BankFeedAccountGroupId=" + BankFeedAccountGroupId +
-                ", SageOneBankFeedAccountGroup=" + SageOneBankFeedAccountGroup +
-                ", Description='" + Description + '\'' +
-                ", Identifier='" + Identifier + '\'' +
-                ", LastRefreshDate=" + LastRefreshDate +
-                ", FirstImportDate=" + FirstImportDate +
-                ", Balance=" + Balance +
-                ", BankAccountId=" + BankAccountId +
-                ", BankAccountName='" + BankAccountName + '\'' +
-                ", LastRefreshStatusId=" + LastRefreshStatusId +
-                '}';
-    }
 }
