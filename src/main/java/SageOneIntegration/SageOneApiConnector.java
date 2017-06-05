@@ -76,13 +76,7 @@ public final class SageOneApiConnector {
 		RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(REQUEST_TIMEOUT).build();
 		SageOneApiConnector.client = HttpClientBuilder.create().setDefaultRequestConfig(requestConfig).build();
 
-		try {
-			if (!setupCompanyList()) {
-				throw new Exception("Could net setup SageOne Integration Library, check console for details");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		setupCompanyList();
 	}
 
 	public static final void setupSageOneApiSA(final Map<String, String> properties) {
@@ -104,13 +98,7 @@ public final class SageOneApiConnector {
 		RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(REQUEST_TIMEOUT).build();
 		SageOneApiConnector.client = HttpClientBuilder.create().setDefaultRequestConfig(requestConfig).build();
 
-		try {
-			if (!setupCompanyList()) {
-				throw new Exception("Could net setup SageOne Integration Library, check console for details");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		setupCompanyList();
 	}
 
 	private static boolean incrementSageOneRequestCounter(final int companyId) {
