@@ -118,20 +118,22 @@ public final class SageOneApiConnector {
 		SageOneConstants.SAGE_ONE_REQUEST_COUNTER_DAY.put(companyId, SageOneConstants.SAGE_ONE_REQUEST_COUNTER_DAY.get(companyId) + 1);
 		SageOneConstants.SAGE_ONE_REQUEST_COUNTER_HOUR.put(companyId, SageOneConstants.SAGE_ONE_REQUEST_COUNTER_HOUR.get(companyId) + 1);
 
+		Calendar calendar = Calendar.getInstance();
+
 		if((SageOneConstants.SAGE_ONE_REQUEST_COUNTER_DAY.get(companyId) >= SageOneConstants.SAGE_ONE_REQUEST_LIMIT_DAY &&
-		   SageOneConstants.CURRENT_DAY == SageOneConstants.CALENDAR.get(Calendar.DAY_OF_WEEK))
+		   SageOneConstants.CURRENT_DAY == calendar.get(Calendar.DAY_OF_WEEK))
 		   || (SageOneConstants.SAGE_ONE_REQUEST_COUNTER_HOUR.get(companyId) >= SageOneConstants.SAGE_ONE_REQUEST_LIMIT_HOUR &&
-		   SageOneConstants.CURRENT_HOUR == SageOneConstants.CALENDAR.get(Calendar.HOUR_OF_DAY))) {
+		   SageOneConstants.CURRENT_HOUR == calendar.get(Calendar.HOUR_OF_DAY))) {
 			response = false;
 		}
 
-		if(SageOneConstants.CURRENT_DAY != SageOneConstants.CALENDAR.get(Calendar.DAY_OF_WEEK)) {
-		    SageOneConstants.CURRENT_DAY = SageOneConstants.CALENDAR.get(Calendar.DAY_OF_WEEK);
+		if(SageOneConstants.CURRENT_DAY != calendar.get(Calendar.DAY_OF_WEEK)) {
+		    SageOneConstants.CURRENT_DAY = calendar.get(Calendar.DAY_OF_WEEK);
 			SageOneConstants.SAGE_ONE_REQUEST_COUNTER_DAY.put(companyId, 0);
 		}
 
-		if(SageOneConstants.CURRENT_HOUR != SageOneConstants.CALENDAR.get(Calendar.HOUR_OF_DAY)) {
-			SageOneConstants.CURRENT_HOUR = CALENDAR.get(Calendar.HOUR_OF_DAY);
+		if(SageOneConstants.CURRENT_HOUR != calendar.get(Calendar.HOUR_OF_DAY)) {
+			SageOneConstants.CURRENT_HOUR = calendar.get(Calendar.HOUR_OF_DAY);
 			SageOneConstants.SAGE_ONE_REQUEST_COUNTER_HOUR.put(companyId, 0);
 		}
 		return response;
