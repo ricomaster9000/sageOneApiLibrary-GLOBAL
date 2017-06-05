@@ -142,7 +142,7 @@ public final class SageOneApiConnector {
 
 		if(globalResponse) {
 			try {
-				String endpointToGetCompanies = endpointPrefix + "SageOneCompany/Get?" + endpointSuffix +
+				String endpointToGetCompanies = endpointPrefix + "Company/Get?" + endpointSuffix +
 				encodeCurlyBrackets(API_KEY);
 
 				if (!runningInner) {
