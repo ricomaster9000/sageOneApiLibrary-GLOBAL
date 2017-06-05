@@ -27,13 +27,14 @@ sageOneApi.SA.requestTimeout = 30000; (default is 30 seconds)
 ### important classes/methods you should use
 
 ```
-SageOneEntityType enum class -> use this primarily as a parameter for template methods, currently only 4 enums is supported, will add more through time
-
+SageOneEntityType enum class -> use this primarily as a parameter for template methods, currently only 5 enums is supported, will add more through time
+```
+```
 SageOneConstants.getSageOneApiCompanyList() Map variable -> 
 Gets the company list which was initialized with all the companies related to the user in the SageOneApiConnector.setupSageOneApiSA(Properties properties) method, from here you can grab company id's by passing in the name of the company in the .get() method of getSageOneApiCompanyList()
-
-SageOne Entities, all of them lies in the SageOneIntegration.SageOneApiEntities package, include them from here, these entity classes will especially be used to save/persist SageOne entities to the SageOne account
-
+```
+```
+SageOne Entities, all of them lies in the SageOneIntegration.SageOneApiEntities package, include them from here, these entity classes will especially be used to save/persist SageOne entities to the SageOne account, use them SageOneEntityType enum class (enum will be used as parameter for template method)
 ```
 
 ### Template Methods
@@ -42,7 +43,7 @@ SageOneApiTemplate.getCustomersByNameAndSurnameOrName(String companyName, String
                                                                                    
 SageOneApiTemplate.getSageOneEntity(String companyName, SageOneEntityType entityName, int entityId) -> grabs one sageOne entity by its id for a certain company
 
-SageOneApiTemplate.saveSageOneEntity(String companyName, Object entityToSave) -> saves one SageOne entity by passing the company name and the SageOne entity object (look above to know where the SageOne entity classes/objects can be found)
+SageOneApiTemplate.saveSageOneEntity(String companyName, Object entityToSave) -> saves one SageOne entity by passing the company name and the SageOne entity object (look above to know where the SageOne entity classes/objects can be found), returns generated entity from SageOne Api as response.
 
 getCustomers(final String companyName) -> grabs all customers for specified company name
 ```
