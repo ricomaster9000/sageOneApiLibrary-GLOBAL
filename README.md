@@ -11,14 +11,15 @@ REPO/REPOSITORY = sageOneApiLibrary-SA
 TAG/VERSION = v0.90a
 ``
 
-Please run the method SageOneApiConnector.setupSageOneApiSA(Properties properties) to initialize this library's code with your App's Properties class object (usually System.getProperties()) and make sure these below fields/properties appear in your properties file and have the required (also correct) assigned values. You can now also initialize it with a Map<String, String> parameter "SageOneApiConnector.setupSageOneApiSA(Map<String, String> properties)".
+Please run the method SageOneApiConnector.setupSageOneApiSA(Properties properties) to initialize this library's code with your App's Properties class object (usually System.getProperties()) and make sure the below first 3 fields/properties appear in your properties file and have the required (also correct) assigned values, the rest have default values but can be overriden. You can now also initialize it with a Map<String, String> parameter "SageOneApiConnector.setupSageOneApiSA(Map<String, String> properties)".
 
 ```
 sageOneApi.SA.clientUsername = 'your Sage One username';
 sageOneApi.SA.clientPassword = 'your Sage One Password';
+sageOneApi.SA.apiKey = 'sd24d-....'; (don't include the brackets, it gets added automatically)
+
 sageOneApi.SA.apiUrl = 'base url for api call'; (this isn't required as the default should work)
 sageOneApi.SA.apiVersion = '1.1.2'; (default is 1.1.2)
-sageOneApi.SA.apiKey = 'sd24d-....'; (don't include the brackets, it gets added automatically)
 sageOneApi.SA.requestLimitDay = 5000; (default is 5000)
 sageOneApi.SA.requestLimitHour = 100; (default is 100)
 sageOneApi.SA.requestResultLimit = 100; (default is 100)
