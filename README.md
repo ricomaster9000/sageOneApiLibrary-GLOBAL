@@ -8,7 +8,7 @@ add as dependency by using jitpack.io, go to this link to see how https://jitpac
 ``
 USER = ricomaster9000
 REPO/REPOSITORY = sageOneApiLibrary-SA
-TAG/VERSION = v0.85a
+TAG/VERSION = v0.86a
 ``
 
 Please run the method SageOneApiConnector.setupSageOneApiSA(Properties properties) to initialize this library's code with your App's Properties class object (usually System.getProperties()) and make sure these below fields/properties appear in your properties file and have the required (also correct) assigned values.
@@ -26,7 +26,7 @@ sageOneApi.SA.requestTimeout = 30000; (default is 30 seconds)
 ### important classes/methods you should use
 
 ```
-SageOneEntityType enum class -> use this primarly as a parameter for template methods, currently only 4 enums is supported, will add more through time
+SageOneEntityType enum class -> use this primarily as a parameter for template methods, currently only 4 enums is supported, will add more through time
 
 SageOneConstants.getSageOneApiCompanyList() Map variable -> 
 Gets the company list which was initialized with all the companies related to the user in the SageOneApiConnector.setupSageOneApiSA(Properties properties) method, from here you can grab company id's by passing in the name of the company in the .get() method of getSageOneApiCompanyList()

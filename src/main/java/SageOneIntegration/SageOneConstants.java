@@ -24,14 +24,21 @@ public final class SageOneConstants {
 	static int SAGE_ONE_REQUEST_LIMIT_HOUR = 100;
 	static int SAGE_ONE_REQUEST_LIMIT_DAY = 5000;
 	static int REQUEST_TIMEOUT = 30 * 1000; // Seconds multiplied with milliseconds
-	static int SAGE_ONE_REQUEST_COUNTER_DAY = 0;
-	static int SAGE_ONE_REQUEST_COUNTER_HOUR = 0;
+	static Map<Integer, Integer> SAGE_ONE_REQUEST_COUNTER_DAY;
+	static Map<Integer, Integer> SAGE_ONE_REQUEST_COUNTER_HOUR;
 	static final Calendar CALENDAR = Calendar.getInstance();
 	static int CURRENT_DAY = CALENDAR.get(Calendar.DAY_OF_WEEK);
 	static int CURRENT_HOUR = CALENDAR.get(Calendar.HOUR_OF_DAY);
 
+	static Map<Integer, Map<String, Integer>> SAGE_ONE_ID_HOLDER = new HashMap<Integer, Map<String, Integer>>();
+
 
 	public final static Map<String, Integer> getSageOneApiCompanyList() {
 		return SageOneConstants.COMPANY_LIST;
+	}
+
+	@Override
+	public final Object clone() throws CloneNotSupportedException {
+		throw new CloneNotSupportedException();
 	}
 }

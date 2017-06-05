@@ -76,7 +76,13 @@ public final class SageOneApiConnector {
 		RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(REQUEST_TIMEOUT).build();
 		SageOneApiConnector.client = HttpClientBuilder.create().setDefaultRequestConfig(requestConfig).build();
 
-		setupCompanyList();
+		try {
+			if (!setupCompanyList()) {
+				throw new Exception("Could net setup SageOne Integration Library, check console for details");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static final void setupSageOneApiSA(final Map<String, String> properties) {
@@ -107,26 +113,26 @@ public final class SageOneApiConnector {
 		}
 	}
 
-	private static boolean incrementSageOneRequestCounter() {
+	private static boolean incrementSageOneRequestCounter(final int companyId) {
 		boolean response = true;
-		SageOneConstants.SAGE_ONE_REQUEST_COUNTER_DAY++;
-		SageOneConstants.SAGE_ONE_REQUEST_COUNTER_HOUR++;
+		SageOneConstants.SAGE_ONE_REQUEST_COUNTER_DAY.put(companyId, SageOneConstants.SAGE_ONE_REQUEST_COUNTER_DAY.get(companyId) + 1);
+		SageOneConstants.SAGE_ONE_REQUEST_COUNTER_HOUR.put(companyId, SageOneConstants.SAGE_ONE_REQUEST_COUNTER_HOUR.get(companyId) + 1);
 
-		if((SageOneConstants.SAGE_ONE_REQUEST_COUNTER_DAY >= SageOneConstants.SAGE_ONE_REQUEST_LIMIT_DAY &&
+		if((SageOneConstants.SAGE_ONE_REQUEST_COUNTER_DAY.get(companyId) >= SageOneConstants.SAGE_ONE_REQUEST_LIMIT_DAY &&
 		   SageOneConstants.CURRENT_DAY == SageOneConstants.CALENDAR.get(Calendar.DAY_OF_WEEK))
-		   || (SageOneConstants.SAGE_ONE_REQUEST_COUNTER_HOUR >= SageOneConstants.SAGE_ONE_REQUEST_LIMIT_HOUR &&
+		   || (SageOneConstants.SAGE_ONE_REQUEST_COUNTER_HOUR.get(companyId) >= SageOneConstants.SAGE_ONE_REQUEST_LIMIT_HOUR &&
 		   SageOneConstants.CURRENT_HOUR == SageOneConstants.CALENDAR.get(Calendar.HOUR_OF_DAY))) {
 			response = false;
 		}
 
 		if(SageOneConstants.CURRENT_DAY != SageOneConstants.CALENDAR.get(Calendar.DAY_OF_WEEK)) {
 		    SageOneConstants.CURRENT_DAY = SageOneConstants.CALENDAR.get(Calendar.DAY_OF_WEEK);
-			SageOneConstants.SAGE_ONE_REQUEST_COUNTER_DAY = 0;
+			SageOneConstants.SAGE_ONE_REQUEST_COUNTER_DAY.put(companyId, 0);
 		}
 
 		if(SageOneConstants.CURRENT_HOUR != SageOneConstants.CALENDAR.get(Calendar.HOUR_OF_DAY)) {
 			SageOneConstants.CURRENT_HOUR = CALENDAR.get(Calendar.HOUR_OF_DAY);
-			SageOneConstants.SAGE_ONE_REQUEST_COUNTER_HOUR = 0;
+			SageOneConstants.SAGE_ONE_REQUEST_COUNTER_HOUR.put(companyId, 0);
 		}
 		return response;
 	}
@@ -145,7 +151,7 @@ public final class SageOneApiConnector {
 					globalResponse = true;
 				}
 
-				SageOneResponseJsonObject sageOneResponseJsonObject = ConnectionCoreCodeReturnResponseJson(
+				SageOneResponseJsonObject sageOneResponseJsonObject = ConnectionCoreCodeReturnResponseJson(-255,
 				endpointToGetCompanies + "&$skip=" + globalSkipIterator, "GET");
 
 				if (sageOneResponseJsonObject.getSuccess()) {
@@ -163,6 +169,9 @@ public final class SageOneApiConnector {
 						for (Object object : objectsBeforeConversion) {
 							SageOneCompany sageOneCompanyToGetIdFrom = objectMapper.convertValue(object, SageOneCompany.class);
 							COMPANY_LIST.put(sageOneCompanyToGetIdFrom.getName(), sageOneCompanyToGetIdFrom.getId());
+							SAGE_ONE_REQUEST_COUNTER_DAY.put(sageOneCompanyToGetIdFrom.getId(), 0);
+							SAGE_ONE_REQUEST_COUNTER_HOUR.put(sageOneCompanyToGetIdFrom.getId(), 0);
+							SAGE_ONE_ID_HOLDER.put(sageOneCompanyToGetIdFrom.getId(), new HashMap<String, Integer>());
 						}
 						runningInner = false;
 					}
@@ -195,7 +204,9 @@ public final class SageOneApiConnector {
 		return response;
 	}
 
-	private static SageOneResponseJsonObject ConnectionCoreCodeReturnResponseJson(String endpoint, final String requestMethod) {
+	private static SageOneResponseJsonObject ConnectionCoreCodeReturnResponseJson(final Integer companyId,
+																				  String endpoint,
+																				  final String requestMethod) {
 		boolean response = true;
 		String resultToReturn = "";
 		HttpRequestBase request = null;
@@ -216,7 +227,7 @@ public final class SageOneApiConnector {
 			}
 
 			if(response) {
-				response = incrementSageOneRequestCounter();
+				response = (companyId != -255) ? incrementSageOneRequestCounter(companyId) : (companyId == -255);
 
 				if(response) {
 					String authStringEnc = new BASE64Encoder().encode(notEncodedCredentials.getBytes());
@@ -281,7 +292,7 @@ public final class SageOneApiConnector {
 					"&" + endpointSuffix : "?" + endpointSuffix) + encodeCurlyBrackets(API_KEY) +
 					"&companyid=" + companyId;
 			}
-			SageOneResponseJsonObject jsonResponse = ConnectionCoreCodeReturnResponseJson((runningInner) ?
+			SageOneResponseJsonObject jsonResponse = ConnectionCoreCodeReturnResponseJson(companyId, (runningInner) ?
 			endpoint + "&$skip=" + globalSkipIterator : endpoint, "GET");
 
 			if(mustReturnResultObject && jsonResponse.getSuccess()) {
@@ -332,7 +343,7 @@ public final class SageOneApiConnector {
 					"&" + endpointSuffix : "?" + endpointSuffix) + encodeCurlyBrackets(API_KEY) + "&companyid=" +
 					companyId;
 
-			SageOneResponseJsonObject jsonResponse = ConnectionCoreCodeReturnResponseJson(endpoint, "POST");
+			SageOneResponseJsonObject jsonResponse = ConnectionCoreCodeReturnResponseJson(companyId, endpoint, "POST");
 
 			sageOneResponseObject = (jsonResponse.getSuccess())
 					? new SageOneResponseObject(true, jsonResponse.getResponseMessage()) :

@@ -22,9 +22,13 @@ package SageOneIntegration;
 import SageOneIntegration.SageOneApiEntities.SageOneCustomer;
 
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Field;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
+
+import static SageOneIntegration.SageOneApiConnector.objectMapper;
+import static SageOneIntegration.SageOneConstants.SAGE_ONE_ID_HOLDER;
 
 public final class SageOneApiTemplate {
 
@@ -100,31 +104,90 @@ public final class SageOneApiTemplate {
         return (sageOneResponseObject != null && sageOneResponseObject.getSuccess() ) ? (T) sageOneResponseObject.getResponseObject() : null;
     }
 
-    public static boolean saveSageOneEntity(final String companyName, final Object entityToSave) {
+    public static SageOneSaveEntityResponse saveSageOneEntity(final String companyName, final Object entityToSave) {
         boolean response = false;
         SageOneResponseObject sageOneResponseObject = null;
-        Class classToUse;
+        SageOneEntityType entityTypeToUse = null;
+        Integer companyId = null;
 
         for(SageOneEntityType sageOneEntityType : SageOneEntityType.values()) {
             if(entityToSave.getClass().getName().equals(sageOneEntityType.GetObject.getClassProperty().getName())) {
-                classToUse = sageOneEntityType.GetObject.getClassProperty();
+                entityTypeToUse = sageOneEntityType;
                 response = true;
             }
         }
 
         if(response) {
-
-            final Integer companyId = SageOneConstants.COMPANY_LIST.get(companyName);
+            companyId = SageOneConstants.COMPANY_LIST.get(companyName);
             if (companyId == null) {
                 sageOneResponseObject = null;
                 System.out.println("SageOneCompany does not exist for the specified Sage One User -> " +
                         "SageOneApiTemplate.class");
             } else {
+                if(SAGE_ONE_ID_HOLDER.get(companyId).get(entityTypeToUse.name()) == null) {
+                    SageOneResponseObject getHighestIdEntity = null;
+                    try {
+                        getHighestIdEntity = SageOneApiConnector.sageOneGrabData(entityTypeToUse.GetObject
+                                .getStringProperty() + "?$orderby=" + URLEncoder.encode("ID desc", "UTF-8"),
+                                entityTypeToUse.GetObject.getClassProperty(), true, companyId);
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                        response = false;
+                    }
+
+                    if(response) {
+                        try {
+                            if (getHighestIdEntity.getSuccess()) {
+                                List<Object> objectList = (List<Object>) getHighestIdEntity.getResponseObject();
+
+                                if (objectList.size() > 0) {
+                                    Field field = objectList.get(0).getClass().getDeclaredField("ID");
+                                    field.setAccessible(true);
+                                    Integer highestIdFromEntityList = (Integer) field.get(objectList.get(0));
+
+                                    if (highestIdFromEntityList != null && highestIdFromEntityList > 0) {
+                                        SAGE_ONE_ID_HOLDER.get(companyId).put(entityTypeToUse.name(), highestIdFromEntityList);
+                                    } else {
+                                        throw new Exception("Could not set Id holder for SageOne entity saving:\n" +
+                                                "companyId -> " + companyId + "\n" +
+                                                "entityName -> " + entityTypeToUse.name());
+                                    }
+                                } else {
+                                    SAGE_ONE_ID_HOLDER.get(companyId).put(entityTypeToUse.name(), 0);
+                                }
+                            } else {
+                                throw new Exception("Could not set Id holder for SageOne entity saving:\n" +
+                                        "companyId -> " + companyId + "\n" +
+                                        "entityName -> " + entityTypeToUse.name());
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            response = false;
+                        }
+                    }
+                }
+
+                try {
+                    Field field = entityToSave.getClass().getDeclaredField("ID");
+                    field.setAccessible(true);
+                    field.setInt(entityToSave, SAGE_ONE_ID_HOLDER.get(companyId).get(entityTypeToUse.name()) + 1);
+                } catch(NoSuchFieldException e) {
+                    e.printStackTrace();
+                    response = false;
+                } catch(IllegalAccessException e) {
+                    e.printStackTrace();
+                    response = false;
+                }
+
                 sageOneResponseObject = SageOneApiConnector.sageOneSaveData(
                 SageOneCoreHelperMethods.convertObjectToJsonString(entityToSave), companyId);
+
+                if(sageOneResponseObject.getSuccess()) {
+                    SAGE_ONE_ID_HOLDER.get(companyId).put(entityTypeToUse.name(), SAGE_ONE_ID_HOLDER.get(companyId).get(entityTypeToUse.name()) + 1);
+                }
             }
         }
 
-        return (response && sageOneResponseObject != null && sageOneResponseObject.getSuccess());
+        return (response && sageOneResponseObject != null && sageOneResponseObject.getSuccess()) ? new SageOneSaveEntityResponse(sageOneResponseObject.getSuccess(), SAGE_ONE_ID_HOLDER.get(companyId).get(entityTypeToUse.name())) : new SageOneSaveEntityResponse(false, -1);
     }
 }
