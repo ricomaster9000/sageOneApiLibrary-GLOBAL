@@ -248,9 +248,8 @@ public final class SageOneApiConnector {
 	}
 
 	private static SageOneResponseJsonObject ConnectionCoreCodeReturnResponseJson(final Integer companyId,
-																				  String endpoint,
-																				  final String requestMethod,
-																				  final String jsonEntityToPost) {
+										      String endpoint,
+										      final String requestMethod,														  final String jsonEntityToPost) {
 		boolean response = true;
 		String resultToReturn = "";
 		HttpRequestBase request = null;
