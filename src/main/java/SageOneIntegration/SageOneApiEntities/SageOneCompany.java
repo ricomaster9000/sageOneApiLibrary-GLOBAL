@@ -115,6 +115,10 @@ public final class SageOneCompany {
     private Date LastLoginDate;
     private SageOneCompanyStatus Status;
 
+    public Integer getId() {
+        return ID;
+    }
+
     public final String getName() {
         return this.Name;
     }
