@@ -1,4 +1,4 @@
-# sageOneApiLibrary-SA V0.91a2 (Final Alpha)
+# sageOneApiLibrary-SA V0.91a3 (Final Alpha)
 A library that contains pre-written code to connect and access the SageOne South Africa Api (v.1.1.2), it also comes with a template that makes use of these pre-written component code to access the SageOne SA api, the template contains methods (mostly dynamic or generic) that a developer can use to build this library into his/her app. Compatible with java 1.6 and upwards.
 
 ### HOW TO USE
@@ -8,7 +8,7 @@ add as dependency by using jitpack.io, go to this link to see how https://jitpac
 ``
 USER = ricomaster9000
 REPO/REPOSITORY = sageOneApiLibrary-SA
-TAG/VERSION = v0.91a2
+TAG/VERSION = v0.91a3
 ``
 
 Please run the method SageOneApiConnector.setupSageOneApiSA(Properties properties) to initialize this library's code with your App's Properties class object (usually System.getProperties()) and make sure the below first 3 fields/properties appear in your properties file and have the required (also correct) assigned values, the rest have default values but can be overriden. 
