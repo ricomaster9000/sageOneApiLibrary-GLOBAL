@@ -15,10 +15,7 @@ public class Main {
     public static void main(String[] args) {
 
         Properties properties = new Properties();
-        properties.setProperty("sageOneApi.SA.clientUsername", "ricorpwd@yahoo.co.za");
-        properties.setProperty("sageOneApi.SA.clientPassword","StartingSmall500*");
         properties.setProperty("sageOneApi.SA.apiVersion","1.1.2");
-        properties.setProperty("sageOneApi.SA.apiKey","71A42541-A543-4164-8CBA-5E0F0602B141");
         properties.setProperty("sageOneApi.SA.requestResultLimit","100");
         properties.setProperty("sageOneApi.SA.requestTimeout","30000");
         properties.setProperty("sageOneApi.SA.requestLimitDay","5000");
