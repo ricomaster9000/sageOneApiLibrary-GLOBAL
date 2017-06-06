@@ -32,7 +32,7 @@ public final class SageOneSupplierReturn {
     private final boolean Locked;
     private final Integer SupplierId;
     private final String SupplierName;
-    private final SageOneSupplier SageOneSupplier;
+    private final SageOneSupplier Supplier;
     private final java.util.Date Modified;
     private final Date Created;
     private final Integer StatusId;
@@ -83,7 +83,7 @@ public final class SageOneSupplierReturn {
         Locked = builder.Locked;
         SupplierId = builder.SupplierId;
         SupplierName = builder.SupplierName;
-        SageOneSupplier = builder.SageOneSupplier;
+        Supplier = builder.Supplier;
         Modified = builder.Modified;
         Created = builder.Created;
         StatusId = builder.StatusId;
@@ -128,7 +128,7 @@ public final class SageOneSupplierReturn {
         private boolean Locked;
         private Integer SupplierId;
         private String SupplierName;
-        private SageOneSupplier SageOneSupplier;
+        private SageOneSupplier Supplier;
         private java.util.Date Modified;
         private Date Created;
         private Integer StatusId;
@@ -192,7 +192,7 @@ public final class SageOneSupplierReturn {
         }
 
         public Builder withSupplier(final SageOneSupplier val){
-            SageOneSupplier = val;
+            Supplier = val;
             return this;
         }
 
@@ -402,8 +402,8 @@ public final class SageOneSupplierReturn {
         return SupplierName;
     }
 
-    public SageOneSupplier getSageOneSupplier() {
-        return SageOneSupplier;
+    public SageOneSupplier getSupplier() {
+        return Supplier;
     }
 
     public java.util.Date getModified() {
@@ -558,7 +558,7 @@ public final class SageOneSupplierReturn {
                 ", Locked=" + Locked +
                 ", SupplierId=" + SupplierId +
                 ", SupplierName='" + SupplierName + '\'' +
-                ", Supplier=" + SageOneSupplier +
+                ", Supplier=" + Supplier +
                 ", Modified=" + Modified +
                 ", Created=" + Created +
                 ", StatusId=" + StatusId +

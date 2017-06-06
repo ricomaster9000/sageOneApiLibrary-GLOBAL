@@ -28,7 +28,7 @@ public final class SageOneCustomerReturn {
     private final boolean Locked;
     private final Integer CustomerId;
     private final String CustomerName;
-    private final SageOneCustomer SageOneCustomer;
+    private final SageOneCustomer Customer;
     private final Integer SalesRepresentativeId;
     private final SageOneSalesRepresentative SageOneSalesRepresentative;
     private final Integer StatusId;
@@ -82,7 +82,7 @@ public final class SageOneCustomerReturn {
         Locked = builder.Locked;
         CustomerId = builder.CustomerId;
         CustomerName = builder.CustomerName;
-        SageOneCustomer = builder.SageOneCustomer;
+        Customer = builder.Customer;
         SalesRepresentativeId = builder.SalesRepresentativeId;
         SageOneSalesRepresentative = builder.SageOneSalesRepresentative;
         StatusId = builder.StatusId;
@@ -129,7 +129,7 @@ public final class SageOneCustomerReturn {
         private boolean Locked;
         private Integer CustomerId;
         private String CustomerName;
-        private SageOneCustomer SageOneCustomer;
+        private SageOneCustomer Customer;
         private Integer SalesRepresentativeId;
         private SageOneSalesRepresentative SageOneSalesRepresentative;
         private Integer StatusId;
@@ -195,7 +195,7 @@ public final class SageOneCustomerReturn {
         }
 
         public Builder withCustomer(final SageOneCustomer val){
-            SageOneCustomer = val;
+            Customer = val;
             return this;
         }
 
@@ -415,8 +415,8 @@ public final class SageOneCustomerReturn {
         return CustomerName;
     }
 
-    public SageOneCustomer getSageOneCustomer() {
-        return SageOneCustomer;
+    public SageOneCustomer getCustomer() {
+        return Customer;
     }
 
     public Integer getSalesRepresentativeId() {
@@ -579,7 +579,7 @@ public final class SageOneCustomerReturn {
                 ", Locked=" + Locked +
                 ", CustomerId=" + CustomerId +
                 ", CustomerName='" + CustomerName + '\'' +
-                ", SageOneCustomer=" + SageOneCustomer +
+                ", SageOneCustomer=" + Customer +
                 ", SalesRepresentativeId=" + SalesRepresentativeId +
                 ", SageOneSalesRepresentative=" + SageOneSalesRepresentative +
                 ", StatusId=" + StatusId +
