@@ -1,4 +1,4 @@
-# sageOneApiLibrary-SA V0.90a (Final Alpha)
+# sageOneApiLibrary-SA V0.91a (Final Alpha)
 A library that contains pre-written code to connect and access the SageOne South Africa Api (v.1.1.2), it also comes with a template that makes use of these pre-written component code to access the SageOne SA api, the template contains methods (mostly dynamic or generic) that a developer can use to build this library into his/her app. Compatible with java 1.6 and upwards.
 
 ### HOW TO USE
@@ -8,24 +8,28 @@ add as dependency by using jitpack.io, go to this link to see how https://jitpac
 ``
 USER = ricomaster9000
 REPO/REPOSITORY = sageOneApiLibrary-SA
-TAG/VERSION = v0.90a
+TAG/VERSION = v0.91a
 ``
 
 Please run the method SageOneApiConnector.setupSageOneApiSA(Properties properties) to initialize this library's code with your App's Properties class object (usually System.getProperties()) and make sure the below first 3 fields/properties appear in your properties file and have the required (also correct) assigned values, the rest have default values but can be overriden. 
 
-You can now also initialize it with a Map<String, String> parameter "SageOneApiConnector.setupSageOneApiSA(Map<String, String> properties)".
+You can now also initialize it with a Map<String, String> parameter "SageOneApiConnector.setupSageOneApiSA(Map<String, String> properties)". 
+
+Spring-support (.yml and .properties files) -> You can now also initialize it with Spring's Environment object(org.springframework.core.env.Environment), like this :
+"SageOneApiConnector.setupSageOneApiSA(Environment properties)"
 
 ```
-sageOneApi.SA.clientUsername = 'your Sage One username';
-sageOneApi.SA.clientPassword = 'your Sage One Password';
-sageOneApi.SA.apiKey = 'sd24d-....'; (don't include the brackets, it gets added automatically)
+sageOneApi.SA.clientUsername = 'your Sage One username'
+sageOneApi.SA.clientPassword = 'your Sage One Password'
+sageOneApi.SA.apiKey = 'sd24d-....' (don't include the brackets, it gets added automatically)
 
-sageOneApi.SA.apiUrl = 'base url for api call'; (this isn't required as the default should work)
-sageOneApi.SA.apiVersion = '1.1.2'; (default is 1.1.2)
-sageOneApi.SA.requestLimitDay = 5000; (default is 5000)
-sageOneApi.SA.requestLimitHour = 100; (default is 100)
-sageOneApi.SA.requestResultLimit = 100; (default is 100)
-sageOneApi.SA.requestTimeout = 30000; (default is 30 seconds)
+sageOneApi.SA.apiUrl = 'base url for api call' (this isn't required as the default should work)
+sageOneApi.SA.apiVersion = 'value' (default is 1.1.2)
+sageOneApi.SA.requestLimitDay = 'value' (default is 5000)
+sageOneApi.SA.requestLimitHour = 'value' (default is 100)
+sageOneApi.SA.requestResultLimit = 'value' (default is 100)
+sageOneApi.SA.requestTimeout = 'value' (default is 30000(30 seconds))
+sageOneApi.SA.requestSocketTimeout = 'value' (default is 30000(30 seconds)) -> 
 ```
 ### important classes/methods you should use
 
