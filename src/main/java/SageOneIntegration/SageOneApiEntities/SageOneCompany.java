@@ -24,22 +24,23 @@ import java.sql.Date;
 /**
  * Created by ricardo on 2017/05/30.
  */
-public final class SageOneCompany extends SageOneMainEntity {
-    private String Name = "";
-    private String CurrencySymbol = "";
-    private int CurrencyDecimalDigits = 0;
-    private int NumberDecimalDigits = 0;
-    private String DecimalSeparator = "";
-    private int HoursDecimalDigits = 0;
-    private int ItemCostPriceDecimalDigits = 0;
-    private int ItemSellingPriceDecimalDigits = 0;
+public final class SageOneCompany {
+    private Integer ID;
+    private String Name;
+    private String CurrencySymbol;
+    private Integer CurrencyDecimalDigits;
+    private Integer NumberDecimalDigits;
+    private String DecimalSeparator;
+    private Integer HoursDecimalDigits;
+    private Integer ItemCostPriceDecimalDigits;
+    private Integer ItemSellingPriceDecimalDigits;
     private String PostalAddress1 = "";
     private String PostalAddress2 = "";
     private String PostalAddress3 = "";
     private String PostalAddress4 = "";
     private String PostalAddress5 = "";
     private String GroupSeparator = "";
-    private int RoundingValue = 0;
+    private Integer RoundingValue;
     private SageOneTaxSystemClass TaxSystem;
     private SageOneRoundingTypeClass RoundingType;
     private boolean AgeMonthly;
@@ -48,8 +49,8 @@ public final class SageOneCompany extends SageOneMainEntity {
     private boolean DoNotAllowProcessingIntoNegativeQuantities;
     private boolean WarnWhenItemQuantityIsZero;
     private boolean WarnWhenItemSellingBelowCost;
-    private int CountryId;
-    private int CompanyEntityTypeId;
+    private Integer CountryId;
+    private Integer CompanyEntityTypeId;
     private Date TakeOnBalanceDate;
     private boolean EnableCustomerZone;
     private boolean EnableAutomaticBankFeedRefresh;
@@ -72,7 +73,7 @@ public final class SageOneCompany extends SageOneMainEntity {
     private boolean IsOwner;
     private boolean UseCCEmail;
     private String CCEmail;
-    private int DateFormatId;
+    private Integer DateFormatId;
     private boolean CheckForDuplicateCustomerReferences;
     private boolean CheckForDuplicateSupplierReferences;
     private String DisplayName;
@@ -84,7 +85,7 @@ public final class SageOneCompany extends SageOneMainEntity {
     private Date LockProcessingDate;
     private boolean LockTimesheetProcessing;
     private Date LockTimesheetProcessingDate;
-    private int TaxPeriodFrequency;
+    private Integer TaxPeriodFrequency;
     private Date PreviousTaxPeriodEndDate;
     private Date PreviousTaxReturnDate;
     private boolean UseNoreplyEmail;
@@ -94,8 +95,8 @@ public final class SageOneCompany extends SageOneMainEntity {
     private String City;
     private String State;
     private String Country;
-    private int HomeCurrencyId;
-    private int CurrencyId;
+    private Integer HomeCurrencyId;
+    private Integer CurrencyId;
     private Date Created;
     private Date Modified;
     private boolean Active;
@@ -103,13 +104,13 @@ public final class SageOneCompany extends SageOneMainEntity {
     private String RegisteredName;
     private String RegistrationNumber;
     private boolean IsPracticeAccount;
-    private int LogoPositionID;
+    private Integer LogoPositionID;
     private SageOneCompanyLogoClass Attachment;
     private String CompanyTaxNumber;
     private String TaxOffice;
     private String CustomerZoneGuid;
-    private int ClientTypeId;
-    private int DisplayTotalTypeId;
+    private Integer ClientTypeId;
+    private Integer DisplayTotalTypeId;
     private boolean DisplayInCompanyConsole;
     private Date LastLoginDate;
     private SageOneCompanyStatus Status;
@@ -130,19 +131,19 @@ public final class SageOneCompany extends SageOneMainEntity {
         this.CurrencySymbol = CurrencySymbol;
     }
 
-    public final int getCurrencyDecimalDigits() {
+    public final Integer getCurrencyDecimalDigits() {
         return this.CurrencyDecimalDigits;
     }
 
-    public final void setCurrencyDecimalDigits(final int CurrencyDecimalDigits) {
+    public final void setCurrencyDecimalDigits(final Integer CurrencyDecimalDigits) {
         this.CurrencyDecimalDigits = CurrencyDecimalDigits;
     }
 
-    public final int getNumberDecimalDigits() {
+    public final Integer getNumberDecimalDigits() {
         return this.NumberDecimalDigits;
     }
 
-    public final void setNumberDecimalDigits(final int NumberDecimalDigits) {
+    public final void setNumberDecimalDigits(final Integer NumberDecimalDigits) {
         this.NumberDecimalDigits = NumberDecimalDigits;
     }
 
@@ -154,27 +155,27 @@ public final class SageOneCompany extends SageOneMainEntity {
         this.DecimalSeparator = DecimalSeparator;
     }
 
-    public final int getHoursDecimalDigits() {
+    public final Integer getHoursDecimalDigits() {
         return this.HoursDecimalDigits;
     }
 
-    public final void setHoursDecimalDigits(final int HoursDecimalDigits) {
+    public final void setHoursDecimalDigits(final Integer HoursDecimalDigits) {
         this.HoursDecimalDigits = HoursDecimalDigits;
     }
 
-    public final int getItemCostPriceDecimalDigits() {
+    public final Integer getItemCostPriceDecimalDigits() {
         return this.ItemCostPriceDecimalDigits;
     }
 
-    public final void setItemCostPriceDecimalDigits(final int ItemCostPriceDecimalDigits) {
+    public final void setItemCostPriceDecimalDigits(final Integer ItemCostPriceDecimalDigits) {
         this.ItemCostPriceDecimalDigits = ItemCostPriceDecimalDigits;
     }
 
-    public final int getItemSellingPriceDecimalDigits() {
+    public final Integer getItemSellingPriceDecimalDigits() {
         return this.ItemSellingPriceDecimalDigits;
     }
 
-    public final void setItemSellingPriceDecimalDigits(final int ItemSellingPriceDecimalDigits) {
+    public final void setItemSellingPriceDecimalDigits(final Integer ItemSellingPriceDecimalDigits) {
         this.ItemSellingPriceDecimalDigits = ItemSellingPriceDecimalDigits;
     }
 
@@ -226,7 +227,7 @@ public final class SageOneCompany extends SageOneMainEntity {
         this.GroupSeparator = GroupSeparator;
     }
 
-    public final int getRoundingValue() {
+    public final Integer getRoundingValue() {
         return this.RoundingValue;
     }
 
@@ -298,19 +299,19 @@ public final class SageOneCompany extends SageOneMainEntity {
         this.WarnWhenItemSellingBelowCost = WarnWhenItemSellingBelowCost;
     }
 
-    public final int getCountryId() {
+    public final Integer getCountryId() {
         return this.CountryId;
     }
 
-    public final void setCountryId(final int CountryId) {
+    public final void setCountryId(final Integer CountryId) {
         this.CountryId = CountryId;
     }
 
-    public final int getCompanyEntityTypeId() {
+    public final Integer getCompanyEntityTypeId() {
         return this.CompanyEntityTypeId;
     }
 
-    public final void setCompanyEntityTypeId(final int CompanyEntityTypeId) {
+    public final void setCompanyEntityTypeId(final Integer CompanyEntityTypeId) {
         this.CompanyEntityTypeId = CompanyEntityTypeId;
     }
 
@@ -490,11 +491,11 @@ public final class SageOneCompany extends SageOneMainEntity {
         this.CCEmail = CCEmail;
     }
 
-    public final int getDateFormatId() {
+    public final Integer getDateFormatId() {
         return this.DateFormatId;
     }
 
-    public final void setDateFormatId(final int DateFormatId) {
+    public final void setDateFormatId(final Integer DateFormatId) {
         this.DateFormatId = DateFormatId;
     }
 
@@ -666,19 +667,19 @@ public final class SageOneCompany extends SageOneMainEntity {
         this.Country = Country;
     }
 
-    public final int getHomeCurrencyId() {
+    public final Integer getHomeCurrencyId() {
         return this.HomeCurrencyId;
     }
 
-    public final void setHomeCurrencyId(final int HomeCurrencyId) {
+    public final void setHomeCurrencyId(final Integer HomeCurrencyId) {
         this.HomeCurrencyId = HomeCurrencyId;
     }
 
-    public final int getCurrencyId() {
+    public final Integer getCurrencyId() {
         return this.CurrencyId;
     }
 
-    public final void setCurrencyId(final int CurrencyId) {
+    public final void setCurrencyId(final Integer CurrencyId) {
         this.CurrencyId = CurrencyId;
     }
 
@@ -738,11 +739,11 @@ public final class SageOneCompany extends SageOneMainEntity {
         this.IsPracticeAccount = IsPracticeAccount;
     }
 
-    public final int getLogoPositionID() {
+    public final Integer getLogoPositionID() {
         return this.LogoPositionID;
     }
 
-    public final void setLogoPositionID(final int LogoPositionID) {
+    public final void setLogoPositionID(final Integer LogoPositionID) {
         this.LogoPositionID = LogoPositionID;
     }
 
@@ -778,19 +779,19 @@ public final class SageOneCompany extends SageOneMainEntity {
         this.CustomerZoneGuid = CustomerZoneGuid;
     }
 
-    public final int getClientTypeId() {
+    public final Integer getClientTypeId() {
         return this.ClientTypeId;
     }
 
-    public final void setClientTypeId(final int ClientTypeId) {
+    public final void setClientTypeId(final Integer ClientTypeId) {
         this.ClientTypeId = ClientTypeId;
     }
 
-    public final int getDisplayTotalTypeId() {
+    public final Integer getDisplayTotalTypeId() {
         return this.DisplayTotalTypeId;
     }
 
-    public final void setDisplayTotalTypeId(final int DisplayTotalTypeId) {
+    public final void setDisplayTotalTypeId(final Integer DisplayTotalTypeId) {
         this.DisplayTotalTypeId = DisplayTotalTypeId;
     }
 

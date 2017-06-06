@@ -87,7 +87,7 @@ public final class SageOneSupplier {
     private final String CurrencySymbol;
 
     public SageOneSupplier(Builder builder) {
-        this.ID = builder.getId();
+        ID = builder.ID;
         Name = builder.Name;
         Category = builder.Category;
         TaxReference = builder.TaxReference;
@@ -138,8 +138,8 @@ public final class SageOneSupplier {
         CurrencySymbol = builder.CurrencySymbol;
     }
 
-    public static class Builder extends SageOneMainEntity {
-
+    public static class Builder {
+        private Integer ID;
         private String Name;
         private SageOneSupplierCategory Category;
         private String TaxReference;
@@ -190,247 +190,247 @@ public final class SageOneSupplier {
         private String CurrencySymbol;
 
         public Builder withId(final Integer val){
-           setId(val);
-            return this;
+           ID = val;
+           return this;
         }
 
         public Builder withName(final String val){
-            Name = (this.isInitialized()) ? val: Name;
+            Name = val;
             return this;
         }
 
         public Builder withCategory(final SageOneSupplierCategory val){
-            Category = (this.isInitialized()) ? val: Category;
+            Category = val;
             return this;
         }
 
         public Builder withTaxReference(final String val){
-            TaxReference = (this.isInitialized()) ? val: TaxReference;
+            TaxReference = val;
             return this;
         }
 
         public Builder withContactName(final String val){
-            ContactName = (this.isInitialized()) ? val: ContactName;
+            ContactName = val;
             return this;
         }
 
         public Builder withTelephone(final String val){
-            Telephone = (this.isInitialized()) ? val: Telephone;
+            Telephone = val;
             return this;
         }
 
         public Builder withFax(final String val){
-            Fax = (this.isInitialized()) ? val: Fax;
+            Fax = val;
             return this;
         }
 
         public Builder withMobile(final String val){
-            Mobile = (this.isInitialized()) ? val: Mobile;
+            Mobile = val;
             return this;
         }
 
         public Builder withEmail(final String val){
-            Email = (this.isInitialized()) ? val: Email;
+            Email = val;
             return this;
         }
 
         public Builder withWebAddress(final String val){
-            WebAddress = (this.isInitialized()) ? val: WebAddress;
+            WebAddress = val;
             return this;
         }
 
         public Builder withActive(final boolean val){
-            Active = (this.isInitialized()) ? val: Active;
+            Active = val;
             return this;
         }
 
         public Builder withBalance(final double val){
-            Balance = (this.isInitialized()) ? val: Balance;
+            Balance = val;
             return this;
         }
 
         public Builder withCreditLimit(final double val){
-            CreditLimit = (this.isInitialized()) ? val: CreditLimit;
+            CreditLimit = val;
             return this;
         }
 
         public Builder withPostalAddress01(final String val){
-            PostalAddress01 = (this.isInitialized()) ? val: PostalAddress01;
+            PostalAddress01 = val;
             return this;
         }
 
         public Builder withPostalAddress02(final String val){
-            PostalAddress02 = (this.isInitialized()) ? val: PostalAddress02;
+            PostalAddress02 = val;
             return this;
         }
 
         public Builder withPostalAddress03(final String val){
-            PostalAddress03 = (this.isInitialized()) ? val: PostalAddress03;
+            PostalAddress03 = val;
             return this;
         }
 
         public Builder withPostalAddress04(final String val){
-            PostalAddress04 = (this.isInitialized()) ? val: PostalAddress04;
+            PostalAddress04 = val;
             return this;
         }
 
         public Builder withPostalAddress05(final String val){
-            PostalAddress05 = (this.isInitialized()) ? val: PostalAddress05;
+            PostalAddress05 = val;
             return this;
         }
 
         public Builder withDeliveryAddress01(final String val){
-            DeliveryAddress01 = (this.isInitialized()) ? val: DeliveryAddress01;
+            DeliveryAddress01 = val;
             return this;
         }
 
         public Builder withDeliveryAddress02(final String val){
-            DeliveryAddress02 = (this.isInitialized()) ? val: DeliveryAddress02;
+            DeliveryAddress02 = val;
             return this;
         }
 
         public Builder withDeliveryAddress03(final String val){
-            DeliveryAddress03 = (this.isInitialized()) ? val: DeliveryAddress03;
+            DeliveryAddress03 = val;
             return this;
         }
 
         public Builder withDeliveryAddress04(final String val){
-            DeliveryAddress04 = (this.isInitialized()) ? val: DeliveryAddress04;
+            DeliveryAddress04 = val;
             return this;
         }
 
         public Builder withDeliveryAddress05(final String val){
-            DeliveryAddress05 = (this.isInitialized()) ? val: DeliveryAddress05;
+            DeliveryAddress05 = val;
             return this;
         }
 
         public Builder withAutoAllocateToOldestInvoice(final boolean val){
-            AutoAllocateToOldestInvoice = (this.isInitialized()) ? val: AutoAllocateToOldestInvoice;
+            AutoAllocateToOldestInvoice = val;
             return this;
         }
 
         public Builder withTextField1(final String val){
-            TextField1 = (this.isInitialized()) ? val: TextField1;
+            TextField1 = val;
             return this;
         }
 
         public Builder withTextField2(final String val){
-            TextField2 = (this.isInitialized()) ? val: TextField2;
+            TextField2 = val;
             return this;
         }
 
         public Builder withTextField3(final String val){
-            TextField3 = (this.isInitialized()) ? val: TextField3;
+            TextField3 = val;
             return this;
         }
 
         public Builder withNumericField1(final double val){
-            NumericField1 = (this.isInitialized()) ? val: NumericField1;
+            NumericField1 = val;
             return this;
         }
 
         public Builder withNumericField2(final double val){
-            NumericField2 = (this.isInitialized()) ? val: NumericField2;
+            NumericField2 = val;
             return this;
         }
 
         public Builder withNumericField3(final double val){
-            NumericField3 = (this.isInitialized()) ? val: NumericField3;
+            NumericField3 = val;
             return this;
         }
 
         public Builder withYesNoField1(final boolean val){
-            YesNoField1 = (this.isInitialized()) ? val: YesNoField1;
+            YesNoField1 = val;
             return this;
         }
 
         public Builder withNumericYesNoField2Field3(final boolean val){
-            YesNoField2 = (this.isInitialized()) ? val: YesNoField2;
+            YesNoField2 = val;
             return this;
         }
 
         public Builder withYesNoField3(final boolean val){
-            YesNoField3 = (this.isInitialized()) ? val: YesNoField3;
+            YesNoField3 = val;
             return this;
         }
 
         public Builder withDateField1(final Date val){
-            DateField1 = (this.isInitialized()) ? val: DateField1;
+            DateField1 = val;
             return this;
         }
 
         public Builder withDateField2(final Date val){
-            DateField2 = (this.isInitialized()) ? val: DateField2;
+            DateField2 = val;
             return this;
         }
 
         public Builder withDateField3(final Date val){
-            DateField3 = (this.isInitialized()) ? val: DateField3;
+            DateField3 = val;
             return this;
         }
 
         public Builder withModified(final Date val){
-            Modified = (this.isInitialized()) ? val: Modified;
+            Modified = val;
             return this;
         }
 
         public Builder withCreated(final Date val){
-            Created = (this.isInitialized()) ? val: Created;
+            Created = val;
             return this;
         }
 
         public Builder withTaxStatusVerified(final Date val){
-            TaxStatusVerified = (this.isInitialized()) ? val: TaxStatusVerified;
+            TaxStatusVerified = val;
             return this;
         }
 
         public Builder withBusinessRegistrationNumber(final String val){
-            BusinessRegistrationNumber = (this.isInitialized()) ? val: BusinessRegistrationNumber;
+            BusinessRegistrationNumber = val;
             return this;
         }
 
         public Builder withRMCDApprovalNumber(final String val){
-            RMCDApprovalNumber = (this.isInitialized()) ? val: RMCDApprovalNumber;
+            RMCDApprovalNumber = val;
             return this;
         }
 
         public Builder withCurrencyId(final Integer val){
-            CurrencyId = (this.isInitialized()) ? val: CurrencyId;
+            CurrencyId = val;
             return this;
         }
 
         public Builder withDefaultTaxTypeId(final Integer val){
-            DefaultTaxTypeId = (this.isInitialized()) ? val: DefaultTaxTypeId;
+            DefaultTaxTypeId = val;
             return this;
         }
 
         public Builder withDueDateMethodId(final Integer val){
-            DueDateMethodId = (this.isInitialized()) ? val: DueDateMethodId;
+            DueDateMethodId = val;
             return this;
         }
 
         public Builder withDueDateMethodValue(final Integer val){
-            DueDateMethodValue = (this.isInitialized()) ? val: DueDateMethodValue;
+            DueDateMethodValue = val;
             return this;
         }
 
         public Builder withHasActivity(final boolean val){
-            HasActivity = (this.isInitialized()) ? val: HasActivity;
+            HasActivity = val;
             return this;
         }
 
         public Builder withDefaultDiscountPercentage(final double val){
-            DefaultDiscountPercentage = (this.isInitialized()) ? val: DefaultDiscountPercentage;
+            DefaultDiscountPercentage = val;
             return this;
         }
 
         public Builder withDefaultTaxType(final SageOneTaxType val){
-            defaultSageOneTaxType = (this.isInitialized()) ? val: defaultSageOneTaxType;
+            defaultSageOneTaxType = val;
             return this;
         }
 
         public Builder withCurrencySymbol(final String val){
-            CurrencySymbol = (this.isInitialized()) ? val: CurrencySymbol;
+            CurrencySymbol = val;
             return this;
         }
 
