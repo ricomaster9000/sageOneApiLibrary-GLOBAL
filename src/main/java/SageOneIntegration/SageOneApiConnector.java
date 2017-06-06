@@ -320,17 +320,9 @@ public final class SageOneApiConnector {
 				request = new HttpPost(endpoint);
 				RequestConfig requestConfig = RequestConfig.copy(defaultRequestConfig).setSocketTimeout(SAGE_ONE_REQUEST_TIMEOUT_SOCKET).setConnectTimeout(REQUEST_TIMEOUT).setConnectionRequestTimeout(REQUEST_TIMEOUT).build();
 				request.setConfig(requestConfig);
-				TreeMap<String, String> params;
-				params = new Gson().fromJson(jsonEntityToPost, new TypeToken<TreeMap<String, String>>() {}.getType());
-
-				ArrayList<NameValuePair> postParameters;
-				postParameters = new ArrayList<NameValuePair>();
-				for (Map.Entry<String, String> entry : params.entrySet()) {
-					postParameters.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
-				}
-
 				StringEntity stringEntity = new StringEntity(jsonEntityToPost);
 				stringEntity.setContentType("application/json");
+				System.out.println(jsonEntityToPost);
 
 				((HttpPost) request).setEntity(stringEntity);
 				request.setHeader("Accept", "application/json");

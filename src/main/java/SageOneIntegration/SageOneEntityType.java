@@ -8,8 +8,8 @@ public enum SageOneEntityType {
     CUSTOMER_RETURN("CustomerReturn/", SageOneCustomerReturn.class),
     SUPPLIER_RETURN("SupplierReturn/", SageOneSupplierReturn.class),
     CUSTOMER("Customer/", SageOneCustomer.class),
-    SUPPLIER("Supplier/", SageOneSupplier.class),
-    COMPANY("Company/", SageOneCompany.class);
+    SUPPLIER("Supplier/", SageOneSupplier.class);
+    //SAGE_ONE_COMMERCIAL_DOCUMENT_LINE("Item/", SageOneItem.class),
 
     public SageOneStringAndClassObject GetObject;
     SageOneEntityType(final String entityGetReqParamName, final Class<?> entityGetReqParamClass)  {

@@ -26,7 +26,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 @JsonDeserialize(builder = SageOneCommercialDocumentLine.Builder.class)
 public final class SageOneCommercialDocumentLine {
     //Gets or sets the selection identifier. This is the selected Item Id or Account Id.
-    private final int ID;
+    private final Integer ID;
     private final int SelectionId;
     private final int TaxTypeId;
     //String length: inclusive between 0 and 100
@@ -54,7 +54,7 @@ public final class SageOneCommercialDocumentLine {
     private final double UnitCost;
 
     public SageOneCommercialDocumentLine(Builder builder) {
-        this.ID = builder.getId();
+        ID = builder.ID;
         SelectionId = builder.SelectionId;
         TaxTypeId = builder.TaxTypeId;
         Description = builder.Description;
@@ -78,7 +78,8 @@ public final class SageOneCommercialDocumentLine {
         UnitCost = builder.UnitCost;
     }
 
-    public static class Builder extends SageOneMainEntity {
+    public static class Builder {
+        private Integer ID;
         private int SelectionId;
         private int TaxTypeId;
         private String Description;
@@ -102,111 +103,111 @@ public final class SageOneCommercialDocumentLine {
         private double UnitCost;
 
         public Builder withId(final int val){
-            setId(val);
+            ID = val;
             return this;
         }
 
         public Builder withSelectionId(final int val){
-            SelectionId = (this.isInitialized()) ? val:SelectionId;
+            SelectionId = val;
             return this;
         }
 
         public Builder withTaxTypeId(final int val){
-            TaxTypeId = (this.isInitialized()) ? val:TaxTypeId;
+            TaxTypeId = val;
             return this;
         }
 
         public Builder withDescription(final String val){
-            Description = (this.isInitialized()) ? val:Description;
+            Description = val;
             return this;
         }
 
         public Builder withLineType(final SageOneCommercialDocumentLine val){
-            LineType = (this.isInitialized()) ? val:LineType;
+            LineType = val;
             return this;
         }
 
         public Builder withQuantity(final double val){
-            Quantity = (this.isInitialized()) ? val:Quantity;
+            Quantity = val;
             return this;
         }
 
         public Builder withUnitPriceExclusive(final double val){
-            UnitPriceExclusive = (this.isInitialized()) ? val:UnitPriceExclusive;
+            UnitPriceExclusive = val;
             return this;
         }
 
         public Builder withUnit(final double val){
-            Unit = (this.isInitialized()) ? val:Unit;
+            Unit = val;
             return this;
         }
 
         public Builder withUnitPriceInclusive(final double val){
-            UnitPriceInclusive = (this.isInitialized()) ? val:UnitPriceInclusive;
+            UnitPriceInclusive = val;
             return this;
         }
 
         public Builder withTaxPercentage(final double val){
-            TaxPercentage = (this.isInitialized()) ? val:TaxPercentage;
+            TaxPercentage = val;
             return this;
         }
 
         public Builder withDiscountPercentage(final double val){
-            DiscountPercentage = (this.isInitialized()) ? val:DiscountPercentage;
+            DiscountPercentage = val;
             return this;
         }
 
         public Builder withExclusive(final double val){
-            Exclusive = (this.isInitialized()) ? val:Exclusive;
+            Exclusive = val;
             return this;
         }
 
         public Builder withDiscount(final double val){
-            Discount = (this.isInitialized()) ? val:Discount;
+            Discount = val;
             return this;
         }
 
         public Builder withTax(final double val){
-            Tax = (this.isInitialized()) ? val:Tax;
+            Tax = val;
             return this;
         }
 
         public Builder withTotal(final double val){
-            Total = (this.isInitialized()) ? val:Total;
+            Total = val;
             return this;
         }
 
         public Builder withComments(final String val){
-            Comments = (this.isInitialized()) ? val:Comments;
+            Comments = val;
             return this;
         }
         public Builder withAnalysisCategoryId1(final int val){
-            AnalysisCategoryId1 = (this.isInitialized()) ? val:AnalysisCategoryId1;
+            AnalysisCategoryId1 = val;
             return this;
         }
 
         public Builder withAnalysisCategoryId2(final int val){
-            AnalysisCategoryId2 = (this.isInitialized()) ? val:AnalysisCategoryId2;
+            AnalysisCategoryId2 = val;
             return this;
         }
 
         public Builder withAnalysisCategoryId3(final int val){
-            AnalysisCategoryId3 = (this.isInitialized()) ? val:AnalysisCategoryId3;
+            AnalysisCategoryId3 = val;
             return this;
         }
 
         public Builder with$TrackingCode(final String val){
-            $TrackingCode = (this.isInitialized()) ? val:$TrackingCode;
+            $TrackingCode = val;
             return this;
         }
 
         public Builder withCurrencyId(final int val){
-            CurrencyId = (this.isInitialized()) ? val:CurrencyId;
+            CurrencyId = val;
             return this;
         }
 
         public Builder withUnitCost(final double val){
-            UnitCost = (this.isInitialized()) ? val:UnitCost;
+            UnitCost = val;
             return this;
         }
 
@@ -215,7 +216,7 @@ public final class SageOneCommercialDocumentLine {
         }
     }
 
-    public int getId() {
+    public Integer getId() {
         return ID;
     }
 

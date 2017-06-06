@@ -20,7 +20,9 @@ package SageOneIntegration;
 
 
 import SageOneIntegration.SageOneApiEntities.SageOneCustomer;
+import SageOneIntegration.SageOneApiEntities.SageOneSupplier;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -28,7 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class SageOneApiTemplate {
-    private static final Gson gson = new Gson();
+    private static final Gson gson = new GsonBuilder().serializeNulls().create();
 
     SageOneApiTemplate() {
 
@@ -79,6 +81,106 @@ public final class SageOneApiTemplate {
             e.printStackTrace();
         }
         return sageOneCustomersGrabbed;
+
+    }
+
+    public static SageOneSupplier getSupplierByName(final String companyName, final String name) {
+        boolean response = true;
+        SageOneResponseObject sageOneResponseObject;
+        List<SageOneSupplier> sageOneCustomersGrabbed = new ArrayList<SageOneSupplier>();
+        String endpointQuery = "Supplier/Get?$filter=";
+
+        try {
+            final Integer companyId = SageOneConstants.COMPANY_LIST.get(companyName);
+
+            if(companyId == null) {
+                response = false;
+            }
+
+            if(response) {
+                    sageOneResponseObject = SageOneApiConnector.sageOneGrabData(endpointQuery +
+                                    URLEncoder.encode("Name eq " + "'" + name + "'", "UTF-8"), SageOneSupplier.class,
+                            true, companyId);
+
+                    if (sageOneResponseObject.getSuccess()) {
+                        if (sageOneResponseObject.getTotalResponseObjects() <= 0) {
+
+                            sageOneResponseObject = SageOneApiConnector.sageOneGrabData(endpointQuery +
+                                            "startswith(Name,'" + name + "')", SageOneSupplier.class, true,
+                                    companyId);
+                        }
+
+                        sageOneCustomersGrabbed.addAll((sageOneResponseObject.getResponseObject() != null) ?
+                                (List<SageOneSupplier>) sageOneResponseObject.getResponseObject() : sageOneCustomersGrabbed);
+                    } else {
+                        System.out.println(sageOneResponseObject.getResponseMessage());
+                    }
+            } else {
+                sageOneCustomersGrabbed = null;
+
+                System.out.println("SageOneCompany does not exist for the specified Sage One User -> " +
+                        "SageOneApiTemplate.class");
+            }
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return (sageOneCustomersGrabbed.size() > 0) ? sageOneCustomersGrabbed.get(0) : null;
+
+    }
+
+    public static <T> T getEntityByPropertyValue(final String companyName, final SageOneEntityType sageOneEntityType,
+                                                 final String propertyName, final String propertyValue) {
+        boolean response = true;
+        SageOneResponseObject sageOneResponseObject;
+        List<Object> sageOneCustomersGrabbed = new ArrayList<Object>();
+
+        try {
+            if (sageOneEntityType.GetObject.getClassProperty().getClass().getField("") == null) {
+                response = false;
+            }
+        } catch(NoSuchFieldException e) {
+            e.printStackTrace();
+            response = false;
+        }
+        String endpointQuery = sageOneEntityType.GetObject.getStringProperty() + "Get?$filter=";
+
+        if(response) {
+            try {
+                final Integer companyId = SageOneConstants.COMPANY_LIST.get(companyName);
+
+                if (companyId == null) {
+                    response = false;
+                }
+
+                if (response) {
+                    sageOneResponseObject = SageOneApiConnector.sageOneGrabData(endpointQuery +
+                                    URLEncoder.encode(propertyName + " eq " + "'" + propertyValue + "'", "UTF-8"),
+                            SageOneSupplier.class, true, companyId);
+
+                    if (sageOneResponseObject.getSuccess()) {
+                        if (sageOneResponseObject.getTotalResponseObjects() <= 0) {
+
+                            sageOneResponseObject = SageOneApiConnector.sageOneGrabData(endpointQuery +
+                                            "startswith(" + propertyName + ",'" + propertyValue + "')",
+                                    sageOneEntityType.GetObject.getClassProperty(), true, companyId);
+                        }
+
+                        sageOneCustomersGrabbed.addAll((sageOneResponseObject.getResponseObject() != null) ?
+                                (List<Object>) sageOneResponseObject.getResponseObject() : sageOneCustomersGrabbed);
+                    } else {
+                        System.out.println(sageOneResponseObject.getResponseMessage());
+                    }
+                } else {
+                    sageOneCustomersGrabbed = null;
+
+                    System.out.println("SageOneCompany does not exist for the specified Sage One User -> " +
+                            "SageOneApiTemplate.class");
+                }
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
+        return (sageOneCustomersGrabbed != null && sageOneCustomersGrabbed.size() > 0) ? (T) sageOneCustomersGrabbed.get(0) : null;
 
     }
 

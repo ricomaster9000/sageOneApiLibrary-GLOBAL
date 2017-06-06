@@ -344,7 +344,7 @@ public final class SageOneSupplier {
             return this;
         }
 
-        public Builder withNumericYesNoField2Field3(final boolean val){
+        public Builder withYesNoField2(final boolean val){
             YesNoField2 = val;
             return this;
         }
@@ -559,15 +559,15 @@ public final class SageOneSupplier {
         return NumericField3;
     }
 
-    public boolean isYesNoField1() {
+    public boolean getYesNoField1() {
         return YesNoField1;
     }
 
-    public boolean isYesNoField2() {
+    public boolean getYesNoField2() {
         return YesNoField2;
     }
 
-    public boolean isYesNoField3() {
+    public boolean getYesNoField3() {
         return YesNoField3;
     }
 
@@ -607,7 +607,7 @@ public final class SageOneSupplier {
         return CurrencyId;
     }
 
-    public boolean isHasActivity() {
+    public boolean getHasActivity() {
         return HasActivity;
     }
 
