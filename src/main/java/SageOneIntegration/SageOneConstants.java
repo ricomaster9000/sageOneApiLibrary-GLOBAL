@@ -22,6 +22,7 @@ public final class SageOneConstants {
 	static int SAGE_ONE_REQUEST_RESULT_LIMIT = 100;
 	static int SAGE_ONE_REQUEST_LIMIT_HOUR = 100;
 	static int SAGE_ONE_REQUEST_LIMIT_DAY = 5000;
+	static int SAGE_ONE_REQUEST_TIMEOUT_SOCKET = 30000;
 	static int REQUEST_TIMEOUT = 30 * 1000; // Seconds multiplied with milliseconds
 	static Map<Integer, Integer> SAGE_ONE_REQUEST_COUNTER_DAY = new HashMap<Integer, Integer>();
 	static Map<Integer, Integer> SAGE_ONE_REQUEST_COUNTER_HOUR = new HashMap<Integer, Integer>();
