@@ -371,7 +371,7 @@ public final class SageOneApiConnector {
 			resultToReturn = "A Java Exception Occurred in the Sage One Integration SageOneApiConnector.class " +
 					"ConnectionCoreCode method code, please check to see what may have caused it, note that it gets" +
 					"used in all the other component methods, so you need to pinpoint which one it is";
-			
+
 			e.printStackTrace();
 		}
 
