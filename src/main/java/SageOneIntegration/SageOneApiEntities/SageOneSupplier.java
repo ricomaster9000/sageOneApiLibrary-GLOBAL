@@ -42,9 +42,9 @@ public final class SageOneSupplier {
     private final String Email;
     //String length: inclusive between 0 and 100
     private final String WebAddress;
-    private final boolean Active;
-    private final double Balance;
-    private final double CreditLimit;
+    private final Boolean Active;
+    private final Double Balance;
+    private final Double CreditLimit;
     //String length: inclusive between 0 and 100
     private final String PostalAddress01;
     private final String PostalAddress02;
@@ -57,18 +57,18 @@ public final class SageOneSupplier {
     private final String DeliveryAddress04;
     private final String DeliveryAddress05;
     //---------------------------------------
-    private final boolean AutoAllocateToOldestInvoice;
+    private final Boolean AutoAllocateToOldestInvoice;
     //String length: inclusive between 0 and 100
     private final String TextField1;
     private final String TextField2;
     private final String TextField3;
     //---------------------------------------
-    private final double NumericField1;
-    private final double NumericField2;
-    private final double NumericField3;
-    private final boolean YesNoField1;
-    private final boolean YesNoField2;
-    private final boolean YesNoField3;
+    private final Double NumericField1;
+    private final Double NumericField2;
+    private final Double NumericField3;
+    private final Boolean YesNoField1;
+    private final Boolean YesNoField2;
+    private final Boolean YesNoField3;
     private final Date DateField1;
     private final Date DateField2;
     private final Date DateField3;
@@ -78,8 +78,8 @@ public final class SageOneSupplier {
     private final String RMCDApprovalNumber;
     private final Date TaxStatusVerified;
     private final Integer CurrencyId;
-    private final boolean HasActivity;
-    private final double DefaultDiscountPercentage;
+    private final Boolean HasActivity;
+    private final Double DefaultDiscountPercentage;
     private final Integer DefaultTaxTypeId;
     private final SageOneTaxType defaultSageOneTaxType;
     private final Integer DueDateMethodId;
@@ -126,7 +126,7 @@ public final class SageOneSupplier {
         Modified = builder.Modified;
         Created = builder.Created;
         BusinessRegistrationNumber = builder.BusinessRegistrationNumber;
-        this.RMCDApprovalNumber = builder.RMCDApprovalNumber;
+        RMCDApprovalNumber = builder.RMCDApprovalNumber;
         TaxStatusVerified = builder.TaxStatusVerified;
         CurrencyId = builder.CurrencyId;
         HasActivity = builder.HasActivity;
@@ -149,7 +149,7 @@ public final class SageOneSupplier {
         private String Mobile;
         private String Email;
         private String WebAddress;
-        private boolean Active;
+        private Boolean Active;
         private double Balance;
         private double CreditLimit;
         private String PostalAddress01;
@@ -162,16 +162,16 @@ public final class SageOneSupplier {
         private String DeliveryAddress03;
         private String DeliveryAddress04;
         private String DeliveryAddress05;
-        private boolean AutoAllocateToOldestInvoice;
+        private Boolean AutoAllocateToOldestInvoice;
         private String TextField1;
         private String TextField2;
         private String TextField3;
         private double NumericField1;
         private double NumericField2;
         private double NumericField3;
-        private boolean YesNoField1;
-        private boolean YesNoField2;
-        private boolean YesNoField3;
+        private Boolean YesNoField1;
+        private Boolean YesNoField2;
+        private Boolean YesNoField3;
         private Date DateField1;
         private Date DateField2;
         private Date DateField3;
@@ -181,7 +181,7 @@ public final class SageOneSupplier {
         private String RMCDApprovalNumber;
         private Date TaxStatusVerified;
         private Integer CurrencyId;
-        private boolean HasActivity;
+        private Boolean HasActivity;
         private double DefaultDiscountPercentage;
         private Integer DefaultTaxTypeId;
         private SageOneTaxType defaultSageOneTaxType;
@@ -239,7 +239,7 @@ public final class SageOneSupplier {
             return this;
         }
 
-        public Builder withActive(final boolean val){
+        public Builder withActive(final Boolean val){
             Active = val;
             return this;
         }
@@ -304,7 +304,7 @@ public final class SageOneSupplier {
             return this;
         }
 
-        public Builder withAutoAllocateToOldestInvoice(final boolean val){
+        public Builder withAutoAllocateToOldestInvoice(final Boolean val){
             AutoAllocateToOldestInvoice = val;
             return this;
         }
@@ -339,17 +339,17 @@ public final class SageOneSupplier {
             return this;
         }
 
-        public Builder withYesNoField1(final boolean val){
+        public Builder withYesNoField1(final Boolean val){
             YesNoField1 = val;
             return this;
         }
 
-        public Builder withYesNoField2(final boolean val){
+        public Builder withYesNoField2(final Boolean val){
             YesNoField2 = val;
             return this;
         }
 
-        public Builder withYesNoField3(final boolean val){
+        public Builder withYesNoField3(final Boolean val){
             YesNoField3 = val;
             return this;
         }
@@ -414,7 +414,7 @@ public final class SageOneSupplier {
             return this;
         }
 
-        public Builder withHasActivity(final boolean val){
+        public Builder withHasActivity(final Boolean val){
             HasActivity = val;
             return this;
         }
@@ -479,7 +479,7 @@ public final class SageOneSupplier {
         return WebAddress;
     }
 
-    public boolean isActive() {
+    public Boolean isActive() {
         return Active;
     }
 
@@ -531,7 +531,7 @@ public final class SageOneSupplier {
         return DeliveryAddress05;
     }
 
-    public boolean isAutoAllocateToOldestInvoice() {
+    public Boolean isAutoAllocateToOldestInvoice() {
         return AutoAllocateToOldestInvoice;
     }
 
@@ -559,15 +559,15 @@ public final class SageOneSupplier {
         return NumericField3;
     }
 
-    public boolean getYesNoField1() {
+    public Boolean getYesNoField1() {
         return YesNoField1;
     }
 
-    public boolean getYesNoField2() {
+    public Boolean getYesNoField2() {
         return YesNoField2;
     }
 
-    public boolean getYesNoField3() {
+    public Boolean getYesNoField3() {
         return YesNoField3;
     }
 
@@ -607,7 +607,7 @@ public final class SageOneSupplier {
         return CurrencyId;
     }
 
-    public boolean getHasActivity() {
+    public Boolean getHasActivity() {
         return HasActivity;
     }
 

@@ -24,8 +24,8 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 @JsonDeserialize(builder = SageOneCustomerReceipt.Builder.class)
 public final class SageOneCustomerReceipt {
-   private final int ID;
-   private final int CustomerId;
+   private final Integer ID;
+   private final Integer CustomerId;
    private final java.util.Date Date;
    private final String Payee;
    //String length: inclusive between 0 and 100
@@ -39,35 +39,35 @@ public final class SageOneCustomerReceipt {
    private final double Total;
    private final double Discount;
    private final double TotalUnallocated;
-   private final boolean Reconciled;
-   private final int BankAccountId;
+   private final Boolean Reconciled;
+   private final Integer BankAccountId;
    private final SageOnePaymentMethod SageOnePaymentMethod;
-   private final int TaxPeriodId;
-   private final boolean Editable;
-   private final boolean Accepted;
-   private final boolean Locked;
+   private final Integer TaxPeriodId;
+   private final Boolean Editable;
+   private final Boolean Accepted;
+   private final Boolean Locked;
    //Gets or sets the Analysis Category identifier. This needs to be a valid AnalysisCategoryId.
-   private final int AnalysisCategoryId1;
+   private final Integer AnalysisCategoryId1;
    // Gets or sets the Analysis Category identifier. This needs to be a valid AnalysisCategoryId.
-   private final int AnalysisCategoryId2;
+   private final Integer AnalysisCategoryId2;
    //Gets or sets the Analysis Category identifier. This needs to be a valid AnalysisCategoryId.
-   private final int AnalysisCategoryId3;
-   private final boolean Printed;
+   private final Integer AnalysisCategoryId3;
+   private final Boolean Printed;
    private final String BankUniqueIdentifier;
-   private final int ImportTypeId;
-   private final int BankImportMappingId;
-   private final int BankAccountCurrencyId;
+   private final Integer ImportTypeId;
+   private final Integer BankImportMappingId;
+   private final Integer BankAccountCurrencyId;
    private final double BankAccountExchangeRate;
-   private final int CustomerCurrencyId;
+   private final Integer CustomerCurrencyId;
    private final double CustomerExchangeRate;
    private final java.util.Date Modified;
    private final java.util.Date Created;
-   private final SageOneCustomer SageOneCustomer;
-   private final SageOneSalesRepresentative SageOneSalesRepresentative;
-   private final SageOneBankAccount SageOneBankAccount;
+   private final SageOneCustomer Customer;
+   private final SageOneSalesRepresentative SalesRepresentative;
+   private final SageOneBankAccount BankAccount;
 
     public SageOneCustomerReceipt(Builder builder) {
-        this.ID                 = builder.getId();
+        ID                      = builder.ID;
         CustomerId              = builder.CustomerId;
         Date                    = builder.Date;
         Payee                   = builder.Payee;
@@ -98,14 +98,14 @@ public final class SageOneCustomerReceipt {
         CustomerExchangeRate    = builder.CustomerExchangeRate;
         Modified                = builder.Modified;
         Created                 = builder.Created;
-        SageOneCustomer = builder.SageOneCustomer;
-        SageOneSalesRepresentative = builder.SageOneSalesRepresentative;
-        SageOneBankAccount = builder.SageOneBankAccount;
-
+        Customer                = builder.Customer;
+        SalesRepresentative     = builder.SalesRepresentative;
+        BankAccount             = builder.BankAccount;
     }
 
-    public static class Builder extends SageOneMainEntity {
-        private int CustomerId;
+    public static class Builder {
+        private Integer ID;
+        private Integer CustomerId;
         private java.util.Date Date;
         private String Payee;
         private String DocumentNumber;
@@ -115,197 +115,197 @@ public final class SageOneCustomerReceipt {
         private double Total;
         private double Discount;
         private double TotalUnallocated;
-        private boolean Reconciled;
-        private int BankAccountId;
+        private Boolean Reconciled;
+        private Integer BankAccountId;
         private SageOnePaymentMethod SageOnePaymentMethod;
-        private int TaxPeriodId;
-        private boolean Editable;
-        private boolean Accepted;
-        private boolean Locked;
-        private int AnalysisCategoryId1;
-        private int AnalysisCategoryId2;
-        private int AnalysisCategoryId3;
-        private boolean Printed;
+        private Integer TaxPeriodId;
+        private Boolean Editable;
+        private Boolean Accepted;
+        private Boolean Locked;
+        private Integer AnalysisCategoryId1;
+        private Integer AnalysisCategoryId2;
+        private Integer AnalysisCategoryId3;
+        private Boolean Printed;
         private String BankUniqueIdentifier;
-        private int ImportTypeId;
-        private int BankImportMappingId;
-        private int BankAccountCurrencyId;
+        private Integer ImportTypeId;
+        private Integer BankImportMappingId;
+        private Integer BankAccountCurrencyId;
         private double BankAccountExchangeRate;
-        private int CustomerCurrencyId;
+        private Integer CustomerCurrencyId;
         private double CustomerExchangeRate;
         private java.util.Date Modified;
         private java.util.Date Created;
-        private SageOneCustomer SageOneCustomer;
-        private SageOneSalesRepresentative SageOneSalesRepresentative;
-        private SageOneBankAccount SageOneBankAccount;
+        private SageOneCustomer Customer;
+        private SageOneSalesRepresentative SalesRepresentative;
+        private SageOneBankAccount BankAccount;
 
-       public Builder withId(final int val){
-           setId(val);
+       public Builder withId(final Integer val){
+           ID = val;
            return this;
        }
 
-       public Builder withCustomerId(final int val) {
-           CustomerId = (this.isInitialized()) ? val:CustomerId;
+       public Builder withCustomerId(final Integer val) {
+           CustomerId = val;
            return this;
        }
 
        public Builder withDate(final java.util.Date val){
-           Date = (this.isInitialized()) ? val:Date;
+           Date = val;
            return this;
        }
 
        public Builder withPayee(final String val){
-           Payee = (this.isInitialized()) ? val:Payee;
+           Payee = val;
            return this;
        }
 
         public Builder withDocumentNumber(final String val){
-            DocumentNumber = (this.isInitialized()) ? val:DocumentNumber;
+            DocumentNumber = val;
             return this;
         }
 
         public Builder withReference(final String val){
-            Reference = (this.isInitialized()) ? val:Reference;
+            Reference = val;
             return this;
         }
 
         public Builder withDescription(final String val){
-            Description = (this.isInitialized()) ? val:Description;
+            Description = val;
             return this;
         }
 
         public Builder withComments(final String val){
-            Comments = (this.isInitialized()) ? val:Comments;
+            Comments = val;
             return this;
         }
 
         public Builder withTotal(final double val){
-            Total = (this.isInitialized()) ? val:Total;
+            Total = val;
             return this;
         }
 
         public Builder withDiscount(final double val){
-            Discount = (this.isInitialized()) ? val:Discount;
+            Discount = val;
             return this;
         }
 
         public Builder withTotalUnallocated(final double val){
-            TotalUnallocated = (this.isInitialized()) ? val:TotalUnallocated;
+            TotalUnallocated = val;
             return this;
         }
 
-        public Builder withReconciled(final boolean val){
-            Reconciled = (this.isInitialized()) ? val:Reconciled;
+        public Builder withReconciled(final Boolean val){
+            Reconciled = val;
             return this;
         }
 
-        public Builder withBankAccountId(final int val){
-            BankAccountId = (this.isInitialized()) ? val:BankAccountId;
+        public Builder withBankAccountId(final Integer val){
+            BankAccountId = val;
             return this;
         }
 
         public Builder withPaymentMethod(final SageOnePaymentMethod val){
-            SageOnePaymentMethod = (this.isInitialized()) ? val: SageOnePaymentMethod;
+            SageOnePaymentMethod =  val;
             return this;
         }
 
-        public Builder withTaxPeriodId(final int val){
-            TaxPeriodId = (this.isInitialized()) ? val:TaxPeriodId;
+        public Builder withTaxPeriodId(final Integer val){
+            TaxPeriodId = val;
             return this;
         }
 
-        public Builder withEditable(final boolean val){
-            Editable = (this.isInitialized()) ? val:Editable;
+        public Builder withEditable(final Boolean val){
+            Editable = val;
             return this;
         }
 
-        public Builder withAccepted(final boolean val){
-            Accepted = (this.isInitialized()) ? val:Accepted;
+        public Builder withAccepted(final Boolean val){
+            Accepted = val;
             return this;
         }
 
-        public Builder withLocked(final boolean val){
-            Locked = (this.isInitialized()) ? val:Locked;
+        public Builder withLocked(final Boolean val){
+            Locked = val;
             return this;
         }
 
-        public Builder withAnalysisCategoryId1(final int val){
-            AnalysisCategoryId1 = (this.isInitialized()) ? val:AnalysisCategoryId1;
+        public Builder withAnalysisCategoryId1(final Integer val){
+            AnalysisCategoryId1 = val;
             return this;
         }
 
-        public Builder withAnalysisCategoryId2(final int val){
-            AnalysisCategoryId2 = (this.isInitialized()) ? val:AnalysisCategoryId2;
+        public Builder withAnalysisCategoryId2(final Integer val){
+            AnalysisCategoryId2 = val;
             return this;
         }
 
-        public Builder withAnalysisCategoryId3(final int val){
-            AnalysisCategoryId3 = (this.isInitialized()) ? val:AnalysisCategoryId3;
+        public Builder withAnalysisCategoryId3(final Integer val){
+            AnalysisCategoryId3 = val;
             return this;
         }
 
-        public Builder withPrinted(final boolean val){
-            Printed = (this.isInitialized()) ? val:Printed;
+        public Builder withPrinted(final Boolean val){
+            Printed = val;
             return this;
         }
 
         public Builder withBankUniqueIdentifier(final String val){
-            BankUniqueIdentifier = (this.isInitialized()) ? val:BankUniqueIdentifier;
+            BankUniqueIdentifier = val;
             return this;
         }
 
-        public Builder withImportTypeId(final int val){
-            ImportTypeId = (this.isInitialized()) ? val:ImportTypeId;
+        public Builder withImportTypeId(final Integer val){
+            ImportTypeId = val;
             return this;
         }
 
-        public Builder withBankImportMappingId(final int val){
-            BankImportMappingId = (this.isInitialized()) ? val:BankImportMappingId;
+        public Builder withBankImportMappingId(final Integer val){
+            BankImportMappingId = val;
             return this;
         }
 
-        public Builder withBankAccountCurrencyId(final int val){
-            BankAccountCurrencyId = (this.isInitialized()) ? val:BankAccountCurrencyId;
+        public Builder withBankAccountCurrencyId(final Integer val){
+            BankAccountCurrencyId = val;
             return this;
         }
 
         public Builder withBankAccountExchangeRate(final double val){
-            BankAccountExchangeRate = (this.isInitialized()) ? val:BankAccountExchangeRate;
+            BankAccountExchangeRate = val;
             return this;
         }
 
-        public Builder withCustomerCurrencyId(final int val){
-            CustomerCurrencyId = (this.isInitialized()) ? val:CustomerCurrencyId;
+        public Builder withCustomerCurrencyId(final Integer val){
+            CustomerCurrencyId = val;
             return this;
         }
 
         public Builder withCustomerExchangeRate(final double val){
-            CustomerExchangeRate = (this.isInitialized()) ? val:CustomerExchangeRate;
+            CustomerExchangeRate = val;
             return this;
         }
 
         public Builder withModified(final java.util.Date val){
-            Modified = (this.isInitialized()) ? val:Modified;
+            Modified = val;
             return this;
         }
 
         public Builder withCreated(final java.util.Date val){
-            Created = (this.isInitialized()) ? val:Created;
+            Created = val;
             return this;
         }
 
         public Builder withCustomer(final SageOneCustomer val){
-            SageOneCustomer = (this.isInitialized()) ? val: SageOneCustomer;
+            Customer =  val;
             return this;
         }
 
         public Builder withSalesRepresentative(final SageOneSalesRepresentative val){
-            SageOneSalesRepresentative = (this.isInitialized()) ? val: SageOneSalesRepresentative;
+            SalesRepresentative =  val;
             return this;
         }
 
         public Builder withBankAccount(final SageOneBankAccount val){
-            SageOneBankAccount = (this.isInitialized()) ? val: SageOneBankAccount;
+            BankAccount =  val;
             return this;
         }
 
@@ -314,11 +314,11 @@ public final class SageOneCustomerReceipt {
         }
    }
 
-    public int getId() {
+    public Integer getId() {
         return ID;
     }
 
-    public int getCustomerId() {
+    public Integer getCustomerId() {
         return CustomerId;
     }
 
@@ -358,11 +358,11 @@ public final class SageOneCustomerReceipt {
         return TotalUnallocated;
     }
 
-    public boolean isReconciled() {
+    public Boolean isReconciled() {
         return Reconciled;
     }
 
-    public int getBankAccountId() {
+    public Integer getBankAccountId() {
         return BankAccountId;
     }
 
@@ -370,35 +370,35 @@ public final class SageOneCustomerReceipt {
         return SageOnePaymentMethod;
     }
 
-    public int getTaxPeriodId() {
+    public Integer getTaxPeriodId() {
         return TaxPeriodId;
     }
 
-    public boolean isEditable() {
+    public Boolean isEditable() {
         return Editable;
     }
 
-    public boolean isAccepted() {
+    public Boolean isAccepted() {
         return Accepted;
     }
 
-    public boolean isLocked() {
+    public Boolean isLocked() {
         return Locked;
     }
 
-    public int getAnalysisCategoryId1() {
+    public Integer getAnalysisCategoryId1() {
         return AnalysisCategoryId1;
     }
 
-    public int getAnalysisCategoryId2() {
+    public Integer getAnalysisCategoryId2() {
         return AnalysisCategoryId2;
     }
 
-    public int getAnalysisCategoryId3() {
+    public Integer getAnalysisCategoryId3() {
         return AnalysisCategoryId3;
     }
 
-    public boolean isPrinted() {
+    public Boolean getPrinted() {
         return Printed;
     }
 
@@ -406,15 +406,15 @@ public final class SageOneCustomerReceipt {
         return BankUniqueIdentifier;
     }
 
-    public int getImportTypeId() {
+    public Integer getImportTypeId() {
         return ImportTypeId;
     }
 
-    public int getBankImportMappingId() {
+    public Integer getBankImportMappingId() {
         return BankImportMappingId;
     }
 
-    public int getBankAccountCurrencyId() {
+    public Integer getBankAccountCurrencyId() {
         return BankAccountCurrencyId;
     }
 
@@ -422,7 +422,7 @@ public final class SageOneCustomerReceipt {
         return BankAccountExchangeRate;
     }
 
-    public int getCustomerCurrencyId() {
+    public Integer getCustomerCurrencyId() {
         return CustomerCurrencyId;
     }
 
@@ -438,40 +438,15 @@ public final class SageOneCustomerReceipt {
         return Created;
     }
 
-    @Override
-    public String toString() {
-        return "SageOneCustomerReceipt{" +
-                "id=" + ID +
-                ", CustomerId=" + CustomerId +
-                ", Date=" + Date +
-                ", Payee='" + Payee + '\'' +
-                ", DocumentNumber='" + DocumentNumber + '\'' +
-                ", Reference='" + Reference + '\'' +
-                ", Description='" + Description + '\'' +
-                ", Comments='" + Comments + '\'' +
-                ", Total=" + Total +
-                ", Discount=" + Discount +
-                ", TotalUnallocated=" + TotalUnallocated +
-                ", Reconciled=" + Reconciled +
-                ", BankAccountId=" + BankAccountId +
-                ", SageOnePaymentMethod=" + SageOnePaymentMethod +
-                ", TaxPeriodId=" + TaxPeriodId +
-                ", Editable=" + Editable +
-                ", Accepted=" + Accepted +
-                ", Locked=" + Locked +
-                ", AnalysisCategoryId1=" + AnalysisCategoryId1 +
-                ", AnalysisCategoryId2=" + AnalysisCategoryId2 +
-                ", AnalysisCategoryId3=" + AnalysisCategoryId3 +
-                ", Printed=" + Printed +
-                ", BankUniqueIdentifier='" + BankUniqueIdentifier + '\'' +
-                ", ImportTypeId=" + ImportTypeId +
-                ", BankImportMappingId=" + BankImportMappingId +
-                ", BankAccountCurrencyId=" + BankAccountCurrencyId +
-                ", BankAccountExchangeRate=" + BankAccountExchangeRate +
-                ", CustomerCurrencyId=" + CustomerCurrencyId +
-                ", CustomerExchangeRate=" + CustomerExchangeRate +
-                ", Modified=" + Modified +
-                ", Created=" + Created +
-                '}';
+    public final SageOneCustomer getCustomer() {
+        return Customer;
+    }
+
+    public final SageOneSalesRepresentative getSalesRepresentative() {
+        return SalesRepresentative;
+    }
+
+    public final SageOneBankAccount getBankAccount() {
+        return BankAccount;
     }
 }

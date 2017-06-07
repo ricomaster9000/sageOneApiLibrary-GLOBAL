@@ -29,7 +29,7 @@ public final class SageOneSalesRepresentative extends SageOneMainEntity {
     //String length: inclusive between 0 and 50
     private String LastName;
     private String Name;
-    private boolean Active;
+    private Boolean Active;
     private String Email;
     //String length: inclusive between 0 and 30
     private String Mobile;
@@ -66,11 +66,11 @@ public final class SageOneSalesRepresentative extends SageOneMainEntity {
         Name = (this.isInitialized()) ? name: this.Name;
     }
 
-    public boolean isActive() {
+    public Boolean isActive() {
         return (this.isInitialized()) && this.Active;
     }
 
-    public void setActive(boolean active) {
+    public void setActive(Boolean active) {
         Active = (this.isInitialized()) ? active: this.Active;
     }
 

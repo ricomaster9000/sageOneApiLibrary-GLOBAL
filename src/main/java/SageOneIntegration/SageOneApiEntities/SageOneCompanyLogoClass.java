@@ -22,22 +22,22 @@ package SageOneIntegration.SageOneApiEntities;
  * Created by ricardo on 2017/05/30.
  */
 public final class SageOneCompanyLogoClass extends SageOneMainEntity {
-    private byte[] Image;
-    private byte[] Timestamp;
+    private Byte[] Image;
+    private Byte[] Timestamp;
 
-    public byte[] getImage() {
+    public Byte[] getImage() {
         return this.Image;
     }
 
-    public void setImage(final byte[] Image) {
+    public void setImage(final Byte[] Image) {
         this.Image = Image;
     }
 
-    public byte[] getTimestamp() {
+    public Byte[] getTimestamp() {
         return this.Timestamp;
     }
 
-    public void setTimestamp(final byte[] Timestamp) {
+    public void setTimestamp(final Byte[] Timestamp) {
         this.Timestamp = Timestamp;
     }
 }

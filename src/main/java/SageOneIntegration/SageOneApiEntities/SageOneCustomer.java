@@ -47,7 +47,7 @@ public final class SageOneCustomer {
    private final String Email;
    //String length: inclusive between 0 and 100
    private final String WebAddress;
-   private final boolean Active;
+   private final Boolean Active;
    private final double Balance;
    private final double CreditLimit;
    //Gets or sets the communication method. Optional. None = 0, Print = 1, Email = 2, Print and Email = 3
@@ -64,10 +64,10 @@ public final class SageOneCustomer {
    private final String DeliveryAddress04;
    private final String DeliveryAddress05;
    //----------------------------------------------
-   private final boolean AutoAllocateToOldestInvoice;
-   private final boolean EnableCustomerZone;
+   private final Boolean AutoAllocateToOldestInvoice;
+   private final Boolean EnableCustomerZone;
    private final UUID CustomerZoneGuid;
-   private final boolean CashSale;
+   private final Boolean CashSale;
    //String length: inclusive between 0 and 100
    private final String TextField1;
    private final String TextField2;
@@ -76,22 +76,22 @@ public final class SageOneCustomer {
    private final double NumericField1;
    private final double NumericField2;
    private final double NumericField3;
-   private final boolean YesNoField1;
-   private final boolean YesNoField2;
-   private final boolean YesNoField3;
+   private final Boolean YesNoField1;
+   private final Boolean YesNoField2;
+   private final Boolean YesNoField3;
    private final Date DateField1;
    private final Date DateField2;
    private final Date DateField3;
    private final Integer DefaultPriceListId;
    private final SageOneAdditionalPriceList DefaultPriceList;
    private final String DefaultPriceListName;
-   private final boolean AcceptsElectronicInvoices;
+   private final Boolean AcceptsElectronicInvoices;
    private final Date Modified;
    private final Date Created;
    private final String BusinessRegistrationNumber;
    private final Date TaxStatusVerified;
    private final Integer CurrencyId;
-   private final boolean HasActivity;
+   private final Boolean HasActivity;
    private final double DefaultDiscountPercentage;
    private final Integer DefaultTaxTypeId;
    private final SageOneTaxType defaultSageOneTaxType;
@@ -173,7 +173,7 @@ public final class SageOneCustomer {
       private String Mobile;
       private String Email;
       private String WebAddress;
-      private boolean Active;
+      private Boolean Active;
       private double Balance;
       private double CreditLimit;
       private Integer CommunicationMethod;
@@ -187,32 +187,32 @@ public final class SageOneCustomer {
       private String DeliveryAddress03 = "";
       private String DeliveryAddress04 = "";
       private String DeliveryAddress05 = "";
-      private boolean AutoAllocateToOldestInvoice;
-      private boolean EnableCustomerZone;
+      private Boolean AutoAllocateToOldestInvoice;
+      private Boolean EnableCustomerZone;
       private UUID CustomerZoneGuid;
-      private boolean CashSale;
+      private Boolean CashSale;
       private String TextField1;
       private String TextField2;
       private String TextField3;
       private double NumericField1;
       private double NumericField2;
       private double NumericField3;
-      private boolean YesNoField1;
-      private boolean YesNoField2;
-      private boolean YesNoField3;
+      private Boolean YesNoField1;
+      private Boolean YesNoField2;
+      private Boolean YesNoField3;
       private Date DateField1;
       private Date DateField2;
       private Date DateField3;
       private Integer DefaultPriceListId;
       private SageOneAdditionalPriceList DefaultPriceList;
       private String DefaultPriceListName;
-      private boolean AcceptsElectronicInvoices;
+      private Boolean AcceptsElectronicInvoices;
       private Date Modified;
       private Date Created;
       private String BusinessRegistrationNumber;
       private Date TaxStatusVerified;
       private Integer CurrencyId;
-      private boolean HasActivity;
+      private Boolean HasActivity;
       private double DefaultDiscountPercentage;
       private Integer DefaultTaxTypeId;
       private SageOneTaxType defaultSageOneTaxType;
@@ -281,7 +281,7 @@ public final class SageOneCustomer {
          return this;
       }
 
-      public Builder withActive(final boolean val){
+      public Builder withActive(final Boolean val){
          Active = val;
          return this;
       }
@@ -351,12 +351,12 @@ public final class SageOneCustomer {
          return this;
       }
 
-      public Builder withAutoAllocateToOldestInvoice(final boolean val){
+      public Builder withAutoAllocateToOldestInvoice(final Boolean val){
          AutoAllocateToOldestInvoice = val;
          return this;
       }
 
-      public Builder withEnableCustomerZone(final boolean val){
+      public Builder withEnableCustomerZone(final Boolean val){
          EnableCustomerZone = val;
          return this;
       }
@@ -366,7 +366,7 @@ public final class SageOneCustomer {
          return this;
       }
 
-      public Builder withCashSale(final boolean val){
+      public Builder withCashSale(final Boolean val){
          CashSale = val;
          return this;
       }
@@ -401,17 +401,17 @@ public final class SageOneCustomer {
          return this;
       }
 
-      public Builder withYesNoField1(final boolean val){
+      public Builder withYesNoField1(final Boolean val){
          YesNoField1 = val;
          return this;
       }
 
-      public Builder withYesNoField2(final boolean val){
+      public Builder withYesNoField2(final Boolean val){
          YesNoField2 = val;
          return this;
       }
 
-      public Builder withYesNoField3(final boolean val){
+      public Builder withYesNoField3(final Boolean val){
          YesNoField3 = val;
          return this;
       }
@@ -446,7 +446,7 @@ public final class SageOneCustomer {
          return this;
       }
 
-      public Builder withAcceptsElectronicInvoices(final boolean val){
+      public Builder withAcceptsElectronicInvoices(final Boolean val){
          AcceptsElectronicInvoices = val;
          return this;
       }
@@ -477,7 +477,7 @@ public final class SageOneCustomer {
       }
 
 
-      public Builder withHasActivity(final boolean val){
+      public Builder withHasActivity(final Boolean val){
          HasActivity = val;
          return this;
       }
@@ -569,7 +569,7 @@ public final class SageOneCustomer {
       return WebAddress;
    }
 
-   public boolean isActive() {
+   public Boolean isActive() {
       return Active;
    }
 
@@ -625,11 +625,11 @@ public final class SageOneCustomer {
       return DeliveryAddress05;
    }
 
-   public boolean isAutoAllocateToOldestInvoice() {
+   public Boolean isAutoAllocateToOldestInvoice() {
       return AutoAllocateToOldestInvoice;
    }
 
-   public boolean isEnableCustomerZone() {
+   public Boolean isEnableCustomerZone() {
       return EnableCustomerZone;
    }
 
@@ -637,7 +637,7 @@ public final class SageOneCustomer {
       return CustomerZoneGuid;
    }
 
-   public boolean isCashSale() {
+   public Boolean isCashSale() {
       return CashSale;
    }
 
@@ -665,15 +665,15 @@ public final class SageOneCustomer {
       return NumericField3;
    }
 
-   public boolean isYesNoField1() {
+   public Boolean isYesNoField1() {
       return YesNoField1;
    }
 
-   public boolean isYesNoField2() {
+   public Boolean isYesNoField2() {
       return YesNoField2;
    }
 
-   public boolean isYesNoField3() {
+   public Boolean isYesNoField3() {
       return YesNoField3;
    }
 
@@ -701,7 +701,7 @@ public final class SageOneCustomer {
       return DefaultPriceListName;
    }
 
-   public boolean isAcceptsElectronicInvoices() {
+   public Boolean isAcceptsElectronicInvoices() {
       return AcceptsElectronicInvoices;
    }
 
@@ -725,7 +725,7 @@ public final class SageOneCustomer {
       return CurrencyId;
    }
 
-   public boolean isHasActivity() {
+   public Boolean isHasActivity() {
       return HasActivity;
    }
 
@@ -751,69 +751,5 @@ public final class SageOneCustomer {
 
    public String getCurrencySymbol() {
       return CurrencySymbol;
-   }
-
-   @Override
-   public String toString() {
-      return "SageOneCustomer{" +
-              "ID=" + ID +
-              ", Name='" + Name + '\'' +
-              ", Category=" + Category +
-              ", SalesRepresentativeId=" + SalesRepresentativeId +
-              ", SageOneSalesRepresentative=" + SageOneSalesRepresentative +
-              ", TaxReference='" + TaxReference + '\'' +
-              ", ContactName='" + ContactName + '\'' +
-              ", Telephone='" + Telephone + '\'' +
-              ", Fax='" + Fax + '\'' +
-              ", Mobile='" + Mobile + '\'' +
-              ", Email='" + Email + '\'' +
-              ", WebAddress='" + WebAddress + '\'' +
-              ", Active=" + Active +
-              ", Balance=" + Balance +
-              ", CreditLimit=" + CreditLimit +
-              ", CommunicationMethod=" + CommunicationMethod +
-              ", PostalAddress01='" + PostalAddress01 + '\'' +
-              ", PostalAddress02='" + PostalAddress02 + '\'' +
-              ", PostalAddress03='" + PostalAddress03 + '\'' +
-              ", PostalAddress04='" + PostalAddress04 + '\'' +
-              ", PostalAddress05='" + PostalAddress05 + '\'' +
-              ", DeliveryAddress01='" + DeliveryAddress01 + '\'' +
-              ", DeliveryAddress02='" + DeliveryAddress02 + '\'' +
-              ", DeliveryAddress03='" + DeliveryAddress03 + '\'' +
-              ", DeliveryAddress04='" + DeliveryAddress04 + '\'' +
-              ", DeliveryAddress05='" + DeliveryAddress05 + '\'' +
-              ", AutoAllocateToOldestInvoice=" + AutoAllocateToOldestInvoice +
-              ", EnableCustomerZone=" + EnableCustomerZone +
-              ", CustomerZoneGuid=" + CustomerZoneGuid +
-              ", CashSale=" + CashSale +
-              ", TextField1='" + TextField1 + '\'' +
-              ", TextField2='" + TextField2 + '\'' +
-              ", TextField3='" + TextField3 + '\'' +
-              ", NumericField1=" + NumericField1 +
-              ", NumericField2=" + NumericField2 +
-              ", NumericField3=" + NumericField3 +
-              ", YesNoField1=" + YesNoField1 +
-              ", YesNoField2=" + YesNoField2 +
-              ", YesNoField3=" + YesNoField3 +
-              ", DateField1=" + DateField1 +
-              ", DateField2=" + DateField2 +
-              ", DateField3=" + DateField3 +
-              ", DefaultPriceListId=" + DefaultPriceListId +
-              ", DefaultPriceList=" + DefaultPriceList +
-              ", DefaultPriceListName='" + DefaultPriceListName + '\'' +
-              ", AcceptsElectronicInvoices=" + AcceptsElectronicInvoices +
-              ", Modified=" + Modified +
-              ", Created=" + Created +
-              ", BusinessRegistrationNumber='" + BusinessRegistrationNumber + '\'' +
-              ", TaxStatusVerified=" + TaxStatusVerified +
-              ", CurrencyId=" + CurrencyId +
-              ", HasActivity=" + HasActivity +
-              ", DefaultDiscountPercentage=" + DefaultDiscountPercentage +
-              ", DefaultTaxTypeId=" + DefaultTaxTypeId +
-              ", defaultSageOneTaxType=" + defaultSageOneTaxType +
-              ", DueDateMethodId=" + DueDateMethodId +
-              ", DueDateMethodValue=" + DueDateMethodValue +
-              ", CurrencySymbol='" + CurrencySymbol + '\'' +
-              '}';
    }
 }

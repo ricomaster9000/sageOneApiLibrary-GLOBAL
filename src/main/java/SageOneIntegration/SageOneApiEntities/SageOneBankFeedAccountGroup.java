@@ -22,32 +22,30 @@ package SageOneIntegration.SageOneApiEntities;
  * Created by brent on 2017/05/31.
  */
 public final class SageOneBankFeedAccountGroup extends SageOneMainEntity {
-    private int BankFeedProviderId;
-    private int BankFeedProviderTypeId;
-    private String Description;
-    private String Identifier;
-    private boolean RequiresAdditionalAuthentication;
-    private int LastRefreshStatusId;
+    private Integer BankFeedProviderId;
+    private Integer BankFeedProviderTypeId;
+    private String  Description;
+    private String  Identifier;
+    private Boolean RequiresAdditionalAuthentication;
+    private Integer LastRefreshStatusId;
 
     public SageOneBankFeedAccountGroup(){
         this.setInitialized(true);
     }
 
-    public int getBankFeedProviderId() {
+    public Integer getBankFeedProviderId() {
         return BankFeedProviderId;
     }
 
-    public void setBankFeedProviderId(int bankFeedProviderId) {
+    public void setBankFeedProviderId(Integer bankFeedProviderId) {
         BankFeedProviderId = bankFeedProviderId;
     }
 
-    public int getBankFeedProviderTypeId() {
+    public Integer getBankFeedProviderTypeId() {
         return BankFeedProviderTypeId;
     }
 
-    public void setBankFeedProviderTypeId(int bankFeedProviderTypeId) {
-        BankFeedProviderTypeId = bankFeedProviderTypeId;
-    }
+    public void setBankFeedProviderTypeId(Integer bankFeedProviderTypeId) { BankFeedProviderTypeId = bankFeedProviderTypeId; }
 
     public String getDescription() {
         return Description;
@@ -65,19 +63,17 @@ public final class SageOneBankFeedAccountGroup extends SageOneMainEntity {
         Identifier = identifier;
     }
 
-    public boolean isRequiresAdditionalAuthentication() {
+    public Boolean isRequiresAdditionalAuthentication() {
         return RequiresAdditionalAuthentication;
     }
 
-    public void setRequiresAdditionalAuthentication(boolean requiresAdditionalAuthentication) {
-        RequiresAdditionalAuthentication = requiresAdditionalAuthentication;
-    }
+    public void setRequiresAdditionalAuthentication(boolean requiresAdditionalAuthentication) { RequiresAdditionalAuthentication = requiresAdditionalAuthentication; }
 
-    public int getLastRefreshStatusId() {
+    public Integer getLastRefreshStatusId() {
         return LastRefreshStatusId;
     }
 
-    public void setLastRefreshStatusId(int lastRefreshStatusId) {
+    public void setLastRefreshStatusId(Integer lastRefreshStatusId) {
         LastRefreshStatusId = lastRefreshStatusId;
     }
 }

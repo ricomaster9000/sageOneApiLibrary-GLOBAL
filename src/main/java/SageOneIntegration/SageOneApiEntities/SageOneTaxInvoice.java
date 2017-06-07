@@ -19,24 +19,33 @@
 package SageOneIntegration.SageOneApiEntities;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-
 import java.util.Date;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
 
-/**
- * Created by brent on 2017/05/31.
- */
-@JsonDeserialize(builder = SageOneSupplierReturn.Builder.class)
-public final class SageOneSupplierReturn {
+@JsonDeserialize(builder = SageOneTaxInvoice.Builder.class)
+public final class SageOneTaxInvoice {
     private final Integer ID;
+    private final Date DueDate;
     private final String FromDocument;
+    private final Integer FromDocumentId;
+    private final Integer FromDocumentTypeId;
+    private final Boolean AllowOnlinePayment;
+    private final Boolean Paid;
+    private final String Status;
     private final Boolean Locked;
-    private final Integer SupplierId;
-    private final String SupplierName;
-    private final SageOneSupplier Supplier;
-    private final java.util.Date Modified;
-    private final Date Created;
+    private final Integer CustomerId;
+    private final String CustomerName;
+    private final SageOneCustomer Customer;
+    private final Integer SalesRepresentativeId;
+    private final SageOneSalesRepresentative SageOneSalesRepresentative;
     private final Integer StatusId;
+    private final Date Modified;
+    private final Date Created;
     private final Date Date;
+    private final Integer Customer_CurrencyId;
+    private final double Customer_ExchangeRate;
     private final Boolean Inclusive;
     private final double DiscountPercentage;
     //String length: inclusive between 0 and 30
@@ -52,6 +61,7 @@ public final class SageOneSupplierReturn {
     private final double Tax;
     private final double Rounding;
     private final double Total;
+    //Data type: Currency
     private final double AmountDue;
     //String length: inclusive between 0 and 100
     private final String PostalAddress01;
@@ -64,8 +74,8 @@ public final class SageOneSupplierReturn {
     private final String DeliveryAddress03;
     private final String DeliveryAddress04;
     private final String DeliveryAddress05;
+    //--------------------------------------
     private final Boolean Printed;
-    //----------------------------------------
     private final Integer CurrencyId;
     private final double ExchangeRate;
     private final Integer TaxPeriodId;
@@ -78,16 +88,26 @@ public final class SageOneSupplierReturn {
     private final String ExternalReference;
     private final SageOneCommercialDocumentLine[] Lines;
 
-    public SageOneSupplierReturn(Builder builder) {
+    public SageOneTaxInvoice(Builder builder) {
         ID = builder.ID;
+        DueDate = builder.DueDate;
         FromDocument = builder.FromDocument;
+        FromDocumentId = builder.FromDocumentId;
+        FromDocumentTypeId = builder.FromDocumentTypeId;
+        AllowOnlinePayment = builder.AllowOnlinePayment;
+        Paid = builder.Paid;
+        Status = builder.Status;
+        Customer_CurrencyId = builder.Customer_CurrencyId;
+        Customer_ExchangeRate = builder.Customer_ExchangeRate;
         Locked = builder.Locked;
-        SupplierId = builder.SupplierId;
-        SupplierName = builder.SupplierName;
-        Supplier = builder.Supplier;
+        CustomerId = builder.CustomerId;
+        CustomerName = builder.CustomerName;
+        Customer = builder.Customer;
+        SalesRepresentativeId = builder.SalesRepresentativeId;
+        SageOneSalesRepresentative = builder.SageOneSalesRepresentative;
+        StatusId = builder.StatusId;
         Modified = builder.Modified;
         Created = builder.Created;
-        StatusId = builder.StatusId;
         Date = builder.Date;
         Inclusive = builder.Inclusive;
         DiscountPercentage = builder.DiscountPercentage;
@@ -126,14 +146,24 @@ public final class SageOneSupplierReturn {
 
     public static class Builder {
         private Integer ID;
+        private Date DueDate;
         private String FromDocument;
+        private Integer FromDocumentId;
+        private Integer FromDocumentTypeId;
+        private Boolean AllowOnlinePayment;
+        private Boolean Paid;
+        private String Status;
+        private Integer Customer_CurrencyId;
+        private double Customer_ExchangeRate;
         private Boolean Locked;
-        private Integer SupplierId;
-        private String SupplierName;
-        private SageOneSupplier Supplier;
-        private java.util.Date Modified;
-        private Date Created;
+        private Integer CustomerId;
+        private String CustomerName;
+        private SageOneCustomer Customer;
+        private Integer SalesRepresentativeId;
+        private SageOneSalesRepresentative SageOneSalesRepresentative;
         private Integer StatusId;
+        private Date Modified;
+        private Date Created;
         private Date Date;
         private Boolean Inclusive;
         private double DiscountPercentage;
@@ -147,16 +177,16 @@ public final class SageOneSupplierReturn {
         private double Rounding;
         private double Total;
         private double AmountDue;
-        private String PostalAddress01;
-        private String PostalAddress02;
-        private String PostalAddress03;
-        private String PostalAddress04;
-        private String PostalAddress05;
-        private String DeliveryAddress01;
-        private String DeliveryAddress02;
-        private String DeliveryAddress03;
-        private String DeliveryAddress04;
-        private String DeliveryAddress05;
+        private String PostalAddress01 = "";
+        private String PostalAddress02 = "";
+        private String PostalAddress03 = "";
+        private String PostalAddress04 = "";
+        private String PostalAddress05 = "";
+        private String DeliveryAddress01 = "";
+        private String DeliveryAddress02 = "";
+        private String DeliveryAddress03 = "";
+        private String DeliveryAddress04 = "";
+        private String DeliveryAddress05 = "";
         private Boolean Printed;
         private Integer CurrencyId;
         private double ExchangeRate;
@@ -174,28 +204,83 @@ public final class SageOneSupplierReturn {
             return this;
         }
 
+        public Builder withDueDate(final Date val) {
+            DueDate = val;
+            return this;
+        }
+
         public Builder withFromDocument(final String val){
             FromDocument = val;
             return this;
         }
 
-        public Builder withLocked(final boolean val){
+        public Builder withFromDocumentId(final Integer val) {
+            FromDocumentId = val;
+            return this;
+        }
+
+        public final Builder withFromDocumentTypeId(final Integer val) {
+            FromDocumentTypeId = val;
+            return this;
+        }
+
+        public final Builder withAllowOnlinePayment(final Boolean val) {
+            AllowOnlinePayment = val;
+            return this;
+        }
+
+        public final Builder withPaid(final Boolean val) {
+            Paid = val;
+            return this;
+        }
+
+        public final Builder withStatus(final String val) {
+            Status = val;
+            return this;
+        }
+
+        public final Builder withCustomer_CurrencyId(final Integer val) {
+            Customer_CurrencyId = val;
+            return this;
+        }
+
+        public final Builder withCustomer_ExchangeRate(final double val) {
+            Customer_ExchangeRate = val;
+            return this;
+        }
+
+        public Builder withLocked(final Boolean val){
             Locked = val;
             return this;
         }
 
-        public Builder withSupplierId(final Integer val){
-            SupplierId = val;
+        public Builder withCustomerId(final Integer val){
+            CustomerId = val;
             return this;
         }
 
-        public Builder withSupplierName(final String val){
-            SupplierName = val;
+        public Builder withCustomerName(final String val){
+            CustomerName = val;
             return this;
         }
 
-        public Builder withSupplier(final SageOneSupplier val){
-            Supplier = val;
+        public Builder withCustomer(final SageOneCustomer val){
+            Customer = val;
+            return this;
+        }
+
+        public Builder withSalesRepresentativeId(final Integer val){
+            SalesRepresentativeId = val;
+            return this;
+        }
+
+        public Builder withSalesRepresentative(final SageOneSalesRepresentative val){
+            SageOneSalesRepresentative = val;
+            return this;
+        }
+
+        public Builder withStatusId(final Integer val){
+            StatusId = val;
             return this;
         }
 
@@ -204,14 +289,8 @@ public final class SageOneSupplierReturn {
             return this;
         }
 
-
         public Builder withCreated(final Date val){
             Created = val;
-            return this;
-        }
-
-        public Builder withStatusId(final Integer val){
-            StatusId = val;
             return this;
         }
 
@@ -269,6 +348,7 @@ public final class SageOneSupplierReturn {
             Rounding = val;
             return this;
         }
+
 
         public Builder withTotal(final double val){
             Total = val;
@@ -385,8 +465,8 @@ public final class SageOneSupplierReturn {
             return this;
         }
 
-        public SageOneSupplierReturn build(){
-            return new SageOneSupplierReturn(this);
+        public SageOneTaxInvoice build(){
+            return new SageOneTaxInvoice(this);
         }
     }
 
@@ -394,24 +474,52 @@ public final class SageOneSupplierReturn {
         return ID;
     }
 
+    public Date getDueDate() { return DueDate; }
+
     public String getFromDocument() {
         return FromDocument;
     }
 
-    public Boolean isLocked() {
+    public final Integer getFromDocumentId() { return FromDocumentId;}
+
+    public final Integer getFromDocumentTypeId() { return FromDocumentTypeId; }
+
+    public final Boolean getAllowOnlinePayment() { return AllowOnlinePayment; }
+
+    public final Boolean getPaid() { return Paid; }
+
+    public final String getStatus() { return Status; }
+
+    public final Integer getCustomer_CurrencyId() { return Customer_CurrencyId; }
+
+    public final double getCustomer_ExchangeRate() { return Customer_ExchangeRate; }
+
+    public Boolean getLocked() {
         return Locked;
     }
 
-    public Integer getSupplierId() {
-        return SupplierId;
+    public Integer getCustomerId() {
+        return CustomerId;
     }
 
-    public String getSupplierName() {
-        return SupplierName;
+    public String getCustomerName() {
+        return CustomerName;
     }
 
-    public SageOneSupplier getSupplier() {
-        return Supplier;
+    public SageOneCustomer getCustomer() {
+        return Customer;
+    }
+
+    public Integer getSalesRepresentativeId() {
+        return SalesRepresentativeId;
+    }
+
+    public SageOneSalesRepresentative getSageOneSalesRepresentative() {
+        return SageOneSalesRepresentative;
+    }
+
+    public Integer getStatusId() {
+        return StatusId;
     }
 
     public java.util.Date getModified() {
@@ -422,15 +530,11 @@ public final class SageOneSupplierReturn {
         return Created;
     }
 
-    public Integer getStatusId() {
-        return StatusId;
-    }
-
     public java.util.Date getDate() {
         return Date;
     }
 
-    public Boolean isInclusive() {
+    public Boolean getInclusive() {
         return Inclusive;
     }
 
@@ -518,9 +622,7 @@ public final class SageOneSupplierReturn {
         return DeliveryAddress05;
     }
 
-    public Boolean getPrinted() {
-        return Printed;
-    }
+    public Boolean getPrinted() { return Printed; }
 
     public Integer getCurrencyId() {
         return CurrencyId;
@@ -534,19 +636,19 @@ public final class SageOneSupplierReturn {
         return TaxPeriodId;
     }
 
-    public Boolean isEditable() {
+    public Boolean getEditable() {
         return Editable;
     }
 
-    public Boolean isHasAttachments() {
+    public Boolean getHasAttachments() {
         return HasAttachments;
     }
 
-    public Boolean isHasNotes() {
+    public Boolean getHasNotes() {
         return HasNotes;
     }
 
-    public Boolean isHasAnticipatedDate() {
+    public Boolean getHasAnticipatedDate() {
         return HasAnticipatedDate;
     }
 
@@ -560,53 +662,5 @@ public final class SageOneSupplierReturn {
 
     public SageOneCommercialDocumentLine[] getLines() {
         return Lines;
-    }
-
-    @Override
-    public String toString() {
-        return "SupplierReturn{" +
-                "id=" + ID +
-                ", FromDocument='" + FromDocument + '\'' +
-                ", Locked=" + Locked +
-                ", SupplierId=" + SupplierId +
-                ", SupplierName='" + SupplierName + '\'' +
-                ", Supplier=" + Supplier +
-                ", Modified=" + Modified +
-                ", Created=" + Created +
-                ", StatusId=" + StatusId +
-                ", Date=" + Date +
-                ", Inclusive=" + Inclusive +
-                ", DiscountPercentage=" + DiscountPercentage +
-                ", TaxReference='" + TaxReference + '\'' +
-                ", DocumentNumber='" + DocumentNumber + '\'' +
-                ", Reference='" + Reference + '\'' +
-                ", Message='" + Message + '\'' +
-                ", Discount=" + Discount +
-                ", Exclusive=" + Exclusive +
-                ", Tax=" + Tax +
-                ", Rounding=" + Rounding +
-                ", Total=" + Total +
-                ", AmountDue=" + AmountDue +
-                ", PostalAddress01='" + PostalAddress01 + '\'' +
-                ", PostalAddress02='" + PostalAddress02 + '\'' +
-                ", PostalAddress03='" + PostalAddress03 + '\'' +
-                ", PostalAddress04='" + PostalAddress04 + '\'' +
-                ", PostalAddress05='" + PostalAddress05 + '\'' +
-                ", DeliveryAddress01='" + DeliveryAddress01 + '\'' +
-                ", DeliveryAddress02='" + DeliveryAddress02 + '\'' +
-                ", DeliveryAddress03='" + DeliveryAddress03 + '\'' +
-                ", DeliveryAddress04='" + DeliveryAddress04 + '\'' +
-                ", DeliveryAddress05='" + DeliveryAddress05 + '\'' +
-                ", CurrencyId=" + CurrencyId +
-                ", ExchangeRate=" + ExchangeRate +
-                ", TaxPeriodId=" + TaxPeriodId +
-                ", Editable=" + Editable +
-                ", HasAttachments=" + HasAttachments +
-                ", HasNotes=" + HasNotes +
-                ", HasAnticipatedDate=" + HasAnticipatedDate +
-                ", AnticipatedDate=" + AnticipatedDate +
-                ", ExternalReference='" + ExternalReference + '\'' +
-                ", Lines=" + Lines +
-                '}';
     }
 }

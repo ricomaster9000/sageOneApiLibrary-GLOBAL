@@ -25,7 +25,7 @@ import java.util.Date;
 public final class SageOneCustomerReturn {
     private final Integer ID;
     private final String FromDocument;
-    private final boolean Locked;
+    private final Boolean Locked;
     private final Integer CustomerId;
     private final String CustomerName;
     private final SageOneCustomer Customer;
@@ -35,7 +35,7 @@ public final class SageOneCustomerReturn {
     private final Date Modified;
     private final Date Created;
     private final Date Date;
-    private final boolean Inclusive;
+    private final Boolean Inclusive;
     private final double DiscountPercentage;
     //String length: inclusive between 0 and 30
     private final String TaxReference;
@@ -64,17 +64,18 @@ public final class SageOneCustomerReturn {
     private final String DeliveryAddress04;
     private final String DeliveryAddress05;
     //--------------------------------------
+    private final Boolean Printed;
     private final Integer CurrencyId;
     private final double ExchangeRate;
     private final Integer TaxPeriodId;
-    private final boolean Editable;
-    private final boolean HasAttachments;
-    private final boolean HasNotes;
-    private final boolean HasAnticipatedDate;
+    private final Boolean Editable;
+    private final Boolean HasAttachments;
+    private final Boolean HasNotes;
+    private final Boolean HasAnticipatedDate;
     private final Date AnticipatedDate;
     //String length: inclusive between 0 and 100
     private final String ExternalReference;
-    private final SageOneCommercialDocumentLine Lines;
+    private final SageOneCommercialDocumentLine[] Lines;
 
     public SageOneCustomerReturn(Builder builder) {
         ID = builder.ID;
@@ -111,6 +112,7 @@ public final class SageOneCustomerReturn {
         DeliveryAddress03 = builder.DeliveryAddress03;
         DeliveryAddress04 = builder.DeliveryAddress04;
         DeliveryAddress05 = builder.DeliveryAddress05;
+        Printed = builder.Printed;
         CurrencyId = builder.CurrencyId;
         ExchangeRate = builder.ExchangeRate;
         TaxPeriodId = builder.TaxPeriodId;
@@ -126,7 +128,7 @@ public final class SageOneCustomerReturn {
     public static class Builder {
         private Integer ID;
         private String FromDocument;
-        private boolean Locked;
+        private Boolean Locked;
         private Integer CustomerId;
         private String CustomerName;
         private SageOneCustomer Customer;
@@ -136,7 +138,7 @@ public final class SageOneCustomerReturn {
         private Date Modified;
         private Date Created;
         private Date Date;
-        private boolean Inclusive;
+        private Boolean Inclusive;
         private double DiscountPercentage;
         private String TaxReference;
         private String DocumentNumber;
@@ -158,16 +160,17 @@ public final class SageOneCustomerReturn {
         private String DeliveryAddress03 = "";
         private String DeliveryAddress04 = "";
         private String DeliveryAddress05 = "";
+        private Boolean Printed;
         private Integer CurrencyId;
         private double ExchangeRate;
         private Integer TaxPeriodId;
-        private boolean Editable;
-        private boolean HasAttachments;
-        private boolean HasNotes;
-        private boolean HasAnticipatedDate;
+        private Boolean Editable;
+        private Boolean HasAttachments;
+        private Boolean HasNotes;
+        private Boolean HasAnticipatedDate;
         private Date AnticipatedDate;
         private String ExternalReference;
-        private SageOneCommercialDocumentLine Lines;
+        private SageOneCommercialDocumentLine[] Lines;
 
         public Builder withId(final Integer val){
             ID = val;
@@ -179,7 +182,7 @@ public final class SageOneCustomerReturn {
             return this;
         }
 
-        public Builder withLocked(final boolean val){
+        public Builder withLocked(final Boolean val){
             Locked = val;
             return this;
         }
@@ -229,7 +232,7 @@ public final class SageOneCustomerReturn {
             return this;
         }
 
-        public Builder withInclusive(final boolean val){
+        public Builder withInclusive(final Boolean val){
             Inclusive = val;
             return this;
         }
@@ -340,6 +343,11 @@ public final class SageOneCustomerReturn {
             return this;
         }
 
+        public Builder withPrinted(final Boolean Printed) {
+            this.Printed = Printed;
+            return this;
+        }
+
         public Builder withCurrencyId(final Integer val){
             CurrencyId = val;
             return this;
@@ -355,22 +363,22 @@ public final class SageOneCustomerReturn {
             return this;
         }
 
-        public Builder withEditable(final boolean val){
+        public Builder withEditable(final Boolean val){
             Editable = val;
             return this;
         }
 
-        public Builder withHasAttachments(final boolean val){
+        public Builder withHasAttachments(final Boolean val){
             HasAttachments = val;
             return this;
         }
 
-        public Builder withHasNotes(final boolean val){
+        public Builder withHasNotes(final Boolean val){
             HasNotes = val;
             return this;
         }
 
-        public Builder withHasAnticipatedDate(final boolean val){
+        public Builder withHasAnticipatedDate(final Boolean val){
             HasAnticipatedDate = val;
             return this;
         }
@@ -385,7 +393,7 @@ public final class SageOneCustomerReturn {
             return this;
         }
 
-        public Builder withLines(final SageOneCommercialDocumentLine val){
+        public Builder withLines(final SageOneCommercialDocumentLine[] val){
             Lines = val;
             return this;
         }
@@ -403,7 +411,7 @@ public final class SageOneCustomerReturn {
         return FromDocument;
     }
 
-    public boolean isLocked() {
+    public Boolean getLocked() {
         return Locked;
     }
 
@@ -443,7 +451,7 @@ public final class SageOneCustomerReturn {
         return Date;
     }
 
-    public boolean isInclusive() {
+    public Boolean getInclusive() {
         return Inclusive;
     }
 
@@ -531,6 +539,8 @@ public final class SageOneCustomerReturn {
         return DeliveryAddress05;
     }
 
+    public Boolean getPrinted() { return Printed; }
+
     public Integer getCurrencyId() {
         return CurrencyId;
     }
@@ -543,19 +553,19 @@ public final class SageOneCustomerReturn {
         return TaxPeriodId;
     }
 
-    public boolean isEditable() {
+    public Boolean getEditable() {
         return Editable;
     }
 
-    public boolean isHasAttachments() {
+    public Boolean getHasAttachments() {
         return HasAttachments;
     }
 
-    public boolean isHasNotes() {
+    public Boolean getHasNotes() {
         return HasNotes;
     }
 
-    public boolean isHasAnticipatedDate() {
+    public Boolean getHasAnticipatedDate() {
         return HasAnticipatedDate;
     }
 
@@ -567,57 +577,7 @@ public final class SageOneCustomerReturn {
         return ExternalReference;
     }
 
-    public SageOneCommercialDocumentLine getLines() {
+    public SageOneCommercialDocumentLine[] getLines() {
         return Lines;
-    }
-
-    @Override
-    public String toString() {
-        return "CustomerReturn{" +
-                "id=" + ID +
-                ", FromDocument='" + FromDocument + '\'' +
-                ", Locked=" + Locked +
-                ", CustomerId=" + CustomerId +
-                ", CustomerName='" + CustomerName + '\'' +
-                ", SageOneCustomer=" + Customer +
-                ", SalesRepresentativeId=" + SalesRepresentativeId +
-                ", SageOneSalesRepresentative=" + SageOneSalesRepresentative +
-                ", StatusId=" + StatusId +
-                ", Modified=" + Modified +
-                ", Created=" + Created +
-                ", Date=" + Date +
-                ", Inclusive=" + Inclusive +
-                ", DiscountPercentage=" + DiscountPercentage +
-                ", TaxReference='" + TaxReference + '\'' +
-                ", DocumentNumber='" + DocumentNumber + '\'' +
-                ", Reference='" + Reference + '\'' +
-                ", Message='" + Message + '\'' +
-                ", Discount=" + Discount +
-                ", Exclusive=" + Exclusive +
-                ", Tax=" + Tax +
-                ", Rounding=" + Rounding +
-                ", Total=" + Total +
-                ", AmountDue=" + AmountDue +
-                ", PostalAddress01='" + PostalAddress01 + '\'' +
-                ", PostalAddress02='" + PostalAddress02 + '\'' +
-                ", PostalAddress03='" + PostalAddress03 + '\'' +
-                ", PostalAddress04='" + PostalAddress04 + '\'' +
-                ", PostalAddress05='" + PostalAddress05 + '\'' +
-                ", DeliveryAddress01='" + DeliveryAddress01 + '\'' +
-                ", DeliveryAddress02='" + DeliveryAddress02 + '\'' +
-                ", DeliveryAddress03='" + DeliveryAddress03 + '\'' +
-                ", DeliveryAddress04='" + DeliveryAddress04 + '\'' +
-                ", DeliveryAddress05='" + DeliveryAddress05 + '\'' +
-                ", CurrencyId=" + CurrencyId +
-                ", ExchangeRate=" + ExchangeRate +
-                ", TaxPeriodId=" + TaxPeriodId +
-                ", Editable=" + Editable +
-                ", HasAttachments=" + HasAttachments +
-                ", HasNotes=" + HasNotes +
-                ", HasAnticipatedDate=" + HasAnticipatedDate +
-                ", AnticipatedDate=" + AnticipatedDate +
-                ", ExternalReference='" + ExternalReference + '\'' +
-                ", Lines=" + Lines +
-                '}';
     }
 }

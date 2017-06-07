@@ -18,6 +18,7 @@
  **/
 package SageOneIntegration.SageOneApiEntities;
 
+import SageOneIntegration.SageOneApiEntities.SageEnum.SageOneCommercialDocumentLineType;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 /**
@@ -27,11 +28,11 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 public final class SageOneCommercialDocumentLine {
     //Gets or sets the selection identifier. This is the selected Item Id or Account Id.
     private final Integer ID;
-    private final int SelectionId;
-    private final int TaxTypeId;
+    private final Integer SelectionId;
+    private final Integer TaxTypeId;
     //String length: inclusive between 0 and 100
     private final String Description;
-    private final SageOneCommercialDocumentLine LineType;
+    private final SageOneCommercialDocumentLineType LineType;
     private final double Quantity;
     private final double UnitPriceExclusive;
     private final double Unit;
@@ -44,12 +45,12 @@ public final class SageOneCommercialDocumentLine {
     private final double Total;
     private final String Comments;
     //Gets or sets the Analysis Category identifier. This needs to be a valid AnalysisCategoryId.
-    private final int AnalysisCategoryId1;
-    private final int AnalysisCategoryId2;
-    private final int AnalysisCategoryId3;
+    private final Integer AnalysisCategoryId1;
+    private final Integer AnalysisCategoryId2;
+    private final Integer AnalysisCategoryId3;
     //----------------------------------
     private final String $TrackingCode;
-    private final int CurrencyId;
+    private final Integer CurrencyId;
     //Gets the UnitCost identifier. This is the Unit Cost of the Item at Time of Sale (only available on TaxInvoices for Item Lines).
     private final double UnitCost;
 
@@ -80,10 +81,10 @@ public final class SageOneCommercialDocumentLine {
 
     public static class Builder {
         private Integer ID;
-        private int SelectionId;
-        private int TaxTypeId;
+        private Integer SelectionId;
+        private Integer TaxTypeId;
         private String Description;
-        private SageOneCommercialDocumentLine LineType;
+        private SageOneCommercialDocumentLineType LineType;
         private double Quantity;
         private double UnitPriceExclusive;
         private double Unit;
@@ -95,24 +96,24 @@ public final class SageOneCommercialDocumentLine {
         private double Tax;
         private double Total;
         private String Comments;
-        private int AnalysisCategoryId1;
-        private int AnalysisCategoryId2;
-        private int AnalysisCategoryId3;
+        private Integer AnalysisCategoryId1;
+        private Integer AnalysisCategoryId2;
+        private Integer AnalysisCategoryId3;
         private String $TrackingCode;
-        private int CurrencyId;
+        private Integer CurrencyId;
         private double UnitCost;
 
-        public Builder withId(final int val){
+        public Builder withId(final Integer val){
             ID = val;
             return this;
         }
 
-        public Builder withSelectionId(final int val){
+        public Builder withSelectionId(final Integer val){
             SelectionId = val;
             return this;
         }
 
-        public Builder withTaxTypeId(final int val){
+        public Builder withTaxTypeId(final Integer val){
             TaxTypeId = val;
             return this;
         }
@@ -122,7 +123,7 @@ public final class SageOneCommercialDocumentLine {
             return this;
         }
 
-        public Builder withLineType(final SageOneCommercialDocumentLine val){
+        public Builder withLineType(final SageOneCommercialDocumentLineType val){
             LineType = val;
             return this;
         }
@@ -181,17 +182,17 @@ public final class SageOneCommercialDocumentLine {
             Comments = val;
             return this;
         }
-        public Builder withAnalysisCategoryId1(final int val){
+        public Builder withAnalysisCategoryId1(final Integer val){
             AnalysisCategoryId1 = val;
             return this;
         }
 
-        public Builder withAnalysisCategoryId2(final int val){
+        public Builder withAnalysisCategoryId2(final Integer val){
             AnalysisCategoryId2 = val;
             return this;
         }
 
-        public Builder withAnalysisCategoryId3(final int val){
+        public Builder withAnalysisCategoryId3(final Integer val){
             AnalysisCategoryId3 = val;
             return this;
         }
@@ -201,7 +202,7 @@ public final class SageOneCommercialDocumentLine {
             return this;
         }
 
-        public Builder withCurrencyId(final int val){
+        public Builder withCurrencyId(final Integer val){
             CurrencyId = val;
             return this;
         }
@@ -220,11 +221,11 @@ public final class SageOneCommercialDocumentLine {
         return ID;
     }
 
-    public int getSelectionId() {
+    public Integer getSelectionId() {
         return SelectionId;
     }
 
-    public int getTaxTypeId() {
+    public Integer getTaxTypeId() {
         return TaxTypeId;
     }
 
@@ -232,7 +233,7 @@ public final class SageOneCommercialDocumentLine {
         return Description;
     }
 
-    public SageOneCommercialDocumentLine getLineType() {
+    public SageOneCommercialDocumentLineType getLineType() {
         return LineType;
     }
 
@@ -280,15 +281,15 @@ public final class SageOneCommercialDocumentLine {
         return Comments;
     }
 
-    public int getAnalysisCategoryId1() {
+    public Integer getAnalysisCategoryId1() {
         return AnalysisCategoryId1;
     }
 
-    public int getAnalysisCategoryId2() {
+    public Integer getAnalysisCategoryId2() {
         return AnalysisCategoryId2;
     }
 
-    public int getAnalysisCategoryId3() {
+    public Integer getAnalysisCategoryId3() {
         return AnalysisCategoryId3;
     }
 
@@ -296,39 +297,11 @@ public final class SageOneCommercialDocumentLine {
         return $TrackingCode;
     }
 
-    public int getCurrencyId() {
+    public Integer getCurrencyId() {
         return CurrencyId;
     }
 
     public double getUnitCost() {
         return UnitCost;
-    }
-
-    @Override
-    public String toString() {
-        return "SageOneCommercialDocumentLine{" +
-                "id=" + ID +
-                ", SelectionId=" + SelectionId +
-                ", TaxTypeId=" + TaxTypeId +
-                ", Description='" + Description + '\'' +
-                ", LineType=" + LineType +
-                ", Quantity=" + Quantity +
-                ", UnitPriceExclusive=" + UnitPriceExclusive +
-                ", Unit=" + Unit +
-                ", UnitPriceInclusive=" + UnitPriceInclusive +
-                ", TaxPercentage=" + TaxPercentage +
-                ", DiscountPercentage=" + DiscountPercentage +
-                ", Exclusive=" + Exclusive +
-                ", Discount=" + Discount +
-                ", Tax=" + Tax +
-                ", Total=" + Total +
-                ", Comments='" + Comments + '\'' +
-                ", AnalysisCategoryId1=" + AnalysisCategoryId1 +
-                ", AnalysisCategoryId2=" + AnalysisCategoryId2 +
-                ", AnalysisCategoryId3=" + AnalysisCategoryId3 +
-                ", $TrackingCode='" + $TrackingCode + '\'' +
-                ", CurrencyId=" + CurrencyId +
-                ", UnitCost=" + UnitCost +
-                '}';
     }
 }

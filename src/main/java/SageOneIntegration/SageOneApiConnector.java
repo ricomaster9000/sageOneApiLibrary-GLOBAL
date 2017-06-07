@@ -412,6 +412,8 @@ public final class SageOneApiConnector {
 				SageOneGrabbedResultsClass responseResultObject =
 				objectMapper.readValue(jsonResponse.getResponseJson(), SageOneGrabbedResultsClass.class);
 
+				System.out.println(responseResultObject.getResults().length);
+
 				for(Object object : responseResultObject.getResults()) {
 					objectsBeforeConversion.add(objectMapper.convertValue(object, ObjectClassToMapTo));
 				}
@@ -453,6 +455,7 @@ public final class SageOneApiConnector {
 					"apikey=" + encodeCurlyBrackets(API_KEY) + "&companyid=" + companyId;
 
 			SageOneResponseJsonObject jsonResponse = ConnectionCoreCodeReturnResponseJson(companyId, endpoint, "POST", jsonObject);
+
 			sageOneResponseObject = (jsonResponse.getSuccess())
 					? new SageOneResponseObject(true, jsonResponse.getResponseMessage(), objectMapper.readValue(jsonResponse.getResponseJson(), classToMapTo)) :
 					new SageOneResponseObject(false, "Failed to save data on SageOne account, the request failed");

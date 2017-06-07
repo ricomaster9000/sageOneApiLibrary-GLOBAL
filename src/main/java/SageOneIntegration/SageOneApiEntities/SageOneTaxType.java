@@ -26,9 +26,9 @@ import java.util.Date;
 public final class SageOneTaxType extends SageOneMainEntity {
     private String Name;
     private double Percentage;
-    private boolean IsDefault;
-    private boolean HasActivity;
-    private boolean IsManualTax;
+    private Boolean IsDefault;
+    private Boolean HasActivity;
+    private Boolean IsManualTax;
     private Date Created;
     private Date Modified;
 
@@ -52,27 +52,27 @@ public final class SageOneTaxType extends SageOneMainEntity {
         Percentage = percentage;
     }
 
-    public boolean isDefault() {
+    public Boolean isDefault() {
         return IsDefault;
     }
 
-    public void setDefault(boolean aDefault) {
+    public void setDefault(Boolean aDefault) {
         IsDefault = aDefault;
     }
 
-    public boolean isHasActivity() {
+    public Boolean isHasActivity() {
         return HasActivity;
     }
 
-    public void setHasActivity(boolean hasActivity) {
+    public void setHasActivity(Boolean hasActivity) {
         HasActivity = hasActivity;
     }
 
-    public boolean isManualTax() {
+    public Boolean isManualTax() {
         return IsManualTax;
     }
 
-    public void setManualTax(boolean manualTax) {
+    public void setManualTax(Boolean manualTax) {
         IsManualTax = manualTax;
     }
 

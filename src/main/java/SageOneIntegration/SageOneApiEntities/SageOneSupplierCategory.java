@@ -18,8 +18,8 @@ public final class SageOneSupplierCategory extends SageOneMainEntity {
         return Description;
     }
 
-    public void setDescription(String description) {
-        Description = description;
+    public void setDescription(String Description) {
+        this.Description = Description;
     }
 
     public Date getModified() {

@@ -43,23 +43,23 @@ public final class SageOneCompany {
     private Integer RoundingValue;
     private SageOneTaxSystemClass TaxSystem;
     private SageOneRoundingTypeClass RoundingType;
-    private boolean AgeMonthly;
-    private boolean DisplayInactiveItems;
-    private boolean WarnWhenItemCostIsZero;
-    private boolean DoNotAllowProcessingIntoNegativeQuantities;
-    private boolean WarnWhenItemQuantityIsZero;
-    private boolean WarnWhenItemSellingBelowCost;
+    private Boolean AgeMonthly;
+    private Boolean DisplayInactiveItems;
+    private Boolean WarnWhenItemCostIsZero;
+    private Boolean DoNotAllowProcessingIntoNegativeQuantities;
+    private Boolean WarnWhenItemQuantityIsZero;
+    private Boolean WarnWhenItemSellingBelowCost;
     private Integer CountryId;
     private Integer CompanyEntityTypeId;
     private Date TakeOnBalanceDate;
-    private boolean EnableCustomerZone;
-    private boolean EnableAutomaticBankFeedRefresh;
+    private Boolean EnableCustomerZone;
+    private Boolean EnableAutomaticBankFeedRefresh;
     private String ContactName;
     private String Telephone;
     private String Fax;
     private String Mobile;
     private String Email;
-    private boolean IsPrimarySendingEmail;
+    private Boolean IsPrimarySendingEmail;
     private String PostalAddress01 = "";
     private String PostalAddress02 = "";
     private String PostalAddress03 = "";
@@ -70,28 +70,28 @@ public final class SageOneCompany {
     private String CompanyInfo03;
     private String CompanyInfo04;
     private String CompanyInfo05;
-    private boolean IsOwner;
-    private boolean UseCCEmail;
+    private Boolean IsOwner;
+    private Boolean UseCCEmail;
     private String CCEmail;
     private Integer DateFormatId;
-    private boolean CheckForDuplicateCustomerReferences;
-    private boolean CheckForDuplicateSupplierReferences;
+    private Boolean CheckForDuplicateCustomerReferences;
+    private Boolean CheckForDuplicateSupplierReferences;
     private String DisplayName;
-    private boolean DisplayInactiveCustomers;
-    private boolean DisplayInactiveSuppliers;
-    private boolean DisplayInactiveTimeProjects;
-    private boolean UseInclusiveProcessingByDefault;
-    private boolean LockProcessing;
+    private Boolean DisplayInactiveCustomers;
+    private Boolean DisplayInactiveSuppliers;
+    private Boolean DisplayInactiveTimeProjects;
+    private Boolean UseInclusiveProcessingByDefault;
+    private Boolean LockProcessing;
     private Date LockProcessingDate;
-    private boolean LockTimesheetProcessing;
+    private Boolean LockTimesheetProcessing;
     private Date LockTimesheetProcessingDate;
     private Integer TaxPeriodFrequency;
     private Date PreviousTaxPeriodEndDate;
     private Date PreviousTaxReturnDate;
-    private boolean UseNoreplyEmail;
-    private boolean AgeingBasedOnDueDate;
-    private boolean UseLogoOnEmails;
-    private boolean UseLogoOnCustomerZone;
+    private Boolean UseNoreplyEmail;
+    private Boolean AgeingBasedOnDueDate;
+    private Boolean UseLogoOnEmails;
+    private Boolean UseLogoOnCustomerZone;
     private String City;
     private String State;
     private String Country;
@@ -99,11 +99,11 @@ public final class SageOneCompany {
     private Integer CurrencyId;
     private Date Created;
     private Date Modified;
-    private boolean Active;
+    private Boolean Active;
     private String TaxNumber;
     private String RegisteredName;
     private String RegistrationNumber;
-    private boolean IsPracticeAccount;
+    private Boolean IsPracticeAccount;
     private Integer LogoPositionID;
     private SageOneCompanyLogoClass Attachment;
     private String CompanyTaxNumber;
@@ -111,7 +111,7 @@ public final class SageOneCompany {
     private String CustomerZoneGuid;
     private Integer ClientTypeId;
     private Integer DisplayTotalTypeId;
-    private boolean DisplayInCompanyConsole;
+    private Boolean DisplayInCompanyConsole;
     private Date LastLoginDate;
     private SageOneCompanyStatus Status;
 
@@ -239,7 +239,7 @@ public final class SageOneCompany {
         return this.RoundingValue;
     }
 
-    public final void setRoundingValue(final int RoundingValue) {
+    public final void setRoundingValue(final Integer RoundingValue) {
         this.RoundingValue = RoundingValue;
     }
 
@@ -259,51 +259,51 @@ public final class SageOneCompany {
         this.RoundingType = RoundingType;
     }
 
-    public final boolean getAgeMonthly() {
+    public final Boolean getAgeMonthly() {
         return this.AgeMonthly;
     }
 
-    public final void setAgeMonthly(final boolean AgeMonthly) {
+    public final void setAgeMonthly(final Boolean AgeMonthly) {
         this.AgeMonthly = AgeMonthly;
     }
 
-    public final boolean getDisplayInactiveItems() {
+    public final Boolean getDisplayInactiveItems() {
         return this.DisplayInactiveItems;
     }
 
-    public final void setDisplayInactiveItems(final boolean DisplayInactiveItems) {
+    public final void setDisplayInactiveItems(final Boolean DisplayInactiveItems) {
         this.DisplayInactiveItems = DisplayInactiveItems;
     }
 
-    public final boolean getWarnWhenItemCostIsZero() {
+    public final Boolean getWarnWhenItemCostIsZero() {
         return this.WarnWhenItemCostIsZero;
     }
 
-    public final void setWarnWhenItemCostIsZero(final boolean WarnWhenItemCostIsZero) {
+    public final void setWarnWhenItemCostIsZero(final Boolean WarnWhenItemCostIsZero) {
         this.WarnWhenItemCostIsZero = WarnWhenItemCostIsZero;
     }
 
-    public final boolean getDoNotAllowProcessingIntoNegativeQuantities() {
+    public final Boolean getDoNotAllowProcessingIntoNegativeQuantities() {
         return this.DoNotAllowProcessingIntoNegativeQuantities;
     }
 
-    public final void setDoNotAllowProcessingIntoNegativeQuantities(final boolean DoNotAllowProcessingIntoNegativeQuantities) {
+    public final void setDoNotAllowProcessingIntoNegativeQuantities(final Boolean DoNotAllowProcessingIntoNegativeQuantities) {
         this.DoNotAllowProcessingIntoNegativeQuantities = DoNotAllowProcessingIntoNegativeQuantities;
     }
 
-    public final boolean getWarnWhenItemQuantityIsZero() {
+    public final Boolean getWarnWhenItemQuantityIsZero() {
         return this.WarnWhenItemQuantityIsZero;
     }
 
-    public final void setWarnWhenItemQuantityIsZero(final boolean WarnWhenItemQuantityIsZero) {
+    public final void setWarnWhenItemQuantityIsZero(final Boolean WarnWhenItemQuantityIsZero) {
         this.WarnWhenItemQuantityIsZero = WarnWhenItemQuantityIsZero;
     }
 
-    public final boolean getWarnWhenItemSellingBelowCost() {
+    public final Boolean getWarnWhenItemSellingBelowCost() {
         return this.WarnWhenItemSellingBelowCost;
     }
 
-    public final void setWarnWhenItemSellingBelowCost(final boolean WarnWhenItemSellingBelowCost) {
+    public final void setWarnWhenItemSellingBelowCost(final Boolean WarnWhenItemSellingBelowCost) {
         this.WarnWhenItemSellingBelowCost = WarnWhenItemSellingBelowCost;
     }
 
@@ -331,19 +331,19 @@ public final class SageOneCompany {
         this.TakeOnBalanceDate = TakeOnBalanceDate;
     }
 
-    public final boolean getEnableCustomerZone() {
+    public final Boolean getEnableCustomerZone() {
         return this.EnableCustomerZone;
     }
 
-    public final void setEnableCustomerZone(final boolean EnableCustomerZone) {
+    public final void setEnableCustomerZone(final Boolean EnableCustomerZone) {
         this.EnableCustomerZone = EnableCustomerZone;
     }
 
-    public final boolean getEnableAutomaticBankFeedRefresh() {
+    public final Boolean getEnableAutomaticBankFeedRefresh() {
         return this.EnableAutomaticBankFeedRefresh;
     }
 
-    public final void setEnableAutomaticBankFeedRefresh(final boolean EnableAutomaticBankFeedRefresh) {
+    public final void setEnableAutomaticBankFeedRefresh(final Boolean EnableAutomaticBankFeedRefresh) {
         this.EnableAutomaticBankFeedRefresh = EnableAutomaticBankFeedRefresh;
     }
 
@@ -387,11 +387,11 @@ public final class SageOneCompany {
         this.Email = Email;
     }
 
-    public final boolean getIsPrimarySendingEmail() {
+    public final Boolean getIsPrimarySendingEmail() {
         return this.IsPrimarySendingEmail;
     }
 
-    public final void setIsPrimarySendingEmail(final boolean IsPrimarySendingEmail) {
+    public final void setIsPrimarySendingEmail(final Boolean IsPrimarySendingEmail) {
         this.IsPrimarySendingEmail = IsPrimarySendingEmail;
     }
 
@@ -475,19 +475,19 @@ public final class SageOneCompany {
         this.CompanyInfo05 = CompanyInfo05;
     }
 
-    public final boolean getIsOwner() {
+    public final Boolean getIsOwner() {
         return this.IsOwner;
     }
 
-    public final void setIsOwner(final boolean IsOwner) {
+    public final void setIsOwner(final Boolean IsOwner) {
         this.IsOwner = IsOwner;
     }
 
-    public final boolean getUseCCEmail() {
+    public final Boolean getUseCCEmail() {
         return this.UseCCEmail;
     }
 
-    public final void setUseCCEmail(final boolean UseCCEmail) {
+    public final void setUseCCEmail(final Boolean UseCCEmail) {
         this.UseCCEmail = UseCCEmail;
     }
 
@@ -507,19 +507,19 @@ public final class SageOneCompany {
         this.DateFormatId = DateFormatId;
     }
 
-    public final boolean getCheckForDuplicateCustomerReferences() {
+    public final Boolean getCheckForDuplicateCustomerReferences() {
         return this.CheckForDuplicateCustomerReferences;
     }
 
-    public final void setCheckForDuplicateCustomerReferences(final boolean CheckForDuplicateCustomerReferences) {
+    public final void setCheckForDuplicateCustomerReferences(final Boolean CheckForDuplicateCustomerReferences) {
         this.CheckForDuplicateCustomerReferences = CheckForDuplicateCustomerReferences;
     }
 
-    public final boolean getCheckForDuplicateSupplierReferences() {
+    public final Boolean getCheckForDuplicateSupplierReferences() {
         return this.CheckForDuplicateSupplierReferences;
     }
 
-    public final void setCheckForDuplicateSupplierReferences(final boolean CheckForDuplicateSupplierReferences) {
+    public final void setCheckForDuplicateSupplierReferences(final Boolean CheckForDuplicateSupplierReferences) {
         this.CheckForDuplicateSupplierReferences = CheckForDuplicateSupplierReferences;
     }
 
@@ -531,43 +531,43 @@ public final class SageOneCompany {
         this.DisplayName = DisplayName;
     }
 
-    public final boolean getDisplayInactiveCustomers() {
+    public final Boolean getDisplayInactiveCustomers() {
         return this.DisplayInactiveCustomers;
     }
 
-    public final void setDisplayInactiveCustomers(final boolean DisplayInactiveCustomers) {
+    public final void setDisplayInactiveCustomers(final Boolean DisplayInactiveCustomers) {
         this.DisplayInactiveCustomers = DisplayInactiveCustomers;
     }
 
-    public final boolean getDisplayInactiveSuppliers() {
+    public final Boolean getDisplayInactiveSuppliers() {
         return this.DisplayInactiveSuppliers;
     }
 
-    public final void setDisplayInactiveSuppliers(final boolean DisplayInactiveSuppliers) {
+    public final void setDisplayInactiveSuppliers(final Boolean DisplayInactiveSuppliers) {
         this.DisplayInactiveSuppliers = DisplayInactiveSuppliers;
     }
 
-    public final boolean getDisplayInactiveTimeProjects() {
+    public final Boolean getDisplayInactiveTimeProjects() {
         return this.DisplayInactiveTimeProjects;
     }
 
-    public final void setDisplayInactiveTimeProjects(final boolean DisplayInactiveTimeProjects) {
+    public final void setDisplayInactiveTimeProjects(final Boolean DisplayInactiveTimeProjects) {
         this.DisplayInactiveTimeProjects = DisplayInactiveTimeProjects;
     }
 
-    public final boolean getUseInclusiveProcessingByDefault() {
+    public final Boolean getUseInclusiveProcessingByDefault() {
         return this.UseInclusiveProcessingByDefault;
     }
 
-    public final void setUseInclusiveProcessingByDefault(final boolean UseInclusiveProcessingByDefault) {
+    public final void setUseInclusiveProcessingByDefault(final Boolean UseInclusiveProcessingByDefault) {
         this.UseInclusiveProcessingByDefault = UseInclusiveProcessingByDefault;
     }
 
-    public final boolean getLockProcessing() {
+    public final Boolean getLockProcessing() {
         return this.LockProcessing;
     }
 
-    public final void setLockProcessing(final boolean LockProcessing) {
+    public final void setLockProcessing(final Boolean LockProcessing) {
         this.LockProcessing = LockProcessing;
     }
 
@@ -579,11 +579,11 @@ public final class SageOneCompany {
         this.LockProcessingDate = LockProcessingDate;
     }
 
-    public final boolean getLockTimesheetProcessing() {
+    public final Boolean getLockTimesheetProcessing() {
         return this.LockTimesheetProcessing;
     }
 
-    public final void setLockTimesheetProcessing(final boolean LockTimesheetProcessing) {
+    public final void setLockTimesheetProcessing(final Boolean LockTimesheetProcessing) {
         this.LockTimesheetProcessing = LockTimesheetProcessing;
     }
 
@@ -595,11 +595,11 @@ public final class SageOneCompany {
         this.LockTimesheetProcessingDate = LockTimesheetProcessingDate;
     }
 
-    public final int getTaxPeriodFrequency() {
+    public final Integer getTaxPeriodFrequency() {
         return this.TaxPeriodFrequency;
     }
 
-    public final void setTaxPeriodFrequency(final int TaxPeriodFrequency) {
+    public final void setTaxPeriodFrequency(final Integer TaxPeriodFrequency) {
         this.TaxPeriodFrequency = TaxPeriodFrequency;
     }
 
@@ -619,35 +619,35 @@ public final class SageOneCompany {
         this.PreviousTaxReturnDate = PreviousTaxReturnDate;
     }
 
-    public final boolean getUseNoreplyEmail() {
+    public final Boolean getUseNoreplyEmail() {
         return this.UseNoreplyEmail;
     }
 
-    public final void setUseNoreplyEmail(final boolean UseNoreplyEmail) {
+    public final void setUseNoreplyEmail(final Boolean UseNoreplyEmail) {
         this.UseNoreplyEmail = UseNoreplyEmail;
     }
 
-    public final boolean getAgeingBasedOnDueDate() {
+    public final Boolean getAgeingBasedOnDueDate() {
         return this.AgeingBasedOnDueDate;
     }
 
-    public final void setAgeingBasedOnDueDate(final boolean AgeingBasedOnDueDate) {
+    public final void setAgeingBasedOnDueDate(final Boolean AgeingBasedOnDueDate) {
         this.AgeingBasedOnDueDate = AgeingBasedOnDueDate;
     }
 
-    public final boolean getUseLogoOnEmails() {
+    public final Boolean getUseLogoOnEmails() {
         return this.UseLogoOnEmails;
     }
 
-    public final void setUseLogoOnEmails(final boolean UseLogoOnEmails) {
+    public final void setUseLogoOnEmails(final Boolean UseLogoOnEmails) {
         this.UseLogoOnEmails = UseLogoOnEmails;
     }
 
-    public final boolean getUseLogoOnCustomerZone() {
+    public final Boolean getUseLogoOnCustomerZone() {
         return this.UseLogoOnCustomerZone;
     }
 
-    public final void setUseLogoOnCustomerZone(final boolean UseLogoOnCustomerZone) {
+    public final void setUseLogoOnCustomerZone(final Boolean UseLogoOnCustomerZone) {
         this.UseLogoOnCustomerZone = UseLogoOnCustomerZone;
     }
 
@@ -707,11 +707,11 @@ public final class SageOneCompany {
         this.Modified = Modified;
     }
 
-    public final boolean getActive() {
+    public final Boolean getActive() {
         return this.Active;
     }
 
-    public final void setActive(final boolean Active) {
+    public final void setActive(final Boolean Active) {
         this.Active = Active;
     }
 
@@ -739,11 +739,11 @@ public final class SageOneCompany {
         this.RegistrationNumber = RegistrationNumber;
     }
 
-    public final boolean getIsPracticeAccount() {
+    public final Boolean getIsPracticeAccount() {
         return this.IsPracticeAccount;
     }
 
-    public final void setIsPracticeAccount(final boolean IsPracticeAccount) {
+    public final void setIsPracticeAccount(final Boolean IsPracticeAccount) {
         this.IsPracticeAccount = IsPracticeAccount;
     }
 
@@ -803,11 +803,11 @@ public final class SageOneCompany {
         this.DisplayTotalTypeId = DisplayTotalTypeId;
     }
 
-    public final boolean getDisplayInCompanyConsole() {
+    public final Boolean getDisplayInCompanyConsole() {
         return this.DisplayInCompanyConsole;
     }
 
-    public final void setDisplayInCompanyConsole(final boolean DisplayInCompanyConsole) {
+    public final void setDisplayInCompanyConsole(final Boolean DisplayInCompanyConsole) {
         this.DisplayInCompanyConsole = DisplayInCompanyConsole;
     }
 
