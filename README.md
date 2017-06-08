@@ -76,7 +76,7 @@ SageOneApiTemplate.getEntitiesByPropertyValue(final String companyName, final Sa
 SageOneApiTemplate.searchEntitiesByAnyMatchedPropertyValues(final String companyName, final SageOneEntityType sageOneEntityType,
                                                             final String[] propertyNames, final String[] propertyValues)
 
--> search for the sage one entity based on the SageOneEntityType parameter passed, pass the property names you want to search
+-> filter the sage one entity based on the SageOneEntityType parameter passed, pass the property names you want to filter
    by as a parameter and make sure the values array parameter is the same length as the property name array parameter,
    if any of the property names is found with their matching value then it will be returned, don't use property names
    that has SageOneObject class value types, it will prevent you from using them.
@@ -87,7 +87,7 @@ SageOneApiTemplate.searchEntitiesByAllMatchedPropertyValues(final String company
                                                             final String[] propertyNames,
                                                             final String[] propertyValues)
 
--> search for the sage one entity based on the SageOneEntityType parameter passed, pass the property names you want to search
+-> filter sage one entities based on the SageOneEntityType parameter passed, pass the property names you want to filter
    by as a parameter and make sure the values array parameter is the same length as the property name array parameter,
    if all of the property names is found with their matching value then it will be returned, don't use property names
    that has SageOneObject class value types, it will prevent you from using them.
