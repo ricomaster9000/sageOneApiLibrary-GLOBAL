@@ -34,7 +34,7 @@ sageOneApi.SA.requestSocketTimeout = 'value' (default is 30000(30 seconds)) ->
 ### important classes/methods you should use
 
 ```
-SageOneEntityType enum class -> use this primarily as a parameter for template methods, currently only about 30-40% of the sage one entity enums is supported, will add more through time
+SageOneEntityType enum class -> use this primarily as a parameter for template methods, currently only about 30-40% of the sage one entities is supported, will add more through time
 ```
 ```
 SageOneConstants.getSageOneApiCompanyList() Map variable -> 
