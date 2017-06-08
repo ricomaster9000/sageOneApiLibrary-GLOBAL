@@ -314,7 +314,6 @@ public final class SageOneApiConnector {
 
 		try {
 			endpoint = encodeCurlyBrackets(endpoint);
-			System.out.println(endpoint);
 			if(requestMethod.toUpperCase().equals("GET")) {
 				request = new HttpGet(endpoint);
 			} else if(requestMethod.toUpperCase().equals("POST")) {
@@ -405,16 +404,12 @@ public final class SageOneApiConnector {
 			} else {
 				endpoint = endpointPlusQuery;
 			}
-			System.out.println(endpoint);
 			SageOneResponseJsonObject jsonResponse = ConnectionCoreCodeReturnResponseJson(companyId, (runningInner) ?
 			endpoint + "&$skip=" + globalSkipIterator : endpoint, "GET", null);
 
 			if(mustReturnResultObject && jsonResponse.getSuccess()) {
-
 				SageOneGrabbedResultsClass responseResultObject =
 				objectMapper.readValue(jsonResponse.getResponseJson(), SageOneGrabbedResultsClass.class);
-
-				System.out.println(responseResultObject.getResults().length);
 
 				for(Object object : responseResultObject.getResults()) {
 					objectsBeforeConversion.add(objectMapper.convertValue(object, ObjectClassToMapTo));

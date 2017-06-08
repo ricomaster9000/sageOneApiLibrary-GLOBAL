@@ -119,7 +119,7 @@ public final class SageOneCoreHelperMethods {
         return sageOneResponseJsonObject;
     }
 
-    public static String convertObjectToJsonString(final Object object) {
+    static String convertObjectToJsonString(final Object object) {
 
         String stringToReturn = "";
         try {
@@ -131,7 +131,7 @@ public final class SageOneCoreHelperMethods {
         return stringToReturn;
     }
 
-    public static <T> T[] convertToArray(List<?> list, Class<T> c) {
+    static <T> T[] convertToArray(List<?> list, Class<T> c) {
         @SuppressWarnings("unchecked")
         T[] result = (T[]) Array.newInstance(c, list.size());
         result = list.toArray(result);

@@ -3,10 +3,9 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>org.ricardo.sageOne</groupId>
     <artifactId>api-SA</artifactId>
-    <version>0.91a5</version>
+    <version>0.98b</version>
     <packaging>jar</packaging>
 
     <name>SageOne Api South Africa Library</name>

@@ -23,13 +23,11 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import java.util.Date;
 
-/**
- * Created by brent on 2017/05/31.
- */
+
 @JsonDeserialize(builder = SageOneBankAccount.Builder.class)
 public final class SageOneBankAccount {
     //String length: inclusive between 0 and 100
-    private final int ID;
+    private final Integer ID;
     private final String Name;
     private final String BankName;
     private final String AccountNumber;
@@ -37,23 +35,23 @@ public final class SageOneBankAccount {
     private final String BranchNumber;
     //-------------------------------------
     private final SageOneBankAccountCategory Category;
-    private final boolean Active;
-    private final boolean Default;
+    private final Boolean Active;
+    private final Boolean Default;
     private final double Balance;
     //String length: inclusive between 0 and 4000
     private final String Description;
-    private final SageOneBankFeedAccount SageOneBankFeedAccount;
+    private final SageOneBankFeedAccount BankFeedAccount;
     private final Date LastTransactionDate;
     private final Date LastImportDate;
-    private final boolean HasTransactionsWaitingForReview;
-    private final int DefaultPaymentMethodId;
-    private final SageOnePaymentMethod SageOnePaymentMethod;
+    private final Boolean HasTransactionsWaitingForReview;
+    private final Integer DefaultPaymentMethodId;
+    private final SageOnePaymentMethod PaymentMethod;
     private final Date Modified;
     private final Date Created;
-    private final int CurrencyId;
+    private final Integer CurrencyId;
 
     public SageOneBankAccount(Builder builder) {
-        this.ID = builder.getId();
+        ID = builder.ID;
         Name = builder.Name;
         BankName = builder.BankName;
         AccountNumber = builder.AccountNumber;
@@ -64,139 +62,140 @@ public final class SageOneBankAccount {
         Default = builder.Default;
         Balance = builder.Balance;
         Description = builder.Description;
-        SageOneBankFeedAccount = builder.SageOneBankFeedAccount;
+        BankFeedAccount = builder.BankFeedAccount;
         LastTransactionDate = builder.LastTransactionDate;
         LastImportDate = builder.LastImportDate;
         HasTransactionsWaitingForReview = builder.HasTransactionsWaitingForReview;
         DefaultPaymentMethodId = builder.DefaultPaymentMethodId;
-        SageOnePaymentMethod = builder.SageOnePaymentMethod;
+        PaymentMethod = builder.PaymentMethod;
         Modified = builder.Modified;
         Created = builder.Created;
         CurrencyId = builder.CurrencyId;
     }
 
-    public static class Builder extends SageOneMainEntity {
+    public static class Builder {
+        private Integer ID;
         private String Name;
         private String BankName;
         private String AccountNumber;
         private String BranchName;
         private String BranchNumber;
         private SageOneBankAccountCategory Category;
-        private boolean         Active;
-        private boolean         Default;
+        private Boolean         Active;
+        private Boolean         Default;
         private double Balance;
         private String Description;
-        private SageOneBankFeedAccount SageOneBankFeedAccount;
+        private SageOneBankFeedAccount BankFeedAccount;
         private Date         LastTransactionDate;
         private Date         LastImportDate;
-        private boolean         HasTransactionsWaitingForReview;
-        private int DefaultPaymentMethodId;
-        private SageOnePaymentMethod SageOnePaymentMethod;
+        private Boolean         HasTransactionsWaitingForReview;
+        private Integer DefaultPaymentMethodId;
+        private SageOnePaymentMethod PaymentMethod;
         private Date Modified;
         private Date Created;
-        private int CurrencyId;
+        private Integer CurrencyId;
 
-        public Builder withId(final int val){
-            setId(val);
+        public Builder withId(final Integer val){
+            ID = val;
             return this;
         }
 
         public Builder withName(final String val){
-            Name = (this.isInitialized()) ? val:Name;
+            Name = val;
             return this;
         }
 
         public Builder withBankName(final String val){
-            BankName = (this.isInitialized()) ? val:BankName;
+            BankName = val;
             return this;
         }
 
         public Builder withAccountNumber(final String val){
-            AccountNumber = (this.isInitialized()) ? val:AccountNumber;
+            AccountNumber = val;
             return this;
         }
 
         public Builder withBranchName(final String val){
-            BranchName = (this.isInitialized()) ? val:BranchName;
+            BranchName = val;
             return this;
         }
 
         public Builder withBranchNumber(final String val){
-            BranchNumber = (this.isInitialized()) ? val:BranchNumber;
+            BranchNumber = val;
             return this;
         }
 
         public Builder withCategory(final SageOneBankAccountCategory val){
-            Category = (this.isInitialized()) ? val:Category;
+            Category = val;
             return this;
         }
 
-        public Builder withActive(final boolean val){
-            Active = (this.isInitialized()) ? val:Active;
+        public Builder withActive(final Boolean val){
+            Active = val;
             return this;
         }
 
-        public Builder withDefault(final boolean val){
-            Default = (this.isInitialized()) ? val:Default;
+        public Builder withDefault(final Boolean val){
+            Default = val;
             return this;
         }
 
         public Builder withBalance(final double val){
-            Balance = (this.isInitialized()) ? val:Balance;
+            Balance = val;
             return this;
         }
 
         public Builder withDescription(final String val){
-            Description = (this.isInitialized()) ? val:Description;
+            Description = val;
             return this;
         }
 
         public Builder withBankFeedAccount(final SageOneBankFeedAccount val){
-            SageOneBankFeedAccount = (this.isInitialized()) ? val: SageOneBankFeedAccount;
+            BankFeedAccount = val;
             return this;
         }
 
         public Builder withLastTransactionDate(final Date val){
-            LastTransactionDate = (this.isInitialized()) ? val:LastTransactionDate;
+            LastTransactionDate = val;
             return this;
         }
 
 
         public Builder withLastImportDate(final Date val){
-            LastImportDate = (this.isInitialized()) ? val:LastImportDate;
+            LastImportDate = val;
             return this;
         }
 
 
-        public Builder withHasTransactionsWaitingForReview(final boolean val){
-            HasTransactionsWaitingForReview = (this.isInitialized()) ? val:HasTransactionsWaitingForReview;
+        public Builder withHasTransactionsWaitingForReview(final Boolean val){
+            HasTransactionsWaitingForReview = val;
             return this;
         }
 
 
-        public Builder withDefaultPaymentMethodId(final int val){
-            DefaultPaymentMethodId = (this.isInitialized()) ? val:DefaultPaymentMethodId;
+        public Builder withDefaultPaymentMethodId(final Integer val){
+            DefaultPaymentMethodId = val;
             return this;
         }
 
 
         public Builder withPaymentMethod(final SageOnePaymentMethod val){
-            SageOnePaymentMethod = (this.isInitialized()) ? val: SageOnePaymentMethod;
+            PaymentMethod = val;
             return this;
         }
 
         public Builder withModified(final Date val){
-            Modified = (this.isInitialized()) ? val:Modified;
+            Modified = val;
             return this;
         }
 
         public Builder withCreated(final Date val){
-            Created = (this.isInitialized()) ? val:Created;
+            Created = val;
             return this;
         }
 
-        public Builder withCurrencyId(final int val){
-            CurrencyId = (this.isInitialized()) ? val:CurrencyId;
+        public Builder withCurrencyId(final Integer val){
+            CurrencyId = val;
             return this;
         }
 
@@ -206,7 +205,7 @@ public final class SageOneBankAccount {
 
     }
 
-    public int getId() {
+    public Integer getId() {
         return ID;
     }
 
@@ -234,11 +233,11 @@ public final class SageOneBankAccount {
         return Category;
     }
 
-    public boolean isActive() {
+    public Boolean isActive() {
         return Active;
     }
 
-    public boolean isDefault() {
+    public Boolean isDefault() {
         return Default;
     }
 
@@ -250,8 +249,8 @@ public final class SageOneBankAccount {
         return Description;
     }
 
-    public SageOneBankFeedAccount getSageOneBankFeedAccount() {
-        return SageOneBankFeedAccount;
+    public SageOneBankFeedAccount getBankFeedAccount() {
+        return BankFeedAccount;
     }
 
     public Date getLastTransactionDate() {
@@ -262,16 +261,16 @@ public final class SageOneBankAccount {
         return LastImportDate;
     }
 
-    public boolean isHasTransactionsWaitingForReview() {
+    public Boolean isHasTransactionsWaitingForReview() {
         return HasTransactionsWaitingForReview;
     }
 
-    public int getDefaultPaymentMethodId() {
+    public Integer getDefaultPaymentMethodId() {
         return DefaultPaymentMethodId;
     }
 
-    public SageOnePaymentMethod getSageOnePaymentMethod() {
-        return SageOnePaymentMethod;
+    public SageOnePaymentMethod getPaymentMethod() {
+        return PaymentMethod;
     }
 
     public Date getModified() {
@@ -282,7 +281,7 @@ public final class SageOneBankAccount {
         return Created;
     }
 
-    public int getCurrencyId() {
+    public Integer getCurrencyId() {
         return CurrencyId;
     }
 }

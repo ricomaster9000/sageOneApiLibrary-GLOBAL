@@ -2,9 +2,6 @@ package SageOneIntegration.SageOneApiEntities;
 
 import java.util.UUID;
 
-/**
- * Created by ricardo on 2017/06/07.
- */
 public final class SageOneAttachment {
     private String Name;
     private Integer Size;

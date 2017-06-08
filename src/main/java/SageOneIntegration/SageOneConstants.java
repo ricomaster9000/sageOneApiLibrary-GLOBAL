@@ -15,28 +15,24 @@ public final class SageOneConstants {
     */
 	static String CLIENT_USERNAME = ""; // TODO testing account, change to actual
 	static String CLIENT_PASSWORD = "";  // TODO testing password, change to actual
-	static String API_URL = "https://accounting.sageone.co.za";
-	static String API_VERSION = "1.1.2";
+	public static String API_URL = "https://accounting.sageone.co.za";
+	public static String API_VERSION = "1.1.2";
 	static String API_KEY = "";
 	static final Map<String, Integer> COMPANY_LIST = new HashMap<String, Integer>();
-	static int SAGE_ONE_REQUEST_RESULT_LIMIT = 100;
-	static int SAGE_ONE_REQUEST_LIMIT_HOUR = 100;
-	static int SAGE_ONE_REQUEST_LIMIT_DAY = 5000;
-	static int SAGE_ONE_REQUEST_TIMEOUT_SOCKET = 30000;
-	static int REQUEST_TIMEOUT = 30 * 1000; // Seconds multiplied with milliseconds
+	public static int SAGE_ONE_REQUEST_RESULT_LIMIT = 100;
+	public static int SAGE_ONE_REQUEST_LIMIT_HOUR = 100;
+	public static int SAGE_ONE_REQUEST_LIMIT_DAY = 5000;
+	public static int SAGE_ONE_REQUEST_TIMEOUT_SOCKET = 30000;
+	public static int REQUEST_TIMEOUT = 30000;
 	static Map<Integer, Integer> SAGE_ONE_REQUEST_COUNTER_DAY = new HashMap<Integer, Integer>();
 	static Map<Integer, Integer> SAGE_ONE_REQUEST_COUNTER_HOUR = new HashMap<Integer, Integer>();
-	static final Calendar CALENDAR = Calendar.getInstance();
-	static int CURRENT_DAY = CALENDAR.get(Calendar.DAY_OF_WEEK);
-	static int CURRENT_HOUR = CALENDAR.get(Calendar.HOUR_OF_DAY);
+	static int CURRENT_DAY = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
+	static int CURRENT_HOUR = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
 
 	final static int MAX_STRING_LENGTH = 255; // For mysql, for VARCHAR() and not LONGTEXT/LONGBLOB/BLOBTEXT
 	final static int MAX_DIGIT_LENGTH = 18; // 18/19 for longs
-	final static int MAX_ATTACHMENT_BYTE_SIZE = 0; // TODO change to appropriate number
-	final static int MAX_PICTURE_ATTACHMENT_BYTE_SIZE = 5000000; // TODO change to appropriate number
-	final static int MAX_PRICE_NUMBER_LENGTH = 14; // The max length for prices
 	final static String GENERAL_DIGIT_REGEX = "[.0-9.]{1," + MAX_DIGIT_LENGTH + "}";
-	final static String GENERAL_PRICE_REGEX = "[.0-9.]+[.]+[.0-9.]{1," + MAX_PRICE_NUMBER_LENGTH + "}";
+	final static String GENERAL_PRICE_REGEX = "[.0-9.]+[.]+[.0-9.]{1," + MAX_DIGIT_LENGTH + "}";
 	final static String GENERAL_STRING_REGEX = "[.*\\S .]{1," + MAX_STRING_LENGTH + "}";
 
 	public final static Map<String, Integer> getSageOneApiCompanyList() {

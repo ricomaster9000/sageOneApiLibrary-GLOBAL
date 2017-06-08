@@ -7,6 +7,7 @@ package SageOneIntegration;
 final class SageOneStringAndClassObject {
     private String stringProperty = "";
     private Class<?> classProperty;
+    private boolean canBeUsedInRequest = true;
     private boolean initialized = false;
 
     SageOneStringAndClassObject(final String stringProperty, final Class<?> classProperty) {
@@ -15,11 +16,19 @@ final class SageOneStringAndClassObject {
         this.initialized = true;
     }
 
+    SageOneStringAndClassObject(final Class<?> classProperty,
+                                final boolean canBeUsedInRequest) {
+        this.stringProperty = stringProperty;
+        this.classProperty = classProperty;
+        this.canBeUsedInRequest = canBeUsedInRequest;
+        this.initialized = true;
+    }
+
     final String getStringProperty() {
         return (this.initialized) ? this.stringProperty : "";
     }
 
-    public final void setStringProperty(final String stringProperty) {
+    final void setStringProperty(final String stringProperty) {
         this.stringProperty = (this.initialized) ? stringProperty : this.stringProperty;
     }
 
@@ -27,8 +36,16 @@ final class SageOneStringAndClassObject {
         return (this.initialized) ? this.classProperty : null;
     }
 
-    public final void setClassProperty(final Class<?> classProperty) {
+    final void setClassProperty(final Class<?> classProperty) {
         this.classProperty = (this.initialized) ? classProperty : this.classProperty;
+    }
+
+    final boolean getCanBeUsedInRequest() {
+        return (this.initialized) ? this.canBeUsedInRequest : null;
+    }
+
+    final void setCanBeUsedInRequest(final boolean canBeUsedInRequest) {
+        this.canBeUsedInRequest = canBeUsedInRequest;
     }
 
     @Override

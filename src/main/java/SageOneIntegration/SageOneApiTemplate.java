@@ -43,12 +43,15 @@ public final class SageOneApiTemplate {
     private static int globalIteratorInner = 0;
 
     // Conditional Variables
-    private static boolean condSearchAnyVal1 = false;
+    private static int condSearchAnyVal1 = 0;
     private static boolean condSearchAnyVal2 = false;
     private static boolean condSearchAnyVal3 = false;
     private static boolean condSearchAnyVal4 = false;
     private static boolean condSearchAnyVal5 = false;
     private static boolean condSearchAnyVal6 = false;
+    private static boolean condSearchAnyVal7 = false;
+    private static boolean condSearchAnyVal8 = false;
+    private static boolean condSearchAnyVal9 = false;
 
 
     private static final String ODataFilter1 = "Get?$filter=";
@@ -84,9 +87,8 @@ public final class SageOneApiTemplate {
 
                     if (sageOneResponseObject.getSuccess()) {
                         if (sageOneResponseObject.getTotalResponseObjects() <= 0) {
-
                             sageOneResponseObject = SageOneApiConnector.sageOneGrabData(endpointQuery +
-                                    ODataFilter5 + "Name,'" + customerName + "')", SageOneCustomer.class, true,
+                            ODataFilter5 + "Name,'" + customerName + "')", SageOneCustomer.class, true,
                             companyId);
                         }
 
@@ -164,13 +166,22 @@ public final class SageOneApiTemplate {
             if (sageOneEntityType.GetObject.getClassProperty().getDeclaredField(propertyName) == null) {
                 response = false;
             }
+            if(response) {
+                Field field = sageOneEntityType.GetObject.getClassProperty().getDeclaredField(propertyName);
+                for (SageOneEntityType sageOneEntity : sageOneEntityType.values()) {
+                    if (field.getType().isAssignableFrom(sageOneEntity.GetObject.getClassProperty())) {
+                        response = false;
+                        break;
+                    }
+                }
+            }
         } catch(NoSuchFieldException e) {
             e.printStackTrace();
             response = false;
         }
-        String endpointQuery = sageOneEntityType.GetObject.getStringProperty() + "Get?$filter=";
 
         if(response) {
+            String endpointQuery = sageOneEntityType.GetObject.getStringProperty() + "Get?$filter=";
             try {
                 final Integer companyId = SageOneConstants.COMPANY_LIST.get(companyName);
 
@@ -198,6 +209,11 @@ public final class SageOneApiTemplate {
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
+        } else {
+            sageOneCustomersGrabbed = new ArrayList<Object>();
+
+            System.out.println("property value isn't the correct value type for the specified property name or it property doesn't exist ->" +
+                    " SageOneApiTemplate.class");
         }
         return (sageOneCustomersGrabbed != null && sageOneCustomersGrabbed.size() == 1) ? (T) sageOneCustomersGrabbed.get(0) : null;
     }
@@ -212,13 +228,21 @@ public final class SageOneApiTemplate {
             if (sageOneEntityType.GetObject.getClassProperty().getDeclaredField(propertyName) == null) {
                 response = false;
             }
+            if(response) {
+                Field field = sageOneEntityType.GetObject.getClassProperty().getDeclaredField(propertyName);
+                for (SageOneEntityType sageOneEntity : sageOneEntityType.values()) {
+                    if (field.getType().isAssignableFrom(sageOneEntity.GetObject.getClassProperty())) {
+                        response = false;
+                        break;
+                    }
+                }
+            }
         } catch(NoSuchFieldException e) {
             e.printStackTrace();
             response = false;
         }
-        String endpointQuery = sageOneEntityType.GetObject.getStringProperty() + "Get?$filter=";
-
         if(response) {
+            String endpointQuery = sageOneEntityType.GetObject.getStringProperty() + "Get?$filter=";
             try {
                 final Integer companyId = SageOneConstants.COMPANY_LIST.get(companyName);
 
@@ -227,12 +251,8 @@ public final class SageOneApiTemplate {
                 }
 
                 if (response) {
-                    System.out.println(endpointQuery +
-                            URLEncoder.encode(propertyName + " eq " + "'" + propertyValue + "'", "UTF-8"));
-
-
                     sageOneResponseObject = SageOneApiConnector.sageOneGrabData(endpointQuery +
-                                    URLEncoder.encode(propertyName + " eq " + "'" + propertyValue + "'", "UTF-8"),
+                            URLEncoder.encode(propertyName + " eq " + "'" + propertyValue + "'", "UTF-8"),
                             sageOneEntityType.GetObject.getClassProperty(), true, companyId);
 
                     if (sageOneResponseObject.getSuccess()) {
@@ -250,6 +270,11 @@ public final class SageOneApiTemplate {
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
+        } else {
+            sageOneCustomersGrabbed = new ArrayList<Object>();
+
+            System.out.println("property value isn't the correct value type for the specified property name or it property doesn't exist ->" +
+                    " SageOneApiTemplate.class");
         }
         return (sageOneCustomersGrabbed != null) ? (List<T>) sageOneCustomersGrabbed : (List<T>) sageOneCustomersGrabbed;
     }
@@ -273,52 +298,81 @@ public final class SageOneApiTemplate {
         }
 
         if(response) {
-            try {
-                if (sageOneEntityType.GetObject.getClassProperty().getClass().getField("") == null) {
-                    response = false;
+            int propertiesFound = 0;
+            for(Field field : sageOneEntityType.GetObject.getClassProperty().getDeclaredFields()) {
+                for (String propertyName : propertyNames) {
+                    if (field.getName().equals(propertyName)) {
+                        propertiesFound++;
+                    }
                 }
-            } catch (NoSuchFieldException e) {
-                e.printStackTrace();
+            }
+            if(propertiesFound != propertyNames.length) {
                 response = false;
             }
-            String endpointQuery = sageOneEntityType.GetObject.getStringProperty() + "Get?$filter=";
-
             if (response) {
                 try {
-                    final Integer companyId = SageOneConstants.COMPANY_LIST.get(companyName);
-
-                    if (companyId == null) {
-                        response = false;
-                    }
-
-                    if (response) {
-                        globalIterator = 0;
-                        queryString = new StringBuilder(propertyNames.length * 200);
-                        for (String propertyName : propertyNames) {
-                            queryString.append(propertyName);
-                            queryString.append(" eq '");
-                            queryString.append(propertyValues[globalIterator]);
-                            queryString.append(((propertyNames.length != globalIterator) ? "' or " : ""));
-                            globalIterator++;
+                    for(String propertyName : propertyNames) {
+                        Field field = sageOneEntityType.GetObject.getClassProperty().getDeclaredField(propertyName);
+                        for (SageOneEntityType sageOneEntity : sageOneEntityType.values()) {
+                            if (field.getType().isAssignableFrom(sageOneEntity.GetObject.getClassProperty())) {
+                                response = false;
+                                break;
+                            }
                         }
-                        sageOneResponseObject = SageOneApiConnector.sageOneGrabData(endpointQuery +
-                                URLEncoder.encode(queryString.toString(), "UTF-8"), SageOneSupplier.class, true, companyId);
-
-                        if (sageOneResponseObject.getSuccess()) {
-                            sageOneCustomersGrabbed.addAll((sageOneResponseObject.getResponseObject() != null) ?
-                                    (List<T>) sageOneResponseObject.getResponseObject() : sageOneCustomersGrabbed);
-                        } else {
-                            System.out.println(sageOneResponseObject.getResponseMessage());
+                        if(!response) {
+                            break;
                         }
-                    } else {
-                        sageOneCustomersGrabbed = null;
-
-                        System.out.println("SageOneCompany does not exist for the specified Sage One User -> " +
-                                "SageOneApiTemplate.class");
                     }
-                } catch (UnsupportedEncodingException e) {
+                } catch (NoSuchFieldException e) {
                     e.printStackTrace();
+                    response = false;
                 }
+                if(response) {
+                    String endpointQuery = sageOneEntityType.GetObject.getStringProperty() + "Get?$filter=";
+                    try {
+                        final Integer companyId = SageOneConstants.COMPANY_LIST.get(companyName);
+
+                        if (companyId == null) {
+                            response = false;
+                        }
+
+                        if (response) {
+                            globalIterator = 0;
+                            queryString = new StringBuilder(propertyNames.length * 200);
+                            for (String propertyName : propertyNames) {
+                                queryString.append(propertyName);
+                                queryString.append(" eq '");
+                                queryString.append(propertyValues[globalIterator]);
+                                queryString.append("'");
+                                globalIterator++;
+                                queryString.append(((propertyNames.length > globalIterator) ? " or " : ""));
+                            }
+                            sageOneResponseObject = SageOneApiConnector.sageOneGrabData(endpointQuery +
+                                            URLEncoder.encode(queryString.toString(), "UTF-8"),
+                                    sageOneEntityType.GetObject.getClassProperty(),
+                                    true, companyId);
+
+                            if (sageOneResponseObject.getSuccess()) {
+                                sageOneCustomersGrabbed.addAll((sageOneResponseObject.getResponseObject() != null) ?
+                                        (List<T>) sageOneResponseObject.getResponseObject() : sageOneCustomersGrabbed);
+                            } else {
+                                System.out.println(sageOneResponseObject.getResponseMessage());
+                            }
+                        } else {
+                            sageOneCustomersGrabbed = null;
+
+                            System.out.println("SageOneCompany does not exist for the specified Sage One User -> " +
+                                    "SageOneApiTemplate.class");
+                        }
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                }
+            } else {
+                sageOneCustomersGrabbed = new ArrayList<T>();
+                System.out.println("Property name doesn't exist in sageOneEntityType parameter class object -> " +
+                        "SageOneApiTemplate.class");
+
             }
         }
         return (sageOneCustomersGrabbed != null) ? sageOneCustomersGrabbed : new ArrayList<T>();
@@ -343,17 +397,37 @@ public final class SageOneApiTemplate {
         }
 
         if(response) {
-            try {
-                if (sageOneEntityType.GetObject.getClassProperty().getClass().getField("") == null) {
-                    response = false;
+            int propertiesFound = 0;
+            for(Field field :  sageOneEntityType.GetObject.getClassProperty().getDeclaredFields()) {
+                for (String propertyName : propertyNames) {
+                    if (field.getName().equals(propertyName)) {
+                        propertiesFound++;
+                    }
                 }
-            } catch (NoSuchFieldException e) {
-                e.printStackTrace();
+            }
+            if(propertiesFound != propertyNames.length) {
                 response = false;
             }
-            String endpointQuery = sageOneEntityType.GetObject.getStringProperty() + "Get?$filter=";
 
             if (response) {
+                try {
+                    for(String propertyName : propertyNames) {
+                        Field field = sageOneEntityType.GetObject.getClassProperty().getDeclaredField(propertyName);
+                        for (SageOneEntityType sageOneEntity : sageOneEntityType.values()) {
+                            if (field.getType().isAssignableFrom(sageOneEntity.GetObject.getClassProperty())) {
+                                response = false;
+                                break;
+                            }
+                        }
+                        if(!response) {
+                            break;
+                        }
+                    }
+                } catch (NoSuchFieldException e) {
+                    e.printStackTrace();
+                    response = false;
+                }
+                String endpointQuery = sageOneEntityType.GetObject.getStringProperty() + "Get?$filter=";
                 try {
                     final Integer companyId = SageOneConstants.COMPANY_LIST.get(companyName);
 
@@ -368,11 +442,12 @@ public final class SageOneApiTemplate {
                             queryString.append(propertyName);
                             queryString.append(" eq '");
                             queryString.append(propertyValues[globalIterator]);
-                            queryString.append(((propertyNames.length != globalIterator) ? "' and " : ""));
+                            queryString.append("'");
                             globalIterator++;
+                            queryString.append(((propertyNames.length > globalIterator) ? " and " : ""));
                         }
                         sageOneResponseObject = SageOneApiConnector.sageOneGrabData(endpointQuery +
-                                URLEncoder.encode(queryString.toString(), "UTF-8"), SageOneSupplier.class, true, companyId);
+                                URLEncoder.encode(queryString.toString(), "UTF-8"), sageOneEntityType.GetObject.getClassProperty(), true, companyId);
 
                         if (sageOneResponseObject.getSuccess()) {
                             sageOneCustomersGrabbed.addAll((sageOneResponseObject.getResponseObject() != null) ?
@@ -381,22 +456,26 @@ public final class SageOneApiTemplate {
                             System.out.println(sageOneResponseObject.getResponseMessage());
                         }
                     } else {
-                        sageOneCustomersGrabbed = null;
-
+                        sageOneCustomersGrabbed = new ArrayList<T>();
                         System.out.println("SageOneCompany does not exist for the specified Sage One User -> " +
                                 "SageOneApiTemplate.class");
                     }
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
+            } else {
+                sageOneCustomersGrabbed = new ArrayList<T>();
+                System.out.println("Property name doesn't exist in sageOneEntityType parameter class object -> " +
+                "SageOneApiTemplate.class");
+
             }
         }
         return (sageOneCustomersGrabbed != null) ? sageOneCustomersGrabbed : new ArrayList<T>();
     }
 
     public static <T> List<T> searchEntitiesByAnyValues(final String companyName,
-                                                                       final SageOneEntityType sageOneEntityType,
-                                                                       final String... values) {
+                                                        final SageOneEntityType sageOneEntityType,
+                                                        final String... values) {
         boolean response = true;
         SageOneResponseObject sageOneResponseObject;
         List<T> sageOneCustomersGrabbed = new ArrayList<T>();
@@ -405,88 +484,99 @@ public final class SageOneApiTemplate {
         if (response) {
             try {
                 final Integer companyId = SageOneConstants.COMPANY_LIST.get(companyName);
-
                 if (companyId == null) {
                     response = false;
                 }
-                if (response) {;
+
+                if (response) {
                     queryString = new StringBuilder(values.length * 200);
                     globalIterator = 0;
+                    condSearchAnyVal1 = 0;
+                    condSearchAnyVal2 = false;
                     for (Field field : sageOneEntityType.GetObject.getClassProperty().getDeclaredFields()) {
                         globalIteratorInner = 0;
                         Class<?> fieldClass = field.getType();
-                        condSearchAnyVal1 = false;
-                        condSearchAnyVal2 = false;
                         condSearchAnyVal3 = false;
                         condSearchAnyVal4 = false;
                         condSearchAnyVal5 = false;
                         condSearchAnyVal6 = false;
+                        condSearchAnyVal7 = false;
+                        condSearchAnyVal8 = false;
+                        condSearchAnyVal9 = false;
                         if(fieldClass.isAssignableFrom(Integer.class) || fieldClass.isAssignableFrom(Long.class)) {
-                            condSearchAnyVal1 = true;
-                            System.out.println(fieldClass + "dfsdfsdf");
-                        } else if(fieldClass.isAssignableFrom(float.class) || fieldClass.isAssignableFrom(double.class)) {
-                            condSearchAnyVal2 = true;
-                        } else if(fieldClass.isAssignableFrom(String.class) || fieldClass.isAssignableFrom(char.class)) {
                             condSearchAnyVal3 = true;
-                        } else if(fieldClass.isAssignableFrom(Boolean.class)) {
+                        } else if(fieldClass.isAssignableFrom(float.class) || fieldClass.isAssignableFrom(double.class)) {
                             condSearchAnyVal4 = true;
-                        } else if(fieldClass.isAssignableFrom(Date.class)) {
+                        } else if(fieldClass.isAssignableFrom(String.class) || fieldClass.isAssignableFrom(char.class)) {
                             condSearchAnyVal5 = true;
+                        } else if(fieldClass.isAssignableFrom(Boolean.class)) {
+                            condSearchAnyVal6 = true;
+                        } else if(fieldClass.isAssignableFrom(Date.class)) {
+                            condSearchAnyVal7 = true;
                         } else {
                             for (SageOneEntityType entity : SageOneEntityType.values()) {
-                                System.out.println(entity.GetObject.getClassProperty() + "   " + fieldClass);
                                 if (fieldClass.isAssignableFrom(entity.GetObject.getClassProperty())) {
-                                    condSearchAnyVal6 = true;
-                                    System.out.println("hellofds");
+                                    condSearchAnyVal8 = true;
                                     break;
                                 }
                             }
+                            if(!condSearchAnyVal8) {
+                                condSearchAnyVal9 = true;
+                            }
                         }
-                        System.out.println(fieldClass);
 
                         for (String propertyValue : values) {
                             boolean mustContinue = true;
-                            if(condSearchAnyVal1) {
-                               mustContinue = (propertyValue.matches(GENERAL_DIGIT_REGEX));
-                            } else if(condSearchAnyVal2) {
-                                mustContinue = (propertyValue.matches(GENERAL_PRICE_REGEX));
-                            } else if(condSearchAnyVal3) {
-                                mustContinue = (propertyValue.matches(GENERAL_STRING_REGEX));
+                            if(condSearchAnyVal3) {
+                                mustContinue = (propertyValue.matches(GENERAL_DIGIT_REGEX));
                             } else if(condSearchAnyVal4) {
-                                mustContinue = (propertyValue.toUpperCase().equals("TRUE") || propertyValue.toUpperCase().equals("FALSE"));
+                                mustContinue = (propertyValue.matches(GENERAL_PRICE_REGEX));
                             } else if(condSearchAnyVal5) {
-                                mustContinue = false;
+                                mustContinue = (propertyValue.matches(GENERAL_STRING_REGEX));
                             } else if(condSearchAnyVal6) {
+                                mustContinue = (propertyValue.toUpperCase().equals("TRUE") || propertyValue.toUpperCase().equals("FALSE"));
+                            } else if(condSearchAnyVal7) {
+                                mustContinue = false;
+                            } else if(condSearchAnyVal8) {
+                                mustContinue = false;
+                            } else if(condSearchAnyVal9) {
                                 mustContinue = false;
                             }
 
+                            condSearchAnyVal1++;
                             if(mustContinue) {
-                                System.out.println(fieldClass + "dfsdfsdffffffffff");
+                                condSearchAnyVal2 = true;
                                 queryString.append("startswith(");
                                 queryString.append(field.getName());
                                 queryString.append(",'");
                                 queryString.append(propertyValue);
                                 queryString.append("')");
-                                queryString.append(((globalIterator < sageOneEntityType.GetObject.getClassProperty().getDeclaredFields().length - 1)
-                                        ? URLEncoder.encode(" or ", "UTF-8") : ""));
+                                queryString.append(URLEncoder.encode(" or ", "UTF-8"));
                             }
                             globalIteratorInner++;
                         }
-                        globalIterator++;
-                    }
-                    System.out.println((endpointQuery + queryString).length() + " " + endpointQuery + queryString);
-                    sageOneResponseObject = SageOneApiConnector.sageOneGrabData(endpointQuery +
-                            queryString.toString(), SageOneSupplier.class, true, companyId);
 
-                    if (sageOneResponseObject.getSuccess()) {
-                        sageOneCustomersGrabbed.addAll((sageOneResponseObject.getResponseObject() != null) ?
-                                (List<T>) sageOneResponseObject.getResponseObject() : sageOneCustomersGrabbed);
-                    } else {
-                        System.out.println(sageOneResponseObject.getResponseMessage());
+                        if(response && condSearchAnyVal2 && (condSearchAnyVal1 > 5 || (sageOneEntityType.GetObject.getClassProperty().getDeclaredFields().length - globalIterator) < 5)) {
+                            condSearchAnyVal1 = 0;
+                            condSearchAnyVal2 = false;
+
+                            sageOneResponseObject = SageOneApiConnector.sageOneGrabData(endpointQuery + queryString.substring(0, queryString.length() - 4),
+                            sageOneEntityType.GetObject.getClassProperty(), true, companyId);
+
+                            if (sageOneResponseObject.getSuccess() && response) {
+                                sageOneCustomersGrabbed.addAll((sageOneResponseObject.getResponseObject() != null) ?
+                                        (List<T>) sageOneResponseObject.getResponseObject() : sageOneCustomersGrabbed);
+                                queryString = new StringBuilder(values.length * 200);
+                            } else {
+                                sageOneCustomersGrabbed = new ArrayList<T>();
+                                response = false;
+                                System.out.println(sageOneResponseObject.getResponseMessage());
+                            }
+                        }
+                        globalIterator++;
                     }
                 } else {
                     sageOneCustomersGrabbed = null;
-
                     System.out.println("SageOneCompany does not exist for the specified Sage One User -> " +
                             "SageOneApiTemplate.class");
                 }

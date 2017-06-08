@@ -2,7 +2,7 @@
 package SageOneIntegration.SageOneApiEntities;
 
 
-enum SageOneTaxSystemClass {
+public enum SageOneTaxSystemClass {
     InvoiceBased(0), PaymentsBased(1), NoTax(2);
 
     private final int ID;
