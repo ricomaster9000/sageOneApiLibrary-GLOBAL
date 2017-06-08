@@ -25,8 +25,8 @@ sageOneApi.SA.apiKey = 'sd24d-....' (don't include the brackets, it gets added a
 
 sageOneApi.SA.apiUrl = 'base url for api call' (this isn't required as the default should work)
 sageOneApi.SA.apiVersion = 'value' (default is 1.1.2)
-sageOneApi.SA.requestLimitDay = 'value' (default is 5000)
-sageOneApi.SA.requestLimitHour = 'value' (default is 100)
+sageOneApi.SA.requestLimitDay = 'value' (default is 6000)
+sageOneApi.SA.requestLimitHour = 'value' (default is 250)
 sageOneApi.SA.requestResultLimit = 'value' (default is 100)
 sageOneApi.SA.requestTimeout = 'value' (default is 30000(30 seconds))
 sageOneApi.SA.requestSocketTimeout = 'value' (default is 30000(30 seconds)) -> 
@@ -79,9 +79,7 @@ SageOneApiTemplate.searchEntitiesByAnyMatchedPropertyValues(final String company
 -> search for the sage one entity based on the SageOneEntityType parameter passed, pass the property names you want to search
    by as a parameter and make sure the values array parameter is the same length as the property name array parameter,
    if any of the property names is found with their matching value then it will be returned, don't use property names
-   that has SageOneObject class value types, it will prevent you from using them and don't use inappropriate property
-   values which value type isn't the same as the property value type (don't use 'a' for the ID property name which should
-   be a int).
+   that has SageOneObject class value types, it will prevent you from using them.
 ```
 ```
 SageOneApiTemplate.searchEntitiesByAllMatchedPropertyValues(final String companyName,
@@ -92,9 +90,7 @@ SageOneApiTemplate.searchEntitiesByAllMatchedPropertyValues(final String company
 -> search for the sage one entity based on the SageOneEntityType parameter passed, pass the property names you want to search
    by as a parameter and make sure the values array parameter is the same length as the property name array parameter,
    if all of the property names is found with their matching value then it will be returned, don't use property names
-   that has SageOneObject class value types, it will prevent you from using them and don't use inappropriate property
-   values which value type isn't the same as the property value type (don't use 'a' for the ID property name which should
-   be a int).
+   that has SageOneObject class value types, it will prevent you from using them.
 ```
 ```
 SageOneApiTemplate.searchEntitiesByAnyValues(final String companyName,

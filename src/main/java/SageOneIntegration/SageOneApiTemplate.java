@@ -52,7 +52,9 @@ public final class SageOneApiTemplate {
     private static boolean condSearchAnyVal7 = false;
     private static boolean condSearchAnyVal8 = false;
     private static boolean condSearchAnyVal9 = false;
+    private static boolean condSearchAnyVal10 = false;
 
+    private static boolean condFilterVal1 = false;
 
     private static final String ODataFilter1 = "Get?$filter=";
     private static final String ODataFilter2 = "Name eq '";
@@ -93,7 +95,7 @@ public final class SageOneApiTemplate {
                         }
 
                         sageOneCustomersGrabbed.addAll((sageOneResponseObject.getResponseObject() != null) ?
-                            (List<SageOneCustomer>) sageOneResponseObject.getResponseObject() : sageOneCustomersGrabbed);
+                        (List<SageOneCustomer>) sageOneResponseObject.getResponseObject() : new ArrayList<SageOneCustomer>());
                     } else {
                         System.out.println(sageOneResponseObject.getResponseMessage());
                         break;
@@ -139,12 +141,12 @@ public final class SageOneApiTemplate {
                         }
 
                         sageOneCustomersGrabbed.addAll((sageOneResponseObject.getResponseObject() != null) ?
-                                (List<SageOneSupplier>) sageOneResponseObject.getResponseObject() : sageOneCustomersGrabbed);
+                                (List<SageOneSupplier>) sageOneResponseObject.getResponseObject() : new ArrayList<SageOneSupplier>());
                     } else {
                         System.out.println(sageOneResponseObject.getResponseMessage());
                     }
             } else {
-                sageOneCustomersGrabbed = null;
+                sageOneCustomersGrabbed = (sageOneCustomersGrabbed.size() <= 0) ? new ArrayList<SageOneSupplier>() : sageOneCustomersGrabbed;
 
                 System.out.println("SageOneCompany does not exist for the specified Sage One User -> " +
                         "SageOneApiTemplate.class");
@@ -167,11 +169,31 @@ public final class SageOneApiTemplate {
                 response = false;
             }
             if(response) {
-                Field field = sageOneEntityType.GetObject.getClassProperty().getDeclaredField(propertyName);
-                for (SageOneEntityType sageOneEntity : sageOneEntityType.values()) {
-                    if (field.getType().isAssignableFrom(sageOneEntity.GetObject.getClassProperty())) {
-                        response = false;
-                        break;
+                condFilterVal1 = false;
+                Class<?> var_01 = sageOneEntityType.GetObject.getClassProperty().getDeclaredField(propertyName).getType();
+                if(var_01.isAssignableFrom(Integer.class) || var_01.isAssignableFrom(Long.class)) {
+                    condFilterVal1 = true;
+                    response = (propertyValue.matches(GENERAL_DIGIT_REGEX));
+                } else if(var_01.isAssignableFrom(double.class)) {
+                    condFilterVal1 = true;
+                    response = (propertyValue.matches(GENERAL_PRICE_REGEX));
+                } else if(var_01.isAssignableFrom(String.class)) {
+                    response = true;
+                } else if(var_01.isAssignableFrom(Date.class)) {
+                    response = true;
+                } else if(var_01.isAssignableFrom(Boolean.class)) {
+                    response = (propertyValue.toUpperCase().equals("TRUE") ||
+                            propertyValue.toUpperCase().equals("FALSE"));
+                } else {
+                    for (SageOneEntityType sageOneEntity : SageOneEntityType.values()) {
+                        if (var_01.isAssignableFrom(sageOneEntity.GetObject.getClassProperty())) {
+                            response = false;
+                            break;
+                        }
+                    }
+                    if(!response) {
+                        throw new NoSuchFieldException("Value passed as parameter is incompatible with value type of property name " +
+                                "'" + propertyName + "' in SageOneApiTemplate class");
                     }
                 }
             }
@@ -191,17 +213,17 @@ public final class SageOneApiTemplate {
 
                 if (response) {
                     sageOneResponseObject = SageOneApiConnector.sageOneGrabData(endpointQuery +
-                            URLEncoder.encode(propertyName + " eq " + "'" + propertyValue + "'", "UTF-8"),
+                            URLEncoder.encode(((condFilterVal1) ? propertyName + " eq " + propertyValue  : propertyName + " eq " + "'" + propertyValue + "'"), "UTF-8"),
                             sageOneEntityType.GetObject.getClassProperty(), true, companyId);
 
                     if (sageOneResponseObject.getSuccess()) {
                         sageOneCustomersGrabbed.addAll((sageOneResponseObject.getResponseObject() != null) ?
-                                (List<Object>) sageOneResponseObject.getResponseObject() : sageOneCustomersGrabbed);
+                                (List<Object>) sageOneResponseObject.getResponseObject() : new ArrayList<Object>());
                     } else {
                         System.out.println(sageOneResponseObject.getResponseMessage());
                     }
                 } else {
-                    sageOneCustomersGrabbed = null;
+                    sageOneCustomersGrabbed = (sageOneCustomersGrabbed.size() <= 0) ? new ArrayList<Object>() : sageOneCustomersGrabbed;
 
                     System.out.println("SageOneCompany does not exist for the specified Sage One User -> " +
                             "SageOneApiTemplate.class");
@@ -222,18 +244,38 @@ public final class SageOneApiTemplate {
                                                  final String propertyName, final String propertyValue) {
         boolean response = true;
         SageOneResponseObject sageOneResponseObject;
-        List<Object> sageOneCustomersGrabbed = new ArrayList<Object>();
+        List<Object> list1 = new ArrayList<Object>();
 
         try {
             if (sageOneEntityType.GetObject.getClassProperty().getDeclaredField(propertyName) == null) {
                 response = false;
             }
             if(response) {
-                Field field = sageOneEntityType.GetObject.getClassProperty().getDeclaredField(propertyName);
-                for (SageOneEntityType sageOneEntity : sageOneEntityType.values()) {
-                    if (field.getType().isAssignableFrom(sageOneEntity.GetObject.getClassProperty())) {
-                        response = false;
-                        break;
+                condFilterVal1 = false;
+                Class<?> var_01 = sageOneEntityType.GetObject.getClassProperty().getDeclaredField(propertyName).getType();
+                if(var_01.isAssignableFrom(Integer.class) || var_01.isAssignableFrom(Long.class)) {
+                    condFilterVal1 = true;
+                    response = (propertyValue.matches(GENERAL_DIGIT_REGEX));
+                } else if(var_01.isAssignableFrom(double.class)) {
+                    condFilterVal1 = true;
+                    response = (propertyValue.matches(GENERAL_PRICE_REGEX));
+                } else if(var_01.isAssignableFrom(String.class)) {
+                    response = true;
+                } else if(var_01.isAssignableFrom(Date.class)) {
+                    response = true;
+                } else if(var_01.isAssignableFrom(Boolean.class)) {
+                    response = (propertyValue.toUpperCase().equals("TRUE") ||
+                            propertyValue.toUpperCase().equals("FALSE"));
+                } else {
+                    for (SageOneEntityType sageOneEntity : SageOneEntityType.values()) {
+                        if (var_01.isAssignableFrom(sageOneEntity.GetObject.getClassProperty())) {
+                            response = false;
+                            break;
+                        }
+                    }
+                    if(!response) {
+                        throw new NoSuchFieldException("Value passed as parameter is incompatible with value type of property name " +
+                                "'" + propertyName + "' in SageOneApiTemplate class");
                     }
                 }
             }
@@ -252,17 +294,17 @@ public final class SageOneApiTemplate {
 
                 if (response) {
                     sageOneResponseObject = SageOneApiConnector.sageOneGrabData(endpointQuery +
-                            URLEncoder.encode(propertyName + " eq " + "'" + propertyValue + "'", "UTF-8"),
+                            URLEncoder.encode(((condFilterVal1) ? propertyName + " eq " + propertyValue : propertyName + " eq " + "'" + propertyValue + "'"), "UTF-8"),
                             sageOneEntityType.GetObject.getClassProperty(), true, companyId);
 
                     if (sageOneResponseObject.getSuccess()) {
-                        sageOneCustomersGrabbed.addAll((sageOneResponseObject.getResponseObject() != null) ?
-                                (List<T>) sageOneResponseObject.getResponseObject() : sageOneCustomersGrabbed);
+                        list1.addAll((sageOneResponseObject.getResponseObject() != null) ?
+                                (List<T>) sageOneResponseObject.getResponseObject() : new ArrayList<Object>());
                     } else {
                         System.out.println(sageOneResponseObject.getResponseMessage());
                     }
                 } else {
-                    sageOneCustomersGrabbed = null;
+                    list1 = (list1.size() <= 0) ? new ArrayList<Object>() : list1;
 
                     System.out.println("SageOneCompany does not exist for the specified Sage One User -> " +
                             "SageOneApiTemplate.class");
@@ -271,12 +313,12 @@ public final class SageOneApiTemplate {
                 e.printStackTrace();
             }
         } else {
-            sageOneCustomersGrabbed = new ArrayList<Object>();
+            list1 = new ArrayList<Object>();
 
             System.out.println("property value isn't the correct value type for the specified property name or it property doesn't exist ->" +
                     " SageOneApiTemplate.class");
         }
-        return (sageOneCustomersGrabbed != null) ? (List<T>) sageOneCustomersGrabbed : (List<T>) sageOneCustomersGrabbed;
+        return (list1 != null) ? (List<T>) list1 : (List<T>) list1;
     }
 
     public static <T> List<T> searchEntitiesByAnyMatchedPropertyValues(final String companyName,
@@ -285,7 +327,7 @@ public final class SageOneApiTemplate {
                                                                        final String[] propertyValues) {
         boolean response = true;
         SageOneResponseObject sageOneResponseObject;
-        List<T> sageOneCustomersGrabbed = new ArrayList<T>();
+        List<T> list1 = new ArrayList<T>();
 
         try {
             if (propertyNames.length != propertyValues.length) {
@@ -311,17 +353,33 @@ public final class SageOneApiTemplate {
             }
             if (response) {
                 try {
+                    globalIterator = 0;
                     for(String propertyName : propertyNames) {
-                        Field field = sageOneEntityType.GetObject.getClassProperty().getDeclaredField(propertyName);
-                        for (SageOneEntityType sageOneEntity : sageOneEntityType.values()) {
-                            if (field.getType().isAssignableFrom(sageOneEntity.GetObject.getClassProperty())) {
-                                response = false;
+                        condFilterVal1 = false;
+                        Class<?> var00_1 = sageOneEntityType.GetObject.getClassProperty().getDeclaredField(propertyName).getType();
+                        if(var00_1.isAssignableFrom(Integer.class) || var00_1.isAssignableFrom(Long.class)) {
+                            response = (propertyValues[globalIterator].matches(GENERAL_DIGIT_REGEX));
+                        } else if(var00_1.isAssignableFrom(double.class)) {
+                            response = (propertyValues[globalIterator].matches(GENERAL_PRICE_REGEX));
+                        } else if(var00_1.isAssignableFrom(String.class)) {
+                            response = true;
+                        } else if(var00_1.isAssignableFrom(Date.class)) {
+                            response = true;
+                        } else if(var00_1.isAssignableFrom(Boolean.class)) {
+                            response = (propertyValues[globalIterator].toUpperCase().equals("TRUE") ||
+                                    propertyValues[globalIterator].toUpperCase().equals("FALSE"));
+                        } else {
+                            for (SageOneEntityType sageOneEntity : SageOneEntityType.values()) {
+                                if (var00_1.isAssignableFrom(sageOneEntity.GetObject.getClassProperty())) {
+                                    response = false;
+                                    break;
+                                }
+                            }
+                            if(!response) {
                                 break;
                             }
                         }
-                        if(!response) {
-                            break;
-                        }
+                        globalIterator++;
                     }
                 } catch (NoSuchFieldException e) {
                     e.printStackTrace();
@@ -339,11 +397,27 @@ public final class SageOneApiTemplate {
                         if (response) {
                             globalIterator = 0;
                             queryString = new StringBuilder(propertyNames.length * 200);
+                            Class<?> var00_1 = null;
                             for (String propertyName : propertyNames) {
+                                condFilterVal1 = false;
+                                try {
+                                    var00_1 = sageOneEntityType.GetObject.getClassProperty().getDeclaredField(propertyName).getType();
+                                    if(var00_1.isAssignableFrom(Integer.class) || var00_1.isAssignableFrom(Long.class) || var00_1.isAssignableFrom(double.class)) {
+                                        condFilterVal1 = true;
+                                    }
+                                } catch(NoSuchFieldException e) {
+                                    e.printStackTrace();
+                                    break;
+                                }
                                 queryString.append(propertyName);
-                                queryString.append(" eq '");
-                                queryString.append(propertyValues[globalIterator]);
-                                queryString.append("'");
+                                if(condFilterVal1) {
+                                    queryString.append(" eq ");
+                                    queryString.append(propertyValues[globalIterator]);
+                                } else {
+                                    queryString.append(" eq '");
+                                    queryString.append(propertyValues[globalIterator]);
+                                    queryString.append("'");
+                                }
                                 globalIterator++;
                                 queryString.append(((propertyNames.length > globalIterator) ? " or " : ""));
                             }
@@ -353,13 +427,13 @@ public final class SageOneApiTemplate {
                                     true, companyId);
 
                             if (sageOneResponseObject.getSuccess()) {
-                                sageOneCustomersGrabbed.addAll((sageOneResponseObject.getResponseObject() != null) ?
-                                        (List<T>) sageOneResponseObject.getResponseObject() : sageOneCustomersGrabbed);
+                                list1.addAll((sageOneResponseObject.getResponseObject() != null) ?
+                                        (List<T>) sageOneResponseObject.getResponseObject() : new ArrayList<T>());
                             } else {
                                 System.out.println(sageOneResponseObject.getResponseMessage());
                             }
                         } else {
-                            sageOneCustomersGrabbed = null;
+                            list1 = (list1.size() <= 0) ? new ArrayList<T>() : list1;
 
                             System.out.println("SageOneCompany does not exist for the specified Sage One User -> " +
                                     "SageOneApiTemplate.class");
@@ -369,13 +443,13 @@ public final class SageOneApiTemplate {
                     }
                 }
             } else {
-                sageOneCustomersGrabbed = new ArrayList<T>();
+                list1 = new ArrayList<T>();
                 System.out.println("Property name doesn't exist in sageOneEntityType parameter class object -> " +
                         "SageOneApiTemplate.class");
 
             }
         }
-        return (sageOneCustomersGrabbed != null) ? sageOneCustomersGrabbed : new ArrayList<T>();
+        return (list1 != null) ? list1 : new ArrayList<T>();
     }
 
     public static <T> List<T> searchEntitiesByAllMatchedPropertyValues(final String companyName,
@@ -411,17 +485,32 @@ public final class SageOneApiTemplate {
 
             if (response) {
                 try {
+                    globalIterator = 0;
                     for(String propertyName : propertyNames) {
-                        Field field = sageOneEntityType.GetObject.getClassProperty().getDeclaredField(propertyName);
-                        for (SageOneEntityType sageOneEntity : sageOneEntityType.values()) {
-                            if (field.getType().isAssignableFrom(sageOneEntity.GetObject.getClassProperty())) {
-                                response = false;
+                        Class<?> var00_1 = sageOneEntityType.GetObject.getClassProperty().getDeclaredField(propertyName).getType();
+                        if(var00_1.isAssignableFrom(Integer.class) || var00_1.isAssignableFrom(Long.class)) {
+                            response = (propertyValues[globalIterator].matches(GENERAL_DIGIT_REGEX));
+                        } else if(var00_1.isAssignableFrom(double.class)) {
+                            response = (propertyValues[globalIterator].matches(GENERAL_PRICE_REGEX));
+                        } else if(var00_1.isAssignableFrom(String.class)) {
+                            response = true;
+                        } else if(var00_1.isAssignableFrom(Date.class)) {
+                            response = true;
+                        } else if(var00_1.isAssignableFrom(Boolean.class)) {
+                            response = (propertyValues[globalIterator].toUpperCase().equals("TRUE") ||
+                                        propertyValues[globalIterator].toUpperCase().equals("FALSE"));
+                        } else {
+                            for (SageOneEntityType sageOneEntity : SageOneEntityType.values()) {
+                                if (var00_1.isAssignableFrom(sageOneEntity.GetObject.getClassProperty())) {
+                                    response = false;
+                                    break;
+                                }
+                            }
+                            if(!response) {
                                 break;
                             }
                         }
-                        if(!response) {
-                            break;
-                        }
+                        globalIterator++;
                     }
                 } catch (NoSuchFieldException e) {
                     e.printStackTrace();
@@ -438,11 +527,28 @@ public final class SageOneApiTemplate {
                     if (response) {
                         globalIterator = 0;
                         queryString = new StringBuilder(propertyNames.length * 200);
+                        Class<?> var00_1 = null;
                         for (String propertyName : propertyNames) {
                             queryString.append(propertyName);
-                            queryString.append(" eq '");
-                            queryString.append(propertyValues[globalIterator]);
-                            queryString.append("'");
+                            condFilterVal1 = false;
+                            try {
+                                var00_1 = sageOneEntityType.GetObject.getClassProperty().getDeclaredField(propertyName).getType();
+                                if(var00_1.isAssignableFrom(Integer.class) || var00_1.isAssignableFrom(Long.class) || var00_1.isAssignableFrom(double.class)) {
+                                    condFilterVal1 = true;
+                                }
+                            } catch(NoSuchFieldException e) {
+                                e.printStackTrace();
+                                break;
+                            }
+                            queryString.append(propertyName);
+                            if(condFilterVal1) {
+                                queryString.append(" eq ");
+                                queryString.append(propertyValues[globalIterator]);
+                            } else {
+                                queryString.append(" eq '");
+                                queryString.append(propertyValues[globalIterator]);
+                                queryString.append("'");
+                            }
                             globalIterator++;
                             queryString.append(((propertyNames.length > globalIterator) ? " and " : ""));
                         }
@@ -451,12 +557,12 @@ public final class SageOneApiTemplate {
 
                         if (sageOneResponseObject.getSuccess()) {
                             sageOneCustomersGrabbed.addAll((sageOneResponseObject.getResponseObject() != null) ?
-                                    (List<T>) sageOneResponseObject.getResponseObject() : sageOneCustomersGrabbed);
+                                    (List<T>) sageOneResponseObject.getResponseObject() : new ArrayList<T>());
                         } else {
                             System.out.println(sageOneResponseObject.getResponseMessage());
                         }
                     } else {
-                        sageOneCustomersGrabbed = new ArrayList<T>();
+                        sageOneCustomersGrabbed = (sageOneCustomersGrabbed.size() <= 0) ? new ArrayList<T>() : sageOneCustomersGrabbed;
                         System.out.println("SageOneCompany does not exist for the specified Sage One User -> " +
                                 "SageOneApiTemplate.class");
                     }
@@ -526,49 +632,59 @@ public final class SageOneApiTemplate {
                         }
 
                         for (String propertyValue : values) {
-                            boolean mustContinue = true;
+                            condSearchAnyVal10 = true;
                             if(condSearchAnyVal3) {
-                                mustContinue = (propertyValue.matches(GENERAL_DIGIT_REGEX));
+                                condSearchAnyVal10 = (propertyValue.matches(GENERAL_DIGIT_REGEX));
                             } else if(condSearchAnyVal4) {
-                                mustContinue = (propertyValue.matches(GENERAL_PRICE_REGEX));
+                                condSearchAnyVal10 = (propertyValue.matches(GENERAL_PRICE_REGEX));
                             } else if(condSearchAnyVal5) {
-                                mustContinue = (propertyValue.matches(GENERAL_STRING_REGEX));
+                                condSearchAnyVal10 = (propertyValue.matches(GENERAL_STRING_REGEX));
                             } else if(condSearchAnyVal6) {
-                                mustContinue = (propertyValue.toUpperCase().equals("TRUE") || propertyValue.toUpperCase().equals("FALSE"));
+                                condSearchAnyVal10 = (propertyValue.toUpperCase().equals("TRUE") || propertyValue.toUpperCase().equals("FALSE"));
                             } else if(condSearchAnyVal7) {
-                                mustContinue = false;
+                                condSearchAnyVal10 = false;
                             } else if(condSearchAnyVal8) {
-                                mustContinue = false;
+                                condSearchAnyVal10 = false;
                             } else if(condSearchAnyVal9) {
-                                mustContinue = false;
+                                condSearchAnyVal10 = false;
                             }
 
                             condSearchAnyVal1++;
-                            if(mustContinue) {
+                            if(condSearchAnyVal10) {
                                 condSearchAnyVal2 = true;
-                                queryString.append("startswith(");
-                                queryString.append(field.getName());
-                                queryString.append(",'");
-                                queryString.append(propertyValue);
-                                queryString.append("')");
+                                if((condSearchAnyVal3 || condSearchAnyVal4)) {
+                                    queryString.append(field.getName());
+                                    queryString.append(URLEncoder.encode(" eq ", "UTF-8"));
+                                    queryString.append(propertyValue);
+                                } else {
+                                    queryString.append("startswith(");
+                                    queryString.append(field.getName());
+                                    queryString.append(",'");
+
+                                    queryString.append(propertyValue);
+                                    queryString.append("')");
+                                }
                                 queryString.append(URLEncoder.encode(" or ", "UTF-8"));
+                                condSearchAnyVal10 = false;
                             }
                             globalIteratorInner++;
                         }
 
-                        if(response && condSearchAnyVal2 && (condSearchAnyVal1 > 5 || (sageOneEntityType.GetObject.getClassProperty().getDeclaredFields().length - globalIterator) < 5)) {
+                        if(response && condSearchAnyVal2 && (condSearchAnyVal1 > 10 || (sageOneEntityType.GetObject.getClassProperty().getDeclaredFields().length - globalIterator) < 10)) {
                             condSearchAnyVal1 = 0;
                             condSearchAnyVal2 = false;
+
+                            System.out.println(queryString.substring(0, queryString.length() - 4));
 
                             sageOneResponseObject = SageOneApiConnector.sageOneGrabData(endpointQuery + queryString.substring(0, queryString.length() - 4),
                             sageOneEntityType.GetObject.getClassProperty(), true, companyId);
 
                             if (sageOneResponseObject.getSuccess() && response) {
                                 sageOneCustomersGrabbed.addAll((sageOneResponseObject.getResponseObject() != null) ?
-                                        (List<T>) sageOneResponseObject.getResponseObject() : sageOneCustomersGrabbed);
+                                        (List<T>) sageOneResponseObject.getResponseObject() : new ArrayList<T>());
                                 queryString = new StringBuilder(values.length * 200);
                             } else {
-                                sageOneCustomersGrabbed = new ArrayList<T>();
+                                sageOneCustomersGrabbed = (sageOneCustomersGrabbed.size() <= 0) ? new ArrayList<T>() : sageOneCustomersGrabbed;
                                 response = false;
                                 System.out.println(sageOneResponseObject.getResponseMessage());
                             }
@@ -606,12 +722,12 @@ public final class SageOneApiTemplate {
 
             if (sageOneResponseObject.getSuccess()) {
                 sageOneCustomersGrabbed.addAll((sageOneResponseObject.getResponseObject() != null) ?
-                        (List<SageOneCustomer>) sageOneResponseObject.getResponseObject() : sageOneCustomersGrabbed);
+                        (List<SageOneCustomer>) sageOneResponseObject.getResponseObject() : new ArrayList<SageOneCustomer>());
             } else {
                 System.out.println(sageOneResponseObject.getResponseMessage());
             }
         } else {
-            sageOneCustomersGrabbed = null;
+            sageOneCustomersGrabbed = (sageOneCustomersGrabbed.size() <= 0) ? new ArrayList<SageOneCustomer>() : sageOneCustomersGrabbed;
 
             System.out.println("SageOneCompany does not exist for the specified Sage One User -> " +
                         "SageOneApiTemplate.class");
