@@ -14,7 +14,9 @@ public enum SageOneEntityType {
     SUPPLIER_INVOICE("SupplierInvoice/", SageOneSupplierInvoice.class),
     COMPANY("Company/", SageOneCompany.class),
     ITEM("Item/", SageOneItem.class),
-    BANK_ACCOUNT("BankAccount/", SageOneBankAccount.class);
+    BANK_ACCOUNT("BankAccount/", SageOneBankAccount.class),
+    TAX_TYPE("TaxType/", SageOneTaxType.class),
+    SUPPLIER_CATEGORY("SupplierCategory/", SageOneSupplierCategory.class);
 
     public SageOneStringAndClassObject GetObject;
     SageOneEntityType(final String entityGetReqParamName, final Class<?> entityGetReqParamClass)  {

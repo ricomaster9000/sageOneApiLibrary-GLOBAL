@@ -30,6 +30,15 @@ public final class SageOneConstants {
 	static int CURRENT_DAY = CALENDAR.get(Calendar.DAY_OF_WEEK);
 	static int CURRENT_HOUR = CALENDAR.get(Calendar.HOUR_OF_DAY);
 
+	final static int MAX_STRING_LENGTH = 255; // For mysql, for VARCHAR() and not LONGTEXT/LONGBLOB/BLOBTEXT
+	final static int MAX_DIGIT_LENGTH = 18; // 18/19 for longs
+	final static int MAX_ATTACHMENT_BYTE_SIZE = 0; // TODO change to appropriate number
+	final static int MAX_PICTURE_ATTACHMENT_BYTE_SIZE = 5000000; // TODO change to appropriate number
+	final static int MAX_PRICE_NUMBER_LENGTH = 14; // The max length for prices
+	final static String GENERAL_DIGIT_REGEX = "[.0-9.]{1," + MAX_DIGIT_LENGTH + "}";
+	final static String GENERAL_PRICE_REGEX = "[.0-9.]+[.]+[.0-9.]{1," + MAX_PRICE_NUMBER_LENGTH + "}";
+	final static String GENERAL_STRING_REGEX = "[.*\\S .]{1," + MAX_STRING_LENGTH + "}";
+
 	public final static Map<String, Integer> getSageOneApiCompanyList() {
 		return SageOneConstants.COMPANY_LIST;
 	}

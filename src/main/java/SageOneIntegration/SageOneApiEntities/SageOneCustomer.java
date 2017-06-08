@@ -23,9 +23,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.util.Date;
 import java.util.UUID;
 
-/**
- * Created by brent on 2017/05/31.
- */
 @JsonDeserialize(builder = SageOneCustomer.Builder.class)
 public final class SageOneCustomer {
    private final Integer ID;

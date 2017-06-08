@@ -43,8 +43,8 @@ public final class SageOneSupplier {
     //String length: inclusive between 0 and 100
     private final String WebAddress;
     private final Boolean Active;
-    private final Double Balance;
-    private final Double CreditLimit;
+    private final double Balance;
+    private final double CreditLimit;
     //String length: inclusive between 0 and 100
     private final String PostalAddress01;
     private final String PostalAddress02;
@@ -63,9 +63,9 @@ public final class SageOneSupplier {
     private final String TextField2;
     private final String TextField3;
     //---------------------------------------
-    private final Double NumericField1;
-    private final Double NumericField2;
-    private final Double NumericField3;
+    private final double NumericField1;
+    private final double NumericField2;
+    private final double NumericField3;
     private final Boolean YesNoField1;
     private final Boolean YesNoField2;
     private final Boolean YesNoField3;
@@ -79,7 +79,7 @@ public final class SageOneSupplier {
     private final Date TaxStatusVerified;
     private final Integer CurrencyId;
     private final Boolean HasActivity;
-    private final Double DefaultDiscountPercentage;
+    private final double DefaultDiscountPercentage;
     private final Integer DefaultTaxTypeId;
     private final SageOneTaxType defaultSageOneTaxType;
     private final Integer DueDateMethodId;
@@ -633,60 +633,5 @@ public final class SageOneSupplier {
 
     public String getCurrencySymbol() {
         return CurrencySymbol;
-    }
-
-    @Override
-    public String toString() {
-        return "Supplier{" +
-                "id=" + ID +
-                ", Name='" + Name + '\'' +
-                ", Category=" + Category +
-                ", TaxReference='" + TaxReference + '\'' +
-                ", ContactName='" + ContactName + '\'' +
-                ", Telephone='" + Telephone + '\'' +
-                ", Fax='" + Fax + '\'' +
-                ", Mobile='" + Mobile + '\'' +
-                ", Email='" + Email + '\'' +
-                ", WebAddress='" + WebAddress + '\'' +
-                ", Active=" + Active +
-                ", Balance=" + Balance +
-                ", CreditLimit=" + CreditLimit +
-                ", PostalAddress01='" + PostalAddress01 + '\'' +
-                ", PostalAddress02='" + PostalAddress02 + '\'' +
-                ", PostalAddress03='" + PostalAddress03 + '\'' +
-                ", PostalAddress04='" + PostalAddress04 + '\'' +
-                ", PostalAddress05='" + PostalAddress05 + '\'' +
-                ", DeliveryAddress01='" + DeliveryAddress01 + '\'' +
-                ", DeliveryAddress02='" + DeliveryAddress02 + '\'' +
-                ", DeliveryAddress03='" + DeliveryAddress03 + '\'' +
-                ", DeliveryAddress04='" + DeliveryAddress04 + '\'' +
-                ", DeliveryAddress05='" + DeliveryAddress05 + '\'' +
-                ", AutoAllocateToOldestInvoice=" + AutoAllocateToOldestInvoice +
-                ", TextField1='" + TextField1 + '\'' +
-                ", TextField2='" + TextField2 + '\'' +
-                ", TextField3='" + TextField3 + '\'' +
-                ", NumericField1=" + NumericField1 +
-                ", NumericField2=" + NumericField2 +
-                ", NumericField3=" + NumericField3 +
-                ", YesNoField1=" + YesNoField1 +
-                ", YesNoField2=" + YesNoField2 +
-                ", YesNoField3=" + YesNoField3 +
-                ", DateField1=" + DateField1 +
-                ", DateField2=" + DateField2 +
-                ", DateField3=" + DateField3 +
-                ", Modified=" + Modified +
-                ", Created=" + Created +
-                ", BusinessRegistrationNumber='" + BusinessRegistrationNumber + '\'' +
-                ", RMCDApprovalNumber='" + RMCDApprovalNumber + '\'' +
-                ", TaxStatusVerified=" + TaxStatusVerified +
-                ", CurrencyId=" + CurrencyId +
-                ", HasActivity=" + HasActivity +
-                ", DefaultDiscountPercentage=" + DefaultDiscountPercentage +
-                ", DefaultTaxTypeId=" + DefaultTaxTypeId +
-                ", defaultSageOneTaxType=" + defaultSageOneTaxType +
-                ", DueDateMethodId=" + DueDateMethodId +
-                ", DueDateMethodValue=" + DueDateMethodValue +
-                ", CurrencySymbol='" + CurrencySymbol + '\'' +
-                '}';
     }
 }

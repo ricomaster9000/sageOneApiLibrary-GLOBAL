@@ -29,14 +29,10 @@
         <developer>
             <name>Ricardo Minnaar</name>
             <email>ricorpwd@yahoo.co.za</email>
-            <organization>Nerdy.co.za</organization>
-            <organizationUrl>https://www.nerdy.co.za</organizationUrl>
         </developer>
         <developer>
             <name>Brent Steyn</name>
             <email>steyn7788@gmail.com</email>
-            <organization>Nerdy.co.za</organization>
-            <organizationUrl>https://www.nerdy.co.za</organizationUrl>
         </developer>
     </developers>
     <dependencies>
