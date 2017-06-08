@@ -404,11 +404,8 @@ public final class SageOneApiConnector {
 			} else {
 				endpoint = endpointPlusQuery;
 			}
-			System.out.println(endpoint);
 			SageOneResponseJsonObject jsonResponse = ConnectionCoreCodeReturnResponseJson(companyId, (runningInner) ?
 			endpoint + "&$skip=" + globalSkipIterator : endpoint, "GET", null);
-			System.out.println(jsonResponse.getResponseJson());
-
 			if(mustReturnResultObject && jsonResponse.getSuccess()) {
 				SageOneGrabbedResultsClass responseResultObject =
 				objectMapper.readValue(jsonResponse.getResponseJson(), SageOneGrabbedResultsClass.class);
