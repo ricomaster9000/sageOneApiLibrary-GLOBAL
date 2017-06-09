@@ -42,7 +42,7 @@ SageOneConstants.getSageOneApiCompanyList() Map variable ->
 Gets the company list which was initialized with all the companies related to the user in the SageOneApiConnector.setupSageOneApiSA(Properties properties) method, from here you can grab company id's by passing in the name of the company in the .get() method of getSageOneApiCompanyList()
 ```
 ```
-SageOne Entities, all of them lies in the SageOneIntegration.SageOneApiEntities package, include them from here, these entity classes will especially be used to save/persist SageOne entities to the SageOne account, use them SageOneEntityType enum class (enum will be used as parameter for template method)
+SageOne Entities, all of them lies in the SageOneIntegration.SageOneApiEntities package, include them from here, these entity classes will especially be used to save/persist SageOne entities to the SageOne account, use the SageOneEntityType enum class (enum will be used as parameter for template method)
 ```
 
 ### Template Methods
@@ -106,6 +106,6 @@ deleteSageOneEntity(final String CompanyName, final SageOneEntityType sageOneEnt
                     final Integer entityId)
 
 -> deletes the sage one entity based on the SageOneEntityType passed and with the entityId specified, note that not all
-   entities are deletable. Returns a boolean response of the operation was successful
+   entities are deletable. Returns a boolean response if the operation was successful or not
 ```
 https://github.com/ricomaster9000/sageOneApiLibrary-SA/
