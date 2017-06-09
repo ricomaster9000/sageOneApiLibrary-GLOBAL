@@ -8,6 +8,7 @@ final class SageOneStringAndClassObject {
     private String stringProperty = "";
     private Class<?> classProperty;
     private boolean canBeUsedInRequest = true;
+    private boolean canBeDeleted = true;
     private boolean initialized = false;
 
     SageOneStringAndClassObject(final String stringProperty, final Class<?> classProperty) {
@@ -16,13 +17,28 @@ final class SageOneStringAndClassObject {
         this.initialized = true;
     }
 
+    SageOneStringAndClassObject(final String stringProperty, final Class<?> classProperty, final boolean canBeDeleted) {
+        this.stringProperty = stringProperty;
+        this.classProperty = classProperty;
+        this.canBeDeleted = canBeDeleted;
+        this.initialized = true;
+    }
+
     SageOneStringAndClassObject(final Class<?> classProperty,
                                 final boolean canBeUsedInRequest) {
-        this.stringProperty = stringProperty;
         this.classProperty = classProperty;
         this.canBeUsedInRequest = canBeUsedInRequest;
         this.initialized = true;
     }
+
+    SageOneStringAndClassObject(final Class<?> classProperty,
+                                final boolean canBeUsedInRequest, final boolean canBeDeleted) {
+        this.classProperty = classProperty;
+        this.canBeUsedInRequest = canBeUsedInRequest;
+        this.canBeDeleted = canBeDeleted;
+        this.initialized = true;
+    }
+
 
     final String getStringProperty() {
         return (this.initialized) ? this.stringProperty : "";
@@ -46,6 +62,14 @@ final class SageOneStringAndClassObject {
 
     final void setCanBeUsedInRequest(final boolean canBeUsedInRequest) {
         this.canBeUsedInRequest = canBeUsedInRequest;
+    }
+
+    final boolean getCanBeDeleted() {
+        return (this.initialized && this.canBeDeleted);
+    }
+
+    final void setCanBeDeleted(final boolean canBeDeleted) {
+        this.canBeDeleted = (this.initialized) ? canBeDeleted : this.canBeDeleted;
     }
 
     @Override

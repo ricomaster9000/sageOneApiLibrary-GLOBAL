@@ -33,7 +33,7 @@ public final class SageOneTaxType extends SageOneMainEntity {
     private Date Modified;
 
     public SageOneTaxType() {
-        this.setInitialized(true);
+
     }
 
     public String getName() {

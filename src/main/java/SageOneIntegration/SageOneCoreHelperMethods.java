@@ -137,4 +137,56 @@ public final class SageOneCoreHelperMethods {
         result = list.toArray(result);
         return (T[]) result;
     }
+
+    static final String custReplace(final String stringToReplace, final int stringSkipLength, final int stringLength,
+                                    final String... parameterStrings) {
+        char[] charString = stringToReplace.toCharArray();
+        int mainParameterIterator = 0;
+        int iterator = stringSkipLength;
+        int parameterStringsLength = parameterStrings.length;
+        int howMuchToPlus = (stringLength % 2 == 1) ? 3 : 4;
+
+        while(parameterStringsLength > mainParameterIterator) {
+            for(;iterator < stringLength; iterator += howMuchToPlus) {
+                if(charString[iterator] == '#') {
+                    charString[iterator - 3] = Character.MIN_VALUE;
+                    charString[iterator - 2] = Character.MIN_VALUE;
+                    charString[iterator - 1] = Character.MIN_VALUE;
+                    charString[iterator] = Character.MIN_VALUE;
+
+                    System.arraycopy(parameterStrings[mainParameterIterator].toCharArray(), 0, charString,
+                    charString[iterator], parameterStrings[mainParameterIterator].length());
+                    mainParameterIterator++;
+                } else if(charString[iterator + 1] == '#') {
+                    charString[iterator - 2] = Character.MIN_VALUE;
+                    charString[iterator - 1] = Character.MIN_VALUE;
+                    charString[iterator] = Character.MIN_VALUE;
+                    charString[iterator + 1] = Character.MIN_VALUE;
+
+                    System.arraycopy(parameterStrings[mainParameterIterator].toCharArray(), 0, charString,
+                        charString[iterator], parameterStrings[mainParameterIterator].length());
+                    mainParameterIterator++;
+                } else if(charString[iterator + 2] == '#') {
+                    charString[iterator - 1] = Character.MIN_VALUE;
+                    charString[iterator] = Character.MIN_VALUE;
+                    charString[iterator + 1] = Character.MIN_VALUE;
+                    charString[iterator + 2] = Character.MIN_VALUE;
+
+                    System.arraycopy(parameterStrings[mainParameterIterator].toCharArray(), 0, charString,
+                            charString[iterator], parameterStrings[mainParameterIterator].length());
+                    mainParameterIterator++;
+                } else if(charString[iterator + 3] == '#') {
+                    charString[iterator + 1] = Character.MIN_VALUE;
+                    charString[iterator + 2] = Character.MIN_VALUE;
+                    charString[iterator + 3] = Character.MIN_VALUE;
+                    charString[iterator] = Character.MIN_VALUE;
+
+                    System.arraycopy(parameterStrings[mainParameterIterator].toCharArray(), 0, charString,
+                    charString[iterator], parameterStrings[mainParameterIterator].length());
+                    mainParameterIterator++;
+                }
+            }
+        }
+        return new String(charString);
+    }
 }

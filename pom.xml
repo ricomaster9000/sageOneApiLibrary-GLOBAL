@@ -3,16 +3,16 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.ricardo.sageOne</groupId>
+    <groupId>org.github.ricomaster9000</groupId>
     <artifactId>api-SA</artifactId>
-    <version>v0.98b2</version>
+    <version>v1.00b1</version>
     <packaging>jar</packaging>
 
     <name>SageOne Api South Africa Library</name>
     <description>
     A library that contains pre-written code to connect and access the SageOne SA Api (v.1.1.2), it also
     comes with a template that makes use of these pre-written component code to access the SageOne SA api, the template
-    will contain methods (mostly dynamic or generic) that a developer will use to build this library into his app.
+    contains methods (mostly dynamic or generic) that a developer can use to build this library into his/her app.
     </description>
     <url>https://github.com/ricomaster9000/sageOneApiLibrary-SA</url>
 

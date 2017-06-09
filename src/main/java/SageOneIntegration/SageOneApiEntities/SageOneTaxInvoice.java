@@ -20,9 +20,6 @@ package SageOneIntegration.SageOneApiEntities;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.util.Date;
-import java.util.concurrent.Callable;
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
 
 @JsonDeserialize(builder = SageOneTaxInvoice.Builder.class)
 public final class SageOneTaxInvoice {

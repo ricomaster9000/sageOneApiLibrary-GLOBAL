@@ -1,4 +1,4 @@
-# sageOneApiLibrary-SA V0.98b2 (First Beta)
+# sageOneApiLibrary-SA V1.00b1 (Early Beta)
 A library that contains pre-written code to connect and access the SageOne South Africa Api (v.1.1.2), it also comes with a template that makes use of these pre-written component code to access the SageOne SA api, the template contains methods (mostly dynamic or generic) that a developer can use to build this library into his/her app. Compatible with java 1.6 and upwards.
 
 ### HOW TO USE
@@ -8,7 +8,7 @@ add as dependency by using jitpack.io, go to this link to see how https://jitpac
 ``
 USER = ricomaster9000
 REPO/REPOSITORY = sageOneApiLibrary-SA
-TAG/VERSION = v0.98b2
+TAG/VERSION = V1.00b1
 ``
 
 Please run the method SageOneApiConnector.setupSageOneApiSA(Properties properties) to initialize this library's code with your App's Properties class object (usually System.getProperties()) and make sure the below first 3 fields/properties appear in your properties file and have the required (also correct) assigned values, the rest have default values but can be overriden.
@@ -99,5 +99,12 @@ SageOneApiTemplate.searchEntitiesByAnyValues(final String companyName,
 -> searches all the property names (if they are not a sageOneObject class and the relevant value is correct type of value,
    for example 'a' won't be used to grab values from a int type property name) of the sageOne entity which is determined
    in the SageOneEntityType parameter, note that multiple requests can be send, all values are used in all property names.
+```
+```
+deleteSageOneEntity(final String CompanyName, final SageOneEntityType sageOneEntityType,
+                    final Integer entityId)
+
+-> deletes the sage one entity based on the SageOneEntityType passed and with the entityId specified, note that not all
+   entities are deletable. Returns a boolean response of the operation was successful
 ```
 https://github.com/ricomaster9000/sageOneApiLibrary-SA/

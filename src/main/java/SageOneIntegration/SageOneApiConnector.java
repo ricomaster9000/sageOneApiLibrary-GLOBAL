@@ -27,6 +27,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.StatusLine;
 import org.apache.http.client.config.AuthSchemes;
 import org.apache.http.client.config.CookieSpecs;
 import org.apache.http.client.config.RequestConfig;
@@ -280,8 +281,8 @@ public final class SageOneApiConnector {
 					System.out.println("Companies with their id's successfully grabbed and listed from Sage One Accounting" +
 					" account");
 				} else {
-					System.out.println("Companies with their id's successfully grabbed and listed from Sage One Accounting" +
-					" account");
+					System.out.println("Sage One Integration code, could not setup CompanyId list, request failed or processing of data failed" +
+							", check log for details.");
 				}
 			} catch (UnsupportedEncodingException e) {
 				response = false;
@@ -306,14 +307,12 @@ public final class SageOneApiConnector {
 	}
 
 	private static SageOneResponseJsonObject ConnectionCoreCodeReturnResponseJson(final Integer companyId,
-										      String endpoint,
-										      final String requestMethod,														  final String jsonEntityToPost) {
+										      String endpoint, final String requestMethod,														  final String jsonEntityToPost) {
 		boolean response = true;
 		String resultToReturn = "";
 		HttpRequestBase request = null;
 
 		try {
-			endpoint = encodeCurlyBrackets(endpoint);
 			if(requestMethod.toUpperCase().equals("GET")) {
 				request = new HttpGet(endpoint);
 			} else if(requestMethod.toUpperCase().equals("POST")) {
@@ -342,21 +341,25 @@ public final class SageOneApiConnector {
 
 					request.addHeader("Content-Type", "application/json");
 					request.addHeader("Authorization", encodedCredidentials);
-					HttpResponse responseFromRquest = client.execute(request);
+					HttpResponse responseFromRequest = client.execute(request);
+					StatusLine responseCode = responseFromRequest.getStatusLine();
+					System.out.println(responseCode);
 
-					System.out.println(responseFromRquest.getStatusLine());
+					response = responseCode.getStatusCode() >= 200 && responseCode.getStatusCode() < 300;
+					System.out.println(response);
 
-					BufferedReader rd = new BufferedReader(new InputStreamReader(responseFromRquest.getEntity().getContent()));
+					if(response) {
+						BufferedReader rd = new BufferedReader(new InputStreamReader(responseFromRequest.getEntity().getContent()));
 
-					StringBuilder constructedResultString = new StringBuilder();
-					String line = "";
+						StringBuilder constructedResultString = new StringBuilder();
+						String line = "";
 
-					while ((line = rd.readLine()) != null) {
-						constructedResultString.append(line);
+						while ((line = rd.readLine()) != null) {
+							constructedResultString.append(line);
+						}
+						resultToReturn = constructedResultString.toString();
 					}
-
 					request.releaseConnection();
-					resultToReturn = constructedResultString.toString();
 				} else {
 					String string = "MAX REQUEST LIMIT REACHED FOR HOUR/DAY, REQUEST COUNTERS:\n" +
 							"DAY -> " + SageOneConstants.SAGE_ONE_REQUEST_COUNTER_DAY + "\n" +
@@ -385,7 +388,7 @@ public final class SageOneApiConnector {
 	}
 
 	public final static SageOneResponseObject sageOneGrabData(final String endpointPlusQuery, final Class<?> ObjectClassToMapTo,
-															  final boolean mustReturnResultObject, final int companyId) {
+													   final boolean mustReturnResultObject, final int companyId) {
 		SageOneResponseObject sageOneResponseObject = null;
 		String endpoint = "";
 
@@ -397,7 +400,7 @@ public final class SageOneApiConnector {
 				
 				endpoint = endpointPrefix + encodeCurlyBrackets(endpointPlusQuery) +
 					((endpointPlusQuery.contains("?") && endpointPlusQuery.contains("=")) ? 
-					"&" + endpointSuffixGet : "?" + endpointSuffixGet) + API_KEY +
+					"&" + endpointSuffixGet : "?" + endpointSuffixGet) + encodeCurlyBrackets(API_KEY) +
 					"&companyid=" + companyId;
 			} else {
 				endpoint = endpointPlusQuery;
@@ -439,13 +442,13 @@ public final class SageOneApiConnector {
 	}
 
 	public final static SageOneResponseObject sageOneSaveData(final Class<?> classToMapTo,
-															  final String endpointPlusQuery, final String jsonObject,
-															  final int companyId) {
+													   final String endpointPlusQuery, final String jsonObject,
+													   final int companyId) {
 		SageOneResponseObject.initializeClass();
 		SageOneResponseObject sageOneResponseObject = null;
 		String endpoint = "";
 		try {
-			endpoint = endpointPrefix + encodeCurlyBrackets(endpointPlusQuery) +
+			endpoint = endpointPrefix + endpointPlusQuery +
 					"apikey=" + encodeCurlyBrackets(API_KEY) + "&companyid=" + companyId;
 
 			SageOneResponseJsonObject jsonResponse = ConnectionCoreCodeReturnResponseJson(companyId, endpoint, "POST", jsonObject);
@@ -459,6 +462,32 @@ public final class SageOneApiConnector {
 			
 			sageOneResponseObject = new SageOneResponseObject(false, "An error occurred while " +
 			"trying to save data on the SageOne account, look on terminal or log files for details");
+		}
+
+		SageOneResponseObject.deInitializeClass();
+		return sageOneResponseObject;
+	}
+
+	public final static SageOneResponseObject deleteSageOneEntity(final String endpointPlusQuery,
+														   final int companyId) {
+		SageOneResponseObject.initializeClass();
+		SageOneResponseObject sageOneResponseObject = null;
+		String endpoint = "";
+		try {
+			endpoint = endpointPrefix + endpointPlusQuery +
+					"?apikey=" + encodeCurlyBrackets(API_KEY) + "&companyid=" + companyId;
+
+			SageOneResponseJsonObject jsonResponse = ConnectionCoreCodeReturnResponseJson(companyId, endpoint, "DELETE", null);
+
+			sageOneResponseObject = (jsonResponse.getSuccess())
+					? new SageOneResponseObject(true, jsonResponse.getResponseMessage()) :
+					new SageOneResponseObject(false, "Failed to delete data on SageOne account, the request failed");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+			sageOneResponseObject = new SageOneResponseObject(false, "An error occurred while " +
+					"trying to delete data on the SageOne account, look on terminal or log files for details");
 		}
 
 		SageOneResponseObject.deInitializeClass();

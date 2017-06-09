@@ -24,8 +24,9 @@ import SageOneIntegration.SageOneApiEntities.SageOneSupplier;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.io.IOException;
+import java.io.InvalidClassException;
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.net.URLEncoder;
 import java.sql.Date;
@@ -39,6 +40,8 @@ import static SageOneIntegration.SageOneConstants.GENERAL_STRING_REGEX;
 public final class SageOneApiTemplate {
     private static final Gson gson = new GsonBuilder().serializeNulls().create();
     private static StringBuilder queryString = new StringBuilder();
+    private static String queryStringNorm;
+
     private static int globalIterator = 0;
     private static int globalIteratorInner = 0;
 
@@ -55,6 +58,10 @@ public final class SageOneApiTemplate {
     private static boolean condSearchAnyVal10 = false;
 
     private static boolean condFilterVal1 = false;
+
+    private static final String sageOneTemplateError1 = "Cannot use the following Sage One Entity for Request in " +
+            "SageOneApiTemplate.class, entity type is -> ####";
+    private static final int sageOneTemplateErrorStringLen = sageOneTemplateError1.length();
 
     private static final String ODataFilter1 = "Get?$filter=";
     private static final String ODataFilter2 = "Name eq '";
@@ -818,5 +825,44 @@ public final class SageOneApiTemplate {
 
         return (response && sageOneResponseObject != null && sageOneResponseObject.getSuccess()) ?
                 (T) sageOneResponseObject.getResponseObject() : null;
+    }
+
+    public final static boolean deleteSageOneEntity(final String CompanyName, final SageOneEntityType sageOneEntityType,
+                                                    final Integer entityId) {
+        boolean response = true;
+        try {
+            Integer companyId = SageOneConstants.COMPANY_LIST.get(CompanyName);
+
+            if(companyId == null) {
+                response = false;
+                throw new IllegalArgumentException("Company with specified company name doesn't exist");
+            }
+
+            if(sageOneEntityType.GetObject.getCanBeUsedInRequest() && sageOneEntityType.GetObject.getCanBeDeleted()) {
+                queryStringNorm = sageOneEntityType.GetObject.getStringProperty() + "Delete/" + entityId;
+
+                System.out.println(queryStringNorm);
+
+                SageOneResponseObject responseObject = SageOneApiConnector.deleteSageOneEntity(queryStringNorm, companyId);
+
+                if(!responseObject.getSuccess()) {
+                    throw new IOException(responseObject.getResponseMessage());
+                }
+
+            } else {
+                throw new InvalidClassException(sageOneTemplateError1.replace("####", sageOneEntityType.GetObject.getClassProperty().getName()));
+            }
+        } catch(InvalidClassException e) {
+            e.printStackTrace();
+            response = false;
+        } catch(IOException e) {
+            e.printStackTrace();
+            response = false;
+        } catch(IllegalArgumentException e) {
+            e.printStackTrace();
+            response = false;
+        }
+
+        return response;
     }
 }

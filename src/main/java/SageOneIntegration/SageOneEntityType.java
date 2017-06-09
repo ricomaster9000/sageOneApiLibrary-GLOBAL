@@ -7,14 +7,16 @@ import SageOneIntegration.SageOneApiEntities.SageEnum.SageOneCommercialDocumentL
 import SageOneIntegration.SageOneApiEntities.SageEnum.SageOnePaymentMethod;
 
 public enum SageOneEntityType {
-    CUSTOMER_RETURN("CustomerReturn/", SageOneCustomerReturn.class),
+    CUSTOMER_RETURN("CustomerReturn/", SageOneCustomerReturn.class, false),
     CUSTOMER_RECEIPT("CustomerReceipt/", SageOneCustomerReceipt.class),
-    SUPPLIER_RETURN("SupplierReturn/", SageOneSupplierReturn.class),
+    SUPPLIER_RETURN("SupplierReturn/", SageOneSupplierReturn.class, false),
     CUSTOMER("Customer/", SageOneCustomer.class),
+    CUSTOMER_NOTE("CustomerNote/", SageOneCustomerNote.class),
     SUPPLIER("Supplier/", SageOneSupplier.class),
-    TAX_INVOICE("TaxInvoice/", SageOneTaxInvoice.class),
-    SUPPLIER_INVOICE("SupplierInvoice/", SageOneSupplierInvoice.class),
-    COMPANY("Company/", SageOneCompany.class),
+    SUPPLIER_NOTE("SupplierNote/", SageOneSupplierNote.class),
+    TAX_INVOICE("TaxInvoice/", SageOneTaxInvoice.class, false),
+    SUPPLIER_INVOICE("SupplierInvoice/", SageOneSupplierInvoice.class, false),
+    COMPANY("Company/", SageOneCompany.class, false),
     ITEM("Item/", SageOneItem.class),
     BANK_ACCOUNT("BankAccount/", SageOneBankAccount.class),
     TAX_TYPE("TaxType/", SageOneTaxType.class),
@@ -39,11 +41,15 @@ public enum SageOneEntityType {
     QUOTE("Quote/", SageOneQuote.class);
 
     public SageOneStringAndClassObject GetObject;
-    SageOneEntityType(final String entityGetReqParamName, final Class<?> entityGetReqParamClass)  {
-        this.GetObject = new SageOneStringAndClassObject(entityGetReqParamName, entityGetReqParamClass);
+    SageOneEntityType(final String entityGetReqParamName, final Class<?> entityReqParamClass)  {
+        this.GetObject = new SageOneStringAndClassObject(entityGetReqParamName, entityReqParamClass);
     }
 
-    SageOneEntityType(final Class<?> entityGetReqParamClass, final boolean entityCanBeUsedInRequest)  {
-        this.GetObject = new SageOneStringAndClassObject(entityGetReqParamClass, entityCanBeUsedInRequest);
+    SageOneEntityType(final String entityGetReqParamName, final Class<?> entityReqParamClass, final boolean entityCanBeDeleted)  {
+        this.GetObject = new SageOneStringAndClassObject(entityGetReqParamName, entityReqParamClass, entityCanBeDeleted);
+    }
+
+    SageOneEntityType(final Class<?> entityReqParamClass, final boolean entityCanBeUsedInRequest)  {
+        this.GetObject = new SageOneStringAndClassObject(entityReqParamClass, entityCanBeUsedInRequest);
     }
 }
