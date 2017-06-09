@@ -35,7 +35,8 @@ public enum SageOneEntityType {
     ADDITIONAL_ITEM_PRICE("AdditionalItemPrice/", SageOneAdditionalItemPrice.class),
     ADDITIONAL_PRICE_LIST("AdditionalPriceList/", SageOneAdditionalPriceList.class),
     COMMERCIAL_DOCUMENT_LINE_TYPE(SageOneCommercialDocumentLineType.class, false),
-    BANK_ACCOUNT_CATEGORY("BankAccountCategory/", SageOneBankAccountCategory.class);
+    BANK_ACCOUNT_CATEGORY("BankAccountCategory/", SageOneBankAccountCategory.class),
+    QUOTE("Quote/", SageOneQuote.class);
 
     public SageOneStringAndClassObject GetObject;
     SageOneEntityType(final String entityGetReqParamName, final Class<?> entityGetReqParamClass)  {

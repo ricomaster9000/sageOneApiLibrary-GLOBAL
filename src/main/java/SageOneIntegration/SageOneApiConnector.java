@@ -322,8 +322,6 @@ public final class SageOneApiConnector {
 				request.setConfig(requestConfig);
 				StringEntity stringEntity = new StringEntity(jsonEntityToPost);
 				stringEntity.setContentType("application/json");
-				System.out.println(jsonEntityToPost);
-
 				((HttpPost) request).setEntity(stringEntity);
 				request.setHeader("Accept", "application/json");
 			} else if(requestMethod.toUpperCase().equals("PUT")) {
