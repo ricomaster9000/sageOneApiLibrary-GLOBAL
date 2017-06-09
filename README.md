@@ -4,6 +4,7 @@ A library that contains pre-written code to connect and access the SageOne South
 ### HOW TO USE
 
 add as dependency by using jitpack.io, go to this link to see how https://jitpack.io/
+search for ricomaster9000/sageOneApiLibrary-SA
 
 ``
 USER = ricomaster9000
