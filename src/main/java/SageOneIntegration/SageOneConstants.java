@@ -34,6 +34,9 @@ public final class SageOneConstants {
 	final static String GENERAL_DIGIT_REGEX = "[.0-9.]{1," + MAX_DIGIT_LENGTH + "}";
 	final static String GENERAL_PRICE_REGEX = "[.0-9.]+[.]+[.0-9.]{1," + MAX_DIGIT_LENGTH + "}";
 	final static String GENERAL_STRING_REGEX = "[.*\\S .]{1," + MAX_STRING_LENGTH + "}";
+	final static String replacementString = "####";
+	final static String BooleanTrueString = "TRUE";
+	final static String BooleanFalseString = "FALSE";
 
 	public final static Map<String, Integer> getSageOneApiCompanyList() {
 		return SageOneConstants.COMPANY_LIST;

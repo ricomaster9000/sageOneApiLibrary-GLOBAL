@@ -297,7 +297,7 @@ public final class SageOneApiConnector {
 				
 				System.out.println("Sage One Integration code, could not setup CompanyId list, a general Java IOException" +
 				" occurred");
-				
+
 				e.printStackTrace();
 			}
 		} else {
@@ -311,6 +311,7 @@ public final class SageOneApiConnector {
 		boolean response = true;
 		String resultToReturn = "";
 		HttpRequestBase request = null;
+		System.out.println(endpoint);
 
 		try {
 			if(requestMethod.toUpperCase().equals("GET")) {
@@ -346,7 +347,6 @@ public final class SageOneApiConnector {
 					System.out.println(responseCode);
 
 					response = responseCode.getStatusCode() >= 200 && responseCode.getStatusCode() < 300;
-					System.out.println(response);
 
 					if(response) {
 						BufferedReader rd = new BufferedReader(new InputStreamReader(responseFromRequest.getEntity().getContent()));
@@ -388,7 +388,7 @@ public final class SageOneApiConnector {
 	}
 
 	public final static SageOneResponseObject sageOneGrabData(final String endpointPlusQuery, final Class<?> ObjectClassToMapTo,
-													   final boolean mustReturnResultObject, final int companyId) {
+													          final boolean mustReturnResultObject, final int companyId) {
 		SageOneResponseObject sageOneResponseObject = null;
 		String endpoint = "";
 
