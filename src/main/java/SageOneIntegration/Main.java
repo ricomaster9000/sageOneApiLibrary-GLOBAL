@@ -24,10 +24,14 @@ public class Main {
 
         List<SageOneSupplier> supplier =
         SageOneApiTemplate.getEntitiesByPropertyValue("Testy555555", SageOneEntityType.SUPPLIER,
-        "Created", "2017-06-15");
-
+        "Name", "DS");
 
 
         System.out.println(supplier.get(0).getId());
+
+        List<SageOneSupplier> listReturned = SageOneApiTemplate.getSageOneEntitiesByType("Testy555555",
+        SageOneEntityType.CUSTOMER);
+
+        System.out.println(listReturned.size());
     }
 }

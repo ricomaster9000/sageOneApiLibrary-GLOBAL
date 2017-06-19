@@ -311,7 +311,6 @@ public final class SageOneApiConnector {
 		boolean response = true;
 		String resultToReturn = "";
 		HttpRequestBase request = null;
-		System.out.println(endpoint);
 
 		try {
 			if(requestMethod.toUpperCase().equals("GET")) {
@@ -349,15 +348,19 @@ public final class SageOneApiConnector {
 					response = responseCode.getStatusCode() >= 200 && responseCode.getStatusCode() < 300;
 
 					if(response) {
-						BufferedReader rd = new BufferedReader(new InputStreamReader(responseFromRequest.getEntity().getContent()));
+						if(responseCode.getStatusCode() == 204) {
+							resultToReturn = "";
+						} else {
+							BufferedReader rd = new BufferedReader(new InputStreamReader(responseFromRequest.getEntity().getContent()));
 
-						StringBuilder constructedResultString = new StringBuilder();
-						String line = "";
+							StringBuilder constructedResultString = new StringBuilder();
+							String line = "";
 
-						while ((line = rd.readLine()) != null) {
-							constructedResultString.append(line);
+							while ((line = rd.readLine()) != null) {
+								constructedResultString.append(line);
+							}
+							resultToReturn = constructedResultString.toString();
 						}
-						resultToReturn = constructedResultString.toString();
 					}
 					request.releaseConnection();
 				} else {
