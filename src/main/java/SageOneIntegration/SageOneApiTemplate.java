@@ -895,7 +895,7 @@ public final class SageOneApiTemplate {
             }
 
             if(sageOneEntityType.GetObject.getCanBeUsedInRequest() && sageOneEntityType.GetObject.getCanBeDeleted()) {
-                queryStringNorm = sageOneEntityType.GetObject.getStringProperty() + DeleteString + entityId;
+                queryStringNorm = sageOneEntityType.GetObject.getStringProperty() + DeleteString + entityId + "?";
 
                 SageOneResponseObject responseObject = SageOneApiConnector.deleteSageOneEntity(queryStringNorm, companyId);
 

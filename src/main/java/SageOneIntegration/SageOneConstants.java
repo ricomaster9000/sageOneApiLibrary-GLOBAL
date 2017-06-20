@@ -37,6 +37,9 @@ public final class SageOneConstants {
 	final static String REPLACEMENT_STRING = "####";
 	final static String BooleanTrueString = "TRUE";
 	final static String BooleanFalseString = "FALSE";
+	final static String SKIP_QUERY_PARAM = "&$skip=";
+	final static String API_KEY_QUERY_PARAM = "apikey=";
+	final static String COMPANY_ID_QUERY_PARAM = "&companyid=";
 
 	public final static Map<String, Integer> getSageOneApiCompanyList() {
 		return SageOneConstants.COMPANY_LIST;

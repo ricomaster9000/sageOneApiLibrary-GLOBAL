@@ -14,9 +14,7 @@ public class Main {
         Properties properties = new Properties();
 
         properties.setProperty("sageOneApi.SA.clientUsername", "ricorpwd@yahoo.co.za");
-
         properties.setProperty("sageOneApi.SA.clientPassword", "");
-
         properties.setProperty("sageOneApi.SA.apiKey", "");
 
         SageOneApiConnector.setupSageOneApiSA(properties);
