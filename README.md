@@ -3,18 +3,18 @@ A library that contains pre-written code to connect and access the SageOne South
 
 ### Features
 #### Methods run recursively if to get all results and to do all operations,
-     for example: if there are more results that can be returned but the max result limit is reached,
-     then another request will be sent until all results are grabbed
+#### for example: if there are more results that can be returned but the max result limit is reached,
+#### then another request will be sent until all results are grabbed
 
 #### If template methods fail, then the app won't stop running or come to a halt, this can be helpful when you expect
-     network problems, so check for null values returned when a method doesn't return a boolean value to see if operations
-     was successful.
+#### network problems, so check for null values returned when a method doesn't return a boolean value to see if operations
+#### was successful.
 
 #### Some methods will return results even if errors occur, like internal server error (500) on API hosting site or when
-     max requests per day or hour is made.
+#### max requests per day or hour is made.
 
 #### Code is set in place to prevent you from getting blocked by the API hosting server by checking how many times you
-     make a request based on the current day and hour.
+#### make a request based on the current day and hour.
 
 ### HOW TO USE
 
