@@ -1,10 +1,8 @@
 /** "Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0. "*/
 package SageOneIntegration.SageOneApiEntities;
 
-/**
- * Created by ricardo on 2017/06/07.
- */
-public class SageOneAdditionalItemPrice extends SageOneMainEntity {
+
+public final class SageOneAdditionalItemPrice extends SageOneMainEntity {
     private Integer ItemId;
     private Double PriceInclusive;
     private Double PriceExclusive;

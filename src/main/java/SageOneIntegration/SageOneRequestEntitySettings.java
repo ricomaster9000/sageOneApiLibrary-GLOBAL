@@ -1,38 +1,46 @@
 /** "Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0. "**/
 package SageOneIntegration;
 
-/**
- * Created by ricardo on 2017/06/01.
- */
-final class SageOneStringAndClassObject {
+
+final class SageOneRequestEntitySettings {
     private String stringProperty = "";
     private Class<?> classProperty;
     private boolean canBeUsedInRequest = true;
     private boolean canBeDeleted = true;
+    private boolean canBeSaved = true;
     private boolean initialized = false;
 
-    SageOneStringAndClassObject(final String stringProperty, final Class<?> classProperty) {
+    SageOneRequestEntitySettings(final String stringProperty, final Class<?> classProperty) {
         this.stringProperty = stringProperty;
         this.classProperty = classProperty;
         this.initialized = true;
     }
 
-    SageOneStringAndClassObject(final String stringProperty, final Class<?> classProperty, final boolean canBeDeleted) {
+    SageOneRequestEntitySettings(final String stringProperty, final Class<?> classProperty, final boolean canBeDeleted) {
         this.stringProperty = stringProperty;
         this.classProperty = classProperty;
         this.canBeDeleted = canBeDeleted;
         this.initialized = true;
     }
 
-    SageOneStringAndClassObject(final Class<?> classProperty,
-                                final boolean canBeUsedInRequest) {
+    SageOneRequestEntitySettings(final String stringProperty, final Class<?> classProperty, final boolean canBeDeleted,
+                                 final boolean canBeSaved) {
+        this.stringProperty = stringProperty;
+        this.classProperty = classProperty;
+        this.canBeDeleted = canBeDeleted;
+        this.canBeSaved = canBeSaved;
+        this.initialized = true;
+    }
+
+    SageOneRequestEntitySettings(final Class<?> classProperty,
+                                 final boolean canBeUsedInRequest) {
         this.classProperty = classProperty;
         this.canBeUsedInRequest = canBeUsedInRequest;
         this.initialized = true;
     }
 
-    SageOneStringAndClassObject(final Class<?> classProperty,
-                                final boolean canBeUsedInRequest, final boolean canBeDeleted) {
+    SageOneRequestEntitySettings(final Class<?> classProperty,
+                                 final boolean canBeUsedInRequest, final boolean canBeDeleted) {
         this.classProperty = classProperty;
         this.canBeUsedInRequest = canBeUsedInRequest;
         this.canBeDeleted = canBeDeleted;
@@ -72,8 +80,16 @@ final class SageOneStringAndClassObject {
         this.canBeDeleted = (this.initialized) ? canBeDeleted : this.canBeDeleted;
     }
 
+    final boolean getCanBeSaved() {
+        return (this.initialized) ? this.canBeSaved : null;
+    }
+
+    final void setCanBeSaved(final boolean canBeSaved) {
+        this.canBeSaved = (this.initialized) ? canBeSaved : this.canBeSaved;
+    }
+
     @Override
-    public final Object clone() {
-        return null;
+    public final Object clone() throws CloneNotSupportedException {
+        throw new CloneNotSupportedException();
     }
 }

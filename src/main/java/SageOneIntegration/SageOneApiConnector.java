@@ -318,6 +318,7 @@ public final class SageOneApiConnector {
 		boolean response = true;
 		String resultToReturn = "";
 		HttpRequestBase request = null;
+		resultLimitReached = false;
 
 		try {
 			if(requestMethod.equals(RequestMethod.GET)) {
@@ -426,7 +427,6 @@ public final class SageOneApiConnector {
 				SageOneGrabbedResultsClass responseResultObject;
 				if(jsonResponse.getSuccess()) {
 					responseResultObject = objectMapper.readValue(jsonResponse.getResponseJson(), SageOneGrabbedResultsClass.class);
-
 					for (Object object : responseResultObject.getResults()) {
 						objectsBeforeConversion.add(objectMapper.convertValue(object, ObjectClassToMapTo));
 					}
@@ -495,8 +495,7 @@ public final class SageOneApiConnector {
 		SageOneResponseObject sageOneResponseObject = null;
 		String endpoint = "";
 		try {
-			endpoint = endpointPrefix + endpointPlusQuery +
-					API_KEY_QUERY_PARAM + encodeCurlyBrackets(API_KEY) + COMPANY_ID_QUERY_PARAM + companyId;
+			endpoint = endpointPrefix + endpointPlusQuery + API_KEY_QUERY_PARAM + encodeCurlyBrackets(API_KEY) + COMPANY_ID_QUERY_PARAM + companyId;
 
 			SageOneResponseJsonObject jsonResponse = ConnectionCoreCodeReturnResponseJson(companyId, endpoint,
 			RequestMethod.DELETE, null);

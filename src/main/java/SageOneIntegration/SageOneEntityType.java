@@ -1,4 +1,21 @@
-/** "Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0. "*/
+/**
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements.  See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership.  The ASF licenses this file
+ to you under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance
+ with the License.  You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied.  See the License for the
+ specific language governing permissions and limitations
+ under the License.
+ **/
 package SageOneIntegration;
 
 
@@ -38,18 +55,27 @@ public enum SageOneEntityType {
     ADDITIONAL_PRICE_LIST("AdditionalPriceList/", SageOneAdditionalPriceList.class),
     COMMERCIAL_DOCUMENT_LINE_TYPE(SageOneCommercialDocumentLineType.class, false),
     BANK_ACCOUNT_CATEGORY("BankAccountCategory/", SageOneBankAccountCategory.class),
+    SAGE_ONE_ACCOUNT("Account/", SageOneAccount.class),
+    SAGE_ONE_ACCOUNT_CATEGORY("AccountCategory/", SageOneAccountCategory.class, false),
+    SAGE_ONE_ACCOUNTANT_NOTE("AccountantNote/", SageOneAccountantNote.class, true, false),
+    SAGE_ONE_ACCOUNTANT_TASK_RECURRENCE("AccountantTaskRecurrence/", SageOneAccountantTaskRecurrence.class, true, false),
     QUOTE("Quote/", SageOneQuote.class);
 
-    public SageOneStringAndClassObject GetObject;
+    public SageOneRequestEntitySettings GetObject;
     SageOneEntityType(final String entityGetReqParamName, final Class<?> entityReqParamClass)  {
-        this.GetObject = new SageOneStringAndClassObject(entityGetReqParamName, entityReqParamClass);
+        this.GetObject = new SageOneRequestEntitySettings(entityGetReqParamName, entityReqParamClass);
     }
 
     SageOneEntityType(final String entityGetReqParamName, final Class<?> entityReqParamClass, final boolean entityCanBeDeleted)  {
-        this.GetObject = new SageOneStringAndClassObject(entityGetReqParamName, entityReqParamClass, entityCanBeDeleted);
+        this.GetObject = new SageOneRequestEntitySettings(entityGetReqParamName, entityReqParamClass, entityCanBeDeleted);
+    }
+
+    SageOneEntityType(final String entityGetReqParamName, final Class<?> entityReqParamClass, final boolean entityCanBeDeleted,
+                      final boolean entityCanBeSaved) {
+        this.GetObject = new SageOneRequestEntitySettings(entityGetReqParamName, entityReqParamClass, entityCanBeDeleted, entityCanBeSaved);
     }
 
     SageOneEntityType(final Class<?> entityReqParamClass, final boolean entityCanBeUsedInRequest)  {
-        this.GetObject = new SageOneStringAndClassObject(entityReqParamClass, entityCanBeUsedInRequest);
+        this.GetObject = new SageOneRequestEntitySettings(entityReqParamClass, entityCanBeUsedInRequest);
     }
 }

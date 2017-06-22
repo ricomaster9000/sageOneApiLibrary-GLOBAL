@@ -1,5 +1,20 @@
-# sageOneApiLibrary-SA V1.00b2 (Early Beta)
+# sageOneApiLibrary-SA V1.04b1 (Early Beta)
 A library that contains pre-written code to connect and access the SageOne South Africa Api (v.1.1.2), it also comes with a template that makes use of these pre-written component code to access the SageOne SA api, the template contains methods (mostly dynamic or generic) that a developer can use to build this library into his/her app. Compatible with java 1.6 and upwards.
+
+### Features
+#### Methods run recursively if to get all results and to do all operations,
+     for example: if there are more results that can be returned but the max result limit is reached,
+     then another request will be sent until all results are grabbed
+
+#### If template methods fail, then the app won't stop running or come to a halt, this can be helpful when you expect
+     network problems, so check for null values returned when a method doesn't return a boolean value to see if operations
+     was successful.
+
+#### Some methods will return results even if errors occur, like internal server error (500) on API hosting site or when
+     max requests per day or hour is made.
+
+#### Code is set in place to prevent you from getting blocked by the API hosting server by checking how many times you
+     make a request based on the current day and hour.
 
 ### HOW TO USE
 
@@ -9,7 +24,7 @@ search for ricomaster9000/sageOneApiLibrary-SA
 ``
 USER = ricomaster9000
 REPO/REPOSITORY = sageOneApiLibrary-SA
-TAG/VERSION = V1.00b2
+TAG/VERSION = V1.04b1
 ``
 
 Please run the method SageOneApiConnector.setupSageOneApiSA(Properties properties) to initialize this library's code with your App's Properties class object (usually System.getProperties()) and make sure the below first 3 fields/properties appear in your properties file and have the required (also correct) assigned values, the rest have default values but can be overriden.
@@ -106,5 +121,19 @@ deleteSageOneEntity(final String CompanyName, final SageOneEntityType sageOneEnt
 
 -> deletes the sage one entity based on the SageOneEntityType passed and with the entityId specified, note that not all
    entities are deletable. Returns a boolean response if the operation was successful or not
+```
+```
+deleteSageOneEntitiesByPropertyValue(final String companyName, final SageOneEntityType sageOneEntityType,
+                                     final String propertyName, final String propertyValue)
+
+-> deletes the SageOneEntityType parameter entities based on a property name and its value, the entities will first be
+   grabbed based on the property name and property value, then the grabbed entities will be deleted one by one by
+   by its id, note that not all entities are deletable. Returns a boolean response if the operation was successful or not
+```
+```
+getSageOneEntitiesByType(final String companyName, final SageOneEntityType sageOneEntityType)
+
+-> gets all the entities by the entity type specified in the second parameter of this method, note that entities that
+   cannot be grabbed, will not be grabbed and a error will be thrown if you do pass them as a parameter
 ```
 https://github.com/ricomaster9000/sageOneApiLibrary-SA/
