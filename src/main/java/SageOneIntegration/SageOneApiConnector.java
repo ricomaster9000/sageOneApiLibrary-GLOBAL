@@ -63,6 +63,7 @@ public final class SageOneApiConnector {
 	private static boolean runningInner = false;
 	private static boolean globalResponse = true;
 	private static CloseableHttpResponse responseFromRequest;
+	private static boolean resultLimitReached = false;
 
 	SageOneApiConnector() {
 	}
@@ -229,6 +230,7 @@ public final class SageOneApiConnector {
 		   || (SageOneConstants.SAGE_ONE_REQUEST_COUNTER_HOUR.get(companyId) >= SageOneConstants.SAGE_ONE_REQUEST_LIMIT_HOUR &&
 		   SageOneConstants.CURRENT_HOUR == calendar.get(Calendar.HOUR_OF_DAY))) {
 			response = false;
+			resultLimitReached = true;
 		}
 
 		if(SageOneConstants.CURRENT_DAY != calendar.get(Calendar.DAY_OF_WEEK)) {
@@ -420,27 +422,33 @@ public final class SageOneApiConnector {
 			}
 			SageOneResponseJsonObject jsonResponse = ConnectionCoreCodeReturnResponseJson(companyId, (runningInner) ?
 			endpoint + SKIP_QUERY_PARAM + globalSkipIterator : endpoint, RequestMethod.GET, null);
-			if(mustReturnResultObject && jsonResponse.getSuccess()) {
-				SageOneGrabbedResultsClass responseResultObject =
-				objectMapper.readValue(jsonResponse.getResponseJson(), SageOneGrabbedResultsClass.class);
+			if(mustReturnResultObject) {
+				SageOneGrabbedResultsClass responseResultObject;
+				if(jsonResponse.getSuccess()) {
+					responseResultObject = objectMapper.readValue(jsonResponse.getResponseJson(), SageOneGrabbedResultsClass.class);
 
-				for(Object object : responseResultObject.getResults()) {
-					objectsBeforeConversion.add(objectMapper.convertValue(object, ObjectClassToMapTo));
+					for (Object object : responseResultObject.getResults()) {
+						objectsBeforeConversion.add(objectMapper.convertValue(object, ObjectClassToMapTo));
+					}
+				} else {
+					responseResultObject = new SageOneGrabbedResultsClass();
 				}
 
-				if(responseResultObject.getResults().length >= SAGE_ONE_REQUEST_RESULT_LIMIT) {
+				if (responseResultObject.getResults().length >= SAGE_ONE_REQUEST_RESULT_LIMIT) {
 					runningInner = true;
 					globalSkipIterator += SAGE_ONE_REQUEST_RESULT_LIMIT;
 					sageOneGrabData(endpoint, ObjectClassToMapTo, mustReturnResultObject, companyId);
 				} else {
 					runningInner = false;
 				}
-				sageOneResponseObject = (jsonResponse.getSuccess()) ? new SageOneResponseObject(true,
-						objectsBeforeConversion, objectsBeforeConversion.size()) :
-						new SageOneResponseObject(false, "Failed to grab data from SageOne account, the request failed");
+				sageOneResponseObject = (jsonResponse.getSuccess()) ? new SageOneResponseObject(jsonResponse.getSuccess(),
+					objectsBeforeConversion, objectsBeforeConversion.size()) :
+					(resultLimitReached) ? new SageOneResponseObject(true,
+					objectsBeforeConversion, objectsBeforeConversion.size()) :
+					new SageOneResponseObject(jsonResponse.getSuccess(), "Failed to grab data from SageOne account, the request failed");
 			} else {
-				sageOneResponseObject = (jsonResponse.getSuccess())
-						? new SageOneResponseObject(true, objectMapper.readValue(jsonResponse.getResponseJson(),
+				sageOneResponseObject = (jsonResponse.getSuccess()) ?
+						new SageOneResponseObject(true, objectMapper.readValue(jsonResponse.getResponseJson(),
 						ObjectClassToMapTo)) : new SageOneResponseObject(false,
 						"Failed to grab data from SageOne account, the request failed");
 			}

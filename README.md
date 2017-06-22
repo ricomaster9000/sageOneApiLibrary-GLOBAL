@@ -23,8 +23,7 @@ Spring-support (.yml and .properties files) -> You can now also initialize it wi
 sageOneApi.SA.clientUsername = 'your Sage One username'
 sageOneApi.SA.clientPassword = 'your Sage One Password'
 sageOneApi.SA.apiKey = 'sd24d-....' (don't include the brackets, it gets added automatically)
-
-sageOneApi.SA.apiUrl = 'base url for api call' (this isn't required as the default should work)
+sageOneApi.SA.apiUrl = 'base url for api call' (default is 'https://accounting.sageone.co.za')
 sageOneApi.SA.apiVersion = 'value' (default is 1.1.2)
 sageOneApi.SA.requestLimitDay = 'value' (default is 6000)
 sageOneApi.SA.requestLimitHour = 'value' (default is 250)
