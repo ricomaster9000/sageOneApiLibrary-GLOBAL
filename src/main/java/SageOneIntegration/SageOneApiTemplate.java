@@ -760,8 +760,7 @@ public final class SageOneApiTemplate {
         return sageOneCustomersGrabbed;
     }
 
-    public static <T> List<T> searchEntitiesByAnyValues(final String companyName,
-                                                        final SageOneEntityType sageOneEntityType,
+    public static <T> List<T> searchEntitiesByAnyValues(final String companyName, final SageOneEntityType sageOneEntityType,
                                                         final String... values) {
         boolean response = true;
         SageOneResponseObject sageOneResponseObject;
