@@ -151,18 +151,18 @@ public final class SageOneApiTemplate {
         return fieldToReturn;
     }
 
-    private static final DateTime checkAndConvertDate(final String dateString) {
+    private static final DateTime checkAndConvertDate(final String dateString, final boolean hideErrors) {
         DateTime dateToReturn = new DateTime();
         try {
-            System.out.println(dateString);
             dateToReturn =  new DateTime().parse(dateString);
 
-            if(dateString.length() != 10 || dateToReturn.getYear() <= 0 || dateToReturn.getMonthOfYear() <= 0 || dateToReturn.getDayOfMonth() <= 0) {
+            if(!hideErrors && (dateString.length() != 10 || dateToReturn.getYear() <= 0 ||
+               dateToReturn.getMonthOfYear() <= 0 || dateToReturn.getDayOfMonth() <= 0)) {
                 throw new IllegalArgumentException();
             }
 
         } catch(IllegalArgumentException e) {
-            e.printStackTrace();
+            if(!hideErrors) { e.printStackTrace(); }
             dateToReturn = null;
         }
         return dateToReturn;
@@ -309,7 +309,7 @@ public final class SageOneApiTemplate {
                         response = true;
                     } else if(var_01.isAssignableFrom(Date.class)) {
                         condFilterVal2 = true;
-                        dateToUse = SageOneApiTemplate.checkAndConvertDate(propertyValue);
+                        dateToUse = SageOneApiTemplate.checkAndConvertDate(propertyValue, false);
                         response = (dateToUse != null);
                         if(response) {
                             dateStringGreaterThan = ODataFilter7 + dateToUse.getYear() + ODataFilter16 + ((dateToUse.getMonthOfYear() > 9) ? dateToUse.getMonthOfYear() : "0" + dateToUse.getMonthOfYear()) + ODataFilter16 + ((dateToUse.getDayOfMonth() > 9) ? dateToUse.getDayOfMonth() : "0" + dateToUse.getDayOfMonth());
@@ -407,7 +407,7 @@ public final class SageOneApiTemplate {
                         response = true;
                     } else if(var_01.isAssignableFrom(Date.class)) {
                         condFilterVal2 = true;
-                        dateToUse = SageOneApiTemplate.checkAndConvertDate(propertyValue);
+                        dateToUse = SageOneApiTemplate.checkAndConvertDate(propertyValue, false);
                         response = (dateToUse != null);
                         if(response) {
                             dateStringGreaterThan = ODataFilter7 + dateToUse.getYear() + ODataFilter16 + ((dateToUse.getMonthOfYear() > 9) ? dateToUse.getMonthOfYear() : "0" + dateToUse.getMonthOfYear()) + ODataFilter16 + ((dateToUse.getDayOfMonth() > 9) ? dateToUse.getDayOfMonth() : "0" + dateToUse.getDayOfMonth());
@@ -564,7 +564,7 @@ public final class SageOneApiTemplate {
                                         condFilterVal1 = true;
                                     } else if(var00_1.isAssignableFrom(Date.class)) {
                                         condFilterVal2 = true;
-                                        dateToUse = SageOneApiTemplate.checkAndConvertDate(propertyValues[globalIterator]);
+                                        dateToUse = SageOneApiTemplate.checkAndConvertDate(propertyValues[globalIterator], false);
                                         response = (dateToUse != null);
                                         if(response) {
                                             dateStringGreaterThan = ODataFilter7 + dateToUse.getYear() + ODataFilter16 + ((dateToUse.getMonthOfYear() > 9) ? dateToUse.getMonthOfYear() : "0" + dateToUse.getMonthOfYear()) + ODataFilter16 + ((dateToUse.getDayOfMonth() > 9) ? dateToUse.getDayOfMonth() : "0" + dateToUse.getDayOfMonth());
@@ -706,7 +706,7 @@ public final class SageOneApiTemplate {
                                     condFilterVal1 = true;
                                 } else if(var00_1.isAssignableFrom(Date.class)) {
                                     condFilterVal2 = true;
-                                    dateToUse = SageOneApiTemplate.checkAndConvertDate(propertyValues[globalIterator]);
+                                    dateToUse = SageOneApiTemplate.checkAndConvertDate(propertyValues[globalIterator], false);
                                     response = (dateToUse != null);
                                     if(response) {
                                         dateStringGreaterThan = ODataFilter7 + dateToUse.getYear() + ODataFilter16 + ((dateToUse.getMonthOfYear() > 9) ? dateToUse.getMonthOfYear() : "0" + dateToUse.getMonthOfYear()) + ODataFilter16 + ((dateToUse.getDayOfMonth() > 9) ? dateToUse.getDayOfMonth() : "0" + dateToUse.getDayOfMonth());
@@ -835,7 +835,7 @@ public final class SageOneApiTemplate {
                                 propertyValue.toUpperCase().equals(BooleanFalseString));
                             } else if(condSearchAnyVal7) {
                                     condFilterVal3 = true;
-                                    dateToUse = SageOneApiTemplate.checkAndConvertDate(propertyValue);
+                                    dateToUse = SageOneApiTemplate.checkAndConvertDate(propertyValue, true);
                                     response = (dateToUse != null);
                                     if(response) {
                                         dateStringGreaterThan = ODataFilter7 + dateToUse.getYear() + ODataFilter16 + ((dateToUse.getMonthOfYear() > 9) ? dateToUse.getMonthOfYear() : "0" + dateToUse.getMonthOfYear()) + ODataFilter16 + ((dateToUse.getDayOfMonth() > 9) ? dateToUse.getDayOfMonth() : "0" + dateToUse.getDayOfMonth());
@@ -1037,7 +1037,7 @@ public final class SageOneApiTemplate {
 
                     if(field.getType().isAssignableFrom(Date.class)) {
                         condFilterVal3 = true;
-                        dateToUse = SageOneApiTemplate.checkAndConvertDate(propertyValue);
+                        dateToUse = SageOneApiTemplate.checkAndConvertDate(propertyValue, false);
                         response = (dateToUse != null);
                         if(response) {
                             dateStringGreaterThan = ODataFilter7 + dateToUse.getYear() + ODataFilter16 + ((dateToUse.getMonthOfYear() > 9) ? dateToUse.getMonthOfYear() : "0" + dateToUse.getMonthOfYear()) + ODataFilter16 + ((dateToUse.getDayOfMonth() > 9) ? dateToUse.getDayOfMonth() : "0" + dateToUse.getDayOfMonth());

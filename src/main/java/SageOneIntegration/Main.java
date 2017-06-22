@@ -14,15 +14,16 @@ public class Main {
         Properties properties = new Properties();
 
         properties.setProperty("sageOneApi.SA.clientUsername", "ricorpwd@yahoo.co.za");
-        properties.setProperty("sageOneApi.SA.clientPassword", "");
-        properties.setProperty("sageOneApi.SA.apiKey", "");
+        properties.setProperty("sageOneApi.SA.clientPassword", "StartingSmall500*");
+        properties.setProperty("sageOneApi.SA.apiKey", "71A42541-A543-4164-8CBA-5E0F0602B141");
 
         SageOneApiConnector.setupSageOneApiSA(properties);
 
 
         List<SageOneSupplier> supplier =
-        SageOneApiTemplate.getEntitiesByPropertyValue("Testy555555", SageOneEntityType.SUPPLIER,
-        "Name", "DS");
+        SageOneApiTemplate.searchEntitiesByAnyValues("Testy555555", SageOneEntityType.SUPPLIER,"DS");
+
+        System.out.println(supplier.get(0).getId() + "sdfsdf");
 
         System.out.println("aaaaaa " +
                 SageOneApiTemplate.deleteSageOneEntitiesByPropertyValue("Testy555555", SageOneEntityType.SUPPLIER,
