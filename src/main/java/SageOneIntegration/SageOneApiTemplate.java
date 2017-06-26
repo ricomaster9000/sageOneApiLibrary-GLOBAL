@@ -387,8 +387,6 @@ public final class SageOneApiTemplate {
                                         ODataFilter8 :
                                         propertyName + URLEncoder.encode(" eq '", UTF_8_STR) + propertyValue + "'";
 
-                                        System.out.println(endpointQuery);
-
                         sageOneResponseObject = SageOneApiConnector.sageOneGrabData(endpointQuery,
                         sageOneEntityType.GetObject.getClassProperty(), true, companyId);
 
