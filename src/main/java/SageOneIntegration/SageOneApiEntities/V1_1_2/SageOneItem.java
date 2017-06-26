@@ -21,9 +21,7 @@ package SageOneIntegration.SageOneApiEntities.V1_1_2;
 
 import java.sql.Date;
 
-/**
- * Created by ricomaster9000 on 2017/06/06.
- */
+
 public final class SageOneItem extends SageOneMainEntity {
     private String Description;
     private SageOneItemCategory Category;
@@ -59,6 +57,7 @@ public final class SageOneItem extends SageOneMainEntity {
     private Boolean YesNoUserField2;
     private Boolean YesNoUserField3;
     private Date Modified;
+    private Date Created;
     private Integer MajorIndustryCodeId;
     private SageOneAdditionalItemPrice[] AdditionalItemPrices;
     private Double GPPercentage;
@@ -336,6 +335,14 @@ public final class SageOneItem extends SageOneMainEntity {
 
     public final void setModified(final Date Modified) {
         this.Modified = (this.isInitialized()) ? Modified : this.Modified;
+    }
+
+    public final Date getCreated() {
+        return (this.isInitialized()) ? this.Created : null;
+    }
+
+    public final void setCreated(final Date Created) {
+        this.Created = (this.isInitialized()) ? Created : this.Created;
     }
 
     public final Integer getMajorIndustryCodeId() {
