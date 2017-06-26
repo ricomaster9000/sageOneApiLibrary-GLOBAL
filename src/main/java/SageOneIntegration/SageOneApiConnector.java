@@ -19,14 +19,10 @@
 package SageOneIntegration;
 
 
-import SageOneIntegration.SageOneApiEntities.SageOneCompany;
-import SageOneIntegration.SageOneApiEntities.SageOneGrabbedResultsClass;
+import SageOneIntegration.SageOneApiEntities.V1_1_2.SageOneCompany;
+import SageOneIntegration.SageOneApiEntities.V1_1_2.SageOneGrabbedResultsClass;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
 import org.apache.http.StatusLine;
 import org.apache.http.client.config.AuthSchemes;
 import org.apache.http.client.config.CookieSpecs;
@@ -36,8 +32,6 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.message.BasicNameValuePair;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.RequestMethod;
 import sun.misc.BASE64Encoder;

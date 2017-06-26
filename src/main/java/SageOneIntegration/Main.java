@@ -1,6 +1,7 @@
 package SageOneIntegration;
 
-import SageOneIntegration.SageOneApiEntities.SageOneSupplier;
+import SageOneIntegration.SageOneApiEntities.SageOneEntityType;
+import SageOneIntegration.SageOneApiEntities.V1_1_2.SageOneSupplier;
 
 import java.util.List;
 import java.util.Properties;
@@ -44,7 +45,7 @@ public class Main {
 
         System.out.println("sdfsdf " + supplierToSave.getCreated().toString() + " " +
         SageOneApiTemplate.deleteSageOneEntitiesByPropertyValue("Testy555555", SageOneEntityType.SUPPLIER,
-        "Created","2017-06-22"));
+        "Created","2017-06-26"));
 
 
         List<SageOneSupplier> listReturned = SageOneApiTemplate.getSageOneEntitiesByType("Testy555555",

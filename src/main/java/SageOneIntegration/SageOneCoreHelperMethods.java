@@ -18,8 +18,8 @@
  **/
 package SageOneIntegration;
 
-import SageOneIntegration.SageOneApiEntities.SageOneCustomerReturn;
-import SageOneIntegration.SageOneApiEntities.SageOneSupplierReturn;
+import SageOneIntegration.SageOneApiEntities.V1_1_2.SageOneCustomerReturn;
+import SageOneIntegration.SageOneApiEntities.V1_1_2.SageOneSupplierReturn;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.gson.Gson;
 
