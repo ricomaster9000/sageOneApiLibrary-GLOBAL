@@ -961,7 +961,7 @@ public final class SageOneApiTemplate {
             if (companyId == null) {
                 throw new IllegalArgumentException(sageOneTemplateError2);
             } else {
-                if (entity.GetObject.getCanBeUsedInRequest()) {
+                if (entity.GetObject.getCanBeUsedInRequest() && entity.GetObject.getCanBeGrabbedById()) {
                     sageOneResponseObject = SageOneApiConnector.sageOneGrabData(endpointQuery, entity.GetObject.getClassProperty(),
                             false, companyId);
                 } else {
