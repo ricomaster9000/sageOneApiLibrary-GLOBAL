@@ -368,7 +368,7 @@ public final class SageOneApiTemplate {
 
             if(response) {
                 String endpointQuery = checkAndManageEndPointQueryIfNeeded(sageOneEntityType.GetObject.getStringProperty(),
-                sageOneEntityType, false, ODataFilter18, false);
+                sageOneEntityType, false, ODataFilter1, false);
 
                 try {
                     final Integer companyId = SageOneConstants.COMPANY_LIST.get(companyName);
@@ -386,6 +386,8 @@ public final class SageOneApiTemplate {
                                         URLEncoder.encode(ODataFilter13, UTF_8_STR) + dateStringSmallThan +
                                         ODataFilter8 :
                                         propertyName + URLEncoder.encode(" eq '", UTF_8_STR) + propertyValue + "'";
+
+                                        System.out.println(endpointQuery);
 
                         sageOneResponseObject = SageOneApiConnector.sageOneGrabData(endpointQuery,
                         sageOneEntityType.GetObject.getClassProperty(), true, companyId);
