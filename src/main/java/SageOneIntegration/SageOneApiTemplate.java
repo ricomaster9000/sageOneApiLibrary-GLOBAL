@@ -38,7 +38,7 @@ import java.util.List;
 import static SageOneIntegration.SageOneConstants.*;
 
 public final class SageOneApiTemplate {
-    private static final Gson gson = new GsonBuilder().serializeNulls().create();
+    private static final Gson gson = new GsonBuilder().serializeNulls().setDateFormat("YYYY-MM-dd").create();
     private static StringBuilder queryString = new StringBuilder();
     private static String queryStringNorm;
     private static DateTime dateToUse = null;
