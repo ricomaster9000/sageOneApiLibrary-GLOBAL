@@ -18,7 +18,7 @@ search for ricomaster9000/sageOneApiLibrary-SA
 ``
 USER = ricomaster9000
 REPO/REPOSITORY = sageOneApiLibrary-SA
-TAG/VERSION = 1.0.5
+TAG/VERSION = v1.0.5
 ``
 
 Please run the method SageOneApiConnector.setupSageOneApiSA(Properties properties) to initialize this library's code with your App's Properties class object (usually System.getProperties()) and make sure the below first 3 fields/properties appear in your properties file and have the required (also correct) assigned values, the rest have default values but can be overriden.
