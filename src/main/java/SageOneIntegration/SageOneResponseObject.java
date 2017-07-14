@@ -26,12 +26,12 @@ public final class SageOneResponseObject {
     private static boolean classInitialized = false;
     private boolean initialized = false;
 
-    static void initializeClass() {
+    public static void initializeClass() {
         SageOneResponseObject.classInitialized = true;
     }
-    static void deInitializeClass() { SageOneResponseObject.classInitialized = false; }
+    public static void deInitializeClass() { SageOneResponseObject.classInitialized = false; }
 
-    SageOneResponseObject() {
+    public SageOneResponseObject() {
         try {
             if (SageOneResponseObject.classInitialized) {
                 this.initialized = true;
@@ -43,7 +43,7 @@ public final class SageOneResponseObject {
         }
     }
 
-    SageOneResponseObject(final boolean success, final Object responseObject) {
+    public SageOneResponseObject(final boolean success, final Object responseObject) {
         try {
             if(SageOneResponseObject.classInitialized) {
                 this.initialized = true;
@@ -57,7 +57,7 @@ public final class SageOneResponseObject {
         }
     }
 
-    SageOneResponseObject(final boolean success, final Object responseObject,
+    public SageOneResponseObject(final boolean success, final Object responseObject,
                           final int totalResponseObjects) {
         try {
             if(SageOneResponseObject.classInitialized) {
@@ -73,7 +73,7 @@ public final class SageOneResponseObject {
         }
     }
 
-    SageOneResponseObject(final boolean success, final String responseMessage) {
+    public SageOneResponseObject(final boolean success, final String responseMessage) {
         try {
             if(SageOneResponseObject.classInitialized) {
                 this.initialized = true;
@@ -87,7 +87,7 @@ public final class SageOneResponseObject {
         }
     }
 
-    SageOneResponseObject(final boolean success, final String responseMessage, final Object responseObject) {
+    public SageOneResponseObject(final boolean success, final String responseMessage, final Object responseObject) {
         try {
             if(SageOneResponseObject.classInitialized) {
                 this.initialized = true;
@@ -102,7 +102,7 @@ public final class SageOneResponseObject {
         }
     }
 
-    SageOneResponseObject(final boolean success, final String responseMessage, final Object responseObject,
+    public SageOneResponseObject(final boolean success, final String responseMessage, final Object responseObject,
                           final int totalResponseObjects) {
         try {
             if(SageOneResponseObject.classInitialized) {
@@ -119,11 +119,11 @@ public final class SageOneResponseObject {
         }
     }
 
-    final void setSuccess(final boolean success) {
+    public final void setSuccess(final boolean success) {
         this.success = (this.initialized) ? success : this.success;
     }
 
-    final boolean getSuccess() {
+    public final boolean getSuccess() {
         try {
             if (!this.initialized) {
                 throw new Exception("Cannot access class");
@@ -135,11 +135,11 @@ public final class SageOneResponseObject {
         return this.success;
     }
 
-    final void setResponseMessage(final String responseMessage) {
+    public final void setResponseMessage(final String responseMessage) {
         this.responseMessage = (this.initialized) ? responseMessage : this.responseMessage;
     }
 
-    final String getResponseMessage() {
+    public final String getResponseMessage() {
         try {
             if (!this.initialized) {
                 throw new Exception("Cannot access class");
@@ -151,11 +151,11 @@ public final class SageOneResponseObject {
         return this.responseMessage;
     }
 
-    final void setResponseObject(final Object responseObject) {
+    public final void setResponseObject(final Object responseObject) {
         this.responseObject = (this.initialized) ? responseObject : this.responseObject;
     }
 
-    final Object getResponseObject() {
+    public final Object getResponseObject() {
         try {
             if (!this.initialized) {
                 throw new Exception("Cannot access class");
@@ -167,11 +167,11 @@ public final class SageOneResponseObject {
         return this.responseObject;
     }
 
-    final void setTotalResponseObjects(final int totalResponseObjects) {
+    public final void setTotalResponseObjects(final int totalResponseObjects) {
         this.totalResponseObjects = (this.initialized) ? totalResponseObjects : this.totalResponseObjects;
     }
 
-    final int getTotalResponseObjects() {
+    public final int getTotalResponseObjects() {
         try {
             if (!this.initialized) {
                 throw new Exception("Cannot access class");

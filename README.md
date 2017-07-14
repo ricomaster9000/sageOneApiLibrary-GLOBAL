@@ -1,5 +1,7 @@
-# sageOneApiLibrary-SA V1.05b4 (Early Beta)
-A library that contains pre-written code to connect and access the SageOne South Africa Api (v.1.1.2), it also comes with a template that makes use of these pre-written component code to access the SageOne SA api, the template contains methods (mostly dynamic or generic) that a developer can use to build this library into his/her app. Compatible with java 1.6 and upwards.
+# sageOneApiLibrary-SA V2.0.0 (Early Beta)
+A library that contains pre-written code to connect and access the different SageOne Api's (currently only South Africa Api),
+it comes with a template for each nationality that makes use of these pre-written component code to access the defirrent SageOne api's,
+the template contains methods (mostly dynamic or generic) that a developer can use to build this library into his/her app. Compatible with java 1.6 and upwards.
 
 ### Features
 #### Methods run recursively if to get all results and to do all operations,for example: if there are more results that can be returned but the max result limit is reached,then another request will be sent until all results are grabbed
@@ -18,15 +20,21 @@ search for ricomaster9000/sageOneApiLibrary-SA
 ``
 USER = ricomaster9000
 REPO/REPOSITORY = sageOneApiLibrary-SA
-TAG/VERSION = V1.05b4
+TAG/VERSION = 2.00
 ``
 
-Please run the method SageOneApiConnector.setupSageOneApiSA(Properties properties) to initialize this library's code with your App's Properties class object (usually System.getProperties()) and make sure the below first 3 fields/properties appear in your properties file and have the required (also correct) assigned values, the rest have default values but can be overriden.
+To set up one must create a new instance of the SageOneApiConnector class, and in the constructor method one must pass in the NationalityType Enum value, it will then set up the instance to work with that nationality.
+After that you should create a new variable with which to store the SageOneApiConnector.getTemplate() object which can take any nationality Sage One Api interface class as its value (SageOneSA for SA, SageOneUK for Uk, etc..),
+this template will then be used to do all operations, you can also include it only locally in method bodies by following the same procudere above, note that the SageOne interface class variable should corrospond with
+the NationalityType enum you speicfied when you constructed a new instance with SageOneApiConnector class, you can initialize multiple SageOneApiConnector class
+instances which will work with different nationalities but never for the same
 
-You can now also initialize it with a Map<String, String> parameter "SageOneApiConnector.setupSageOneApiSA(Map<String, String> properties)". 
+Please run the method SageOne??.setupSageOneApi(Properties properties) to initialize this library's code with your App's Properties class object (usually System.getProperties()) and make sure the below first 3 fields/properties appear in your properties file and have the required (also correct) assigned values, the rest have default values but can be overriden.
+
+You can now also initialize it with a Map<String, String> parameter "SageOne??.setupSageOneApi.setupSageOneApi(Map<String, String> properties)".
 
 Spring-support (.yml and .properties files) -> You can now also initialize it with Spring's Environment object(org.springframework.core.env.Environment), like this :
-"SageOneApiConnector.setupSageOneApiSA(Environment properties)"
+"SageOne??.setupSageOneApi(Environment properties)"
 
 ```
 sageOneApi.SA.clientUsername = 'your Sage One username'
@@ -50,7 +58,7 @@ SageOneConstants.getSageOneApiCompanyList() Map variable ->
 Gets the company list which was initialized with all the companies related to the user in the SageOneApiConnector.setupSageOneApiSA(Properties properties) method, from here you can grab company id's by passing in the name of the company in the .get() method of getSageOneApiCompanyList()
 ```
 ```
-SageOne Entities, all of them lies in the SageOneIntegration.SageOneApiEntities package, include them from here, these entity classes will especially be used to save/persist SageOne entities to the SageOne account, use the SageOneEntityType enum class (enum will be used as parameter for template method)
+SageOne Entities, all of them lies in the SageOneIntegration.SA.V1_1_2.SageOneApiEntities package, include them from here, these entity classes will especially be used to save/persist SageOne entities to the SageOne account, use the SageOneEntityType enum class (enum will be used as parameter for template method)
 ```
 
 ### Template Methods

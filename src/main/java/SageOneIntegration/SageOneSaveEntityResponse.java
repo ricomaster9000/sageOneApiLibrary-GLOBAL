@@ -4,7 +4,8 @@ package SageOneIntegration;
 /**
  * Created by ricomaster9000 on 2017/06/05.
  */
-public final class SageOneSaveEntityResponse {
+public final class
+SageOneSaveEntityResponse {
     private boolean success = false;
     private int savedEntityId = 0;
     private boolean initialized = false;

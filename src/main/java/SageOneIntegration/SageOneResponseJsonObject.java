@@ -25,12 +25,12 @@ public final class SageOneResponseJsonObject {
     private static boolean classInitialized = false;
     private boolean initialized = false;
 
-    static void initializeClass() {
+    public static void initializeClass() {
         SageOneResponseJsonObject.classInitialized = true;
     }
-    static void deInitializeClass() { SageOneResponseJsonObject.classInitialized = false; }
+    public static void deInitializeClass() { SageOneResponseJsonObject.classInitialized = false; }
 
-    SageOneResponseJsonObject() {
+    public SageOneResponseJsonObject() {
         try {
             if (SageOneResponseJsonObject.classInitialized) {
                 this.initialized = true;
@@ -42,7 +42,7 @@ public final class SageOneResponseJsonObject {
         }
     }
 
-    SageOneResponseJsonObject(final boolean success, final String responseMessage) {
+    public SageOneResponseJsonObject(final boolean success, final String responseMessage) {
         try {
             if(SageOneResponseJsonObject.classInitialized) {
                 this.initialized = true;
@@ -56,7 +56,7 @@ public final class SageOneResponseJsonObject {
         }
     }
 
-    SageOneResponseJsonObject(final boolean success, final String responseMessage, final String responseJson) {
+    public SageOneResponseJsonObject(final boolean success, final String responseMessage, final String responseJson) {
         try {
             if(SageOneResponseJsonObject.classInitialized) {
                 this.initialized = true;
@@ -71,7 +71,7 @@ public final class SageOneResponseJsonObject {
         }
     }
 
-    final void setSuccess(final boolean success) {
+    public final void setSuccess(final boolean success) {
         this.success = (this.initialized) ? success : this.success;
     }
 
@@ -87,7 +87,7 @@ public final class SageOneResponseJsonObject {
         return success;
     }
 
-    final void setResponseMessage(final String responseMessage) {
+    public final void setResponseMessage(final String responseMessage) {
         this.responseMessage = (this.initialized) ? responseMessage : this.responseMessage;
     }
 
@@ -103,7 +103,7 @@ public final class SageOneResponseJsonObject {
         return responseMessage;
     }
 
-    final void setResponseJson(final String responseJson) {
+    public final void setResponseJson(final String responseJson) {
         this.responseJson = (this.initialized) ? responseJson : this.responseJson;
     }
 

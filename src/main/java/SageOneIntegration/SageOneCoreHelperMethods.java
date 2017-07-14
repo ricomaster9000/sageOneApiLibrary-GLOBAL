@@ -18,8 +18,8 @@
  **/
 package SageOneIntegration;
 
-import SageOneIntegration.SageOneApiEntities.V1_1_2.SageOneCustomerReturn;
-import SageOneIntegration.SageOneApiEntities.V1_1_2.SageOneSupplierReturn;
+import SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneCustomerReturn;
+import SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneSupplierReturn;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.gson.Gson;
 
@@ -35,7 +35,7 @@ public final class SageOneCoreHelperMethods {
 
     }
 
-    static String encodeCurlyBrackets(String endpointToEncode) throws UnsupportedEncodingException {
+    public static String encodeCurlyBrackets(String endpointToEncode) throws UnsupportedEncodingException {
         String stringToReturn = "";
         int indexOfCurlyBeginning = 0;
         int indexOfCurlyEnding = 0;
@@ -107,8 +107,8 @@ public final class SageOneCoreHelperMethods {
                             responseFromTry = false;
                         }
                         sageOneResponseJsonObject = new SageOneResponseJsonObject((sageOneResponseObjectFromApi.getSuccess() && responseFromTry),
-                                (responseFromTry) ? "Successfully grabbed data from SageOne Api" : "Failed to grab " +
-                                "data from SageOne Api, Api call was successful but the data returned caused " +
+                                (responseFromTry) ? "Successfully grabbed data from SageOneSA Api" : "Failed to grab " +
+                                "data from SageOneSA Api, Api call was successful but the data returned caused " +
                                 "an error", jsonString);
                 }
             }
