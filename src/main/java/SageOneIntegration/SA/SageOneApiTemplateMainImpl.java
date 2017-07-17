@@ -109,9 +109,10 @@ public abstract class SageOneApiTemplateMainImpl extends SetupClass implements S
     protected static SageOneResponseObject sageOneSaveData(final int companyId,
                                                            final Class<?> classToMapTo,
                                                            final String endpointPlusQuery,
-                                                           final String jsonObject) {
-        return SageOneCoreConnection.sageOneSaveData(classToMapTo, endpointPlusQuery,
-                jsonObject, companyId);
+                                                           final String jsonObject,
+                                                           final byte[] fileData) {
+        return SageOneCoreConnection.sageOneSaveData(companyId, classToMapTo, endpointPlusQuery,
+                jsonObject, fileData);
     }
 
     protected static SageOneResponseObject deleteSageOneEntity(final int companyId,
@@ -413,6 +414,12 @@ public abstract class SageOneApiTemplateMainImpl extends SetupClass implements S
     public SageOneHttpResponseMessage downloadSageOneEntity(final String companyName,
                                                      final int entityId,
                                                      final SageOneEntityType.V_1_1_2 entity) {
+        return null;
+    }
+
+    public <T> T saveSageOneAttachment(final String companyName,
+                                final SageOneEntityType.V_1_1_2 entityToSave,
+                                final byte[] fileData) {
         return null;
     }
     // END OF VERSION 1.1.2

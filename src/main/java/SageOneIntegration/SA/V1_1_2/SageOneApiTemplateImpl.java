@@ -60,7 +60,7 @@ public final class SageOneApiTemplateImpl extends SageOneApiTemplateMainImpl imp
     public SageOneApiTemplateImpl() {
     }
 
-    private static final Class<?> checkAndSetupPropertyValueUsage(final Class<?> fieldClass, final String propertyValue,
+    private static Class<?> checkAndSetupPropertyValueUsage(final Class<?> fieldClass, final String propertyValue,
                                                                   final boolean checkOnlyPropertyNotValue) {
         boolean response = true;
         condFilterVal1 = false;
@@ -97,8 +97,8 @@ public final class SageOneApiTemplateImpl extends SageOneApiTemplateMainImpl imp
                         (dateToUse.getDayOfMonth() + 1));
             }
         } else if(fieldClass.isAssignableFrom(Boolean.class)) {
-            response = (!checkOnlyPropertyNotValue) ? (propertyValue.toUpperCase().equals(Boolean.TRUE) ||
-            propertyValue.toUpperCase().equals(Boolean.FALSE)) : checkOnlyPropertyNotValue;
+            response = (!checkOnlyPropertyNotValue) ? (propertyValue.toUpperCase().equals(Boolean.TRUE.toString()) ||
+            propertyValue.toUpperCase().equals(Boolean.FALSE.toString())) : checkOnlyPropertyNotValue;
 
             condFilterVal1 = response;
             condSearchAnyVal6 = response;
@@ -147,7 +147,7 @@ public final class SageOneApiTemplateImpl extends SageOneApiTemplateMainImpl imp
                 sageOneEntityType, false, ODataFilter1, false, false, false);
 
                 try {
-                    final Integer companyId = super.CompanyList.get(companyName);
+                    final Integer companyId = SageOneApiTemplateImpl.CompanyList.get(companyName);
 
                     if (companyId == null) {
                         response = false;
@@ -163,7 +163,7 @@ public final class SageOneApiTemplateImpl extends SageOneApiTemplateMainImpl imp
                                         ODataFilter8 :
                                         propertyName + URLEncoder.encode(" eq '", UTF_8_STR) + propertyValue + "'";
 
-                        sageOneResponseObject = this.sageOneGrabData(companyId, endpointQuery,
+                        sageOneResponseObject = SageOneApiTemplateImpl.sageOneGrabData(companyId, endpointQuery,
                         sageOneEntityType.GetObject.getClassProperty(), true);
 
                         if (sageOneResponseObject.getSuccess()) {
@@ -214,7 +214,7 @@ public final class SageOneApiTemplateImpl extends SageOneApiTemplateMainImpl imp
                 sageOneEntityType, false, ODataFilter1, false, false, false);
 
                 try {
-                    final Integer companyId = super.CompanyList.get(companyName);
+                    final Integer companyId = SageOneApiTemplateImpl.CompanyList.get(companyName);
 
                     if(companyId == null) {
                         response = false;
@@ -230,7 +230,7 @@ public final class SageOneApiTemplateImpl extends SageOneApiTemplateMainImpl imp
                                         ODataFilter8 : propertyName + URLEncoder.encode(" eq '", UTF_8_STR) +
                         propertyValue + "'";
 
-                        sageOneResponseObject = this.sageOneGrabData(companyId, endpointQuery,
+                        sageOneResponseObject = SageOneApiTemplateImpl.sageOneGrabData(companyId, endpointQuery,
                         sageOneEntityType.GetObject.getClassProperty(), true);
 
                         if(sageOneResponseObject.getSuccess()) {
@@ -291,7 +291,7 @@ public final class SageOneApiTemplateImpl extends SageOneApiTemplateMainImpl imp
                     sageOneEntityType, false, ODataFilter1, false, false, false);
 
                     try {
-                        final Integer companyId = super.CompanyList.get(companyName);
+                        final Integer companyId = SageOneApiTemplateImpl.CompanyList.get(companyName);
 
                         if (companyId == null) {
                             response = false;
@@ -337,7 +337,7 @@ public final class SageOneApiTemplateImpl extends SageOneApiTemplateMainImpl imp
                                 globalIterator++;
                                 queryString.append(((propertyNames.length > globalIterator) ? " or " : ""));
                             }
-                            sageOneResponseObject = this.sageOneGrabData(companyId, endpointQuery +
+                            sageOneResponseObject = SageOneApiTemplateImpl.sageOneGrabData(companyId, endpointQuery +
                                     queryString.toString(), sageOneEntityType.GetObject.getClassProperty(),
                                     true);
 
@@ -393,7 +393,7 @@ public final class SageOneApiTemplateImpl extends SageOneApiTemplateMainImpl imp
                 String endpointQuery = checkAndManageEndPointQueryIfNeeded(sageOneEntityType.GetObject.getStringProperty(),
                         sageOneEntityType, false, ODataFilter1, false, false, false);
                 try {
-                    final Integer companyId = super.CompanyList.get(companyName);
+                    final Integer companyId = SageOneApiTemplateImpl.CompanyList.get(companyName);
 
                     if (companyId == null) {
                         response = false;
@@ -437,7 +437,7 @@ public final class SageOneApiTemplateImpl extends SageOneApiTemplateMainImpl imp
                             globalIterator++;
                             queryString.append(((propertyNames.length > globalIterator) ? " and " : ""));
                         }
-                        sageOneResponseObject = this.sageOneGrabData(companyId, endpointQuery +
+                        sageOneResponseObject = SageOneApiTemplateImpl.sageOneGrabData(companyId, endpointQuery +
                                 queryString.toString(), sageOneEntityType.GetObject.getClassProperty(),
                                 true);
 
@@ -480,7 +480,7 @@ public final class SageOneApiTemplateImpl extends SageOneApiTemplateMainImpl imp
 
         if (response) {
             try {
-                final Integer companyId = super.CompanyList.get(companyName);
+                final Integer companyId = SageOneApiTemplateImpl.CompanyList.get(companyName);
                 if (companyId == null) {
                     response = false;
                 }
@@ -511,8 +511,8 @@ public final class SageOneApiTemplateImpl extends SageOneApiTemplateMainImpl imp
                             } else if(condSearchAnyVal5) {
                                 condSearchAnyVal10 = (propertyValue.matches(GENERAL_STRING_REGEX));
                             } else if(condSearchAnyVal6) {
-                                condSearchAnyVal10 = (propertyValue.toUpperCase().equals(Boolean.TRUE) ||
-                                propertyValue.toUpperCase().equals(Boolean.FALSE));
+                                condSearchAnyVal10 = (propertyValue.toUpperCase().equals(Boolean.TRUE.toString()) ||
+                                propertyValue.toUpperCase().equals(Boolean.FALSE.toString()));
                             } else if(condSearchAnyVal7) {
                                 dateToUse = SageOneApiTemplateImpl.checkAndConvertDate(propertyValue, true);
                                 condFilterVal3 = (dateToUse != null);
@@ -562,11 +562,11 @@ public final class SageOneApiTemplateImpl extends SageOneApiTemplateMainImpl imp
                         if(response && condSearchAnyVal2 && (condSearchAnyVal1 > 10 || (sageOneEntityType.GetObject.getClassProperty().getDeclaredFields().length - globalIterator) < 10)) {
                             condSearchAnyVal1 = 0;
                             condSearchAnyVal2 = false;
-                            sageOneResponseObject = this.sageOneGrabData(companyId, endpointQuery +
+                            sageOneResponseObject = SageOneApiTemplateImpl.sageOneGrabData(companyId, endpointQuery +
                             queryString.substring(0, queryString.length() - 4),
                             sageOneEntityType.GetObject.getClassProperty(), true);
 
-                            if (sageOneResponseObject.getSuccess() && response) {
+                            if (sageOneResponseObject.getSuccess()) {
                                 sageOneCustomersGrabbed.addAll((sageOneResponseObject.getResponseObject() != null) ?
                                 (List<T>) sageOneResponseObject.getResponseObject() : new ArrayList<T>());
                                 queryString = new StringBuilder(values.length * 200);
@@ -603,14 +603,14 @@ public final class SageOneApiTemplateImpl extends SageOneApiTemplateMainImpl imp
         entity, true, entityId, false, false, false);
         SageOneResponseObject sageOneResponseObject = null;
 
-        final Integer companyId = super.CompanyList.get(companyName);
+        final Integer companyId = SageOneApiTemplateImpl.CompanyList.get(companyName);
         try {
             if (companyId == null) {
                 throw new IllegalArgumentException(sageOneTemplateError2);
             } else {
                 if (entity.GetObject.getCanBeUsedInRequest() && entity.GetObject.getCanBeGrabbedById()) {
 
-                    sageOneResponseObject = this.sageOneGrabData(companyId, endpointQuery,
+                    sageOneResponseObject = SageOneApiTemplateImpl.sageOneGrabData(companyId, endpointQuery,
                     entity.GetObject.getClassProperty(), false);
                 } else {
                     throw new InvalidClassException(String.format(sageOneTemplateError1, entity.name()));
@@ -646,7 +646,7 @@ public final class SageOneApiTemplateImpl extends SageOneApiTemplateMainImpl imp
 
         try {
             if (response) {
-                companyId = super.CompanyList.get(companyName);
+                companyId = SageOneApiTemplateImpl.CompanyList.get(companyName);
                 if (companyId == null) {
                     sageOneResponseObject = null;
                     System.out.println(sageOneTemplateError2);
@@ -654,8 +654,8 @@ public final class SageOneApiTemplateImpl extends SageOneApiTemplateMainImpl imp
                     String endpointQuery = checkAndManageEndPointQueryIfNeeded(entityTypeToUse.GetObject.getStringProperty(),
                     entityTypeToUse, false, null, false, true, false);
 
-                    sageOneResponseObject = this.sageOneSaveData(companyId, entityTypeToUse.GetObject.getClassProperty(),
-                    endpointQuery, gson.toJson(entityToSave));
+                    sageOneResponseObject = SageOneApiTemplateImpl.sageOneSaveData(companyId, entityTypeToUse.GetObject.getClassProperty(),
+                    endpointQuery, gson.toJson(entityToSave), null);
                 }
             } else {
                 throw new IllegalArgumentException(String.format(sageOneTemplateError1, entityToSave.getClass().getName()));
@@ -674,7 +674,7 @@ public final class SageOneApiTemplateImpl extends SageOneApiTemplateMainImpl imp
                                              final SageOneEntityType.V_1_1_2 sageOneEntityType) {
         boolean response = true;
         try {
-            Integer companyId = super.CompanyList.get(CompanyName);
+            Integer companyId = SageOneApiTemplateImpl.CompanyList.get(CompanyName);
 
             if(companyId == null) {
                 response = false;
@@ -685,7 +685,7 @@ public final class SageOneApiTemplateImpl extends SageOneApiTemplateMainImpl imp
                 queryStringNorm = checkAndManageEndPointQueryIfNeeded(sageOneEntityType.GetObject.getStringProperty(),
                 sageOneEntityType, false, entityId, true, false, false);
 
-                SageOneResponseObject responseObject = this.deleteSageOneEntity(companyId, queryStringNorm);
+                SageOneResponseObject responseObject = SageOneApiTemplateImpl.deleteSageOneEntity(companyId, queryStringNorm);
 
                 if(responseObject.getSuccess()) {
                     System.out.println(String.format(sageOneTemplateSuccess1, sageOneEntityType.GetObject.getClassProperty().getName(), entityId));
@@ -713,7 +713,7 @@ public final class SageOneApiTemplateImpl extends SageOneApiTemplateMainImpl imp
         boolean response = true;
         condFilterVal3 = false;
 
-        Integer companyId = super.CompanyList.get(companyName);
+        Integer companyId = SageOneApiTemplateImpl.CompanyList.get(companyName);
 
         if(companyId == null) {
             response = false;
@@ -766,7 +766,7 @@ public final class SageOneApiTemplateImpl extends SageOneApiTemplateMainImpl imp
                                 endpointQuery = checkAndManageEndPointQueryIfNeeded(sageOneEntityType.GetObject.getStringProperty(),
                                 sageOneEntityType, false, idOfEntity, true, false, false);
 
-                                if(this.deleteSageOneEntity(companyId, endpointQuery).getSuccess()) {
+                                if(SageOneApiTemplateImpl.deleteSageOneEntity(companyId, endpointQuery).getSuccess()) {
                                     System.out.println(String.format(sageOneTemplateSuccess1,
                                     sageOneEntityType.GetObject.getClassProperty().getName(), idOfEntity));
                                 } else {
@@ -803,7 +803,7 @@ public final class SageOneApiTemplateImpl extends SageOneApiTemplateMainImpl imp
         boolean response = true;
         List<T> listToReturn = new ArrayList<T>();
 
-        Integer companyId = super.CompanyList.get(companyName);
+        Integer companyId = SageOneApiTemplateImpl.CompanyList.get(companyName);
 
         if(companyId == null) {
             response = false;
@@ -815,7 +815,7 @@ public final class SageOneApiTemplateImpl extends SageOneApiTemplateMainImpl imp
                  sageOneEntityType, false, "", false, false, false);
 
                 if(sageOneEntityType.GetObject.getCanBeUsedInRequest()) {
-                    SageOneResponseObject sageOneResponseObj = this.sageOneGrabData(companyId, endpointQuery,
+                    SageOneResponseObject sageOneResponseObj = SageOneApiTemplateImpl.sageOneGrabData(companyId, endpointQuery,
                     sageOneEntityType.GetObject.getClassProperty(), true);
 
                     response = sageOneResponseObj.getSuccess();
@@ -850,14 +850,14 @@ public final class SageOneApiTemplateImpl extends SageOneApiTemplateMainImpl imp
 
         SageOneResponseObject sageOneResponseObject = null;
 
-        final Integer companyId = super.CompanyList.get(companyName);
+        final Integer companyId = SageOneApiTemplateImpl.CompanyList.get(companyName);
         try {
             if (companyId == null) {
                 throw new IllegalArgumentException(sageOneTemplateError2);
             } else {
                 if (entity.GetObject.getCanBeUsedInRequest() && entity.GetObject.getCanBeDownloaded()) {
 
-                    sageOneResponseObject = this.sageOneGrabData(companyId, endpointQuery,
+                    sageOneResponseObject = SageOneApiTemplateImpl.sageOneGrabData(companyId, endpointQuery,
                             SageOneHttpResponseMessage.class, false);
                 } else {
                     throw new InvalidClassException(String.format(sageOneTemplateError1, entity.name()));
@@ -874,8 +874,9 @@ public final class SageOneApiTemplateImpl extends SageOneApiTemplateMainImpl imp
     }
 
     @Override
-    public final <T> T saveSageOneAttachment(final String companyName, final Object entityToSave,
-                                             final byte[] fileData, String fileContentType) {
+    public final <T> T saveSageOneAttachment(final String companyName, final SageOneEntityType.V_1_1_2 entityToSave,
+                                             final byte[] fileData) {
+
         boolean response = false;
         SageOneResponseObject sageOneResponseObject = null;
         SageOneEntityType.V_1_1_2 entityTypeToUse = null;
@@ -888,13 +889,13 @@ public final class SageOneApiTemplateImpl extends SageOneApiTemplateMainImpl imp
             }
         }
 
-        if(!entityTypeToUse.GetObject.getCanBeUsedInRequest() && !entityTypeToUse.GetObject.getCanBeDownloaded()) {
+        if(!entityTypeToUse.GetObject.getCanBeDownloaded()) {
             response = false;
         }
 
         try {
             if (response) {
-                companyId = super.CompanyList.get(companyName);
+                companyId = SageOneApiTemplateMainImpl.CompanyList.get(companyName);
                 if (companyId == null) {
                     sageOneResponseObject = null;
                     System.out.println(sageOneTemplateError2);
@@ -902,8 +903,8 @@ public final class SageOneApiTemplateImpl extends SageOneApiTemplateMainImpl imp
                     String endpointQuery = checkAndManageEndPointQueryIfNeeded(entityTypeToUse.GetObject.getStringProperty(),
                             entityTypeToUse, false, null, false, true, false);
 
-                    sageOneResponseObject = this.sageOneSaveData(companyId, entityTypeToUse.GetObject.getClassProperty(),
-                            endpointQuery, gson.toJson(entityToSave));
+                    sageOneResponseObject = SageOneApiTemplateMainImpl.sageOneSaveData(companyId, SageOneHttpResponseMessage.class,
+                            endpointQuery, null, fileData);
                 }
             } else {
                 throw new IllegalArgumentException(String.format(sageOneTemplateError1, entityToSave.getClass().getName()));

@@ -22,7 +22,6 @@ import SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneCompany;
 import SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneGrabbedResultsClass;
 import SageOneIntegration.SageOneApiConnector;
 import SageOneIntegration.SageOneResponseJsonObject;
-import com.sun.deploy.util.SystemUtils;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.springframework.core.env.Environment;
@@ -61,7 +60,7 @@ class SetupClass {
                 }
 
                 SageOneResponseJsonObject sageOneResponseJsonObject = ConnectionCoreCodeReturnResponseJson(-255,
-                        endpointToGetCompanies + SKIP_QUERY_PARAM + globalSkipIterator, RequestMethod.GET, null);
+                        endpointToGetCompanies + SKIP_QUERY_PARAM + globalSkipIterator, RequestMethod.GET, null, null);
 
                 if (sageOneResponseJsonObject.getSuccess()) {
 
@@ -130,7 +129,7 @@ class SetupClass {
         if (response) {
             SageOneConstants.CLIENT_USERNAME = properties.getProperty("sageOneApi.SA.clientUsername").toCharArray();
             SageOneConstants.CLIENT_PASSWORD = properties.getProperty("sageOneApi.SA.clientPassword").toCharArray();
-            SageOneConstants.API_KEY = new String("{" + properties.getProperty("sageOneApi.SA.apiKey") + "}").toCharArray();
+            SageOneConstants.API_KEY = ("{" + properties.getProperty("sageOneApi.SA.apiKey") + "}").toCharArray();
 
             SageOneConstants.API_URL = (properties.getProperty("sageOneApi.SA.apiUrl") != null) ?
                     properties.getProperty("sageOneApi.SA.apiUrl") : SageOneConstants.API_URL;
@@ -178,7 +177,7 @@ class SetupClass {
         if (response) {
             SageOneConstants.CLIENT_USERNAME = properties.get("sageOneApi.SA.clientUsername").toCharArray();
             SageOneConstants.CLIENT_PASSWORD = properties.get("sageOneApi.SA.clientPassword").toCharArray();
-            SageOneConstants.API_KEY = new String("{" + properties.get("sageOneApi.SA.apiKey") + "}").toCharArray();
+            SageOneConstants.API_KEY = ("{" + properties.get("sageOneApi.SA.apiKey") + "}").toCharArray();
 
             SageOneConstants.API_URL = (properties.get("sageOneApi.SA.apiUrl") != null) ?
                     properties.get("sageOneApi.SA.apiUrl") : SageOneConstants.API_URL;
@@ -226,7 +225,7 @@ class SetupClass {
         if (response) {
             SageOneConstants.CLIENT_USERNAME = properties.getProperty("sageOneApi.SA.clientUsername").toCharArray();
             SageOneConstants.CLIENT_PASSWORD = properties.getProperty("sageOneApi.SA.clientPassword").toCharArray();
-            SageOneConstants.API_KEY = new String("{" + properties.getProperty("sageOneApi.SA.apiKey") + "}").toCharArray();
+            SageOneConstants.API_KEY = ("{" + properties.getProperty("sageOneApi.SA.apiKey") + "}").toCharArray();
 
             SageOneConstants.API_URL = (properties.getProperty("sageOneApi.SA.apiUrl") != null) ?
                     properties.getProperty("sageOneApi.SA.apiUrl") : SageOneConstants.API_URL;
