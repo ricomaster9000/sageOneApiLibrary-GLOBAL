@@ -24,7 +24,7 @@ package SageOneIntegration.SA.V1_1_2.SageOneApiEntities;
 public final class SageOneGrabbedResultsClass {
     private int TotalResults;
     private int ReturnedResults;
-    private Object[] Results;
+    private Object[] Results = new Object[]{};
 
     public final int getTotalResults() {
         return this.TotalResults;

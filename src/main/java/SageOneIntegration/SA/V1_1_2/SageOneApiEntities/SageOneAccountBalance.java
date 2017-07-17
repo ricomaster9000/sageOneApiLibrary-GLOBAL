@@ -18,7 +18,7 @@
  **/
 package SageOneIntegration.SA.V1_1_2.SageOneApiEntities;
 
-import SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageEnum.SageOneAccountType;
+import SageOneIntegration.SA.V1_1_2.SageOneEnumEntities.SageOneAccountType;
 
 import java.util.Date;
 

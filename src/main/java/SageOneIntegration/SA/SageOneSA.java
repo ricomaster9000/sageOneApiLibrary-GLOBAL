@@ -1,9 +1,26 @@
+/**
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements.  See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership.  The ASF licenses this file
+ to you under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance
+ with the License.  You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied.  See the License for the
+ specific language governing permissions and limitations
+ under the License.
+ **/
 package SageOneIntegration.SA;
 
-import SageOneIntegration.NationalityType;
+import SageOneIntegration.SA.ReusableClasses.SageOneHttpResponseMessage;
 import SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneCustomer;
 import SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneSupplier;
-import SageOneIntegration.SageOneResponseObject;
 import org.springframework.core.env.Environment;
 
 import java.util.List;
@@ -40,29 +57,29 @@ public interface SageOneSA {
                                                   final String propertyValue);
 
     public <T> List<T> searchEntitiesByAnyMatchedPropertyValues(final String companyName,
-                                                                                final SageOneEntityType.V_1_1_2 sageOneEntityType,
-                                                                                final String[] propertyNames,
-                                                                                final String[] propertyValues);
+                                                                final SageOneEntityType.V_1_1_2 sageOneEntityType,
+                                                                final String[] propertyNames,
+                                                                final String[] propertyValues);
 
     public <T> List<T> searchEntitiesByAllMatchedPropertyValues(final String companyName,
-                                                                                final SageOneEntityType.V_1_1_2 sageOneEntityType,
-                                                                                final String[] propertyNames,
-                                                                                final String[] propertyValues);
+                                                                final SageOneEntityType.V_1_1_2 sageOneEntityType,
+                                                                final String[] propertyNames,
+                                                                final String[] propertyValues);
 
     public <T> List<T> searchEntitiesByAnyValues(final String companyName,
                                                  final SageOneEntityType.V_1_1_2 sageOneEntityType,
                                                  final String... values);
 
     public <T> T getSageOneEntity(final String companyName,
-                                  final SageOneEntityType.V_1_1_2 entity,
-                                  final int entityId);
+                                  final int entityId,
+                                  final SageOneEntityType.V_1_1_2 entity);
 
     public <T> T saveSageOneEntity(final String companyName,
                                    final Object entityToSave);
 
     public boolean deleteSageOneEntity(final String companyName,
-                                       final SageOneEntityType.V_1_1_2 sageOneEntityType,
-                                       final Integer entityId);
+                                       final Integer entityId,
+                                       final SageOneEntityType.V_1_1_2 sageOneEntityType);
 
     public boolean deleteSageOneEntitiesByPropertyValue(final String companyName,
                                                         final SageOneEntityType.V_1_1_2 sageOneEntityType,
@@ -71,4 +88,8 @@ public interface SageOneSA {
 
     public <T> List<T> getSageOneEntitiesByType(final String companyName,
                                                 final SageOneEntityType.V_1_1_2 sageOneEntityType);
+
+    SageOneHttpResponseMessage downloadSageOneEntity(final String companyName,
+                                                     final int entityId,
+                                                     final SageOneEntityType.V_1_1_2 entity);
 }

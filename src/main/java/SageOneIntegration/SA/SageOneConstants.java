@@ -1,3 +1,4 @@
+/** "Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0. "*/
 package SageOneIntegration.SA;
 
 
@@ -17,11 +18,13 @@ public class SageOneConstants {
     returned for list methods, regardless of the parameter sent through. THIS IS PER COMPANY/USER,
     CAN HAVE MORE THAN ONE, LIMIT IS NOT ENFORCED BUT REALLY RECOMMENDED.
    */
-    protected static String CLIENT_USERNAME = ""; // TODO testing account, change to actual
-    protected static String CLIENT_PASSWORD = "";  // TODO testing password, change to actual
+    protected static char[] CLIENT_USERNAME = new char[]{}; // Change to actual and then toCharArray
+    protected static char[] CLIENT_PASSWORD = new char[]{};  // Change to actual and then toCharArray
+    protected static char[] API_KEY = new char[]{}; // Change to actual and then toCharArray
+
+
     protected static String API_URL = "https://accounting.sageone.co.za";
     public static String API_VERSION = "1.1.2";
-    protected static String API_KEY = "";
     protected static int SAGE_ONE_REQUEST_RESULT_LIMIT = 100;
     protected static int SAGE_ONE_REQUEST_LIMIT_HOUR = 250;
     protected static int SAGE_ONE_REQUEST_LIMIT_DAY = 6000;

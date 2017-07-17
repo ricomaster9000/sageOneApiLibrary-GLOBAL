@@ -4,16 +4,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.github.ricomaster9000</groupId>
-    <artifactId>api-SA</artifactId>
-    <version>1.0.7</version>
+    <artifactId>api-GLOBAL</artifactId>
+    <version>2.0.0</version>
     <packaging>jar</packaging>
-    <name>SageOne Api South Africa Library</name>
+    <name>SageOne Api Global Library</name>
     <description>
-    A library that contains pre-written code to connect and access the SageOne SA Api (v.1.1.2), it also
-    comes with a template that makes use of these pre-written component code to access the SageOne SA api, the template
-    contains methods (mostly dynamic or generic) that a developer can use to build this library into his/her app.
+        A library that contains pre-written code to connect and access the different SageOne Api's (currently only South Africa Api),
+        it comes with a template for each nationality that makes use of these pre-written component code to access the defirrent SageOne api's,
+        the template contains methods (mostly dynamic or generic) that a developer can use to build this library into his/her app. Compatible with java 1.6 and upwards.
     </description>
-    <url>https://github.com/ricomaster9000/sageOneApiLibrary-SA</url>
+    <url>https://github.com/ricomaster9000/sageOneApiLibrary-GLOBAL</url>
 
     <licenses>
         <license>
@@ -58,6 +58,11 @@
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
             <version>2.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tika</groupId>
+            <artifactId>tika-core</artifactId>
+            <version>1.15</version>
         </dependency>
     </dependencies>
 

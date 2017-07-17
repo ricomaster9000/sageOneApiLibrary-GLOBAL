@@ -16,7 +16,7 @@
  specific language governing permissions and limitations
  under the License.
  **/
-package SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageEnum;
+package SageOneIntegration.SA.V1_1_2.SageOneEnumEntities;
 
 
 public enum SageOneAccountType {

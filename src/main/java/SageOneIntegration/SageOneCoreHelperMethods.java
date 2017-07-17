@@ -35,29 +35,33 @@ public final class SageOneCoreHelperMethods {
 
     }
 
-    public static String encodeCurlyBrackets(String endpointToEncode) throws UnsupportedEncodingException {
+    public static String encodeCurlyBrackets(String endpointToEncode) {
         String stringToReturn = "";
-        int indexOfCurlyBeginning = 0;
-        int indexOfCurlyEnding = 0;
+        try {
+            int indexOfCurlyBeginning = 0;
+            int indexOfCurlyEnding = 0;
 
-        if(endpointToEncode.contains("{") && endpointToEncode.contains("}")) {
+            if (endpointToEncode.contains("{") && endpointToEncode.contains("}")) {
 
-            indexOfCurlyBeginning = endpointToEncode.indexOf("{");
-            indexOfCurlyEnding = endpointToEncode.indexOf("}") + 1;
+                indexOfCurlyBeginning = endpointToEncode.indexOf("{");
+                indexOfCurlyEnding = endpointToEncode.indexOf("}") + 1;
 
-            String stringToEncode = endpointToEncode.substring(indexOfCurlyBeginning, indexOfCurlyEnding);
-            stringToEncode = URLEncoder.encode(stringToEncode, "UTF-8");
+                String stringToEncode = endpointToEncode.substring(indexOfCurlyBeginning, indexOfCurlyEnding);
+                stringToEncode = URLEncoder.encode(stringToEncode, "UTF-8");
 
-            endpointToEncode = endpointToEncode.replace(endpointToEncode.substring(indexOfCurlyBeginning,
-            indexOfCurlyEnding), stringToEncode);
+                endpointToEncode = endpointToEncode.replace(endpointToEncode.substring(indexOfCurlyBeginning,
+                        indexOfCurlyEnding), stringToEncode);
 
-            if(endpointToEncode.contains("{") && endpointToEncode.contains("}")) {
-                stringToReturn = encodeCurlyBrackets(endpointToEncode);
+                if (endpointToEncode.contains("{") && endpointToEncode.contains("}")) {
+                    stringToReturn = encodeCurlyBrackets(endpointToEncode);
+                } else {
+                    stringToReturn = endpointToEncode;
+                }
             } else {
                 stringToReturn = endpointToEncode;
             }
-        } else {
-            stringToReturn = endpointToEncode;
+        } catch(UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
         return stringToReturn;
     }

@@ -19,8 +19,6 @@
 package SageOneIntegration.SA.V1_1_2.SageOneApiEntities;
 
 
-import org.joda.time.DateTime;
-
 import java.util.Date;
 
 public final class SageOneItem extends SageOneMainEntity {

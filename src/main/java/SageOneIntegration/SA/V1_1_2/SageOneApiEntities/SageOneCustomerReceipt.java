@@ -18,7 +18,7 @@
  **/
 package SageOneIntegration.SA.V1_1_2.SageOneApiEntities;
 
-import SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageEnum.SageOnePaymentMethod;
+import SageOneIntegration.SA.V1_1_2.SageOneEnumEntities.SageOnePaymentMethod;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import java.util.Date;

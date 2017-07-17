@@ -36,9 +36,9 @@ public final class SageOneResponseObject {
             if (SageOneResponseObject.classInitialized) {
                 this.initialized = true;
             } else {
-                throw new Exception("Cannot access class");
+                throw new ClassNotFoundException("Cannot access class, initialize before usage");
             }
-        } catch(Exception e) {
+        } catch(ClassNotFoundException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -50,9 +50,9 @@ public final class SageOneResponseObject {
                 this.success = success;
                 this.responseObject = responseObject;
             } else {
-                throw new Exception("Cannot access class");
+                throw new ClassNotFoundException("Cannot access class, initialize before usage");
             }
-        } catch(Exception e) {
+        } catch(ClassNotFoundException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -66,9 +66,9 @@ public final class SageOneResponseObject {
                 this.responseObject = responseObject;
                 this.totalResponseObjects = totalResponseObjects;
             } else {
-                throw new Exception("Cannot access class");
+                throw new ClassNotFoundException("Cannot access class, initialize before usage");
             }
-        } catch(Exception e) {
+        } catch(ClassNotFoundException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -80,9 +80,9 @@ public final class SageOneResponseObject {
                 this.success = success;
                 this.responseMessage = responseMessage;
             } else {
-                throw new Exception("Cannot access class");
+                throw new ClassNotFoundException("Cannot access class, initialize before usage");
             }
-        } catch(Exception e) {
+        } catch(ClassNotFoundException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -95,9 +95,9 @@ public final class SageOneResponseObject {
                 this.responseMessage = responseMessage;
                 this.responseObject = responseObject;
             } else {
-                throw new Exception("Cannot access class");
+                throw new ClassNotFoundException("Cannot access class, initialize before usage");
             }
-        } catch(Exception e) {
+        } catch(ClassNotFoundException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -112,9 +112,9 @@ public final class SageOneResponseObject {
                 this.responseObject = responseObject;
                 this.totalResponseObjects = totalResponseObjects;
             } else {
-                throw new Exception("Cannot access class");
+                throw new ClassNotFoundException("Cannot access class, initialize before usage");
             }
-        } catch(Exception e) {
+        } catch(ClassNotFoundException e) {
             System.out.println(e.getMessage());
         }
     }

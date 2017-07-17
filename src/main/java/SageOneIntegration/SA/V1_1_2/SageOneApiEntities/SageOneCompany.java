@@ -17,9 +17,9 @@
 package SageOneIntegration.SA.V1_1_2.SageOneApiEntities;
 
 
-import SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageEnum.SageOneCompanyStatus;
-import SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageEnum.SageOneRoundingTypeClass;
-import SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageEnum.SageOneTaxSystemClass;
+import SageOneIntegration.SA.V1_1_2.SageOneEnumEntities.SageOneCompanyStatus;
+import SageOneIntegration.SA.V1_1_2.SageOneEnumEntities.SageOneRoundingTypeClass;
+import SageOneIntegration.SA.V1_1_2.SageOneEnumEntities.SageOneTaxSystemClass;
 
 import java.util.Date;
 

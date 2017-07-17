@@ -19,7 +19,6 @@
 package SageOneIntegration.SA.V1_1_2.SageOneApiEntities;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import org.joda.time.DateTime;
 
 import java.util.Date;
 

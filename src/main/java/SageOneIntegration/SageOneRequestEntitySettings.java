@@ -1,31 +1,37 @@
 /** "Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0. "**/
-package SageOneIntegration.SA;
+package SageOneIntegration;
 
 
 public final class SageOneRequestEntitySettings {
-    private String stringProperty = "";
+    private String stringProperty;
     private Class<?> classProperty;
     private boolean canBeUsedInRequest = true;
     private boolean canBeDeleted = true;
     private boolean canBeSaved = true;
     private boolean canBeGrabbedById = true;
+    private boolean canBeDownloaded = false;
     private boolean initialized = false;
 
-    public SageOneRequestEntitySettings(final String stringProperty, final Class<?> classProperty) {
+    public SageOneRequestEntitySettings(final String stringProperty,
+                                        final Class<?> classProperty) {
         this.stringProperty = stringProperty;
         this.classProperty = classProperty;
         this.initialized = true;
     }
 
-    public SageOneRequestEntitySettings(final String stringProperty, final Class<?> classProperty, final boolean canBeDeleted) {
+    public SageOneRequestEntitySettings(final String stringProperty,
+                                        final Class<?> classProperty,
+                                        final boolean canBeDeleted) {
         this.stringProperty = stringProperty;
         this.classProperty = classProperty;
         this.canBeDeleted = canBeDeleted;
         this.initialized = true;
     }
 
-    public SageOneRequestEntitySettings(final String stringProperty, final Class<?> classProperty, final boolean canBeDeleted,
-                                 final boolean canBeSaved) {
+    public SageOneRequestEntitySettings(final String stringProperty,
+                                        final Class<?> classProperty,
+                                        final boolean canBeDeleted,
+                                        final boolean canBeSaved) {
         this.stringProperty = stringProperty;
         this.classProperty = classProperty;
         this.canBeDeleted = canBeDeleted;
@@ -33,8 +39,11 @@ public final class SageOneRequestEntitySettings {
         this.initialized = true;
     }
 
-    public SageOneRequestEntitySettings(final String stringProperty, final Class<?> classProperty, final boolean canBeDeleted,
-                                        final boolean canBeSaved, final boolean canBeGrabbedById) {
+    public SageOneRequestEntitySettings(final String stringProperty,
+                                        final Class<?> classProperty,
+                                        final boolean canBeDeleted,
+                                        final boolean canBeSaved,
+                                        final boolean canBeGrabbedById) {
         this.stringProperty = stringProperty;
         this.classProperty = classProperty;
         this.canBeDeleted = canBeDeleted;
@@ -43,24 +52,41 @@ public final class SageOneRequestEntitySettings {
         this.initialized = true;
     }
 
+    public SageOneRequestEntitySettings(final String stringProperty,
+                                        final Class<?> classProperty,
+                                        final boolean canBeDeleted,
+                                        final boolean canBeSaved,
+                                        final boolean canBeGrabbedById,
+                                        final boolean canBeDownloaded) {
+        this.stringProperty = stringProperty;
+        this.classProperty = classProperty;
+        this.canBeDeleted = canBeDeleted;
+        this.canBeSaved = canBeSaved;
+        this.canBeGrabbedById = canBeGrabbedById;
+        this.canBeDownloaded = canBeDownloaded;
+        this.initialized = true;
+    }
+
     public SageOneRequestEntitySettings(final Class<?> classProperty,
-                                 final boolean canBeUsedInRequest) {
+                                        final boolean canBeUsedInRequest) {
         this.classProperty = classProperty;
         this.canBeUsedInRequest = canBeUsedInRequest;
         this.initialized = true;
     }
 
     public SageOneRequestEntitySettings(final Class<?> classProperty,
-                                 final boolean canBeUsedInRequest, final boolean canBeDeleted) {
+                                        final boolean canBeUsedInRequest,
+                                        final boolean canBeDeleted) {
         this.classProperty = classProperty;
         this.canBeUsedInRequest = canBeUsedInRequest;
         this.canBeDeleted = canBeDeleted;
         this.initialized = true;
+        String test = new String(new char[]{'d'});
     }
 
 
     public final String getStringProperty() {
-        return (this.initialized) ? this.stringProperty : "";
+        return (this.initialized) ? this.stringProperty : null;
     }
 
     public final void setStringProperty(final String stringProperty) {
@@ -105,6 +131,14 @@ public final class SageOneRequestEntitySettings {
 
     public final void setCanBeGrabbedById(final boolean canBeGrabbedById) {
         this.canBeGrabbedById = (this.initialized) ? canBeGrabbedById : this.canBeGrabbedById;
+    }
+
+    public final boolean getCanBeDownloaded() {
+        return (this.initialized) ? this.canBeDownloaded : false;
+    }
+
+    public final void setCanBeDownloaded(final boolean canBeDownloaded) {
+        this.canBeDownloaded = (this.initialized) ? this.canBeDownloaded : false;
     }
 
     @Override

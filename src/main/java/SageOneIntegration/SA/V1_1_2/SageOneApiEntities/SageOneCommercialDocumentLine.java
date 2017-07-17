@@ -18,7 +18,7 @@
  **/
 package SageOneIntegration.SA.V1_1_2.SageOneApiEntities;
 
-import SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageEnum.SageOneCommercialDocumentLineType;
+import SageOneIntegration.SA.V1_1_2.SageOneEnumEntities.SageOneCommercialDocumentLineType;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 /**

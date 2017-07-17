@@ -1,10 +1,28 @@
+/**
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements.  See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership.  The ASF licenses this file
+ to you under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance
+ with the License.  You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied.  See the License for the
+ specific language governing permissions and limitations
+ under the License.
+ **/
 package SageOneIntegration.SA;
 
-import SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneCompany;
 import SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneGrabbedResultsClass;
 import SageOneIntegration.SageOneApiConnector;
 import SageOneIntegration.SageOneResponseJsonObject;
 import SageOneIntegration.SageOneResponseObject;
+import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
 import org.apache.http.client.config.AuthSchemes;
 import org.apache.http.client.config.CookieSpecs;
@@ -20,14 +38,13 @@ import sun.misc.BASE64Encoder;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
-import static SageOneIntegration.SA.SageOneConstants.REQUEST_TIMEOUT;
-import static SageOneIntegration.SA.SageOneConstants.SAGE_ONE_REQUEST_TIMEOUT_SOCKET;
+import static SageOneIntegration.SA.SageOneConstants.*;
+import static SageOneIntegration.SA.SageOneConstants.CLIENT_PASSWORD;
+import static SageOneIntegration.SA.SageOneConstants.CLIENT_USERNAME;
 import static SageOneIntegration.SageOneConstants.SKIP_QUERY_PARAM;
 import static SageOneIntegration.SageOneCoreHelperMethods.encodeCurlyBrackets;
 
@@ -35,7 +52,7 @@ import static SageOneIntegration.SageOneCoreHelperMethods.encodeCurlyBrackets;
  * Created by Ricardo on 2017-07-05.
  */
 final class SageOneCoreConnection {
-    protected static String notEncodedCredentials;
+    protected static char[] notEncodedCredentials;
     protected static RequestConfig defaultRequestConfig = RequestConfig.custom().setCookieSpec(CookieSpecs.BEST_MATCH).setExpectContinueEnabled(true).setStaleConnectionCheckEnabled(true).setTargetPreferredAuthSchemes(Arrays.asList(AuthSchemes.NTLM, AuthSchemes.DIGEST)).setProxyPreferredAuthSchemes(Arrays.asList(AuthSchemes.BASIC)).build();
     protected static RequestConfig requestConfig = RequestConfig.custom().setSocketTimeout(SAGE_ONE_REQUEST_TIMEOUT_SOCKET).setConnectTimeout(REQUEST_TIMEOUT).setConnectionRequestTimeout(REQUEST_TIMEOUT).build();
     protected static int globalSkipIterator = 0;
@@ -45,6 +62,18 @@ final class SageOneCoreConnection {
     protected static String endpointSuffixGet;
     protected static List<Object> objectsBeforeConversion;
     protected static boolean resultLimitReached = false;
+
+    final static void setNotEncodedCreditentials() {
+        SageOneCoreConnection.notEncodedCredentials = new char[CLIENT_USERNAME.length + CLIENT_PASSWORD.length + 1];
+
+        System.arraycopy(CLIENT_USERNAME, 0, SageOneCoreConnection.notEncodedCredentials, 0,
+        CLIENT_USERNAME.length);
+
+        SageOneCoreConnection.notEncodedCredentials[CLIENT_USERNAME.length] = ':';
+
+        System.arraycopy(CLIENT_PASSWORD, 0, SageOneCoreConnection.notEncodedCredentials, CLIENT_USERNAME.length + 1,
+        CLIENT_PASSWORD.length);
+    }
 
     static boolean incrementSageOneRequestCounter(final int companyId) {
         boolean response = true;
@@ -73,9 +102,9 @@ final class SageOneCoreConnection {
     }
 
     static SageOneResponseJsonObject ConnectionCoreCodeReturnResponseJson(final int companyId,
-                                                                                  final String endpoint,
-                                                                                  final RequestMethod requestMethod,
-                                                                                  final String jsonEntityToPost) {
+                                                                          final String endpoint,
+                                                                          final RequestMethod requestMethod,
+                                                                          final String jsonEntityToPost) {
         boolean response = true;
         String resultToReturn = "";
         HttpRequestBase request = null;
@@ -87,7 +116,11 @@ final class SageOneCoreConnection {
                 System.out.println(endpoint);
             } else if(requestMethod.equals(RequestMethod.POST)) {
                 request = new HttpPost(endpoint);
-                RequestConfig requestConfig = RequestConfig.copy(defaultRequestConfig).setSocketTimeout(SAGE_ONE_REQUEST_TIMEOUT_SOCKET).setConnectTimeout(REQUEST_TIMEOUT).setConnectionRequestTimeout(REQUEST_TIMEOUT).build();
+
+                RequestConfig requestConfig = RequestConfig.copy(defaultRequestConfig)
+                .setSocketTimeout(SAGE_ONE_REQUEST_TIMEOUT_SOCKET).setConnectTimeout(REQUEST_TIMEOUT)
+                .setConnectionRequestTimeout(REQUEST_TIMEOUT).build();
+
                 request.setConfig(requestConfig);
                 StringEntity stringEntity = new StringEntity(jsonEntityToPost);
                 stringEntity.setContentType(ContentType.APPLICATION_JSON.toString());
@@ -106,13 +139,22 @@ final class SageOneCoreConnection {
                 response = (companyId != -255) ? incrementSageOneRequestCounter(companyId) : (companyId == -255);
 
                 if(response) {
-                    String authStringEnc = new BASE64Encoder().encode(notEncodedCredentials.getBytes());
-                    String encodedCredentials = "Basic " + authStringEnc;
+                    setNotEncodedCreditentials();
+                    String authStringEnc = new BASE64Encoder().encode(new String(notEncodedCredentials).getBytes());
+
+                    // START OF SECURITY SUBSECTION -> Ignore
+                    SageOneCoreConnection.notEncodedCredentials = null;
+                    // END OF SECURITY SUBSECTION
 
                     SageOneApiConnector.client = HttpClientBuilder.create().setDefaultRequestConfig(SageOneCoreConnection.requestConfig).build();
                     request.addHeader("Content-Type", ContentType.APPLICATION_JSON.toString());
-                    request.addHeader("Authorization", encodedCredentials);
+                    request.addHeader("Authorization", "Basic " + authStringEnc);
                     CloseableHttpResponse responseFromRequest = SageOneApiConnector.client.execute(request);
+
+                    // START OF SECURITY SUBSECTION -> Ignore
+                    authStringEnc = null;
+                    // END OF SECURITY SUBSECTION
+
                     StatusLine responseCode = responseFromRequest.getStatusLine();
 
                     System.out.println(responseCode);
@@ -165,8 +207,10 @@ final class SageOneCoreConnection {
         return jsonObjectToReturn;
     }
 
-    final static SageOneResponseObject sageOneGrabData(final String endpointPlusQuery, final Class<?> ObjectClassToMapTo,
-                                                                final boolean mustReturnResultObject, final int companyId) {
+    final static SageOneResponseObject sageOneGrabData(final int companyId,
+                                                       final String endpointPlusQuery,
+                                                       final Class<?> ObjectClassToMapTo,
+                                                       final boolean mustReturnResultObject) {
         SageOneResponseObject sageOneResponseObject = null;
         String endpoint = "";
 
@@ -178,7 +222,8 @@ final class SageOneCoreConnection {
 
                 endpoint = endpointPrefix + encodeCurlyBrackets(endpointPlusQuery) +
                         ((endpointPlusQuery.contains("?") && endpointPlusQuery.contains("=")) ?
-                                "&" + endpointSuffixGet : "?" + endpointSuffixGet) + encodeCurlyBrackets(SageOneConstants.API_KEY) +
+                                "&" + endpointSuffixGet : "?" + endpointSuffixGet) +
+                                encodeCurlyBrackets(new String(SageOneConstants.API_KEY)) +
                         SageOneConstants.COMPANY_ID_QUERY_PARAM + companyId;
             } else {
                 endpoint = endpointPlusQuery;
@@ -188,6 +233,7 @@ final class SageOneCoreConnection {
             if(mustReturnResultObject) {
                 SageOneGrabbedResultsClass responseResultObject;
                 if(jsonResponse.getSuccess()) {
+                    System.out.println(jsonResponse.getSuccess());
                     responseResultObject = SageOneApiConnector.objectMapper.readValue(jsonResponse.getResponseJson(), SageOneGrabbedResultsClass.class);
                     for (Object object : responseResultObject.getResults()) {
                         objectsBeforeConversion.add(SageOneApiConnector.objectMapper.convertValue(object, ObjectClassToMapTo));
@@ -199,7 +245,7 @@ final class SageOneCoreConnection {
                 if (responseResultObject.getResults().length >= SageOneConstants.SAGE_ONE_REQUEST_RESULT_LIMIT) {
                     runningInner = true;
                     globalSkipIterator += SageOneConstants.SAGE_ONE_REQUEST_RESULT_LIMIT;
-                    sageOneGrabData(endpoint, ObjectClassToMapTo, mustReturnResultObject, companyId);
+                    sageOneGrabData(companyId, endpoint, ObjectClassToMapTo, mustReturnResultObject);
                 } else {
                     runningInner = false;
                 }
@@ -214,7 +260,7 @@ final class SageOneCoreConnection {
                                 ObjectClassToMapTo)) : new SageOneResponseObject(false,
                         "Failed to grab data from SageOneSA account, the request failed");
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
 
             sageOneResponseObject = new SageOneResponseObject(false, "An error occurred while " +
@@ -232,7 +278,8 @@ final class SageOneCoreConnection {
         String endpoint = "";
         try {
             endpoint = endpointPrefix + endpointPlusQuery +
-                    SageOneConstants.API_KEY_QUERY_PARAM + encodeCurlyBrackets(SageOneConstants.API_KEY) + SageOneConstants.COMPANY_ID_QUERY_PARAM + companyId;
+            SageOneConstants.API_KEY_QUERY_PARAM + encodeCurlyBrackets(new String(SageOneConstants.API_KEY)) +
+            SageOneConstants.COMPANY_ID_QUERY_PARAM + companyId;
 
             SageOneResponseJsonObject jsonResponse = ConnectionCoreCodeReturnResponseJson(companyId, endpoint, RequestMethod.POST, jsonObject);
 
@@ -240,7 +287,7 @@ final class SageOneCoreConnection {
                     ? new SageOneResponseObject(true, jsonResponse.getResponseMessage(), SageOneApiConnector.objectMapper.readValue(jsonResponse.getResponseJson(), classToMapTo)) :
                     new SageOneResponseObject(false, "Failed to save data on SageOneSA account, the request failed");
 
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
 
             sageOneResponseObject = new SageOneResponseObject(false, "An error occurred while " +
@@ -251,29 +298,22 @@ final class SageOneCoreConnection {
         return sageOneResponseObject;
     }
 
-    final static SageOneResponseObject deleteSageOneEntity(final String endpointPlusQuery,
-                                                                  final int companyId) {
+    protected final static SageOneResponseObject deleteSageOneEntity(final int companyId,
+                                                                     final String endpointPlusQuery) {
         SageOneResponseObject.initializeClass();
         SageOneResponseObject sageOneResponseObject = null;
         String endpoint = "";
-        try {
-            endpoint = endpointPrefix + endpointPlusQuery + SageOneConstants.API_KEY_QUERY_PARAM +
-                    encodeCurlyBrackets(SageOneConstants.API_KEY) +
+
+        endpoint = endpointPrefix + endpointPlusQuery + SageOneConstants.API_KEY_QUERY_PARAM +
+                    encodeCurlyBrackets(new String(SageOneConstants.API_KEY)) +
                     SageOneConstants.COMPANY_ID_QUERY_PARAM + companyId;
 
-            SageOneResponseJsonObject jsonResponse = ConnectionCoreCodeReturnResponseJson(companyId, endpoint,
-                    RequestMethod.DELETE, null);
+        SageOneResponseJsonObject jsonResponse = ConnectionCoreCodeReturnResponseJson(companyId, endpoint,
+                RequestMethod.DELETE, null);
 
-            sageOneResponseObject = (jsonResponse.getSuccess())
-                    ? new SageOneResponseObject(true, jsonResponse.getResponseMessage()) :
-                    new SageOneResponseObject(false, "Failed to delete data on SageOneSA account, the request failed");
-
-        } catch (Exception e) {
-            e.printStackTrace();
-
-            sageOneResponseObject = new SageOneResponseObject(false, "An error occurred while " +
-                    "trying to delete data on the SageOneSA account, look on terminal or log files for details");
-        }
+        sageOneResponseObject = (jsonResponse.getSuccess())
+                ? new SageOneResponseObject(true, jsonResponse.getResponseMessage()) :
+                new SageOneResponseObject(false, "Failed to delete data on SageOneSA account, the request failed");
 
         SageOneResponseObject.deInitializeClass();
         return sageOneResponseObject;

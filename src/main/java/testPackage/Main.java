@@ -3,6 +3,7 @@ package testPackage;
 
 
 import SageOneIntegration.NationalityType;
+import SageOneIntegration.SA.ReusableClasses.SageOneHttpResponseMessage;
 import SageOneIntegration.SA.SageOneEntityType;
 import SageOneIntegration.SA.SageOneSA;
 import SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneCustomer;
@@ -20,6 +21,7 @@ public class Main {
         public static void main(String[] args) {
                 Properties properties = new Properties();
 
+                // Version 2.0.0
                 properties.setProperty("sageOneApi.SA.clientUsername", "dagoraf@gmail.com");
                 properties.setProperty("sageOneApi.SA.clientPassword", "Sonnyabcd5678@");
                 properties.setProperty("sageOneApi.SA.apiKey", "71A42541-A543-4164-8CBA-5E0F0602B141");
@@ -27,16 +29,31 @@ public class Main {
                 sageOneApiConnector.setupSageOneApi(properties);
                 SageOneSA sageOneSATemplate = sageOneApiConnector.getTemplate();
 
-                List<SageOneCustomer> customers =
-                        sageOneSATemplate.getSageOneEntitiesByType("rotor",
-                                SageOneEntityType.V_1_1_2.CUSTOMER);
+                List<SageOneCustomer> customers = sageOneSATemplate.getSageOneEntitiesByType("rotor",
+                SageOneEntityType.V_1_1_2.CUSTOMER);
 
-                System.out.print(customers.get(0).getName());
+                System.out.println(customers.get(0).getName());
 
                 List<SageOneCustomer> searchedCustomer = sageOneSATemplate.searchEntitiesByAnyValues("rotor",
-                        SageOneEntityType.V_1_1_2.CUSTOMER, "D", "OO");
+                SageOneEntityType.V_1_1_2.CUSTOMER, "D", "OO");
 
                 System.out.println(searchedCustomer.size());
+
+                List<SageOneCustomer> sageOneCustomers =
+                sageOneSATemplate.searchEntitiesByAnyMatchedPropertyValues("rotor",
+                SageOneEntityType.V_1_1_2.CUSTOMER, new String[]{"Name"}, new String[]{"DC"});
+
+                System.out.println("hello");
+
+                System.out.println(sageOneCustomers.size());
+                // End of Version 2.0.0
+
+                // Version 2.1.0
+                SageOneAccountNoteAttachment
+                //SageOneHttpResponseMessage downloadResponse
+
+
+
 
         }
 }

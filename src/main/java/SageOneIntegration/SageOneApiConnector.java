@@ -19,7 +19,7 @@
 package SageOneIntegration;
 
 
-import SageOneIntegration.SA.SageOneApiTemplateImpl;
+import SageOneIntegration.SA.SageOneApiTemplateMainImpl;
 import SageOneIntegration.SA.SageOneSA;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -46,7 +46,9 @@ public final class SageOneApiConnector {
 		SageOneApiConnector.objectMapper.configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES, true);
 
 		if(nationality.equals(NationalityType.SA)) {
-			templateSA = new SageOneApiTemplateImpl();
+			if(SageOneIntegration.SA.SageOneConstants.API_VERSION.equals("1.1.2")) {
+				templateSA = new SageOneIntegration.SA.V1_1_2.SageOneApiTemplateImpl();
+			}
 		}
 	}
 

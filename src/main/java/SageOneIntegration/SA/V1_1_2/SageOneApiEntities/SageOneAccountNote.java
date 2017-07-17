@@ -21,31 +21,24 @@ package SageOneIntegration.SA.V1_1_2.SageOneApiEntities;
 import java.util.Date;
 
 /**
- * Created by ricomaster9000 on 2017/06/09.
+ * Created by Ricardo on 2017-07-15.
  */
-public final class SageOneSupplierNote extends SageOneMainEntity {
-    private Integer SupplierId;
+public final class SageOneAccountNote extends SageOneMainEntity {//ID required
+    private Integer AccountId;
     private Integer UserId;
-    private Integer Priority;
-    private Integer NoteCategoryId;
-    private Boolean NotifyAssignee;
-    private String Subject;
+    private String Subject; //Required, between 0 and 100
     private Date EntryDate;
-    private Date ActionDate;
+    private Date ActionDate; //Required
     private Boolean Status;
     private String Note;
     private Boolean HasAttachments;
 
-    public SageOneSupplierNote() {
-
+    public final Integer getAccountId() {
+        return (this.isInitialized()) ? this.AccountId : null;
     }
 
-    public final Integer getSupplierId() {
-        return (this.isInitialized()) ? this.SupplierId: null;
-    }
-
-    public final void setSupplierId(final Integer SupplierId) {
-        this.SupplierId = (this.isInitialized()) ? SupplierId : this.SupplierId;
+    public final void setAccountId(final Integer AccountId) {
+        this.AccountId = (this.isInitialized()) ? AccountId : this.AccountId;
     }
 
     public final Integer getUserId() {
@@ -54,30 +47,6 @@ public final class SageOneSupplierNote extends SageOneMainEntity {
 
     public final void setUserId(final Integer UserId) {
         this.UserId = (this.isInitialized()) ? UserId : this.UserId;
-    }
-
-    public final Integer getPriority() {
-        return (this.isInitialized()) ? this.Priority : null;
-    }
-
-    public final void setPriority(final Integer Priority) {
-        this.Priority = (this.isInitialized()) ? Priority : this.Priority;
-    }
-
-    public final Integer getNoteCategoryId() {
-        return (this.isInitialized()) ? this.NoteCategoryId : null;
-    }
-
-    public final void setNoteCategoryId(final Integer NoteCategoryId) {
-        this.NoteCategoryId = (this.isInitialized()) ? NoteCategoryId : this.NoteCategoryId;
-    }
-
-    public final Boolean getNotifyAssignee() {
-        return (this.isInitialized()) ? this.NotifyAssignee : null;
-    }
-
-    public final void setNotifyAssignee(final Boolean NotifyAssignee) {
-        this.NotifyAssignee = (this.isInitialized()) ? NotifyAssignee : this.NotifyAssignee;
     }
 
     public final String getSubject() {
@@ -127,4 +96,5 @@ public final class SageOneSupplierNote extends SageOneMainEntity {
     public final void setHasAttachments(final Boolean HasAttachments) {
         this.HasAttachments = (this.isInitialized()) ? HasAttachments : this.HasAttachments;
     }
+
 }

@@ -19,53 +19,58 @@
 package SageOneIntegration.SA;
 
 
-
-import SageOneIntegration.SA.SageOneEntityType;
-import SageOneIntegration.SA.SageOneRequestEntitySettings;
 import SageOneIntegration.SA.V1_1_2.SageOneApiEntities.*;
-import SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageEnum.SageOneCommercialDocumentLineType;
-import SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageEnum.SageOnePaymentMethod;
-import SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageEnum.SageOneRoundingTypeClass;
-import SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageEnum.SageOneTaxSystemClass;
+import SageOneIntegration.SA.V1_1_2.SageOneEnumEntities.SageOneCommercialDocumentLineType;
+import SageOneIntegration.SA.V1_1_2.SageOneEnumEntities.SageOneRoundingTypeClass;
+import SageOneIntegration.SA.V1_1_2.SageOneEnumEntities.SageOneTaxSystemClass;
+import SageOneIntegration.SageOneRequestEntitySettings;
 
 public class SageOneEntityType {
 
     public enum V_1_1_2 {
-        CUSTOMER_RETURN("CustomerReturn/", SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneCustomerReturn.class, false),
-        CUSTOMER_RECEIPT("CustomerReceipt/", SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneCustomerReceipt.class),
-        SUPPLIER_RETURN("SupplierReturn/", SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneSupplierReturn.class, false),
-        CUSTOMER("Customer/", SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneCustomer.class),
-        CUSTOMER_NOTE("CustomerNote/", SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneCustomerNote.class),
-        SUPPLIER("Supplier/", SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneSupplier.class),
-        SUPPLIER_NOTE("SupplierNote/", SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneSupplierNote.class),
-        TAX_INVOICE("TaxInvoice/", SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneTaxInvoice.class, false),
-        SUPPLIER_INVOICE("SupplierInvoice/", SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneSupplierInvoice.class, false),
-        ACCOUNT_BALANCE("AccountBalance/", SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneAccountBalance.class, false, false),
-        COMPANY("Company/", SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneCompany.class, false, false),
-        ITEM("Item/", SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneItem.class),
-        BANK_ACCOUNT("BankAccount/", SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneBankAccount.class),
-        TAX_TYPE("TaxType/", SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneTaxType.class),
-        SUPPLIER_CATEGORY("SupplierCategory/", SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneSupplierCategory.class),
-        BANK_FEED_ACCOUNT(SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneBankFeedAccount.class, false),
-        ATTACHMENT(SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneAttachment.class, false),
-        BANK_FEED_ACCOUNT_GROUP(SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneBankFeedAccountGroup.class, false),
-        PAYMENT_METHOD("PaymentMethod/", SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageEnum.SageOnePaymentMethod.class),
-        ROUNDING_TYPE(SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageEnum.SageOneRoundingTypeClass.class, false),
-        ITEM_CATEGORY("ItemCategory/", SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneItemCategory.class),
-        CUSTOMER_CATEGORY("CustomerCategory/", SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneCustomerCategory.class),
-        ITEM_REPORT_GROUP("ItemReportGroup/", SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneItemReportGroup.class),
-        SALES_REPRESENTATIVE("SalesRepresentative/", SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneSalesRepresentative.class),
-        TAX_SYSTEM_CLASS(SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageEnum.SageOneTaxSystemClass.class, false),
-        COMMERCIAL_DOCUMENT_LINE(SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneCommercialDocumentLine.class, false),
-        ADDITIONAL_ITEM_PRICE("AdditionalItemPrice/", SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneAdditionalItemPrice.class),
-        ADDITIONAL_PRICE_LIST("AdditionalPriceList/", SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneAdditionalPriceList.class),
-        COMMERCIAL_DOCUMENT_LINE_TYPE(SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageEnum.SageOneCommercialDocumentLineType.class, false),
-        BANK_ACCOUNT_CATEGORY("BankAccountCategory/", SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneBankAccountCategory.class),
-        SAGE_ONE_ACCOUNT("Account/", SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneAccount.class),
-        SAGE_ONE_ACCOUNT_CATEGORY("AccountCategory/", SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneAccountCategory.class, false),
-        SAGE_ONE_ACCOUNTANT_NOTE("AccountantNote/", SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneAccountantNote.class, true, false),
-        SAGE_ONE_ACCOUNTANT_TASK_RECURRENCE("AccountantTaskRecurrence/", SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneAccountantTaskRecurrence.class, true, false),
-        QUOTE("Quote/", SageOneQuote.class);
+        ATTACHMENT(SageOneAttachment.class, false),
+        ACCOUNTANT_TASK("AccountantTask/", SageOneAccountantTask.class, true, false),
+        ACCOUNT_BALANCE("AccountBalance/", SageOneAccountBalance.class, false, false, false),
+        ADDITIONAL_ITEM_PRICE("AdditionalItemPrice/", SageOneAdditionalItemPrice.class),
+        ADDITIONAL_PRICE_LIST("AdditionalPriceList/", SageOneAdditionalPriceList.class),
+        ACCOUNT("Account/", SageOneAccount.class),
+        ACCOUNT_NOTE("AccountNote/", SageOneAccountNote.class),
+        ACCOUNTANT_NOTE("AccountantNote/", SageOneAccountantNote.class, true, false),
+        ACCOUNTANT_TASK_RECURRENCE("AccountantTaskRecurrence/", SageOneAccountantTaskRecurrence.class, true, false),
+        ACCOUNT_CATEGORY("AccountCategory/", SageOneAccountCategory.class, false, false),
+
+        BANK_ACCOUNT("BankAccount/", SageOneBankAccount.class),
+        BANK_ACCOUNT_CATEGORY("BankAccountCategory/", SageOneBankAccountCategory.class),
+        BANK_FEED_ACCOUNT(SageOneBankFeedAccount.class, false),
+        BANK_FEED_ACCOUNT_GROUP(SageOneBankFeedAccountGroup.class, false),
+
+        COMPANY("Company/", SageOneCompany.class, false, false),
+        CUSTOMER_RETURN("CustomerReturn/", SageOneCustomerReturn.class, false),
+        CUSTOMER_RECEIPT("CustomerReceipt/", SageOneCustomerReceipt.class),
+        CUSTOMER("Customer/", SageOneCustomer.class),
+        CUSTOMER_NOTE("CustomerNote/", SageOneCustomerNote.class),
+        CUSTOMER_CATEGORY("CustomerCategory/", SageOneCustomerCategory.class),
+        COMMERCIAL_DOCUMENT_LINE(SageOneCommercialDocumentLine.class, false),
+        COMMERCIAL_DOCUMENT_LINE_TYPE(SageOneCommercialDocumentLineType.class, false),
+
+        ITEM_CATEGORY("ItemCategory/", SageOneItemCategory.class),
+        ITEM_REPORT_GROUP("ItemReportGroup/", SageOneItemReportGroup.class),
+        ITEM("Item/", SageOneItem.class),
+
+        ROUNDING_TYPE(SageOneRoundingTypeClass.class, false),
+
+        QUOTE("Quote/", SageOneQuote.class),
+
+        SUPPLIER_RETURN("SupplierReturn/", SageOneSupplierReturn.class, false),
+        SUPPLIER("Supplier/", SageOneSupplier.class),
+        SUPPLIER_NOTE("SupplierNote/", SageOneSupplierNote.class),
+        SUPPLIER_INVOICE("SupplierInvoice/", SageOneSupplierInvoice.class, false),
+        SUPPLIER_CATEGORY("SupplierCategory/", SageOneSupplierCategory.class),
+        SALES_REPRESENTATIVE("SalesRepresentative/", SageOneSalesRepresentative.class),
+
+        TAX_TYPE("TaxType/", SageOneTaxType.class),
+        TAX_INVOICE("TaxInvoice/", SageOneTaxInvoice.class, false),
+        TAX_SYSTEM_CLASS(SageOneTaxSystemClass.class, false);
 
         public SageOneRequestEntitySettings GetObject;
 
@@ -78,8 +83,14 @@ public class SageOneEntityType {
         }
 
         V_1_1_2(final String entityGetReqParamName, final Class<?> entityReqParamClass, final boolean entityCanBeDeleted,
-                             final boolean entityCanBeSaved) {
+                final boolean entityCanBeSaved) {
             this.GetObject = new SageOneRequestEntitySettings(entityGetReqParamName, entityReqParamClass, entityCanBeDeleted, entityCanBeSaved);
+        }
+
+        V_1_1_2(final String entityGetReqParamName, final Class<?> entityReqParamClass, final boolean entityCanBeDeleted,
+                final boolean entityCanBeSaved, final boolean entityCanBeGrabbedByID) {
+            this.GetObject = new SageOneRequestEntitySettings(entityGetReqParamName, entityReqParamClass,
+                    entityCanBeDeleted, entityCanBeSaved, entityCanBeGrabbedByID);
         }
 
         V_1_1_2(final Class<?> entityReqParamClass, final boolean entityCanBeUsedInRequest) {
@@ -89,7 +100,7 @@ public class SageOneEntityType {
 
     public enum V_1_1_1 {
 
-        QUOTE("Quote/", SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneQuote.class);
+        QUOTE("Quote/", SageOneQuote.class);
 
         public SageOneRequestEntitySettings GetObject;
 
