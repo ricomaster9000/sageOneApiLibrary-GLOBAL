@@ -20,6 +20,7 @@ package SageOneIntegration.SA;
 
 
 import SageOneIntegration.SA.ReusableClasses.SageOneHttpResponseMessage;
+import SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneAttachment;
 import SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneCustomer;
 import SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneSupplier;
 import SageOneIntegration.SageOneResponseObject;
@@ -109,10 +110,9 @@ public abstract class SageOneApiTemplateMainImpl extends SetupClass implements S
     protected static SageOneResponseObject sageOneSaveData(final int companyId,
                                                            final Class<?> classToMapTo,
                                                            final String endpointPlusQuery,
-                                                           final String jsonObject,
-                                                           final byte[] fileData) {
+                                                           final String jsonObject) {
         return SageOneCoreConnection.sageOneSaveData(companyId, classToMapTo, endpointPlusQuery,
-                jsonObject, fileData);
+                jsonObject);
     }
 
     protected static SageOneResponseObject deleteSageOneEntity(final int companyId,
@@ -186,10 +186,10 @@ public abstract class SageOneApiTemplateMainImpl extends SetupClass implements S
     protected static final String checkAndManageEndPointQueryIfNeeded(String endpointQuery, final SageOneEntityType.V_1_1_2 entityType,
                                                                       final boolean mustGrabById, final Object ODataQueryTypeBasis,
                                                                       final boolean mustBeDeleted, final boolean mustBeSaved,
-                                                                      final boolean mustBeDownloaded) {
+                                                                      final boolean mustBeDownloaded, final boolean mustBeGrabbedWithoutId) {
         if(mustGrabById) {
             endpointQuery += GetString + FS + ODataQueryTypeBasis;
-        } else if(!mustGrabById && !mustBeDeleted) {
+        } else if(mustBeGrabbedWithoutId) {
             if(API_VERSION.equals("1.1.2")) {
                 if(entityType.equals(SageOneEntityType.V_1_1_2.ACCOUNT_BALANCE)) {
                     endpointQuery += GetString + "AccountBudgets" + ODataQueryTypeBasis;
@@ -206,7 +206,7 @@ public abstract class SageOneApiTemplateMainImpl extends SetupClass implements S
                 if(entityType.equals(SageOneEntityType.V_1_1_2.ACCOUNTANT_TASK)){
                     endpointQuery += "UpdateTaskStatus?";
                 } else {
-                    endpointQuery += SaveString;
+                    endpointQuery += FS + SaveString;
                 }
             } else {
                 endpointQuery += GetString + ODataQueryTypeBasis;
@@ -225,7 +225,7 @@ public abstract class SageOneApiTemplateMainImpl extends SetupClass implements S
         List<SageOneCustomer> sageOneCustomersGrabbed = new ArrayList<SageOneCustomer>();
         String endpointQuery = checkAndManageEndPointQueryIfNeeded(SageOneEntityType.V_1_1_2.CUSTOMER.GetObject.getStringProperty(),
                 SageOneEntityType.V_1_1_2.CUSTOMER, false, ODataFilter18, false,
-                false, false);
+                false, false, true);
 
         try {
             final Integer companyId = COMPANY_LIST.get(companyName);
@@ -272,7 +272,7 @@ public abstract class SageOneApiTemplateMainImpl extends SetupClass implements S
 
         String endpointQuery = checkAndManageEndPointQueryIfNeeded(SageOneEntityType.V_1_1_2.SUPPLIER.GetObject.getStringProperty(),
                 SageOneEntityType.V_1_1_2.SUPPLIER, false, ODataFilter18, false,
-                false, false);
+                false, false, true);
 
         try {
             final Integer companyId = COMPANY_LIST.get(companyName);
@@ -320,7 +320,7 @@ public abstract class SageOneApiTemplateMainImpl extends SetupClass implements S
 
         String endpointQuery = checkAndManageEndPointQueryIfNeeded(SageOneEntityType.V_1_1_2.CUSTOMER.GetObject.getStringProperty(),
                 SageOneEntityType.V_1_1_2.CUSTOMER, false, "", false,
-                false, false);
+                false, false, true);
 
 
         final Integer companyId = COMPANY_LIST.get(companyName);
@@ -346,81 +346,4 @@ public abstract class SageOneApiTemplateMainImpl extends SetupClass implements S
         }
         return sageOneCustomersGrabbed;
     }
-
-    // START OF VERSION 1.1.2, Methods only added because of implementation, ignore
-    public <T> T getEntityByPropertyValue(final String companyName,
-                                          final SageOneEntityType.V_1_1_2 sageOneEntityType,
-                                          final String propertyName,
-                                          final String propertyValue) {
-        return null;
-    }
-
-    public <T> List<T> getEntitiesByPropertyValue(final String companyName,
-                                                  final SageOneEntityType.V_1_1_2 sageOneEntityType,
-                                                  final String propertyName,
-                                                  final String propertyValue) {
-        return null;
-    }
-
-    public <T> List<T> searchEntitiesByAnyMatchedPropertyValues(final String companyName,
-                                                                final SageOneEntityType.V_1_1_2 sageOneEntityType,
-                                                                final String[] propertyNames,
-                                                                final String[] propertyValues) {
-        return null;
-    }
-
-    public <T> List<T> searchEntitiesByAllMatchedPropertyValues(final String companyName,
-                                                                final SageOneEntityType.V_1_1_2 sageOneEntityType,
-                                                                final String[] propertyNames,
-                                                                final String[] propertyValues) {
-        return null;
-    }
-
-    public <T> List<T> searchEntitiesByAnyValues(final String companyName,
-                                                 final SageOneEntityType.V_1_1_2 sageOneEntityType,
-                                                 final String... values) {
-        return null;
-    }
-
-    public <T> T getSageOneEntity(final String companyName,
-                                  final int entityId,
-                                  final SageOneEntityType.V_1_1_2 entity) {
-        return null;
-    }
-
-    public <T> T saveSageOneEntity(final String companyName,
-                                   final Object entityToSave) {
-        return null;
-    }
-
-    public boolean deleteSageOneEntity(final String companyName,
-                                       final Integer entityId,
-                                       final SageOneEntityType.V_1_1_2 sageOneEntityType) {
-        return false;
-    }
-
-    public boolean deleteSageOneEntitiesByPropertyValue(final String companyName,
-                                                        final SageOneEntityType.V_1_1_2 sageOneEntityType,
-                                                        final String propertyName,
-                                                        final String propertyValue) {
-        return false;
-    }
-
-    public <T> List<T> getSageOneEntitiesByType(final String companyName,
-                                                final SageOneEntityType.V_1_1_2 sageOneEntityType) {
-        return null;
-    }
-
-    public SageOneHttpResponseMessage downloadSageOneEntity(final String companyName,
-                                                     final int entityId,
-                                                     final SageOneEntityType.V_1_1_2 entity) {
-        return null;
-    }
-
-    public <T> T saveSageOneAttachment(final String companyName,
-                                final SageOneEntityType.V_1_1_2 entityToSave,
-                                final byte[] fileData) {
-        return null;
-    }
-    // END OF VERSION 1.1.2
 }

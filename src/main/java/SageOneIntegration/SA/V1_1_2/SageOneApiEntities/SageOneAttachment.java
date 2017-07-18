@@ -5,10 +5,10 @@ import java.util.UUID;
 
 public final class SageOneAttachment {
     private String Name;
-    private Integer Size;
+    private Long Size;
     private UUID AttachmentUID;
     private byte[] Data;
-    private boolean initialized;
+    private transient boolean initialized;
 
     public SageOneAttachment() {
         this.initialized = true;
@@ -22,11 +22,11 @@ public final class SageOneAttachment {
         this.Name = (this.initialized) ? Name : this.Name;
     }
 
-    public final Integer getSize() {
+    public final Long getSize() {
         return (this.initialized) ? this.Size : null;
     }
 
-    public final void setSize(final Integer Size) {
+    public final void setSize(final Long Size) {
         this.Size = (this.initialized) ? Size : this.Size;
     }
 
@@ -44,5 +44,10 @@ public final class SageOneAttachment {
 
     public final void setData(final byte[] Data) {
         this.Data = (this.initialized) ? Data : this.Data;
+    }
+
+    @Override
+    public final Object clone() throws CloneNotSupportedException {
+        throw new CloneNotSupportedException();
     }
 }

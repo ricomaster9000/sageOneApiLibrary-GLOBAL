@@ -28,21 +28,22 @@ import SageOneIntegration.SageOneRequestEntitySettings;
 public class SageOneEntityType {
 
     public enum V_1_1_2 {
-        ATTACHMENT(SageOneAttachment.class, false),
+        ATTACHMENT(null, SageOneAttachment.class, false),
         ACCOUNTANT_TASK("AccountantTask/", SageOneAccountantTask.class, true, false),
         ACCOUNT_BALANCE("AccountBalance/", SageOneAccountBalance.class, false, false, false),
         ADDITIONAL_ITEM_PRICE("AdditionalItemPrice/", SageOneAdditionalItemPrice.class),
         ADDITIONAL_PRICE_LIST("AdditionalPriceList/", SageOneAdditionalPriceList.class),
         ACCOUNT("Account/", SageOneAccount.class),
         ACCOUNT_NOTE("AccountNote/", SageOneAccountNote.class),
+        ACCOUNT_NOTE_ATTACHMENT("AccountNoteAttachment", SageOneAccountNoteAttachment.class, true, true, true, false, true),
         ACCOUNTANT_NOTE("AccountantNote/", SageOneAccountantNote.class, true, false),
         ACCOUNTANT_TASK_RECURRENCE("AccountantTaskRecurrence/", SageOneAccountantTaskRecurrence.class, true, false),
         ACCOUNT_CATEGORY("AccountCategory/", SageOneAccountCategory.class, false, false),
 
         BANK_ACCOUNT("BankAccount/", SageOneBankAccount.class),
         BANK_ACCOUNT_CATEGORY("BankAccountCategory/", SageOneBankAccountCategory.class),
-        BANK_FEED_ACCOUNT(SageOneBankFeedAccount.class, false),
-        BANK_FEED_ACCOUNT_GROUP(SageOneBankFeedAccountGroup.class, false),
+        BANK_FEED_ACCOUNT(null, SageOneBankFeedAccount.class, false),
+        BANK_FEED_ACCOUNT_GROUP(null, SageOneBankFeedAccountGroup.class, false),
 
         COMPANY("Company/", SageOneCompany.class, false, false),
         CUSTOMER_RETURN("CustomerReturn/", SageOneCustomerReturn.class, false),
@@ -50,14 +51,14 @@ public class SageOneEntityType {
         CUSTOMER("Customer/", SageOneCustomer.class),
         CUSTOMER_NOTE("CustomerNote/", SageOneCustomerNote.class),
         CUSTOMER_CATEGORY("CustomerCategory/", SageOneCustomerCategory.class),
-        COMMERCIAL_DOCUMENT_LINE(SageOneCommercialDocumentLine.class, false),
-        COMMERCIAL_DOCUMENT_LINE_TYPE(SageOneCommercialDocumentLineType.class, false),
+        COMMERCIAL_DOCUMENT_LINE(null, SageOneCommercialDocumentLine.class, false),
+        COMMERCIAL_DOCUMENT_LINE_TYPE(null, SageOneCommercialDocumentLineType.class, false),
 
         ITEM_CATEGORY("ItemCategory/", SageOneItemCategory.class),
         ITEM_REPORT_GROUP("ItemReportGroup/", SageOneItemReportGroup.class),
         ITEM("Item/", SageOneItem.class),
 
-        ROUNDING_TYPE(SageOneRoundingTypeClass.class, false),
+        ROUNDING_TYPE(null, SageOneRoundingTypeClass.class, false),
 
         QUOTE("Quote/", SageOneQuote.class),
 
@@ -70,7 +71,7 @@ public class SageOneEntityType {
 
         TAX_TYPE("TaxType/", SageOneTaxType.class),
         TAX_INVOICE("TaxInvoice/", SageOneTaxInvoice.class, false),
-        TAX_SYSTEM_CLASS(SageOneTaxSystemClass.class, false);
+        TAX_SYSTEM_CLASS(null, SageOneTaxSystemClass.class, false);
 
         public SageOneRequestEntitySettings GetObject;
 
@@ -93,8 +94,18 @@ public class SageOneEntityType {
                     entityCanBeDeleted, entityCanBeSaved, entityCanBeGrabbedByID);
         }
 
-        V_1_1_2(final Class<?> entityReqParamClass, final boolean entityCanBeUsedInRequest) {
-            this.GetObject = new SageOneRequestEntitySettings(entityReqParamClass, entityCanBeUsedInRequest);
+        V_1_1_2(final String entityGetReqParamName, final Class<?> entityReqParamClass, final boolean entityCanBeDeleted,
+                final boolean entityCanBeSaved, final boolean entityCanBeGrabbedByID, final boolean entityCanBeGrabbedWithoutId) {
+            this.GetObject = new SageOneRequestEntitySettings(entityGetReqParamName, entityReqParamClass,
+                    entityCanBeDeleted, entityCanBeSaved, entityCanBeGrabbedByID, entityCanBeGrabbedWithoutId);
+        }
+
+        V_1_1_2(final String entityGetReqParamName, final Class<?> entityReqParamClass, final boolean entityCanBeDeleted,
+                final boolean entityCanBeSaved, final boolean entityCanBeGrabbedByID, final boolean entityCanBeGrabbedWithoutId,
+                final boolean entityCanBeDownloaded) {
+            this.GetObject = new SageOneRequestEntitySettings(entityGetReqParamName, entityReqParamClass,
+                    entityCanBeDeleted, entityCanBeSaved, entityCanBeGrabbedByID, entityCanBeGrabbedWithoutId,
+                    entityCanBeDownloaded);
         }
     }
 
@@ -115,10 +126,6 @@ public class SageOneEntityType {
         V_1_1_1(final String entityGetReqParamName, final Class<?> entityReqParamClass, final boolean entityCanBeDeleted,
                 final boolean entityCanBeSaved) {
             this.GetObject = new SageOneRequestEntitySettings(entityGetReqParamName, entityReqParamClass, entityCanBeDeleted, entityCanBeSaved);
-        }
-
-        V_1_1_1(final Class<?> entityReqParamClass, final boolean entityCanBeUsedInRequest) {
-            this.GetObject = new SageOneRequestEntitySettings(entityReqParamClass, entityCanBeUsedInRequest);
         }
     }
 }

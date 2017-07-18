@@ -54,7 +54,7 @@ import static SageOneIntegration.SageOneCoreHelperMethods.encodeCurlyBrackets;
 /**
  * Created by Ricardo on 2017-07-05.
  */
-final class SageOneCoreConnection {
+public final class SageOneCoreConnection {
     protected static char[] notEncodedCredentials;
     protected static RequestConfig defaultRequestConfig = RequestConfig.custom().setCookieSpec(CookieSpecs.BEST_MATCH).setExpectContinueEnabled(true).setStaleConnectionCheckEnabled(true).setTargetPreferredAuthSchemes(Arrays.asList(AuthSchemes.NTLM, AuthSchemes.DIGEST)).setProxyPreferredAuthSchemes(Arrays.asList(AuthSchemes.BASIC)).build();
     protected static RequestConfig requestConfig = RequestConfig.custom().setSocketTimeout(SAGE_ONE_REQUEST_TIMEOUT_SOCKET).setConnectTimeout(REQUEST_TIMEOUT).setConnectionRequestTimeout(REQUEST_TIMEOUT).build();
@@ -105,20 +105,19 @@ final class SageOneCoreConnection {
         return response;
     }
 
-    static SageOneResponseJsonObject ConnectionCoreCodeReturnResponseJson(final int companyId,
+    public static SageOneResponseJsonObject ConnectionCoreCodeReturnResponseJson(final int companyId,
                                                                           final String endpoint,
                                                                           final RequestMethod requestMethod,
-                                                                          final String jsonEntityToPost,
-                                                                          final byte[] fileEntityToPost) {
+                                                                          final String jsonEntityToPost) {
         boolean response = true;
         String resultToReturn = "";
         HttpRequestBase request = null;
         resultLimitReached = false;
 
         try {
+            System.out.println(endpoint);
             if(requestMethod.equals(RequestMethod.GET)) {
                 request = new HttpGet(endpoint);
-                System.out.println(endpoint);
             } else if(requestMethod.equals(RequestMethod.POST)) {
                 request = new HttpPost(endpoint);
 
@@ -127,24 +126,10 @@ final class SageOneCoreConnection {
                 .setConnectionRequestTimeout(REQUEST_TIMEOUT).build();
 
                 request.setConfig(requestConfig);
-                if(jsonEntityToPost != null && fileEntityToPost == null) {
-
-                    StringEntity stringEntity = new StringEntity(jsonEntityToPost);
-                    stringEntity.setContentType(ContentType.APPLICATION_JSON.toString());
-                    ((HttpPost) request).setEntity(stringEntity);
-                    request.setHeader("Accept", ContentType.APPLICATION_JSON.toString());
-
-                } else if(jsonEntityToPost == null && fileEntityToPost != null && fileEntityToPost.length > 0) {
-
-                    String detectedContentType = tika.detect(fileEntityToPost);
-                    ByteArrayEntity byteArrayEntity = new ByteArrayEntity(fileEntityToPost);
-                    byteArrayEntity.setContentType(detectedContentType);
-                    ((HttpPost) request).setEntity(byteArrayEntity);
-                    request.setHeader("Accept", detectedContentType);
-
-                } else {
-                    response = false;
-                }
+                StringEntity stringEntity = new StringEntity(jsonEntityToPost);
+                stringEntity.setContentType(ContentType.APPLICATION_JSON.toString());
+                ((HttpPost) request).setEntity(stringEntity);
+                request.setHeader("Accept", ContentType.APPLICATION_JSON.toString());
             } else if(requestMethod.equals(RequestMethod.PUT)) {
                 request = new HttpPut(endpoint);
             } else if(requestMethod.equals(RequestMethod.DELETE)) {
@@ -169,6 +154,7 @@ final class SageOneCoreConnection {
                     request.addHeader("Content-Type", ContentType.APPLICATION_JSON.toString());
                     request.addHeader("Authorization", "Basic " + authStringEnc);
                     CloseableHttpResponse responseFromRequest = SageOneApiConnector.client.execute(request);
+                    System.out.println(responseFromRequest);
 
                     // START OF SECURITY SUBSECTION -> Ignore
                     authStringEnc = null;
@@ -248,7 +234,7 @@ final class SageOneCoreConnection {
                 endpoint = endpointPlusQuery;
             }
             SageOneResponseJsonObject jsonResponse = ConnectionCoreCodeReturnResponseJson(companyId, (runningInner) ?
-                    endpoint + SKIP_QUERY_PARAM + globalSkipIterator : endpoint, RequestMethod.GET, null, null);
+                    endpoint + SKIP_QUERY_PARAM + globalSkipIterator : endpoint, RequestMethod.GET, null);
             if(mustReturnResultObject) {
                 SageOneGrabbedResultsClass responseResultObject;
                 if(jsonResponse.getSuccess()) {
@@ -292,8 +278,7 @@ final class SageOneCoreConnection {
     final static SageOneResponseObject sageOneSaveData(final int companyId,
                                                        final Class<?> classToMapTo,
                                                        final String endpointPlusQuery,
-                                                       final String jsonObject,
-                                                       final byte[] fileData) {
+                                                       final String jsonObject) {
         SageOneResponseObject.initializeClass();
         SageOneResponseObject sageOneResponseObject = null;
         String endpoint = "";
@@ -303,7 +288,7 @@ final class SageOneCoreConnection {
             SageOneConstants.COMPANY_ID_QUERY_PARAM + companyId;
 
             SageOneResponseJsonObject jsonResponse = ConnectionCoreCodeReturnResponseJson(companyId, endpoint,
-                    RequestMethod.POST, jsonObject, fileData);
+                    RequestMethod.POST, jsonObject);
 
             sageOneResponseObject = (jsonResponse.getSuccess())
                     ? new SageOneResponseObject(true, jsonResponse.getResponseMessage(), SageOneApiConnector.objectMapper.readValue(jsonResponse.getResponseJson(), classToMapTo)) :
@@ -331,11 +316,12 @@ final class SageOneCoreConnection {
                     SageOneConstants.COMPANY_ID_QUERY_PARAM + companyId;
 
         SageOneResponseJsonObject jsonResponse = ConnectionCoreCodeReturnResponseJson(companyId, endpoint,
-                RequestMethod.DELETE, null, null);
+                RequestMethod.DELETE, null);
 
         sageOneResponseObject = (jsonResponse.getSuccess())
                 ? new SageOneResponseObject(true, jsonResponse.getResponseMessage()) :
-                new SageOneResponseObject(false, "Failed to delete data on SageOneSA account, the request failed");
+                new SageOneResponseObject(false,
+                "Failed to delete data on SageOneSA account, the request failed");
 
         SageOneResponseObject.deInitializeClass();
         return sageOneResponseObject;

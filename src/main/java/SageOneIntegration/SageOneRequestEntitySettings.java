@@ -10,6 +10,7 @@ public final class SageOneRequestEntitySettings {
     private boolean canBeSaved = true;
     private boolean canBeGrabbedById = true;
     private boolean canBeDownloaded = false;
+    private boolean canBeGrabbedWithoutId = true;
     private boolean initialized = false;
 
     public SageOneRequestEntitySettings(final String stringProperty,
@@ -21,10 +22,10 @@ public final class SageOneRequestEntitySettings {
 
     public SageOneRequestEntitySettings(final String stringProperty,
                                         final Class<?> classProperty,
-                                        final boolean canBeDeleted) {
+                                        final boolean canBeUsedInRequest) {
         this.stringProperty = stringProperty;
         this.classProperty = classProperty;
-        this.canBeDeleted = canBeDeleted;
+        this.canBeUsedInRequest = canBeUsedInRequest;
         this.initialized = true;
     }
 
@@ -57,31 +58,31 @@ public final class SageOneRequestEntitySettings {
                                         final boolean canBeDeleted,
                                         final boolean canBeSaved,
                                         final boolean canBeGrabbedById,
+                                        final boolean canBeGrabbedWithoutId) {
+        this.stringProperty = stringProperty;
+        this.classProperty = classProperty;
+        this.canBeDeleted = canBeDeleted;
+        this.canBeSaved = canBeSaved;
+        this.canBeGrabbedById = canBeGrabbedById;
+        this.canBeGrabbedWithoutId = canBeGrabbedWithoutId;
+        this.initialized = true;
+    }
+
+    public SageOneRequestEntitySettings(final String stringProperty,
+                                        final Class<?> classProperty,
+                                        final boolean canBeDeleted,
+                                        final boolean canBeSaved,
+                                        final boolean canBeGrabbedById,
+                                        final boolean canBeGrabbedWithoutId,
                                         final boolean canBeDownloaded) {
         this.stringProperty = stringProperty;
         this.classProperty = classProperty;
         this.canBeDeleted = canBeDeleted;
         this.canBeSaved = canBeSaved;
         this.canBeGrabbedById = canBeGrabbedById;
+        this.canBeGrabbedWithoutId = canBeGrabbedWithoutId;
         this.canBeDownloaded = canBeDownloaded;
         this.initialized = true;
-    }
-
-    public SageOneRequestEntitySettings(final Class<?> classProperty,
-                                        final boolean canBeUsedInRequest) {
-        this.classProperty = classProperty;
-        this.canBeUsedInRequest = canBeUsedInRequest;
-        this.initialized = true;
-    }
-
-    public SageOneRequestEntitySettings(final Class<?> classProperty,
-                                        final boolean canBeUsedInRequest,
-                                        final boolean canBeDeleted) {
-        this.classProperty = classProperty;
-        this.canBeUsedInRequest = canBeUsedInRequest;
-        this.canBeDeleted = canBeDeleted;
-        this.initialized = true;
-        String test = new String(new char[]{'d'});
     }
 
 

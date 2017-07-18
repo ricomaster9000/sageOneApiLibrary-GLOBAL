@@ -60,7 +60,7 @@ class SetupClass {
                 }
 
                 SageOneResponseJsonObject sageOneResponseJsonObject = ConnectionCoreCodeReturnResponseJson(-255,
-                        endpointToGetCompanies + SKIP_QUERY_PARAM + globalSkipIterator, RequestMethod.GET, null, null);
+                        endpointToGetCompanies + SKIP_QUERY_PARAM + globalSkipIterator, RequestMethod.GET, null);
 
                 if (sageOneResponseJsonObject.getSuccess()) {
 

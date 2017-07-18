@@ -3,7 +3,7 @@ package SageOneIntegration.SA.V1_1_2.SageOneApiEntities;
 
 class SageOneMainEntity {
     private Integer ID;
-    private boolean initialized = false;
+    private transient boolean initialized = false;
 
     public SageOneMainEntity() {
         this.initialized = true;

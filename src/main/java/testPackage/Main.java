@@ -4,13 +4,23 @@ package testPackage;
 
 import SageOneIntegration.NationalityType;
 import SageOneIntegration.SA.ReusableClasses.SageOneHttpResponseMessage;
+import SageOneIntegration.SA.SageOneCoreConnection;
 import SageOneIntegration.SA.SageOneEntityType;
 import SageOneIntegration.SA.SageOneSA;
+import SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneAttachment;
 import SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneCustomer;
 import SageOneIntegration.SageOneApiConnector;
+import org.apache.tika.io.IOUtils;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.swing.filechooser.FileSystemView;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
+import java.util.UUID;
 
 /**
  * Created by Ricardo on 2017-07-05.
@@ -48,9 +58,33 @@ public class Main {
                 System.out.println(sageOneCustomers.size());
                 // End of Version 2.0.0
 
-                // Version 2.1.0
-                SageOneAccountNoteAttachment
-                //SageOneHttpResponseMessage downloadResponse
+                File file = new File(FileSystemView.getFileSystemView().getHomeDirectory() + File.separator + File.separator +
+                File.separator + "helloTest.txt");
+
+                try {
+
+                        // Version 2.1.0
+                        SageOneAttachment attachment = new SageOneAttachment();
+                        FileInputStream inputStream = new FileInputStream(file);
+                        byte[] fileData = new byte[]{};
+                        System.out.println(file.length());
+                        fileData = IOUtils.toByteArray(inputStream);
+                        System.out.println(fileData.length);
+
+                        attachment.setName(file.getName());
+                        attachment.setSize(file.length());
+                        attachment.setData(fileData);
+                        attachment.setAttachmentUID(UUID.randomUUID());
+
+                        SageOneAttachment attchmentSaved = sageOneSATemplate.saveSageOneAttachment("rotor",
+                        SageOneEntityType.V_1_1_2.ACCOUNT_NOTE_ATTACHMENT, attachment);
+                } catch(FileNotFoundException e) {
+                        e.printStackTrace();
+                } catch(IOException e) {
+                        e.printStackTrace();
+                }
+
+                        //SageOneHttpResponseMessage downloadResponse
 
 
 
