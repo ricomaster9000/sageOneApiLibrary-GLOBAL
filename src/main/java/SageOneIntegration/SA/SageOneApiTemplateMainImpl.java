@@ -115,6 +115,17 @@ public abstract class SageOneApiTemplateMainImpl extends SetupClass implements S
                 jsonObject);
     }
 
+    protected static SageOneResponseObject sageOneUploadData(final int companyId,
+                                                         final String endpointPlusQuery,
+                                                         final Class<?> classToMapTo,
+                                                         final String fileName,
+                                                         final String objectType,
+                                                         final Object objectTypeRelatedId,
+                                                         final byte[] fileData) {
+        return SageOneCoreConnection.sageOneUploadData(companyId, endpointPlusQuery, classToMapTo, fileName,
+                objectType, objectTypeRelatedId, fileData);
+    }
+
     protected static SageOneResponseObject deleteSageOneEntity(final int companyId,
                                                                final String endpointPlusQuery) {
         return SageOneCoreConnection.deleteSageOneEntity(companyId, endpointPlusQuery);
@@ -205,6 +216,9 @@ public abstract class SageOneApiTemplateMainImpl extends SetupClass implements S
             if(API_VERSION.equals("1.1.2")) {
                 if(entityType.equals(SageOneEntityType.V_1_1_2.ACCOUNTANT_TASK)){
                     endpointQuery += "UpdateTaskStatus?";
+                /*} else if(entityType.GetObject.getStringProperty().indexOf("Attachment") >= 0) {
+                    endpointQuery += FS + "Save" + FS;
+*/
                 } else {
                     endpointQuery += FS + SaveString;
                 }

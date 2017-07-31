@@ -22,6 +22,7 @@ import SageOneIntegration.SA.ReusableClasses.SageOneHttpResponseMessage;
 import SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneAttachment;
 import SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneCustomer;
 import SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneSupplier;
+import SageOneIntegration.SageOneUploadDataWrapper;
 import org.springframework.core.env.Environment;
 
 import java.util.List;
@@ -96,5 +97,6 @@ public interface SageOneSA {
 
     <T> T saveSageOneAttachment(final String companyName,
                                 final SageOneEntityType.V_1_1_2 entityTypeToSave,
-                                final SageOneAttachment attchment);
+                                final Object objectTypeRelatedId,
+                                final SageOneUploadDataWrapper attchmentObject);
 }

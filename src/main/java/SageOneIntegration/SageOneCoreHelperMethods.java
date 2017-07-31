@@ -50,7 +50,7 @@ public final class SageOneCoreHelperMethods {
                 stringToEncode = URLEncoder.encode(stringToEncode, "UTF-8");
 
                 endpointToEncode = endpointToEncode.replace(endpointToEncode.substring(indexOfCurlyBeginning,
-                        indexOfCurlyEnding), stringToEncode);
+                indexOfCurlyEnding), stringToEncode);
 
                 if (endpointToEncode.contains("{") && endpointToEncode.contains("}")) {
                     stringToReturn = encodeCurlyBrackets(endpointToEncode);

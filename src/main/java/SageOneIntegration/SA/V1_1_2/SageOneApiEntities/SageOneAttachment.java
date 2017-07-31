@@ -7,7 +7,6 @@ public final class SageOneAttachment {
     private String Name;
     private Long Size;
     private UUID AttachmentUID;
-    private byte[] Data;
     private transient boolean initialized;
 
     public SageOneAttachment() {
@@ -36,14 +35,6 @@ public final class SageOneAttachment {
 
     public final void setAttachmentUID(final UUID AttachmentUID) {
         this.AttachmentUID = (this.initialized) ? AttachmentUID : this.AttachmentUID;
-    }
-
-    public final byte[] getData() {
-        return (this.initialized) ? this.Data : null;
-    }
-
-    public final void setData(final byte[] Data) {
-        this.Data = (this.initialized) ? Data : this.Data;
     }
 
     @Override

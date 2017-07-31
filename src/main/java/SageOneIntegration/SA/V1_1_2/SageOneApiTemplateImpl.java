@@ -25,6 +25,7 @@ import SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneAttachment;
 import SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneCustomer;
 import SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneSupplier;
 import SageOneIntegration.SageOneResponseObject;
+import SageOneIntegration.SageOneUploadDataWrapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.apache.http.entity.ContentType;
@@ -878,8 +879,10 @@ public final class SageOneApiTemplateImpl extends SageOneApiTemplateMainImpl imp
     }
 
     @Override
-    public final <T> T saveSageOneAttachment(final String companyName, final SageOneEntityType.V_1_1_2 entityTypeToUse,
-                                             final SageOneAttachment attchment) {
+    public final <T> T saveSageOneAttachment(final String companyName,
+                                             final SageOneEntityType.V_1_1_2 entityTypeToUse,
+                                             final Object objectTypeRelatedId,
+                                             final SageOneUploadDataWrapper attchmentObject) {
 
         boolean response = true;
         SageOneResponseObject sageOneResponseObject = null;
@@ -901,8 +904,11 @@ public final class SageOneApiTemplateImpl extends SageOneApiTemplateMainImpl imp
                             entityTypeToUse, false, "", false,
                             true, false, false);
 
-                    sageOneResponseObject = SageOneApiTemplateMainImpl.sageOneSaveData(companyId, SageOneHttpResponseMessage.class,
-                            endpointQuery, gson.toJson(attchment));
+                    sageOneResponseObject = SageOneApiTemplateMainImpl.sageOneUploadData(companyId, endpointQuery,
+                    SageOneAttachment.class, attchmentObject.getName(),
+                    entityTypeToUse.GetObject.getStringProperty().substring(0,
+                    entityTypeToUse.GetObject.getStringProperty().indexOf("Attachment")), objectTypeRelatedId,
+                            attchmentObject.getData());
                 }
             } else {
                 throw new IllegalArgumentException(String.format(sageOneTemplateError1, entityTypeToUse.getClass().getName()));
