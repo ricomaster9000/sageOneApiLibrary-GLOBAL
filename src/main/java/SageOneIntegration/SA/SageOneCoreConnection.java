@@ -22,6 +22,9 @@ import SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneGrabbedResultsClas
 import SageOneIntegration.SageOneApiConnector;
 import SageOneIntegration.SageOneResponseJsonObject;
 import SageOneIntegration.SageOneResponseObject;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
@@ -43,7 +46,9 @@ import org.joda.time.DateTime;
 import org.springframework.web.bind.annotation.RequestMethod;
 import sun.misc.BASE64Encoder;
 
+import javax.lang.model.type.ArrayType;
 import java.io.*;
+import java.lang.reflect.Type;
 import java.net.MalformedURLException;
 import java.util.*;
 
@@ -69,7 +74,7 @@ public final class SageOneCoreConnection {
     protected static String endpointSuffixGet;
     protected static List<Object> objectsBeforeConversion;
     protected static boolean resultLimitReached = false;
-    private static Tika tika = new Tika();
+    protected static final Gson gson = new GsonBuilder().setDateFormat("YYYY-MM-dd").serializeNulls().create();
 
     private static void setNotEncodedCreditentials() {
         SageOneCoreConnection.notEncodedCredentials = new char[CLIENT_USERNAME.length + CLIENT_PASSWORD.length + 1];
@@ -130,8 +135,6 @@ public final class SageOneCoreConnection {
                 // END OF SECURITY SUBSECTION
 
                 String boundary = "---------------"+UUID.randomUUID().toString();
-
-
 
                 HttpEntity entity = MultipartEntityBuilder
                         .create()
@@ -331,7 +334,6 @@ public final class SageOneCoreConnection {
             if(mustReturnResultObject) {
                 SageOneGrabbedResultsClass responseResultObject;
                 if(jsonResponse.getSuccess()) {
-                    System.out.println(jsonResponse.getSuccess());
                     responseResultObject = SageOneApiConnector.objectMapper.readValue(jsonResponse.getResponseJson(), SageOneGrabbedResultsClass.class);
                     for (Object object : responseResultObject.getResults()) {
                         objectsBeforeConversion.add(SageOneApiConnector.objectMapper.convertValue(object, ObjectClassToMapTo));
@@ -438,11 +440,26 @@ public final class SageOneCoreConnection {
             SageOneResponseJsonObject jsonResponse = UploadCoreCodeReturnResponseJson(companyId, endpoint, fileName,
                     objectType, objectTypeRelatedId, fileData);
 
+/*            if(jsonResponse.getSuccess()) {
+                List<Object> objectList = new ArrayList<Object>();
+                String[] jsonReturnedList =
+                SageOneApiConnector.objectMapper.readValue(jsonResponse.getResponseJson(), String[].class);
+
+                for(String jsonObject : jsonReturnedList) {
+                    Object object = SageOneApiConnector.objectMapper.readValue(jsonObject, classToMapTo);
+                    objectList.add(object);
+                }
+
+
+            } else {
+
+            }*/
+
             sageOneResponseObject = (jsonResponse.getSuccess())
                     ? new SageOneResponseObject(true, jsonResponse.getResponseMessage(), SageOneApiConnector.objectMapper.readValue(jsonResponse.getResponseJson(), classToMapTo)) :
                     new SageOneResponseObject(false, "Failed to upload data on SageOneSA account, the request failed");
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
 
             sageOneResponseObject = new SageOneResponseObject(false, "An error occurred while " +

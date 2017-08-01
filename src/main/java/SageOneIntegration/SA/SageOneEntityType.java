@@ -35,7 +35,7 @@ public class SageOneEntityType {
         ADDITIONAL_PRICE_LIST("AdditionalPriceList/", SageOneAdditionalPriceList.class),
         ACCOUNT("Account/", SageOneAccount.class),
         ACCOUNT_NOTE("AccountNote/", SageOneAccountNote.class),
-        ACCOUNT_NOTE_ATTACHMENT("AccountNoteAttachment", SageOneAccountNoteAttachment.class, true, true, true, false, true),
+        ACCOUNT_NOTE_ATTACHMENT("AccountNoteAttachment/", SageOneAccountNoteAttachment.class, true, true, true, false, true),
         ACCOUNTANT_NOTE("AccountantNote/", SageOneAccountantNote.class, true, false),
         ACCOUNTANT_TASK_RECURRENCE("AccountantTaskRecurrence/", SageOneAccountantTaskRecurrence.class, true, false),
         ACCOUNT_CATEGORY("AccountCategory/", SageOneAccountCategory.class, false, false),

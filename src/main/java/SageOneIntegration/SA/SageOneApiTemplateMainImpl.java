@@ -233,7 +233,7 @@ public abstract class SageOneApiTemplateMainImpl extends SetupClass implements S
 
     @Override
     public final List<SageOneCustomer> getCustomersByNameAndSurnameOrName(final String companyName,
-                                                                           String... customerNames) {
+                                                                          final String... customerNames) {
         boolean response = true;
         SageOneResponseObject sageOneResponseObject;
         List<SageOneCustomer> sageOneCustomersGrabbed = new ArrayList<SageOneCustomer>();

@@ -34,7 +34,7 @@ public class Main {
         public static void main(String[] args) {
                 Properties properties = new Properties();
 
-                // Version 2.0.0
+                // Version 2.0.*
 
                 properties.setProperty("sageOneApi.SA.clientUsername", "ricbus98@gmail.com");
                 properties.setProperty("sageOneApi.SA.clientPassword", "Sonnyabcd5678@");
@@ -59,11 +59,10 @@ public class Main {
 
                 System.out.println("hello");
 
-
                 System.out.println(sageOneCustomers.size());
                 // End of Version 2.0.0
 
-                // Version 2.1.0
+                // Version 2.1.*
                 List<SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneAccount> grabbedFirstAccount =
                 sageOneSATemplate.getSageOneEntitiesByType("rotor5", SageOneEntityType.V_1_1_2.ACCOUNT);
 
@@ -71,9 +70,7 @@ public class Main {
                 SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneAccountNote newAccountNote =
                 new SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneAccountNote();
 
-                newAccountNote.setId(0);
-                //newAccountNote.setAccountId(grabbedFirstAccount.get(0).getId());
-                //newAccountNote.setHasAttachments(true);
+                newAccountNote.setId(3370);//0
                 newAccountNote.setSubject("TestingForAttachments");
                 newAccountNote.setActionDate(new DateTime().plusDays(3).toDate());
 
@@ -86,7 +83,6 @@ public class Main {
                         File.separator + File.separator + File.separator + "helloTest.txt");
 
                         try {
-                                SageOneAttachment attachment = new SageOneAttachment();
                                 FileInputStream inputStream = new FileInputStream(file);
                                 byte[] fileData = new byte[]{};
                                 System.out.println(file.length());
@@ -96,20 +92,26 @@ public class Main {
                                 SageOneUploadDataWrapper fileToUpload = new SageOneUploadDataWrapper();
 
 
-
                                 fileToUpload.setName(file.getName());
                                 fileToUpload.setData(fileData);
 
                                 SageOneAttachment attchmentSaved = sageOneSATemplate.saveSageOneAttachment("rotor5",
-                                SageOneEntityType.V_1_1_2.ACCOUNT_NOTE_ATTACHMENT, saveAccountNote.getId(), attachment);
+                                SageOneEntityType.V_1_1_2.ACCOUNT_NOTE_ATTACHMENT, saveAccountNote.getId(), fileToUpload);
+
+
+                                List<SageOneAttachment> sageOneGrabbedAttachments =
+                                sageOneSATemplate.downloadSageOneEntities("rotor5",
+                                attchmentSaved.getAttachmentUID().toString(),
+                                SageOneEntityType.V_1_1_2.ACCOUNT_NOTE_ATTACHMENT);
+
+                                System.out.println(sageOneGrabbedAttachments.size());
+
                         } catch(FileNotFoundException e) {
                                 e.printStackTrace();
                         } catch(IOException e) {
                                 e.printStackTrace();
                         }
                 }
-
-                        //SageOneHttpResponseMessage downloadResponse
 
 
 

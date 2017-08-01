@@ -846,12 +846,13 @@ public final class SageOneApiTemplateImpl extends SageOneApiTemplateMainImpl imp
     }
 
     @Override
-    public final SageOneHttpResponseMessage downloadSageOneEntity(final String companyName,
-                                                                  final String entityGlobalUniqueIdentifier,
-                                                                  final SageOneEntityType.V_1_1_2 entity) {
+    public final <T> List<T> downloadSageOneEntities(final String companyName,
+                                                     final String entityGlobalUniqueIdentifier,
+                                                     final SageOneEntityType.V_1_1_2 entity) {
+        List<T> grabbedObjects = new ArrayList<T>();
         String endpointQuery = checkAndManageEndPointQueryIfNeeded(entity.GetObject.getStringProperty(),
-                entity, true, entityGlobalUniqueIdentifier, false, false,
-                true, false);
+        entity, false, "{" + entityGlobalUniqueIdentifier + "}", false,
+        false, true, false);
 
         SageOneResponseObject sageOneResponseObject = null;
 
@@ -863,7 +864,13 @@ public final class SageOneApiTemplateImpl extends SageOneApiTemplateMainImpl imp
                 if (entity.GetObject.getCanBeUsedInRequest() && entity.GetObject.getCanBeDownloaded()) {
 
                     sageOneResponseObject = SageOneApiTemplateImpl.sageOneGrabData(companyId, endpointQuery,
-                            SageOneHttpResponseMessage.class, false);
+                            SageOneAttachment[].class, true);
+
+                    if(sageOneResponseObject.getSuccess()) {
+                        grabbedObjects = (List<T>) sageOneResponseObject.getResponseObject();
+                    } else {
+                        System.out.println(sageOneResponseObject.getResponseMessage());
+                    }
                 } else {
                     throw new InvalidClassException(String.format(sageOneTemplateError1, entity.name()));
                 }
@@ -874,8 +881,7 @@ public final class SageOneApiTemplateImpl extends SageOneApiTemplateMainImpl imp
             e.printStackTrace();
         }
 
-        return (sageOneResponseObject != null && sageOneResponseObject.getSuccess() ) ?
-                (SageOneHttpResponseMessage) sageOneResponseObject.getResponseObject() : null;
+        return grabbedObjects;
     }
 
     @Override
@@ -883,7 +889,7 @@ public final class SageOneApiTemplateImpl extends SageOneApiTemplateMainImpl imp
                                              final SageOneEntityType.V_1_1_2 entityTypeToUse,
                                              final Object objectTypeRelatedId,
                                              final SageOneUploadDataWrapper attchmentObject) {
-
+        T[] grabbedObjects = null;
         boolean response = true;
         SageOneResponseObject sageOneResponseObject = null;
         Integer companyId = null;
@@ -905,10 +911,12 @@ public final class SageOneApiTemplateImpl extends SageOneApiTemplateMainImpl imp
                             true, false, false);
 
                     sageOneResponseObject = SageOneApiTemplateMainImpl.sageOneUploadData(companyId, endpointQuery,
-                    SageOneAttachment.class, attchmentObject.getName(),
+                    SageOneAttachment[].class, attchmentObject.getName(),
                     entityTypeToUse.GetObject.getStringProperty().substring(0,
                     entityTypeToUse.GetObject.getStringProperty().indexOf("Attachment")), objectTypeRelatedId,
                             attchmentObject.getData());
+
+                    grabbedObjects = (T[]) sageOneResponseObject.getResponseObject();
                 }
             } else {
                 throw new IllegalArgumentException(String.format(sageOneTemplateError1, entityTypeToUse.getClass().getName()));
@@ -918,6 +926,6 @@ public final class SageOneApiTemplateImpl extends SageOneApiTemplateMainImpl imp
         }
 
         return (response && sageOneResponseObject != null && sageOneResponseObject.getSuccess()) ?
-                (T) sageOneResponseObject.getResponseObject() : null;
+                (T) grabbedObjects[0] : null;
     }
 }

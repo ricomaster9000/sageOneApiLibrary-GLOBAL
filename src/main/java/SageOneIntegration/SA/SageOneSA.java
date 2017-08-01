@@ -40,8 +40,8 @@ public interface SageOneSA {
 
     void setupSageOneApi(final Environment properties);
 
-    List<SageOneCustomer> getCustomersByNameAndSurnameOrName(String companyName,
-                                                             String... customerNames);
+    List<SageOneCustomer> getCustomersByNameAndSurnameOrName(final String companyName,
+                                                             final String... customerNames);
 
     SageOneSupplier getSupplierByName(final String companyName,
                                       final String name);
@@ -89,11 +89,11 @@ public interface SageOneSA {
                                                  final String propertyValue);
 
     <T> List<T> getSageOneEntitiesByType(final String companyName,
-                                                final SageOneEntityType.V_1_1_2 sageOneEntityType);
+                                         final SageOneEntityType.V_1_1_2 sageOneEntityType);
 
-    SageOneHttpResponseMessage downloadSageOneEntity(final String companyName,
-                                                     String entityGlobalUniqueIdentifier,
-                                                     final SageOneEntityType.V_1_1_2 entity);
+    <T> List<T> downloadSageOneEntities(final String companyName,
+                                        String entityGlobalUniqueIdentifier,
+                                        final SageOneEntityType.V_1_1_2 entity);
 
     <T> T saveSageOneAttachment(final String companyName,
                                 final SageOneEntityType.V_1_1_2 entityTypeToSave,

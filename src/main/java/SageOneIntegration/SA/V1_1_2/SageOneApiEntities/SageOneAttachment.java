@@ -6,7 +6,7 @@ import java.util.UUID;
 public final class SageOneAttachment {
     private String Name;
     private Long Size;
-    private UUID AttachmentUID;
+    private String AttachmentUID;
     private transient boolean initialized;
 
     public SageOneAttachment() {
@@ -29,11 +29,11 @@ public final class SageOneAttachment {
         this.Size = (this.initialized) ? Size : this.Size;
     }
 
-    public final UUID getAttachmentUID() {
+    public final String getAttachmentUID() {
         return (this.initialized) ? this.AttachmentUID : null;
     }
 
-    public final void setAttachmentUID(final UUID AttachmentUID) {
+    public final void setAttachmentUID(final String AttachmentUID) {
         this.AttachmentUID = (this.initialized) ? AttachmentUID : this.AttachmentUID;
     }
 
