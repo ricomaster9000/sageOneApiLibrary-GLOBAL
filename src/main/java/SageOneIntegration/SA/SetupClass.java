@@ -21,7 +21,7 @@ package SageOneIntegration.SA;
 import SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneCompany;
 import SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneGrabbedResultsClass;
 import SageOneIntegration.SageOneApiConnector;
-import SageOneIntegration.SageOneResponseJsonObject;
+import SageOneIntegration.SageOneResponseJsonDataObject;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.springframework.core.env.Environment;
@@ -59,12 +59,12 @@ class SetupClass {
                     globalResponse = true;
                 }
 
-                SageOneResponseJsonObject sageOneResponseJsonObject = ConnectionCoreCodeReturnResponseJson(-255,
+                SageOneResponseJsonDataObject sageOneResponseJsonDataObject = ConnectionCoreCodeReturnResponseJson(-255,
                         endpointToGetCompanies + SKIP_QUERY_PARAM + globalSkipIterator, RequestMethod.GET, null);
 
-                if (sageOneResponseJsonObject.getSuccess()) {
+                if (sageOneResponseJsonDataObject.getSuccess()) {
 
-                    SageOneGrabbedResultsClass resultObject = SageOneApiConnector.objectMapper.readValue(sageOneResponseJsonObject.getResponseJson(),
+                    SageOneGrabbedResultsClass resultObject = SageOneApiConnector.objectMapper.readValue(sageOneResponseJsonDataObject.getResponseJson(),
                             SageOneGrabbedResultsClass.class);
 
                     objectsBeforeConversion.addAll(Arrays.asList(resultObject.getResults()));

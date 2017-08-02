@@ -18,21 +18,22 @@
  **/
 package SageOneIntegration;
 
-public final class SageOneResponseJsonObject {
+public final class SageOneResponseJsonDataObject {
     private boolean success = false;
     private String responseMessage = "";
     private String responseJson;
+    private byte[] responseData;
     private static boolean classInitialized = false;
     private boolean initialized = false;
 
     public static void initializeClass() {
-        SageOneResponseJsonObject.classInitialized = true;
+        SageOneResponseJsonDataObject.classInitialized = true;
     }
-    public static void deInitializeClass() { SageOneResponseJsonObject.classInitialized = false; }
+    public static void deInitializeClass() { SageOneResponseJsonDataObject.classInitialized = false; }
 
-    public SageOneResponseJsonObject() {
+    public SageOneResponseJsonDataObject() {
         try {
-            if (SageOneResponseJsonObject.classInitialized) {
+            if (SageOneResponseJsonDataObject.classInitialized) {
                 this.initialized = true;
             } else {
                 throw new Exception("Cannot access class");
@@ -42,9 +43,9 @@ public final class SageOneResponseJsonObject {
         }
     }
 
-    public SageOneResponseJsonObject(final boolean success, final String responseMessage) {
+    public SageOneResponseJsonDataObject(final boolean success, final String responseMessage) {
         try {
-            if(SageOneResponseJsonObject.classInitialized) {
+            if(SageOneResponseJsonDataObject.classInitialized) {
                 this.initialized = true;
                 this.success = success;
                 this.responseMessage = responseMessage;
@@ -56,9 +57,9 @@ public final class SageOneResponseJsonObject {
         }
     }
 
-    public SageOneResponseJsonObject(final boolean success, final String responseMessage, final String responseJson) {
+    public SageOneResponseJsonDataObject(final boolean success, final String responseMessage, final String responseJson) {
         try {
-            if(SageOneResponseJsonObject.classInitialized) {
+            if(SageOneResponseJsonDataObject.classInitialized) {
                 this.initialized = true;
                 this.success = success;
                 this.responseMessage = responseMessage;
@@ -119,13 +120,42 @@ public final class SageOneResponseJsonObject {
         return responseJson;
     }
 
+    public final void setResponseData(final byte[] responseData) {
+        this.responseData = (this.initialized) ? responseData : this.responseData;
+    }
+
+    public final byte[] getResponseData() {
+        try {
+            if (!this.initialized) {
+                throw new Exception("Cannot access class");
+            }
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+        return responseData;
+    }
+
     @Override
     public final String toString() {
-        return (this.initialized) ? "AjaxResponseJsonObject{" +
-                " success = " + this.success + "," +
-                " responseMessage = '" + this.responseMessage + "'," +
-                " responseJson = " + this.responseJson + "," +
-                "}" : null;
+        String toString = null;
+        if(this.initialized) {
+
+            toString = "AjaxResponseJsonObject{" +
+                    " success = " + this.success + "," +
+                    " responseMessage = '" + this.responseMessage + "'," +
+                    " responseJson = " + this.responseJson + "," +
+                    " responseData = \"";
+
+            StringBuilder byteData = new StringBuilder();
+
+            for(byte dataPiece : this.responseData) {
+                byteData.append(dataPiece);
+            }
+
+            toString += byteData.toString() + "\"}";
+        }
+        return toString;
     }
 
     @Override

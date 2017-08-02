@@ -20,35 +20,23 @@ package SageOneIntegration.SA;
 
 import SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneGrabbedResultsClass;
 import SageOneIntegration.SageOneApiConnector;
-import SageOneIntegration.SageOneResponseJsonObject;
+import SageOneIntegration.SageOneResponseJsonDataObject;
 import SageOneIntegration.SageOneResponseObject;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
 import org.apache.http.client.config.AuthSchemes;
 import org.apache.http.client.config.CookieSpecs;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.*;
-import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.entity.ContentType;
-import org.apache.http.entity.FileEntity;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.entity.mime.HttpMultipartMode;
-import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
-import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.tika.Tika;
 import org.joda.time.DateTime;
 import org.springframework.web.bind.annotation.RequestMethod;
 import sun.misc.BASE64Encoder;
 
-import javax.lang.model.type.ArrayType;
 import java.io.*;
-import java.lang.reflect.Type;
 import java.net.MalformedURLException;
 import java.util.*;
 
@@ -58,7 +46,6 @@ import static SageOneIntegration.SA.SageOneConstants.CLIENT_USERNAME;
 import static SageOneIntegration.SageOneApiConnector.client;
 import static SageOneIntegration.SageOneConstants.SKIP_QUERY_PARAM;
 import static SageOneIntegration.SageOneCoreHelperMethods.encodeCurlyBrackets;
-import static org.apache.http.HttpHeaders.USER_AGENT;
 
 /**
  * Created by Ricardo on 2017-07-05.
@@ -74,7 +61,6 @@ public final class SageOneCoreConnection {
     protected static String endpointSuffixGet;
     protected static List<Object> objectsBeforeConversion;
     protected static boolean resultLimitReached = false;
-    protected static final Gson gson = new GsonBuilder().setDateFormat("YYYY-MM-dd").serializeNulls().create();
 
     private static void setNotEncodedCreditentials() {
         SageOneCoreConnection.notEncodedCredentials = new char[CLIENT_USERNAME.length + CLIENT_PASSWORD.length + 1];
@@ -114,12 +100,12 @@ public final class SageOneCoreConnection {
         return response;
     }
 
-    private static SageOneResponseJsonObject UploadCoreCodeReturnResponseJson(final int companyId,
-                                                                             final String endpoint,
-                                                                             final String fileName,
-                                                                             final String objectType,
-                                                                             final Object objectTypeRelatedId,
-                                                                             final byte[] fileData) {
+    private static SageOneResponseJsonDataObject UploadCoreCodeReturnResponseJson(final int companyId,
+                                                                                  final String endpoint,
+                                                                                  final String fileName,
+                                                                                  final String objectType,
+                                                                                  final Object objectTypeRelatedId,
+                                                                                  final byte[] fileData) {
         boolean response = true;
         String resultToReturn = null;
         try {
@@ -152,8 +138,6 @@ public final class SageOneCoreConnection {
                 request.addHeader("Authorization", "Basic " + authStringEnc);
                 request.setHeader("Connection", "keep-alive");
 
-                System.out.println(entity);
-
                 CloseableHttpResponse responseFromRequest = client.execute(request);
 
                 StatusLine statusLine = responseFromRequest.getStatusLine();
@@ -165,8 +149,6 @@ public final class SageOneCoreConnection {
 
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    // ... System.out.println(line) ?
-                    System.out.println(line);
                     constructedResultString.append(line);
                 }
 
@@ -187,34 +169,31 @@ public final class SageOneCoreConnection {
         }
 
 
-        SageOneResponseJsonObject.initializeClass();
+        SageOneResponseJsonDataObject.initializeClass();
 
-        SageOneResponseJsonObject jsonObjectToReturn = (response)
-                ? new SageOneResponseJsonObject(true, null, resultToReturn) :
-                new SageOneResponseJsonObject(false, "ERROR", resultToReturn);
+        SageOneResponseJsonDataObject jsonObjectToReturn = (response)
+                ? new SageOneResponseJsonDataObject(true, null, resultToReturn) :
+                new SageOneResponseJsonDataObject(false, "ERROR", resultToReturn);
 
-        SageOneResponseJsonObject.deInitializeClass();
+        SageOneResponseJsonDataObject.deInitializeClass();
 
         return jsonObjectToReturn;
     }
 
-    public static SageOneResponseJsonObject ConnectionCoreCodeReturnResponseJson(final int companyId,
-                                                                          final String endpoint,
-                                                                          final RequestMethod requestMethod,
-                                                                          final String jsonEntityToPost) {
+    public static SageOneResponseJsonDataObject ConnectionCoreCodeReturnResponseJson(final int companyId,
+                                                                                     final String endpoint,
+                                                                                     final RequestMethod requestMethod,
+                                                                                     final String jsonEntityToPost) {
         boolean response = true;
         String resultToReturn = "";
         HttpRequestBase request = null;
         resultLimitReached = false;
 
         try {
-            System.out.println(endpoint);
                 if(requestMethod.equals(RequestMethod.GET)) {
                     request = new HttpGet(endpoint);
                 } else if(requestMethod.equals(RequestMethod.POST)) {
                     request = new HttpPost(endpoint);
-
-                    System.out.println(jsonEntityToPost);
 
                     RequestConfig requestConfig = RequestConfig.copy(defaultRequestConfig)
                     .setSocketTimeout(SAGE_ONE_REQUEST_TIMEOUT_SOCKET).setConnectTimeout(REQUEST_TIMEOUT)
@@ -274,7 +253,6 @@ public final class SageOneCoreConnection {
                                     constructedResultString.append(line);
                                 }
                                 resultToReturn = constructedResultString.toString();
-                                System.out.println(resultToReturn);
                             }
                         }
                         request.releaseConnection();
@@ -297,13 +275,13 @@ public final class SageOneCoreConnection {
             request.releaseConnection();
         }
 
-        SageOneResponseJsonObject.initializeClass();
+        SageOneResponseJsonDataObject.initializeClass();
 
-        SageOneResponseJsonObject jsonObjectToReturn = (response)
-                ? new SageOneResponseJsonObject(true, null, resultToReturn) :
-                new SageOneResponseJsonObject(false, "ERROR", resultToReturn);
+        SageOneResponseJsonDataObject jsonObjectToReturn = (response)
+                ? new SageOneResponseJsonDataObject(true, null, resultToReturn) :
+                new SageOneResponseJsonDataObject(false, "ERROR", resultToReturn);
 
-        SageOneResponseJsonObject.deInitializeClass();
+        SageOneResponseJsonDataObject.deInitializeClass();
 
         return jsonObjectToReturn;
     }
@@ -329,7 +307,7 @@ public final class SageOneCoreConnection {
             } else {
                 endpoint = endpointPlusQuery;
             }
-            SageOneResponseJsonObject jsonResponse = ConnectionCoreCodeReturnResponseJson(companyId, (runningInner) ?
+            SageOneResponseJsonDataObject jsonResponse = ConnectionCoreCodeReturnResponseJson(companyId, (runningInner) ?
                     endpoint + SKIP_QUERY_PARAM + globalSkipIterator : endpoint, RequestMethod.GET, null);
             if(mustReturnResultObject) {
                 SageOneGrabbedResultsClass responseResultObject;
@@ -382,7 +360,7 @@ public final class SageOneCoreConnection {
             SageOneConstants.API_KEY_QUERY_PARAM + encodeCurlyBrackets(new String(SageOneConstants.API_KEY)) +
             SageOneConstants.COMPANY_ID_QUERY_PARAM + companyId;
 
-            SageOneResponseJsonObject jsonResponse = ConnectionCoreCodeReturnResponseJson(companyId, endpoint,
+            SageOneResponseJsonDataObject jsonResponse = ConnectionCoreCodeReturnResponseJson(companyId, endpoint,
                     RequestMethod.POST, jsonObject);
 
             sageOneResponseObject = (jsonResponse.getSuccess())
@@ -410,7 +388,7 @@ public final class SageOneCoreConnection {
                     encodeCurlyBrackets(new String(SageOneConstants.API_KEY)) +
                     SageOneConstants.COMPANY_ID_QUERY_PARAM + companyId;
 
-        SageOneResponseJsonObject jsonResponse = ConnectionCoreCodeReturnResponseJson(companyId, endpoint,
+        SageOneResponseJsonDataObject jsonResponse = ConnectionCoreCodeReturnResponseJson(companyId, endpoint,
                 RequestMethod.DELETE, null);
 
         sageOneResponseObject = (jsonResponse.getSuccess())
@@ -437,23 +415,8 @@ public final class SageOneCoreConnection {
                     SageOneConstants.API_KEY_QUERY_PARAM + encodeCurlyBrackets(new String(SageOneConstants.API_KEY)) +
                     SageOneConstants.COMPANY_ID_QUERY_PARAM + companyId;
 
-            SageOneResponseJsonObject jsonResponse = UploadCoreCodeReturnResponseJson(companyId, endpoint, fileName,
+            SageOneResponseJsonDataObject jsonResponse = UploadCoreCodeReturnResponseJson(companyId, endpoint, fileName,
                     objectType, objectTypeRelatedId, fileData);
-
-/*            if(jsonResponse.getSuccess()) {
-                List<Object> objectList = new ArrayList<Object>();
-                String[] jsonReturnedList =
-                SageOneApiConnector.objectMapper.readValue(jsonResponse.getResponseJson(), String[].class);
-
-                for(String jsonObject : jsonReturnedList) {
-                    Object object = SageOneApiConnector.objectMapper.readValue(jsonObject, classToMapTo);
-                    objectList.add(object);
-                }
-
-
-            } else {
-
-            }*/
 
             sageOneResponseObject = (jsonResponse.getSuccess())
                     ? new SageOneResponseObject(true, jsonResponse.getResponseMessage(), SageOneApiConnector.objectMapper.readValue(jsonResponse.getResponseJson(), classToMapTo)) :

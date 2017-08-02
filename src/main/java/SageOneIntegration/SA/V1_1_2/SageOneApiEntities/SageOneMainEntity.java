@@ -2,16 +2,16 @@
 package SageOneIntegration.SA.V1_1_2.SageOneApiEntities;
 
 class SageOneMainEntity {
-    private Integer ID;
+    private int ID = 0;
     private transient boolean initialized = false;
 
     public SageOneMainEntity() {
         this.initialized = true;
     }
 
-    public Integer getId() { return (this.initialized) ? this.ID : -1; }
+    public int getId() { return (this.initialized) ? this.ID : -1; }
 
-    public void setId(final Integer ID) { this.ID = (this.initialized) ? ID : this.ID; }
+    public void setId(final int ID) { this.ID = (this.initialized) ? ID : this.ID; }
 
     public boolean isInitialized() { return this.initialized; }
 

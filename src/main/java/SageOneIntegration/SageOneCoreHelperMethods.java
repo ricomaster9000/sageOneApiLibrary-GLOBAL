@@ -66,11 +66,11 @@ public final class SageOneCoreHelperMethods {
         return stringToReturn;
     }
 
-    public static SageOneResponseJsonObject alterResponseJsonObjectAfterSageOneApiCall(final SageOneResponseObject
+    public static SageOneResponseJsonDataObject alterResponseJsonObjectAfterSageOneApiCall(final SageOneResponseObject
                                                                                                sageOneResponseObjectFromApi,
-                                                                                       final String forSpecificField) {
-        SageOneResponseJsonObject.initializeClass();
-        SageOneResponseJsonObject sageOneResponseJsonObject = new SageOneResponseJsonObject(false,
+                                                                                           final String forSpecificField) {
+        SageOneResponseJsonDataObject.initializeClass();
+        SageOneResponseJsonDataObject sageOneResponseJsonDataObject = new SageOneResponseJsonDataObject(false,
                 "Failed to grab data from Sage One Api", "");
 
         if(sageOneResponseObjectFromApi.getSuccess()) {
@@ -80,13 +80,13 @@ public final class SageOneCoreHelperMethods {
                 if(forSpecificField.equals("invoiceNumber")) {
                     SageOneCustomerReturn purchaseInvoice = (SageOneCustomerReturn) responseObjectToWorkWith;
 
-                    sageOneResponseJsonObject = new SageOneResponseJsonObject(sageOneResponseObjectFromApi.getSuccess(),
+                    sageOneResponseJsonDataObject = new SageOneResponseJsonDataObject(sageOneResponseObjectFromApi.getSuccess(),
                             "Successfully grabbed invoiceNumber", purchaseInvoice.getDocumentNumber());
                 } else {
                     Gson g = new Gson();
                     String jsonString = g.toJson(sageOneResponseObjectFromApi);
 
-                    sageOneResponseJsonObject = new SageOneResponseJsonObject(sageOneResponseObjectFromApi.getSuccess(),
+                    sageOneResponseJsonDataObject = new SageOneResponseJsonDataObject(sageOneResponseObjectFromApi.getSuccess(),
                     "Successfully grabbed invoiceNumber", jsonString);
                 }
 
@@ -96,7 +96,7 @@ public final class SageOneCoreHelperMethods {
                 if(forSpecificField.equals("invoiceNumber")) {
                     SageOneSupplierReturn saleInvoice = (SageOneSupplierReturn) responseObjectToWorkWith;
 
-                    sageOneResponseJsonObject = new SageOneResponseJsonObject(sageOneResponseObjectFromApi.getSuccess(),
+                    sageOneResponseJsonDataObject = new SageOneResponseJsonDataObject(sageOneResponseObjectFromApi.getSuccess(),
                             "Successfully grabbed invoiceNumber", saleInvoice.getDocumentNumber());
                 } else {
                         boolean responseFromTry = false;
@@ -110,17 +110,17 @@ public final class SageOneCoreHelperMethods {
                             e.printStackTrace();
                             responseFromTry = false;
                         }
-                        sageOneResponseJsonObject = new SageOneResponseJsonObject((sageOneResponseObjectFromApi.getSuccess() && responseFromTry),
+                        sageOneResponseJsonDataObject = new SageOneResponseJsonDataObject((sageOneResponseObjectFromApi.getSuccess() && responseFromTry),
                                 (responseFromTry) ? "Successfully grabbed data from SageOneSA Api" : "Failed to grab " +
                                 "data from SageOneSA Api, Api call was successful but the data returned caused " +
                                 "an error", jsonString);
                 }
             }
-            SageOneResponseJsonObject.deInitializeClass();
+            SageOneResponseJsonDataObject.deInitializeClass();
         } else {
-            sageOneResponseJsonObject.setResponseMessage(sageOneResponseObjectFromApi.getResponseMessage());
+            sageOneResponseJsonDataObject.setResponseMessage(sageOneResponseObjectFromApi.getResponseMessage());
         }
-        return sageOneResponseJsonObject;
+        return sageOneResponseJsonDataObject;
     }
 
     static String convertObjectToJsonString(final Object object) {
