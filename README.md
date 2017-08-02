@@ -62,6 +62,7 @@ SageOne Entities, all of them lies in the SageOneIntegration.<NationalityType>.<
 ```
 
 ### Template Methods
+#### save method without id specified is a creation of new entity, if id is specified however then entity is edited
 #### <NationalityType> = NationalityType.name() -> the name of the enum (NationalityType.SA will be SA)
 #### <Version> = The version of the enum class to use in SageOneEntityType.{VERSION_ENUM_CLASS} (current one for SA for example is ".V_1_1_2")
 ```
@@ -71,7 +72,7 @@ SageOne<NationalityType>.getCustomersByNameAndSurnameOrName(String companyName, 
 SageOne<NationalityType>.getSageOneEntity(String companyName, SageOneEntityType<Version> entityName, int entityId) -> grabs one sageOne entity by its id for a certain company
 ```
 ```
-SageOne<NationalityType>.saveSageOneEntity(String companyName, Object entityToSave) -> saves one SageOne entity by passing the company name and the SageOne entity object (look above to know where the SageOne entity classes/objects can be found), returns generated entity from SageOne Api as response, Version for api will automatically be detected.
+SageOne<NationalityType>.saveSageOneEntity(String companyName, Object entityToSave) -> saves (AND also edits if id is present in object) one SageOne entity by passing the company name and the SageOne entity object (look above to know where the SageOne entity classes/objects can be found), returns generated entity from SageOne Api as response, Version for api will automatically be detected.
 ```
 ```
 SageOne<NationalityType>.getCustomers(final String companyName) -> grabs all customers for specified company name
