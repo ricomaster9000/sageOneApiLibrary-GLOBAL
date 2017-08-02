@@ -20,6 +20,7 @@ package SageOneIntegration.SA;
 
 import SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneGrabbedResultsClass;
 import SageOneIntegration.SageOneApiConnector;
+import SageOneIntegration.SageOneDownloadDataWrapper;
 import SageOneIntegration.SageOneResponseJsonDataObject;
 import SageOneIntegration.SageOneResponseObject;
 import org.apache.http.HttpEntity;
@@ -32,8 +33,10 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.tika.Tika;
 import org.joda.time.DateTime;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.client.RestTemplate;
 import sun.misc.BASE64Encoder;
 
 import java.io.*;
@@ -61,6 +64,7 @@ public final class SageOneCoreConnection {
     protected static String endpointSuffixGet;
     protected static List<Object> objectsBeforeConversion;
     protected static boolean resultLimitReached = false;
+    protected static Tika tika = new Tika();
 
     private static void setNotEncodedCreditentials() {
         SageOneCoreConnection.notEncodedCredentials = new char[CLIENT_USERNAME.length + CLIENT_PASSWORD.length + 1];
@@ -427,6 +431,36 @@ public final class SageOneCoreConnection {
 
             sageOneResponseObject = new SageOneResponseObject(false, "An error occurred while " +
                     "trying to upload data on the SageOneSA account, look on terminal or log files for details");
+        }
+
+        SageOneResponseObject.deInitializeClass();
+        return sageOneResponseObject;
+    }
+
+    final static SageOneResponseObject sageOneDownloadData(final int companyId,
+                                                           final String endpointPlusQuery) {
+        SageOneResponseObject.initializeClass();
+        SageOneResponseObject sageOneResponseObject = null;
+        String endpoint = "";
+        try {
+            endpoint = endpointPrefix + endpointPlusQuery +
+                    SageOneConstants.API_KEY_QUERY_PARAM + encodeCurlyBrackets(new String(SageOneConstants.API_KEY)) +
+                    SageOneConstants.COMPANY_ID_QUERY_PARAM + companyId;
+
+            SageOneResponseJsonDataObject jsonResponse = ConnectionCoreCodeReturnResponseJson(companyId, endpoint,
+            RequestMethod.GET, null);
+
+            sageOneResponseObject = (jsonResponse.getSuccess())
+            ? new SageOneResponseObject(true, jsonResponse.getResponseMessage(),
+            new SageOneDownloadDataWrapper(tika.detect(jsonResponse.getResponseJson().getBytes()), jsonResponse.getResponseJson().getBytes(),
+            jsonResponse.getResponseJson().getBytes().length) ) :
+            new SageOneResponseObject(false, "Failed to download data from SageOneSA account, the request failed");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            sageOneResponseObject = new SageOneResponseObject(false, "An error occurred while " +
+            "trying to upload data on the SageOneSA account, look on terminal or log files for details");
         }
 
         SageOneResponseObject.deInitializeClass();

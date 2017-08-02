@@ -6,7 +6,7 @@ package SageOneIntegration;
  */
 public final class SageOneDownloadDataWrapper {
     private String contentType;
-    private Integer contentLength;
+    private int contentLength = 0;
     private byte[] responseData;
     private String fileName;
     private boolean initialized = false;
@@ -14,6 +14,13 @@ public final class SageOneDownloadDataWrapper {
     public SageOneDownloadDataWrapper() {
         this.initialized = true;
     }
+    public SageOneDownloadDataWrapper(final String contentType, final byte[] responseData, final int contentLength) {
+        this.contentType = contentType;
+        this.responseData = responseData;
+        this.contentLength = contentLength;
+        this.initialized = true;
+    }
+
 
     public final String getContentType() {
         return (this.initialized) ? this.contentType : null;

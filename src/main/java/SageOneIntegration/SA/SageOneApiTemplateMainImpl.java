@@ -75,7 +75,7 @@ public abstract class SageOneApiTemplateMainImpl extends SetupClass implements S
     protected static final String SaveString = "Save?";
     protected static final String DownloadString = "Download";
     protected static final String UTF_8_STR = "UTF-8";
-    protected static final String DelReqSuffix = "?";
+    protected static final String QuestionSuffix = "?";
     protected static final String ODataFilter1 = "?$filter=";
     protected static final String ODataFilter2 = DeleteString + "?";
     protected static final String ODataFilter3 = " eq ";
@@ -129,6 +129,11 @@ public abstract class SageOneApiTemplateMainImpl extends SetupClass implements S
     protected static SageOneResponseObject deleteSageOneEntity(final int companyId,
                                                                final String endpointPlusQuery) {
         return SageOneCoreConnection.deleteSageOneEntity(companyId, endpointPlusQuery);
+    }
+
+    protected static SageOneResponseObject sageOneDownloadData(final int companyId,
+                                                           final String endpointPlusQuery) {
+        return SageOneCoreConnection.sageOneDownloadData(companyId, endpointPlusQuery);
     }
 
     @Override
@@ -211,14 +216,11 @@ public abstract class SageOneApiTemplateMainImpl extends SetupClass implements S
                 endpointQuery += GetString + ODataQueryTypeBasis;
             }
         } else if(mustBeDeleted) {
-            endpointQuery += DeleteString + FS + ODataQueryTypeBasis + DelReqSuffix;
+            endpointQuery += DeleteString + FS + ODataQueryTypeBasis + QuestionSuffix;
         } else if(mustBeSaved) {
             if(API_VERSION.equals("1.1.2")) {
                 if(entityType.equals(SageOneEntityType.V_1_1_2.ACCOUNTANT_TASK)){
                     endpointQuery += "UpdateTaskStatus?";
-                /*} else if(entityType.GetObject.getStringProperty().indexOf("Attachment") >= 0) {
-                    endpointQuery += FS + "Save" + FS;
-*/
                 } else {
                     endpointQuery += FS + SaveString;
                 }
@@ -226,7 +228,7 @@ public abstract class SageOneApiTemplateMainImpl extends SetupClass implements S
                 endpointQuery += GetString + ODataQueryTypeBasis;
             }
         } else if(mustBeDownloaded) {
-            endpointQuery += DownloadString + FS + ODataQueryTypeBasis;
+            endpointQuery += DownloadString + FS + ODataQueryTypeBasis + QuestionSuffix;
         }
         return endpointQuery;
     }

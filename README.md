@@ -1,4 +1,4 @@
-# sageOneApiLibrary-GLOBAL V2.1.3 (Early Beta)
+# sageOneApiLibrary-GLOBAL V2.1.6 (Early Beta)
 A library that contains pre-written code to connect and access the different SageOne Api's (currently only South Africa Api),
 it comes with a template for each nationality that makes use of these pre-written component code to access the defirrent SageOne api's,
 the template contains methods (mostly dynamic or generic) that a developer can use to build this library into his/her app. Compatible with java 1.6 and upwards.
@@ -20,7 +20,7 @@ search for ricomaster9000/sageOneApiLibrary-SA
 ``
 USER = ricomaster9000
 REPO/REPOSITORY = sageOneApiLibrary-GLOBAL
-TAG/VERSION = 2.13
+TAG/VERSION = 2.16
 ``
 
 To set up one must create a new instance of the SageOneApiConnector class, and in the constructor method one must pass in the NationalityType Enum value, it will then set up the instance to work with that nationality.
@@ -61,15 +61,17 @@ Gets the company list which was initialized with all the companies related to th
 SageOne Entities, all of them lies in the SageOneIntegration.<NationalityType>.<Version>SageOneApiEntities package, include them from here, these entity classes will especially be used to save/persist SageOne entities to the SageOne account, use the SageOneEntityType enum class (enum will be used as parameter for template method)
 ```
 
-### Template Methods <NationalityType> = NationalityType.name() -> the name of the enum (NationalityType.SA will be SA)
+### Template Methods
+#### <NationalityType> = NationalityType.name() -> the name of the enum (NationalityType.SA will be SA)
+#### <Version> = The version of the enum class to use in SageOneEntityType.{VERSION_ENUM_CLASS} (current one for SA for example is ".V_1_1_2")
 ```
 SageOne<NationalityType>.getCustomersByNameAndSurnameOrName(String companyName, String... customerNames) -> the second parameter can be one value or multiple values seperated by a comma
 ```
 ```
-SageOne<NationalityType>.getSageOneEntity(String companyName, SageOneEntityType entityName, int entityId) -> grabs one sageOne entity by its id for a certain company
+SageOne<NationalityType>.getSageOneEntity(String companyName, SageOneEntityType<Version> entityName, int entityId) -> grabs one sageOne entity by its id for a certain company
 ```
 ```
-SageOne<NationalityType>.saveSageOneEntity(String companyName, Object entityToSave) -> saves one SageOne entity by passing the company name and the SageOne entity object (look above to know where the SageOne entity classes/objects can be found), returns generated entity from SageOne Api as response.
+SageOne<NationalityType>.saveSageOneEntity(String companyName, Object entityToSave) -> saves one SageOne entity by passing the company name and the SageOne entity object (look above to know where the SageOne entity classes/objects can be found), returns generated entity from SageOne Api as response, Version for api will automatically be detected.
 ```
 ```
 SageOne<NationalityType>.getCustomers(final String companyName) -> grabs all customers for specified company name
@@ -78,19 +80,19 @@ SageOne<NationalityType>.getCustomers(final String companyName) -> grabs all cus
 SageOne<NationalityType>.getSupplierByName(final String Name) -> grabs a sage one supplier by name
 ```
 ```
-SageOne<NationalityType>.getEntityByPropertyValue(final String companyName, final SageOneEntityType sageOneEntityType,
+SageOne<NationalityType>.getEntityByPropertyValue(final String companyName, final SageOneEntityType<Version> sageOneEntityType,
                                             final String propertyName, final String propertyValue)
 
 -> returns an entity which contains the passed property value for the passed property name, if more than one entity is found, only one is returned
 ```
 ```
-SageOne<NationalityType>.getEntitiesByPropertyValue(final String companyName, final SageOneEntityType sageOneEntityType,
+SageOne<NationalityType>.getEntitiesByPropertyValue(final String companyName, final SageOneEntityType<Version> sageOneEntityType,
                                               final String propertyName, final String propertyValue)
 
 -> like above, but returns a list of entities
 ```
 ```
-SageOne<NationalityType>.searchEntitiesByAnyMatchedPropertyValues(final String companyName, final SageOneEntityType sageOneEntityType,
+SageOne<NationalityType>.searchEntitiesByAnyMatchedPropertyValues(final String companyName, final SageOneEntityType<Version> sageOneEntityType,
                                                             final String[] propertyNames, final String[] propertyValues)
 
 -> filter the sage one entity based on the SageOneEntityType parameter passed, pass the property names you want to filter
@@ -100,7 +102,7 @@ SageOne<NationalityType>.searchEntitiesByAnyMatchedPropertyValues(final String c
 ```
 ```
 SageOne<NationalityType>.searchEntitiesByAllMatchedPropertyValues(final String companyName,
-                                                            final SageOneEntityType sageOneEntityType,
+                                                            final SageOneEntityType<Version> sageOneEntityType,
                                                             final String[] propertyNames,
                                                             final String[] propertyValues)
 
@@ -111,21 +113,21 @@ SageOne<NationalityType>.searchEntitiesByAllMatchedPropertyValues(final String c
 ```
 ```
 SageOne<NationalityType>.searchEntitiesByAnyValues(final String companyName,
-                                             final SageOneEntityType sageOneEntityType,
+                                             final SageOneEntityType<Version> sageOneEntityType,
                                              final String... values)
 -> searches all the property names (if they are not a sageOneObject class and the relevant value is correct type of value,
    for example 'a' won't be used to grab values from a int type property name) of the sageOne entity which is determined
    in the SageOneEntityType parameter, note that multiple requests can be send, all values are used in all property names.
 ```
 ```
-SageOne<NationalityType>.deleteSageOneEntity(final String CompanyName, final SageOneEntityType sageOneEntityType,
+SageOne<NationalityType>.deleteSageOneEntity(final String CompanyName, final SageOneEntityType<Version> sageOneEntityType,
                     final Integer entityId)
 
 -> deletes the sage one entity based on the SageOneEntityType passed and with the entityId specified, note that not all
    entities are deletable. Returns a boolean response if the operation was successful or not
 ```
 ```
-SageOne<NationalityType>.deleteSageOneEntitiesByPropertyValue(final String companyName, final SageOneEntityType sageOneEntityType,
+SageOne<NationalityType>.deleteSageOneEntitiesByPropertyValue(final String companyName, final SageOneEntityType<Version> sageOneEntityType,
                                      final String propertyName, final String propertyValue)
 
 -> deletes the SageOneEntityType parameter entities based on a property name and its value, the entities will first be
@@ -133,9 +135,27 @@ SageOne<NationalityType>.deleteSageOneEntitiesByPropertyValue(final String compa
    by its id, note that not all entities are deletable. Returns a boolean response if the operation was successful or not
 ```
 ```
-SageOne<NationalityType>.getSageOneEntitiesByType(final String companyName, final SageOneEntityType sageOneEntityType)
+SageOne<NationalityType>.getSageOneEntitiesByType(final String companyName, final SageOneEntityType<Version> sageOneEntityType)
 
 -> gets all the entities by the entity type specified in the second parameter of this method, note that entities that
    cannot be grabbed, will not be grabbed and a error will be thrown if you do pass them as a parameter
+```
+```
+SageOne<NationalityType>.saveSageOneAttachment(final String companyName, final SageOneEntityType<Version> entityTypeToUse,
+                                               final Object objectTypeRelatedId, final SageOneUploadDataWrapper attchmentObject)
+
+-> saves a sageOne attachment for specified SageOneEntityType Parameter combined with its related identifier as the next
+   paremeter (can be string or numerical), the last paremeter is the actual information being uploaded which will be a
+   SageOneUploadDataWrapper instance, so,  and returns an attachment object which will contain the attachment UID which
+   is essential if you wish to grab/download the attachment later, returns null if operation fails.
+```
+```
+SageOne<NationalityType>.downloadSageOneEntity(final String companyName,
+                                               final String entityGlobalUniqueIdentifier,
+                                               final SageOneEntityType<Version> entity)
+
+-> gets a sageOne attachment for specified SageOneEntityType Parameter based on the attachment's global unique identifier,
+   which should not be duplicated, a SageOneDownloadDataWrapper will be returned as response and null will be returned
+   if operation failed.
 ```
 https://github.com/ricomaster9000/sageOneApiLibrary-SA/

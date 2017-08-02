@@ -10,6 +10,7 @@ import SageOneIntegration.SA.SageOneSA;
 import SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneAttachment;
 import SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneCustomer;
 import SageOneIntegration.SageOneApiConnector;
+import SageOneIntegration.SageOneDownloadDataWrapper;
 import SageOneIntegration.SageOneUploadDataWrapper;
 import org.apache.tika.io.IOUtils;
 import org.joda.time.DateTime;
@@ -38,7 +39,7 @@ public class Main {
 
                 properties.setProperty("sageOneApi.SA.clientUsername", "ricbus98@gmail.com");
                 properties.setProperty("sageOneApi.SA.clientPassword", "Sonnyabcd5678@");
-                properties.setProperty("sageOneApi.SA.apiKey", "");
+                properties.setProperty("sageOneApi.SA.apiKey", "71A42541-A543-4164-8CBA-5E0F0602B141");
 
                 sageOneApiConnector.setupSageOneApi(properties);
                 SageOneSA sageOneSATemplate = sageOneApiConnector.getTemplate();
@@ -99,12 +100,12 @@ public class Main {
                                 SageOneEntityType.V_1_1_2.ACCOUNT_NOTE_ATTACHMENT, saveAccountNote.getId(), fileToUpload);
 
 
-                                List<SageOneAttachment> sageOneGrabbedAttachments =
-                                sageOneSATemplate.downloadSageOneEntities("rotor5",
+                                SageOneDownloadDataWrapper sageOneGrabbedAttachment =
+                                sageOneSATemplate.downloadSageOneEntity("rotor5",
                                 attchmentSaved.getAttachmentUID().toString(),
                                 SageOneEntityType.V_1_1_2.ACCOUNT_NOTE_ATTACHMENT);
 
-                                System.out.println(sageOneGrabbedAttachments.size());
+                                System.out.println(sageOneGrabbedAttachment.getContentLength());
 
                         } catch(FileNotFoundException e) {
                                 e.printStackTrace();
