@@ -40,11 +40,11 @@ Spring-support (.yml and .properties files) -> You can now also initialize it wi
 sageOneApi.<NationalityType>.clientUsername = 'your Sage One username'
 sageOneApi.<NationalityType>.clientPassword = 'your Sage One Password'
 sageOneApi.<NationalityType>.apiKey = 'your Sage One Api Key' (don't include the brackets, it gets added automatically)
-sageOneApi.<NationalityType>.apiUrl = 'base url for api call' (default is 'https://accounting.sageone.co.za')
-sageOneApi.<NationalityType>.apiVersion = 'value' (default is 1.1.2)
-sageOneApi.<NationalityType>.requestLimitDay = 'value' (default is 6000)
-sageOneApi.<NationalityType>.requestLimitHour = 'value' (default is 250)
-sageOneApi.<NationalityType>.requestResultLimit = 'value' (default is 100)
+sageOneApi.<NationalityType>.apiUrl = 'base url for api call' (default is 'https://accounting.sageone.co.za' for SA)
+sageOneApi.<NationalityType>.apiVersion = 'value' (default is 1.1.2 for SA)
+sageOneApi.<NationalityType>.requestLimitDay = 'value' (default is 6000 for SA)
+sageOneApi.<NationalityType>.requestLimitHour = 'value' (default is 250 for SA)
+sageOneApi.<NationalityType>.requestResultLimit = 'value' (default is 100 for SA)
 sageOneApi.<NationalityType>.requestTimeout = 'value' (default is 30000(30 seconds))
 sageOneApi.<NationalityType>.requestSocketTimeout = 'value' (default is 30000(30 seconds)) ->
 ```
