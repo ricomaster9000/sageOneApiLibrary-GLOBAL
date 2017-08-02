@@ -15,7 +15,7 @@ the template contains methods (mostly dynamic or generic) that a developer can u
 ### HOW TO USE
 
 add as dependency by using jitpack.io, go to this link to see how https://jitpack.io/
-search for ricomaster9000/sageOneApiLibrary-SA
+search for ricomaster9000/sageOneApiLibrary-GLOBAL
 
 ``
 USER = ricomaster9000
@@ -159,4 +159,4 @@ SageOne<NationalityType>.downloadSageOneEntity(final String companyName,
    which should not be duplicated, a SageOneDownloadDataWrapper will be returned as response and null will be returned
    if operation failed.
 ```
-https://github.com/ricomaster9000/sageOneApiLibrary-SA/
+https://github.com/ricomaster9000/sageOneApiLibrary-GLOBAL
