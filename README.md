@@ -51,7 +51,7 @@ sageOneApi.<NationalityType>.requestSocketTimeout = 'value' (default is 30000(30
 ### important classes/methods you should use
 
 ```
-SageOneEntityType enum class holder -> Every Nationality has one, for instance SageOneEntityType class for SA will be SageOneEntityTypeSA, use this primarily as a parameter for template methods, (currently only about 30-40% of the sage one entities is supported for SA, will add more through time)
+SageOneEntityType enum class holder -> Every Nationality has one, for instance SageOneEntityType class for SA will be SageOneIntegration.SA.SageOneEntityType.{VERSION}, use this primarily as a parameter for template methods, (currently only about 30-40% of the sage one entities is supported for SA, will add more through time)
 ```
 ```
 SageOneIntegration.<NationalityType>.SageOneConstants.getSageOneApiCompanyList() Map variable ->
