@@ -15,7 +15,7 @@ the template contains methods (mostly dynamic or generic) that a developer can u
 ### HOW TO USE
 
 add as dependency by using jitpack.io, go to this link to see how https://jitpack.io/
-search for ricomaster9000/sageOneApiLibrary-SA
+search for ricomaster9000/sageOneApiLibrary-GLOBAL
 
 ``
 USER = ricomaster9000
@@ -40,18 +40,18 @@ Spring-support (.yml and .properties files) -> You can now also initialize it wi
 sageOneApi.<NationalityType>.clientUsername = 'your Sage One username'
 sageOneApi.<NationalityType>.clientPassword = 'your Sage One Password'
 sageOneApi.<NationalityType>.apiKey = 'your Sage One Api Key' (don't include the brackets, it gets added automatically)
-sageOneApi.<NationalityType>.apiUrl = 'base url for api call' (default is 'https://accounting.sageone.co.za')
-sageOneApi.<NationalityType>.apiVersion = 'value' (default is 1.1.2)
-sageOneApi.<NationalityType>.requestLimitDay = 'value' (default is 6000)
-sageOneApi.<NationalityType>.requestLimitHour = 'value' (default is 250)
-sageOneApi.<NationalityType>.requestResultLimit = 'value' (default is 100)
+sageOneApi.<NationalityType>.apiUrl = 'base url for api call' (default is 'https://accounting.sageone.co.za' for SA)
+sageOneApi.<NationalityType>.apiVersion = 'value' (default is 1.1.2 for SA)
+sageOneApi.<NationalityType>.requestLimitDay = 'value' (default is 6000 for SA)
+sageOneApi.<NationalityType>.requestLimitHour = 'value' (default is 250 for SA)
+sageOneApi.<NationalityType>.requestResultLimit = 'value' (default is 100 for SA)
 sageOneApi.<NationalityType>.requestTimeout = 'value' (default is 30000(30 seconds))
 sageOneApi.<NationalityType>.requestSocketTimeout = 'value' (default is 30000(30 seconds)) ->
 ```
 ### important classes/methods you should use
 
 ```
-SageOneEntityType enum class holder -> Every Nationality has one, for instance SageOneEntityType class for SA will be SageOneEntityTypeSA, use this primarily as a parameter for template methods, (currently only about 30-40% of the sage one entities is supported for SA, will add more through time)
+SageOneEntityType enum class holder -> Every Nationality has one, for instance SageOneEntityType class for SA will be SageOneIntegration.SA.SageOneEntityType.{VERSION}, use this primarily as a parameter for template methods, (currently only about 30-40% of the sage one entities is supported for SA, will add more through time)
 ```
 ```
 SageOneIntegration.<NationalityType>.SageOneConstants.getSageOneApiCompanyList() Map variable ->
@@ -159,4 +159,4 @@ SageOne<NationalityType>.downloadSageOneEntity(final String companyName,
    which should not be duplicated, a SageOneDownloadDataWrapper will be returned as response and null will be returned
    if operation failed.
 ```
-https://github.com/ricomaster9000/sageOneApiLibrary-SA/
+https://github.com/ricomaster9000/sageOneApiLibrary-GLOBAL
