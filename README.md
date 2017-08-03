@@ -63,8 +63,8 @@ SageOne Entities, all of them lies in the SageOneIntegration.<NationalityType>.<
 
 ### Template Methods
 #### save method without id specified is a creation of new entity, if id is specified however then entity is edited
-#### <NationalityType> = NationalityType.name() -> the name of the enum (NationalityType.SA will be SA)
-#### <Version> = The version of the enum class to use in SageOneEntityType.{VERSION_ENUM_CLASS} (current one for SA for example is ".V_1_1_2")
+#### <"NationalityType"> (ignore double quotes) = NationalityType.name() -> the name of the enum (NationalityType.SA will be SA)
+#### <"Version"> (ignore double quotes) = The version of the enum class to use in SageOneEntityType.{VERSION_ENUM_CLASS} (current one for SA for example is ".V_1_1_2")
 ```
 SageOne<NationalityType>.getCustomersByNameAndSurnameOrName(String companyName, String... customerNames) -> the second parameter can be one value or multiple values seperated by a comma
 ```
