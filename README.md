@@ -13,6 +13,8 @@ the template contains methods (mostly dynamic or generic) that a developer can u
 #### Code is set in place to prevent you from getting blocked by the API hosting server by checking how many times you make a request based on the current day and hour.
 
 ### HOW TO USE
+#### **<NationalityType**> = NationalityType.name() -> the name of the enum (NationalityType.SA will be SA)
+#### **<Version**> = The version of the enum class to use in SageOneEntityType.{VERSION_ENUM_CLASS} (current one for SA for example is ".V_1_1_2")
 
 add as dependency by using jitpack.io, go to this link to see how https://jitpack.io/
 search for ricomaster9000/sageOneApiLibrary-GLOBAL
@@ -29,12 +31,12 @@ this template will then be used to do all operations, you can also include it on
 the NationalityType enum you speicfied when you constructed a new instance with SageOneApiConnector class, you can initialize multiple SageOneApiConnector class
 instances which will work with different nationalities but never for the same
 
-Please run the method SageOne??.setupSageOneApi(Properties properties) to initialize this library's code with your App's Properties class object (usually System.getProperties()) and make sure the below first 3 fields/properties appear in your properties file and have the required (also correct) assigned values, the rest have default values but can be overriden.
+Please run the method SageOne<NationalityType>.setupSageOneApi(Properties properties) to initialize this library's code with your App's Properties class object (usually System.getProperties()) and make sure the below first 3 fields/properties appear in your properties file and have the required (also correct) assigned values, the rest have default values but can be overriden.
 
-You can now also initialize it with a Map<String, String> parameter "SageOne??.setupSageOneApi.setupSageOneApi(Map<String, String> properties)".
+You can now also initialize it with a Map<String, String> parameter "SageOne<NationalityType>.setupSageOneApi.setupSageOneApi(Map<String, String> properties)".
 
 Spring-support (.yml and .properties files) -> You can now also initialize it with Spring's Environment object(org.springframework.core.env.Environment), like this :
-"SageOne??.setupSageOneApi(Environment properties)"
+"SageOne<NationalityType>.setupSageOneApi(Environment properties)"
 
 ```
 sageOneApi.<NationalityType>.clientUsername = 'your Sage One username'
@@ -63,8 +65,6 @@ SageOne Entities, all of them lies in the SageOneIntegration.<NationalityType>.<
 
 ### Template Methods
 #### save method without id specified is a creation of new entity, if id is specified however then entity is edited
-#### <"NationalityType"> (ignore double quotes) = NationalityType.name() -> the name of the enum (NationalityType.SA will be SA)
-#### <"Version"> (ignore double quotes) = The version of the enum class to use in SageOneEntityType.{VERSION_ENUM_CLASS} (current one for SA for example is ".V_1_1_2")
 ```
 SageOne<NationalityType>.getCustomersByNameAndSurnameOrName(String companyName, String... customerNames) -> the second parameter can be one value or multiple values seperated by a comma
 ```
