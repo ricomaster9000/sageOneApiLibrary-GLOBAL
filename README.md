@@ -17,7 +17,7 @@ the template contains methods (mostly dynamic or generic) that a developer can u
 #### **<Version**> = The version of the enum class to use in SageOneEntityType.{VERSION_ENUM_CLASS} (current one for SA for example is ".V_1_1_2")
 
 
-#### A tester package is included in the main branch, not in released instances, use it as an example of how to use this library.
+#### A tester package is included in the master branch (inside src\main\testPackage), not in released instances, use it as an example of how to use this library.
 
 add as dependency by using jitpack.io, go to this link to see how https://jitpack.io/
 search for ricomaster9000/sageOneApiLibrary-GLOBAL
