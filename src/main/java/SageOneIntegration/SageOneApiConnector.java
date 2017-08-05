@@ -19,7 +19,6 @@
 package SageOneIntegration;
 
 
-import SageOneIntegration.SA.SageOneApiTemplateMainImpl;
 import SageOneIntegration.SA.SageOneSA;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -36,7 +35,6 @@ import static SageOneIntegration.NationalityType.SA;
 public final class SageOneApiConnector {
 	private static final long serialVersionUID = 1L;
 	public static CloseableHttpClient client;
-	private CloseableHttpResponse responseFromRequest;
 	private NationalityType nationality;
 	public static ObjectMapper objectMapper = new ObjectMapper();
 	private SageOneSA templateSA;

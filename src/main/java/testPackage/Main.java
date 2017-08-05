@@ -26,9 +26,7 @@ import java.util.Properties;
 import java.util.UUID;
 import java.util.concurrent.Callable;
 
-/**
- * Created by Ricardo on 2017-07-05.
- */
+
 public class Main {
         private static SageOneApiConnector sageOneApiConnector = new SageOneApiConnector(NationalityType.SA);
 
@@ -39,10 +37,14 @@ public class Main {
 
                 properties.setProperty("sageOneApi.SA.clientUsername", "ricbus98@gmail.com");
                 properties.setProperty("sageOneApi.SA.clientPassword", "Sonnyabcd5678@");
-                properties.setProperty("sageOneApi.SA.apiKey", "");
+                properties.setProperty("sageOneApi.SA.apiKey", "71A42541-A543-4164-8CBA-5E0F0602B141");
 
                 sageOneApiConnector.setupSageOneApi(properties);
                 SageOneSA sageOneSATemplate = sageOneApiConnector.getTemplate();
+
+                List<SageOneCustomer> customerListLinearTest = sageOneSATemplate.getCustomers("rotor5");
+
+                System.out.println(customerListLinearTest.size());
 
                 List<SageOneCustomer> customers = sageOneSATemplate.getSageOneEntitiesByType("rotor5",
                 SageOneEntityType.V_1_1_2.CUSTOMER);

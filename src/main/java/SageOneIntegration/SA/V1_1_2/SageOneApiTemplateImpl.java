@@ -127,6 +127,135 @@ public final class SageOneApiTemplateImpl extends SageOneApiTemplateMainImpl imp
     }
 
     @Override
+    public final List<SageOneCustomer> getCustomersByNameAndSurnameOrName(final String companyName,
+                                                                          final String... customerNames) {
+        boolean response = true;
+        SageOneResponseObject sageOneResponseObject;
+        List<SageOneCustomer> sageOneCustomersGrabbed = new ArrayList<SageOneCustomer>();
+        String endpointQuery = checkAndManageEndPointQueryIfNeeded(SageOneEntityType.V_1_1_2.CUSTOMER.GetObject.getStringProperty(),
+                SageOneEntityType.V_1_1_2.CUSTOMER, false, ODataFilter18, false,
+                false, false, true);
+
+        try {
+            final Integer companyId = SageOneIntegration.SA.SageOneConstants.getSageOneApiCompanyList().get(companyName);
+
+            if(companyId == null) {
+                response = false;
+            }
+
+            if(response) {
+                for (String customerName : customerNames) {
+                    sageOneResponseObject = this.sageOneGrabData(companyId, endpointQuery +
+                                    URLEncoder.encode(ODataFilter19 + customerName + ODataFilter4, UTF_8_STR),
+                            SageOneCustomer.class, true);
+
+                    if (sageOneResponseObject.getSuccess()) {
+                        if (sageOneResponseObject.getTotalResponseObjects() <= 0) {
+                            sageOneResponseObject = this.sageOneGrabData(companyId, endpointQuery +
+                                    ODataFilter5 + "Name,'" + customerName + "')", SageOneCustomer.class, true);
+                        }
+
+                        sageOneCustomersGrabbed.addAll((sageOneResponseObject.getResponseObject() != null) ?
+                                (List<SageOneCustomer>) sageOneResponseObject.getResponseObject() : new ArrayList<SageOneCustomer>());
+                    } else {
+                        System.out.println(sageOneResponseObject.getResponseMessage());
+                        break;
+                    }
+                }
+            } else {
+                sageOneCustomersGrabbed = null;
+                System.out.println(sageOneTemplateError2);
+            }
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return sageOneCustomersGrabbed;
+    }
+
+    @Override
+    public SageOneSupplier getSupplierByName(final String companyName, final String name) {
+        boolean response = true;
+        SageOneResponseObject sageOneResponseObject;
+        List<SageOneSupplier> sageOneCustomersGrabbed = new ArrayList<SageOneSupplier>();
+
+        String endpointQuery = checkAndManageEndPointQueryIfNeeded(SageOneEntityType.V_1_1_2.SUPPLIER.GetObject.getStringProperty(),
+                SageOneEntityType.V_1_1_2.SUPPLIER, false, ODataFilter18, false,
+                false, false, true);
+
+        try {
+            final Integer companyId = SageOneIntegration.SA.SageOneConstants.getSageOneApiCompanyList().get(companyName);
+
+            if(companyId == null) {
+                response = false;
+            }
+
+            if(response) {
+                sageOneResponseObject = this.sageOneGrabData(companyId,
+                        endpointQuery + URLEncoder.encode("Name eq " + "'" + name + "'", UTF_8_STR),
+                        SageOneSupplier.class, true);
+
+                if (sageOneResponseObject.getSuccess()) {
+                    if (sageOneResponseObject.getTotalResponseObjects() <= 0) {
+
+                        sageOneResponseObject = this.sageOneGrabData(companyId,
+                                endpointQuery + "startswith(Name,'" + name + "')", SageOneSupplier.class,
+                                true);
+                    }
+
+                    sageOneCustomersGrabbed.addAll((sageOneResponseObject.getResponseObject() != null) ?
+                            (List<SageOneSupplier>) sageOneResponseObject.getResponseObject() :
+                            new ArrayList<SageOneSupplier>());
+                } else {
+                    System.out.println(sageOneResponseObject.getResponseMessage());
+                }
+            } else {
+                sageOneCustomersGrabbed = (sageOneCustomersGrabbed.size() <= 0) ? new ArrayList<SageOneSupplier>() :
+                        sageOneCustomersGrabbed;
+                System.out.println(sageOneTemplateError2);
+            }
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return (sageOneCustomersGrabbed.size() > 0) ? sageOneCustomersGrabbed.get(0) : null;
+
+    }
+
+    @Override
+    public final List<SageOneCustomer> getCustomers(final String companyName) {
+        boolean response = true;
+        SageOneResponseObject sageOneResponseObject;
+        List<SageOneCustomer> sageOneCustomersGrabbed = new ArrayList<SageOneCustomer>();
+
+        String endpointQuery = checkAndManageEndPointQueryIfNeeded(SageOneEntityType.V_1_1_2.CUSTOMER.GetObject.getStringProperty(),
+                SageOneEntityType.V_1_1_2.CUSTOMER, false, "", false,
+                false, false, true);
+
+
+        final Integer companyId = SageOneIntegration.SA.SageOneConstants.getSageOneApiCompanyList().get(companyName);
+
+        if(companyId == null) {
+            response = false;
+        }
+
+        if(response) {
+            sageOneResponseObject = this.sageOneGrabData(companyId, endpointQuery,
+                    SageOneCustomer.class, true);
+            SageOneResponseObject.deInitializeClass();
+
+            if (sageOneResponseObject.getSuccess()) {
+                sageOneCustomersGrabbed.addAll((sageOneResponseObject.getResponseObject() != null) ?
+                        (List<SageOneCustomer>) sageOneResponseObject.getResponseObject() : new ArrayList<SageOneCustomer>());
+            } else {
+                System.out.println(sageOneResponseObject.getResponseMessage());
+            }
+        } else {
+            sageOneCustomersGrabbed = (sageOneCustomersGrabbed.size() <= 0) ? new ArrayList<SageOneCustomer>() : sageOneCustomersGrabbed;
+            System.out.println(sageOneTemplateError2);
+        }
+        return sageOneCustomersGrabbed;
+    }
+
+    @Override
     public final <T> T getEntityByPropertyValue(final String companyName, final SageOneEntityType.V_1_1_2 sageOneEntityType,
                                                  final String propertyName, final String propertyValue) {
         boolean response = true;

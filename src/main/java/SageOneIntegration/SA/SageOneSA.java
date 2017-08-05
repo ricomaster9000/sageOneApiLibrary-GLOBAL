@@ -18,8 +18,7 @@
  **/
 package SageOneIntegration.SA;
 
-import SageOneIntegration.SA.ReusableClasses.SageOneHttpResponseMessage;
-import SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneAttachment;
+
 import SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneCustomer;
 import SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneSupplier;
 import SageOneIntegration.SageOneDownloadDataWrapper;
