@@ -131,7 +131,7 @@ SageOne<NationalityType>.deleteSageOneEntity(final String CompanyName, final Sag
 SageOne<NationalityType>.deleteSageOneEntitiesByPropertyValue(final String companyName, final SageOneEntityType<Version> sageOneEntityType,
                                      final String propertyName, final String propertyValue)
 
--> deletes the SageOneEntityType parameter entities based on a property name and its value, the entities will first be
+-> deletes the SageOneEntityType parameter entity based on a property name and its value, entities will first be
    grabbed based on the property name and property value, then the grabbed entities will be deleted one by one by
    by its id, note that not all entities are deletable. Returns a boolean response if the operation was successful or not
 ```
