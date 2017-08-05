@@ -147,8 +147,8 @@ SageOne<NationalityType>.saveSageOneAttachment(final String companyName, final S
 
 -> saves a sageOne attachment for specified SageOneEntityType Parameter combined with its related identifier as the next
    paremeter (can be string or numerical), the last paremeter is the actual information being uploaded which will be a
-   SageOneUploadDataWrapper instance, so,  and returns an attachment object which will contain the attachment UID which
-   is essential if you wish to grab/download the attachment later, returns null if operation fails.
+   SageOneUploadDataWrapper instance, if all went well an SageOneAttachment object which contains the attachment UID is returned which
+   is essential if you wish to grab/download the attachment later, otherwise returns null if operation fails.
 ```
 ```
 SageOne<NationalityType>.downloadSageOneEntity(final String companyName,
