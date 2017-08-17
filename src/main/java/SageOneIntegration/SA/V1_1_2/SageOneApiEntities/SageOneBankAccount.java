@@ -75,7 +75,7 @@ public final class SageOneBankAccount {
     }
 
     public static class Builder {
-        private Integer ID;
+        private Integer ID = 0;
         private String Name;
         private String BankName;
         private String AccountNumber;

@@ -31,10 +31,23 @@ public final class SageOneRequestEntitySettings {
 
     public SageOneRequestEntitySettings(final String stringProperty,
                                         final Class<?> classProperty,
+                                        final boolean canBeUsedInRequest,
+                                        final boolean canBeDeleted) {
+        this.stringProperty = stringProperty;
+        this.classProperty = classProperty;
+        this.canBeUsedInRequest = canBeUsedInRequest;
+        this.canBeDeleted = canBeDeleted;
+        this.initialized = true;
+    }
+
+    public SageOneRequestEntitySettings(final String stringProperty,
+                                        final Class<?> classProperty,
+                                        final boolean canBeUsedInRequest,
                                         final boolean canBeDeleted,
                                         final boolean canBeSaved) {
         this.stringProperty = stringProperty;
         this.classProperty = classProperty;
+        this.canBeUsedInRequest = canBeUsedInRequest;
         this.canBeDeleted = canBeDeleted;
         this.canBeSaved = canBeSaved;
         this.initialized = true;
@@ -42,11 +55,13 @@ public final class SageOneRequestEntitySettings {
 
     public SageOneRequestEntitySettings(final String stringProperty,
                                         final Class<?> classProperty,
+                                        final boolean canBeUsedInRequest,
                                         final boolean canBeDeleted,
                                         final boolean canBeSaved,
                                         final boolean canBeGrabbedById) {
         this.stringProperty = stringProperty;
         this.classProperty = classProperty;
+        this.canBeUsedInRequest = canBeUsedInRequest;
         this.canBeDeleted = canBeDeleted;
         this.canBeSaved = canBeSaved;
         this.canBeGrabbedById = canBeGrabbedById;
@@ -55,12 +70,14 @@ public final class SageOneRequestEntitySettings {
 
     public SageOneRequestEntitySettings(final String stringProperty,
                                         final Class<?> classProperty,
+                                        final boolean canBeUsedInRequest,
                                         final boolean canBeDeleted,
                                         final boolean canBeSaved,
                                         final boolean canBeGrabbedById,
                                         final boolean canBeGrabbedWithoutId) {
         this.stringProperty = stringProperty;
         this.classProperty = classProperty;
+        this.canBeUsedInRequest = canBeUsedInRequest;
         this.canBeDeleted = canBeDeleted;
         this.canBeSaved = canBeSaved;
         this.canBeGrabbedById = canBeGrabbedById;
@@ -70,6 +87,7 @@ public final class SageOneRequestEntitySettings {
 
     public SageOneRequestEntitySettings(final String stringProperty,
                                         final Class<?> classProperty,
+                                        final boolean canBeUsedInRequest,
                                         final boolean canBeDeleted,
                                         final boolean canBeSaved,
                                         final boolean canBeGrabbedById,
@@ -77,6 +95,7 @@ public final class SageOneRequestEntitySettings {
                                         final boolean canBeDownloaded) {
         this.stringProperty = stringProperty;
         this.classProperty = classProperty;
+        this.canBeUsedInRequest = canBeUsedInRequest;
         this.canBeDeleted = canBeDeleted;
         this.canBeSaved = canBeSaved;
         this.canBeGrabbedById = canBeGrabbedById;
@@ -132,6 +151,14 @@ public final class SageOneRequestEntitySettings {
 
     public final void setCanBeGrabbedById(final boolean canBeGrabbedById) {
         this.canBeGrabbedById = (this.initialized) ? canBeGrabbedById : this.canBeGrabbedById;
+    }
+
+    public final boolean getCanBeGrabbedWithoutId() {
+        return (this.initialized) ? this.canBeGrabbedWithoutId : null;
+    }
+
+    public final void setCanBeGrabbedWithoutId(final boolean canBeGrabbedWithoutId) {
+        this.canBeGrabbedWithoutId = (this.initialized) ? canBeGrabbedWithoutId : this.canBeGrabbedWithoutId;
     }
 
     public final boolean getCanBeDownloaded() {

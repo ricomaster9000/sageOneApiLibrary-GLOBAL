@@ -29,15 +29,15 @@ public class SageOneEntityType {
 
     public enum V_1_1_2 {
         ATTACHMENT(null, SageOneAttachment.class, false),
-        ACCOUNTANT_TASK("AccountantTask/", SageOneAccountantTask.class, true, false),
-        ACCOUNT_BALANCE("AccountBalance/", SageOneAccountBalance.class, false, false, false),
+        ACCOUNTANT_TASK("AccountantTask/", SageOneAccountantTask.class, true, true, false),
+        ACCOUNT_BALANCE("AccountBalance/", SageOneAccountBalance.class, true, false, false, false),
         ADDITIONAL_ITEM_PRICE("AdditionalItemPrice/", SageOneAdditionalItemPrice.class),
         ADDITIONAL_PRICE_LIST("AdditionalPriceList/", SageOneAdditionalPriceList.class),
         ACCOUNT("Account/", SageOneAccount.class),
         ACCOUNT_NOTE("AccountNote/", SageOneAccountNote.class),
-        ACCOUNT_NOTE_ATTACHMENT("AccountNoteAttachment/", SageOneAccountNoteAttachment.class, true, true, true, false, true),
-        ACCOUNTANT_NOTE("AccountantNote/", SageOneAccountantNote.class, true, false),
-        ACCOUNTANT_TASK_RECURRENCE("AccountantTaskRecurrence/", SageOneAccountantTaskRecurrence.class, true, false),
+        ACCOUNT_NOTE_ATTACHMENT("AccountNoteAttachment/", SageOneAccountNoteAttachment.class, true, true, true, true, false, true),
+        ACCOUNTANT_NOTE("AccountantNote/", SageOneAccountantNote.class, true, true, false), //Fix from here
+        ACCOUNTANT_TASK_RECURRENCE("AccountantTaskRecurrence/", SageOneAccountantTaskRecurrence.class, true, true, false),
         ACCOUNT_CATEGORY("AccountCategory/", SageOneAccountCategory.class, false, false),
 
         BANK_ACCOUNT("BankAccount/", SageOneBankAccount.class),
@@ -79,33 +79,41 @@ public class SageOneEntityType {
             this.GetObject = new SageOneRequestEntitySettings(entityGetReqParamName, entityReqParamClass);
         }
 
-        V_1_1_2(final String entityGetReqParamName, final Class<?> entityReqParamClass, final boolean entityCanBeDeleted) {
-            this.GetObject = new SageOneRequestEntitySettings(entityGetReqParamName, entityReqParamClass, entityCanBeDeleted);
+        V_1_1_2(final String entityGetReqParamName, final Class<?> entityReqParamClass, final boolean entityCanBeUsedInRequest) {
+            this.GetObject = new SageOneRequestEntitySettings(entityGetReqParamName, entityReqParamClass, entityCanBeUsedInRequest);
         }
 
-        V_1_1_2(final String entityGetReqParamName, final Class<?> entityReqParamClass, final boolean entityCanBeDeleted,
-                final boolean entityCanBeSaved) {
-            this.GetObject = new SageOneRequestEntitySettings(entityGetReqParamName, entityReqParamClass, entityCanBeDeleted, entityCanBeSaved);
+        V_1_1_2(final String entityGetReqParamName, final Class<?> entityReqParamClass, final boolean entityCanBeUsedInRequest,
+                final boolean entityCanBeDeleted) {
+            this.GetObject = new SageOneRequestEntitySettings(entityGetReqParamName, entityReqParamClass, entityCanBeUsedInRequest, entityCanBeDeleted);
         }
 
-        V_1_1_2(final String entityGetReqParamName, final Class<?> entityReqParamClass, final boolean entityCanBeDeleted,
-                final boolean entityCanBeSaved, final boolean entityCanBeGrabbedByID) {
+        V_1_1_2(final String entityGetReqParamName, final Class<?> entityReqParamClass, final boolean entityCanBeUsedInRequest,
+                boolean entityCanBeDeleted, boolean entityCanBeSaved) {
             this.GetObject = new SageOneRequestEntitySettings(entityGetReqParamName, entityReqParamClass,
-                    entityCanBeDeleted, entityCanBeSaved, entityCanBeGrabbedByID);
+                    entityCanBeUsedInRequest, entityCanBeDeleted, entityCanBeSaved);
         }
 
-        V_1_1_2(final String entityGetReqParamName, final Class<?> entityReqParamClass, final boolean entityCanBeDeleted,
-                final boolean entityCanBeSaved, final boolean entityCanBeGrabbedByID, final boolean entityCanBeGrabbedWithoutId) {
+        V_1_1_2(final String entityGetReqParamName, final Class<?> entityReqParamClass, final boolean entityCanBeUsedInRequest,
+                final boolean entityCanBeDeleted, final boolean entityCanBeSaved, final boolean entityCanBeGrabbedByID) {
             this.GetObject = new SageOneRequestEntitySettings(entityGetReqParamName, entityReqParamClass,
-                    entityCanBeDeleted, entityCanBeSaved, entityCanBeGrabbedByID, entityCanBeGrabbedWithoutId);
+                    entityCanBeDeleted, entityCanBeUsedInRequest, entityCanBeSaved, entityCanBeGrabbedByID);
         }
 
-        V_1_1_2(final String entityGetReqParamName, final Class<?> entityReqParamClass, final boolean entityCanBeDeleted,
-                final boolean entityCanBeSaved, final boolean entityCanBeGrabbedByID, final boolean entityCanBeGrabbedWithoutId,
-                final boolean entityCanBeDownloaded) {
+        V_1_1_2(final String entityGetReqParamName, final Class<?> entityReqParamClass, final boolean entityCanBeUsedInRequest,
+                final boolean entityCanBeDeleted, final boolean entityCanBeSaved, final boolean entityCanBeGrabbedByID,
+                final boolean entityCanBeGrabbedWithoutId) {
             this.GetObject = new SageOneRequestEntitySettings(entityGetReqParamName, entityReqParamClass,
-                    entityCanBeDeleted, entityCanBeSaved, entityCanBeGrabbedByID, entityCanBeGrabbedWithoutId,
-                    entityCanBeDownloaded);
+                    entityCanBeUsedInRequest, entityCanBeDeleted, entityCanBeSaved, entityCanBeGrabbedByID,
+                    entityCanBeGrabbedWithoutId);
+        }
+
+        V_1_1_2(final String entityGetReqParamName, final Class<?> entityReqParamClass, final boolean entityCanBeUsedInRequest,
+                final boolean entityCanBeDeleted, final boolean entityCanBeSaved, final boolean entityCanBeGrabbedByID,
+                final boolean entityCanBeGrabbedWithoutId, final boolean entityCanBeDownloaded) {
+            this.GetObject = new SageOneRequestEntitySettings(entityGetReqParamName, entityReqParamClass,
+                    entityCanBeUsedInRequest, entityCanBeDeleted, entityCanBeSaved, entityCanBeGrabbedByID,
+                    entityCanBeGrabbedWithoutId, entityCanBeDownloaded);
         }
     }
 
@@ -117,15 +125,6 @@ public class SageOneEntityType {
 
         V_1_1_1(final String entityGetReqParamName, final Class<?> entityReqParamClass) {
             this.GetObject = new SageOneRequestEntitySettings(entityGetReqParamName, entityReqParamClass);
-        }
-
-        V_1_1_1(final String entityGetReqParamName, final Class<?> entityReqParamClass, final boolean entityCanBeDeleted) {
-            this.GetObject = new SageOneRequestEntitySettings(entityGetReqParamName, entityReqParamClass, entityCanBeDeleted);
-        }
-
-        V_1_1_1(final String entityGetReqParamName, final Class<?> entityReqParamClass, final boolean entityCanBeDeleted,
-                final boolean entityCanBeSaved) {
-            this.GetObject = new SageOneRequestEntitySettings(entityGetReqParamName, entityReqParamClass, entityCanBeDeleted, entityCanBeSaved);
         }
     }
 }

@@ -158,7 +158,7 @@ public final class SageOneCustomer {
    }
 
    public static class Builder {
-      private Integer ID;
+      private Integer ID = 0;
       private String Name;
       private SageOneCustomerCategory Category;
       private Integer SalesRepresentativeId;
@@ -171,8 +171,8 @@ public final class SageOneCustomer {
       private String Email;
       private String WebAddress;
       private Boolean Active;
-      private Double Balance;
-      private Double CreditLimit;
+      private double Balance;
+      private double CreditLimit;
       private Integer CommunicationMethod;
       private String PostalAddress01 = "";
       private String PostalAddress02 = "";
