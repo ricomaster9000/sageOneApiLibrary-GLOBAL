@@ -58,8 +58,8 @@ sageOneApi.<NationalityType>.requestResultLimit = 'value' (default is 100 for SA
 sageOneApi.<NationalityType>.requestTimeout = 'value' (default is 30000(30 seconds))
 sageOneApi.<NationalityType>.requestSocketTimeout = 'value' (default is 30000(30 seconds)) ->
 ```
-#### 3  <div id="ICMYSUOKA" style="visibility:hidden"></div>
-### important classes/methods you should use
+#### ________________________________  <div id="ICMYSUOKA" style="visibility:hidden"></div>
+### 3. important classes/methods you should use
 
 ```
 SageOneEntityType enum class holder -> Every Nationality has one, for instance SageOneEntityType class for SA will be SageOneIntegration.SA.SageOneEntityType.{VERSION}, use this primarily as a parameter for template methods, (currently only about 30-40% of the sage one entities is supported for SA, will add more through time)
@@ -71,8 +71,8 @@ Gets the company list which was initialized with all the companies related to th
 ```
 SageOne Entities, all of them lies in the SageOneIntegration.<NationalityType>.<Version>SageOneApiEntities package, include them from here, these entity classes will especially be used to save/persist SageOne entities to the SageOne account, use the SageOneEntityType enum class (enum will be used as parameter for template method)
 ```
-#### 4  <div id="TemplateMethods" style="visibility:hidden"></div>
-###  Template Methods
+#### _____________________  <div id="TemplateMethods" style="visibility:hidden"></div>
+### 4. Template Methods
 
 #### save method without id specified is a creation of new entity, if id is specified however then entity is edited
 ```
