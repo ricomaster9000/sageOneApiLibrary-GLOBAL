@@ -3,6 +3,12 @@ A library that contains pre-written code to connect and access the different Sag
 it comes with a template for each nationality that makes use of these pre-written component code to access the defirrent SageOne api's,
 the template contains methods (mostly dynamic or generic) that a developer can use to build this library into his/her app. Compatible with java 1.6 and upwards.
 
+## Table Of Contents
+#### Features
+#### How to Use
+#### Important classes/methods you should use or know about
+#### Template Methods
+
 ### Features
 #### Methods run recursively if to get all results and to do all operations,for example: if there are more results that can be returned but the max result limit is reached,then another request will be sent until all results are grabbed
 
