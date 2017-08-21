@@ -18,7 +18,7 @@ the template contains methods (mostly dynamic or generic) that a developer can u
 
 #### Code is set in place to prevent you from getting blocked by the API hosting server by checking how many times you make a request based on the current day and hour. <div id="HowToUse" style="visibility:hidden"></div>
 
-### 2. HOW TO USE
+### 2. HOW TO USE (Variables used throughout readme is right below 'How to use' heading, very important)
 #### **<NationalityType**> = NationalityType.name() -> the name of the enum (NationalityType.SA will be SA)
 #### **<Version**> = The version of the enum class to use in SageOneEntityType.{VERSION_ENUM_CLASS} (current one for SA for example is ".V_1_1_2")
 
