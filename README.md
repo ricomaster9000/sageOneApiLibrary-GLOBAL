@@ -7,8 +7,8 @@ the template contains methods (mostly dynamic or generic) that a developer can u
 #### 1 <a href="#Features">Features</a>
 #### 2 <a href="#HowToUse">How to Use</a>
 #### 3 <a href="#ICMYSUOKA">Important classes/methods you should use or know about</a>
-#### 4 <a href="#TemplateMethods">Template Methods</a>
-### 1. Features <div id="Features" style="visibility:hidden"></div>
+#### 4 <a href="#TemplateMethods">Template Methods</a><div id="Features" style="visibility:hidden"></div>
+### 1. Features
 
 #### Methods run recursively if to get all results and to do all operations,for example: if there are more results that can be returned but the max result limit is reached,then another request will be sent until all results are grabbed
 
