@@ -1,4 +1,4 @@
-# sageOneApiLibrary-GLOBAL V2.1.6 (Early Beta)
+# sageOneApiLibrary-GLOBAL V2.1.11 (Early Beta)
 A library that contains pre-written code to connect and access the different SageOne Api's (currently only South Africa Api),
 it comes with a template for each nationality that makes use of these pre-written component code to access the defirrent SageOne api's,
 the template contains methods (mostly dynamic or generic) that a developer can use to build this library into his/her app. Compatible with java 1.6 and upwards.
@@ -25,7 +25,7 @@ search for ricomaster9000/sageOneApiLibrary-GLOBAL
 ``
 USER = ricomaster9000
 REPO/REPOSITORY = sageOneApiLibrary-GLOBAL
-TAG/VERSION = 2.16
+TAG/VERSION = 2.1.11
 ``
 
 To set up one must create a new instance of the SageOneApiConnector class, and in the constructor method one must pass in the NationalityType Enum value, it will then set up the instance to work with that nationality.

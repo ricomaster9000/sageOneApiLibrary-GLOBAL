@@ -14,6 +14,8 @@ import org.joda.time.DateTime;
 
 import java.util.List;
 import java.util.Properties;
+import java.util.UUID;
+
 import org.junit.*;
 
 
@@ -27,21 +29,24 @@ public class TestVersion2 {
     @BeforeClass
     public static void setupTestEnvironment() {
         properties.setProperty("sageOneApi.SA.clientUsername", "");
-        properties.setProperty("sageOneApi.SA.clientPassword", "4");
+        properties.setProperty("sageOneApi.SA.clientPassword", "");
         properties.setProperty("sageOneApi.SA.apiKey", "");
 
         sageOneApiConnector.setupSageOneApi(properties);
         sageOneSATemplate = sageOneApiConnector.getTemplate();
 
-/*        SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneCustomer newCustomer =
+        SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneCustomer newCustomer =
         new SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneCustomer.Builder().withName("testCustomer").build();
+
+        sageOneSATemplate.deleteSageOneEntitiesByPropertyValue(COMPANY_NAME_TO_USE,
+        SageOneEntityType.V_1_1_2.CUSTOMER, "Name", "testCustomer");
 
         SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneCustomer saveCustomer =
         sageOneSATemplate.saveSageOneEntity(COMPANY_NAME_TO_USE, newCustomer);
 
         if(saveCustomer == null) {
             MUST_CONTINUE_TESTING = false;
-        }*/
+        }
     }
 
     // Tests for version 2.0.* , ALL GENERAL TESTING, coverage is bad, but there
@@ -53,7 +58,7 @@ public class TestVersion2 {
 
         // Check if save entity works
         SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneSupplier newSupplier =
-        new SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneSupplier.Builder().withName("Suppplierjj").build();
+        new SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneSupplier.Builder().withName(UUID.randomUUID().toString()).build();
 
         SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneSupplier saveSupplier =
         sageOneSATemplate.saveSageOneEntity(COMPANY_NAME_TO_USE, newSupplier);
@@ -79,6 +84,27 @@ public class TestVersion2 {
 
         Assert.assertTrue(sageOneSATemplate.deleteSageOneEntity(COMPANY_NAME_TO_USE,
         saveSupplier.getId(), SageOneEntityType.V_1_1_2.SUPPLIER));
+
+    }
+
+    @Test
+    public void deleteEntitiesByPropertyValue2_0() {
+        if(!MUST_CONTINUE_TESTING) {
+            throw new IllegalArgumentException("Setup Environment failed, no tests will be run");
+        }
+        // Check if delete entity works after saving an entity
+        SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneSupplier newSupplier =
+                new SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneSupplier.Builder().withName("SuppplierToDelete").build();
+
+        SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneSupplier saveSupplier =
+                sageOneSATemplate.saveSageOneEntity(COMPANY_NAME_TO_USE, newSupplier);
+
+        if(saveSupplier == null) {
+            throw new IllegalArgumentException("Unable to save entity which will be used for deletion");
+        }
+
+        Assert.assertTrue(sageOneSATemplate.deleteSageOneEntitiesByPropertyValue(COMPANY_NAME_TO_USE,
+                SageOneEntityType.V_1_1_2.SUPPLIER, "Name", "SuppplierToDelete"));
 
     }
 

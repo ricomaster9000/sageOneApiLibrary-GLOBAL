@@ -1029,7 +1029,7 @@ public final class SageOneApiTemplateImpl extends SageOneApiTemplateMainImpl imp
         Integer companyId = null;
 
 
-        if(!entityTypeToUse.GetObject.getCanBeDownloaded() || !entityTypeToUse.GetObject.getCanBeSaved()) {
+        if(!entityTypeToUse.GetObject.getCanBeDownloaded()) {
             response = false;
         }
 

@@ -34,20 +34,22 @@ public class SageOneEntityType {
         ADDITIONAL_ITEM_PRICE("AdditionalItemPrice/", SageOneAdditionalItemPrice.class),
         ADDITIONAL_PRICE_LIST("AdditionalPriceList/", SageOneAdditionalPriceList.class),
         ACCOUNT("Account/", SageOneAccount.class),
-        ACCOUNT_NOTE("AccountNote/", SageOneAccountNote.class),
-        ACCOUNT_NOTE_ATTACHMENT("AccountNoteAttachment/", SageOneAccountNoteAttachment.class, true, true, true, true, false, true),
-        ACCOUNTANT_NOTE("AccountantNote/", SageOneAccountantNote.class, true, true, false), //Fix from here
+        ACCOUNT_NOTE("AccountNote/", SageOneAccountNote.class, true, true, true, true, true, false),
+        ACCOUNT_NOTE_ATTACHMENT("AccountNoteAttachment/", SageOneAccountNoteAttachment.class, true, true, false, true, false, true),
+        ACCOUNTANT_NOTE("AccountantNote/", SageOneAccountantNote.class, true, true, false),
         ACCOUNTANT_TASK_RECURRENCE("AccountantTaskRecurrence/", SageOneAccountantTaskRecurrence.class, true, true, false),
-        ACCOUNT_CATEGORY("AccountCategory/", SageOneAccountCategory.class, false, false),
+        ACCOUNT_CATEGORY("AccountCategory/", SageOneAccountCategory.class, true, false, false, true, true),
+        ACCOUNT_OPENING_BALANCE("AccountOpeningBalance/", SageOneAccountOpeningBalance.class, true, false),
+        ACCOUNT_PAYMENT("AccountPayment/", SageOneAccountPayment.class, true, false, true, false),
 
         BANK_ACCOUNT("BankAccount/", SageOneBankAccount.class),
         BANK_ACCOUNT_CATEGORY("BankAccountCategory/", SageOneBankAccountCategory.class),
         BANK_FEED_ACCOUNT(null, SageOneBankFeedAccount.class, false),
-        BANK_FEED_ACCOUNT_GROUP(null, SageOneBankFeedAccountGroup.class, false),
+        BANK_FEED_ACCOUNT_GROUP(null, SageOneBankFeedAccountGroup.class, false),//Fix from here
 
-        COMPANY("Company/", SageOneCompany.class, false, false),
-        CUSTOMER_RETURN("CustomerReturn/", SageOneCustomerReturn.class, false),
-        CUSTOMER_RECEIPT("CustomerReceipt/", SageOneCustomerReceipt.class),
+        COMPANY("Company/", SageOneCompany.class, true, false, false),
+        CUSTOMER_RETURN("CustomerReturn/", SageOneCustomerReturn.class, true, false),
+        CUSTOMER_RECEIPT("CustomerReceipt/", SageOneCustomerReceipt.class, true, false),
         CUSTOMER("Customer/", SageOneCustomer.class),
         CUSTOMER_NOTE("CustomerNote/", SageOneCustomerNote.class),
         CUSTOMER_CATEGORY("CustomerCategory/", SageOneCustomerCategory.class),
@@ -62,16 +64,17 @@ public class SageOneEntityType {
 
         QUOTE("Quote/", SageOneQuote.class),
 
-        SUPPLIER_RETURN("SupplierReturn/", SageOneSupplierReturn.class, false),
+        SUPPLIER_RETURN("SupplierReturn/", SageOneSupplierReturn.class, true, false),
         SUPPLIER("Supplier/", SageOneSupplier.class),
         SUPPLIER_NOTE("SupplierNote/", SageOneSupplierNote.class),
-        SUPPLIER_INVOICE("SupplierInvoice/", SageOneSupplierInvoice.class, false),
+        SUPPLIER_INVOICE("SupplierInvoice/", SageOneSupplierInvoice.class, true, false),
         SUPPLIER_CATEGORY("SupplierCategory/", SageOneSupplierCategory.class),
         SALES_REPRESENTATIVE("SalesRepresentative/", SageOneSalesRepresentative.class),
 
         TAX_TYPE("TaxType/", SageOneTaxType.class),
-        TAX_INVOICE("TaxInvoice/", SageOneTaxInvoice.class, false),
-        TAX_SYSTEM_CLASS(null, SageOneTaxSystemClass.class, false);
+        TAX_INVOICE("TaxInvoice/", SageOneTaxInvoice.class, true, false),
+        TAX_SYSTEM_CLASS(null, SageOneTaxSystemClass.class, true, false);
+
 
         public SageOneRequestEntitySettings GetObject;
 
