@@ -59,7 +59,7 @@ sageOneApi.<NationalityType>.requestTimeout = 'value' (default is 30000(30 secon
 sageOneApi.<NationalityType>.requestSocketTimeout = 'value' (default is 30000(30 seconds)) ->
 ```
 #### ________________________________  <div id="ICMYSUOKA" style="visibility:hidden"></div>
-### 3. important classes/methods you should use
+### 3. important classes/methods you should use or know about
 
 ```
 SageOneEntityType enum class holder -> Every Nationality has one, for instance SageOneEntityType class for SA will be SageOneIntegration.SA.SageOneEntityType.{VERSION}, use this primarily as a parameter for template methods, (currently only about 30-40% of the sage one entities is supported for SA, will add more through time)
