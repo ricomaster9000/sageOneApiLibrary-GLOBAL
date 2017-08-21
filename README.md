@@ -4,12 +4,13 @@ it comes with a template for each nationality that makes use of these pre-writte
 the template contains methods (mostly dynamic or generic) that a developer can use to build this library into his/her app. Compatible with java 1.6 and upwards.
 
 ## Table Of Contents
-#### Features
-#### How to Use
-#### Important classes/methods you should use or know about
-#### Template Methods
+#### <a href="#Features">Features</a>
+#### <a href="#HowToUse">How to Use</a>
+#### <a href="#ICMYSUOKA">Important classes/methods you should use or know about</a>
+#### <a href="#TemplateMethods">Template Methods</a>
 
 ### Features
+<div id="Features" style="visibility:hidden"></div>
 #### Methods run recursively if to get all results and to do all operations,for example: if there are more results that can be returned but the max result limit is reached,then another request will be sent until all results are grabbed
 
 #### If template methods fail, then the app won't stop running or come to a halt, this can be helpful when you expect network problems, so check for null values returned when a method doesn't return a boolean value to see if operations was successful.
@@ -19,6 +20,7 @@ the template contains methods (mostly dynamic or generic) that a developer can u
 #### Code is set in place to prevent you from getting blocked by the API hosting server by checking how many times you make a request based on the current day and hour.
 
 ### HOW TO USE
+<div id="HowToUse" style="visibility:hidden"></div>
 #### **<NationalityType**> = NationalityType.name() -> the name of the enum (NationalityType.SA will be SA)
 #### **<Version**> = The version of the enum class to use in SageOneEntityType.{VERSION_ENUM_CLASS} (current one for SA for example is ".V_1_1_2")
 
@@ -59,6 +61,7 @@ sageOneApi.<NationalityType>.requestTimeout = 'value' (default is 30000(30 secon
 sageOneApi.<NationalityType>.requestSocketTimeout = 'value' (default is 30000(30 seconds)) ->
 ```
 ### important classes/methods you should use
+<div id="ICMYSUOKA" style="visibility:hidden"></div>
 
 ```
 SageOneEntityType enum class holder -> Every Nationality has one, for instance SageOneEntityType class for SA will be SageOneIntegration.SA.SageOneEntityType.{VERSION}, use this primarily as a parameter for template methods, (currently only about 30-40% of the sage one entities is supported for SA, will add more through time)
@@ -72,6 +75,7 @@ SageOne Entities, all of them lies in the SageOneIntegration.<NationalityType>.<
 ```
 
 ### Template Methods
+<div id="TemplateMethods" style="visibility:hidden"></div>
 #### save method without id specified is a creation of new entity, if id is specified however then entity is edited
 ```
 SageOne<NationalityType>.getCustomersByNameAndSurnameOrName(String companyName, String... customerNames) -> the second parameter can be one value or multiple values seperated by a comma
