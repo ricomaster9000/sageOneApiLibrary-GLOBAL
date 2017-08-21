@@ -25,7 +25,7 @@ the template contains methods (mostly dynamic or generic) that a developer can u
 
 #### A tester package is included in the master branch (inside src\main\testPackage), not in released instances, use it as an example of how to use this library.
 
-add as dependency by using jitpack.io, go to this link https://jitpack.io/#ricomaster9000/sageOneApiLibrary-GLOBAL/2.16
+add as dependency by using jitpack.io, go to this link https://jitpack.io/#ricomaster9000/sageOneApiLibrary-GLOBAL/2.1.11
 
 ``
 USER = ricomaster9000
