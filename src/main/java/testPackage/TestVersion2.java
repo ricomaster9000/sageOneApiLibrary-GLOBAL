@@ -21,20 +21,29 @@ import org.junit.*;
 
 public class TestVersion2 {
     private static SageOneApiConnector sageOneApiConnector = new SageOneApiConnector(NationalityType.SA);
-    private static Properties properties = new Properties();
     private static SageOneSA sageOneSATemplate;
     private static boolean MUST_CONTINUE_TESTING = true;
     private static String COMPANY_NAME_TO_USE = "Nerdyre";
 
     @BeforeClass
     public static void setupTestEnvironment() {
-        properties.setProperty("sageOneApi.SA.clientUsername", "");
-        properties.setProperty("sageOneApi.SA.clientPassword", "");
-        properties.setProperty("sageOneApi.SA.apiKey", "");
+        
+        // A Mocked properties object, one whould use System.getProperties(), which also returns a properties object, to load the properties inside the properties file, which will be inside the resource directory
+        Properties properties = new Properties();
+        properties.setProperty("sageOneApi.SA.clientUsername", ""); // default is blank, please fill in these values, required for testing
+        properties.setProperty("sageOneApi.SA.clientPassword", ""); // default is blank, please fill in these values, required for testing
+        properties.setProperty("sageOneApi.SA.apiKey", ""); // default is blank, please fill in these values, required for testing
 
         sageOneApiConnector.setupSageOneApi(properties);
+        
+        // Now here the actual 'service'/template gets initialized, the below variable will be used everywhere and always to conduct api operations
+        /* Note, one can initialize this on a more global level and re-use it everywhere, 
+           one of these templates can only be used for one type of nationality (and NO DUPLICATES, so 2 SA templates will cause problems, unless maybe seperated on different threads, not tested), 
+           but you can create as many other templates as you want that will represent other nationalities
+        */
         sageOneSATemplate = sageOneApiConnector.getTemplate();
 
+        // creates a test customer to use throughout the test
         SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneCustomer newCustomer =
         new SageOneIntegration.SA.V1_1_2.SageOneApiEntities.SageOneCustomer.Builder().withName("testCustomer").build();
 
