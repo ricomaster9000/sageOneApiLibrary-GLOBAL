@@ -3,6 +3,8 @@ A library that contains pre-written code to connect and access the different Sag
 it comes with a template for each nationality that makes use of these pre-written component code to access the defirrent SageOne api's,
 the template contains methods (mostly dynamic or generic) that a developer can use to build this library into his/her app. Compatible with java 1.6 and upwards.
 
+##!!!!REQUIRES THE SAGE ONE 'ACCOUNTING' TYPE ACCOUNT TO CORRECLTY FUNCTION, OTHERWISE PROBLEMS WILL OR MIGHT ARISE!!!
+
 ## Table Of Contents
 #### 1 <a href="#Features">Features</a>
 #### 2 <a href="#HowToUse">How to Use</a>
